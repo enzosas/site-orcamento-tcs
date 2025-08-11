@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tcs</groupId>
-	<artifactId>site-orcamento</artifactId>
+	<artifactId>site-orcamento-tcs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>site-orcamento</name>
+	<name>site-orcamento-tcs</name>
 	<description>Aplicação Spring Boot para gerar orçamentos.</description>
 	<url/>
 	<licenses>
