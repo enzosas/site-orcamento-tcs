@@ -1,0 +1,4358 @@
+/* Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 300px 200px;
+gap: 100px;
+
+position: relative;
+width: 1920px;
+height: 7829.67px;
+
+background: #FFFFFF;
+
+
+/* AZUL PRINCIPAL 1 */
+
+width: 668.22px;
+height: 98.57px;
+
+background: url(AZUL PRINCIPAL.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Gerador de Orçamento */
+
+width: 792.95px;
+height: 105px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 67.1725px;
+line-height: 105px;
+/* identical to box height, or 156% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.262392px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 13 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 41.2302px;
+gap: 20.62px;
+
+width: 745.13px;
+height: 1018.39px;
+
+background: #FFFFFF;
+box-shadow: 0px 0px 12.3691px 2.06151px rgba(0, 0, 0, 0.1);
+border-radius: 12.3691px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Escolha o modelo */
+
+width: 540.94px;
+height: 83px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 52.7746px;
+line-height: 82px;
+/* identical to box height, or 156% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.206151px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 27.5826px;
+gap: 13.79px;
+
+width: 316.65px;
+height: 277.48px;
+
+background: #FFFFFF;
+border: 2.88611px solid #1A365D;
+border-radius: 8.27477px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 261.48px;
+height: 40.55px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 8.27477px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 17.6528px;
+line-height: 7px;
+/* or 37% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.137913px;
+
+color: #000000;
+
+
+
+/* Group 2 */
+
+width: 261.48px;
+height: 40.55px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #1A365D;
+border-radius: 8.27477px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 17.6528px;
+line-height: 7px;
+/* or 37% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.137913px;
+
+color: #FFFFFF;
+
+
+
+/* Group 3 */
+
+width: 261.48px;
+height: 40.82px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 8.27477px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 17.6528px;
+line-height: 7px;
+/* or 37% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.137913px;
+
+color: #000000;
+
+
+
+/* Group 4 */
+
+width: 261.48px;
+height: 40.55px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 8.27477px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 17.6528px;
+line-height: 7px;
+/* or 37% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.137913px;
+
+color: #000000;
+
+
+
+/* Group 5 */
+
+width: 261.48px;
+height: 40.55px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 8.27477px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 17.6528px;
+line-height: 7px;
+/* or 37% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.137913px;
+
+color: #000000;
+
+
+
+/* Frame 12 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 63.9068px 66.7929px;
+gap: 4.12px;
+
+width: 682.77px;
+height: 37.52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 549.19px;
+height: 0px;
+
+border: 2.06151px solid rgba(83, 86, 90, 0.3);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Filtros */
+
+width: 130px;
+height: 42px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 43.1513px;
+line-height: 41px;
+/* identical to box height, or 96% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.16856px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Frame 11 */
+
+width: 598.25px;
+height: 335.61px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Frame 9 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 20.6151px;
+gap: 20.62px;
+
+position: absolute;
+width: 297.06px;
+height: 165.75px;
+left: 0px;
+top: 0px;
+
+
+
+/* Cabo / Corrente */
+
+width: 152px;
+height: 29px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 18.2072px;
+line-height: 28px;
+/* identical to box height, or 156% */
+display: flex;
+align-items: center;
+letter-spacing: 0.142244px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 3 */
+
+width: 255.83px;
+height: 65.56px;
+
+border: 2.88611px solid #1A365D;
+border-radius: 12.3691px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.3691px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 19.7905px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.206151px;
+
+color: #53565A;
+
+
+
+/* Frame 10 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 20.6151px;
+gap: 20.62px;
+
+position: absolute;
+width: 297.06px;
+height: 165.75px;
+left: 301.19px;
+top: 169.87px;
+
+
+
+/* Cabo / Corrente */
+
+width: 197px;
+height: 29px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 18.2072px;
+line-height: 28px;
+/* identical to box height, or 156% */
+display: flex;
+align-items: center;
+letter-spacing: 0.142244px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 3 */
+
+width: 255.83px;
+height: 65.56px;
+
+border: 2.88611px solid #1A365D;
+border-radius: 12.3691px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.3691px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 19.7905px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.206151px;
+
+color: #53565A;
+
+
+
+/* Frame 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 20.6151px;
+gap: 20.62px;
+
+position: absolute;
+width: 297.06px;
+height: 165.75px;
+left: 301.19px;
+top: 0px;
+
+
+
+/* Cabo / Corrente */
+
+width: 117px;
+height: 29px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 18.2072px;
+line-height: 28px;
+/* identical to box height, or 156% */
+display: flex;
+align-items: center;
+letter-spacing: 0.142244px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 3 */
+
+width: 255.83px;
+height: 65.56px;
+
+border: 2.88611px solid #1A365D;
+border-radius: 12.3691px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.3691px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.7905px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.206151px;
+
+color: #000000;
+
+
+
+/* Frame 11 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 20.6151px;
+gap: 20.62px;
+
+position: absolute;
+width: 297.06px;
+height: 165.75px;
+left: 0px;
+top: 169.87px;
+
+
+
+/* Cabo / Corrente */
+
+width: 119px;
+height: 29px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 18.2072px;
+line-height: 28px;
+/* identical to box height, or 156% */
+display: flex;
+align-items: center;
+letter-spacing: 0.142244px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 3 */
+
+width: 255.83px;
+height: 65.56px;
+
+border: 2.88611px solid #1A365D;
+border-radius: 12.3691px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.3691px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.7905px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.206151px;
+
+color: #000000;
+
+
+
+/* Frame 15 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12.529px;
+gap: 18.79px;
+
+width: 349.42px;
+height: 83.06px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5.72159px;
+
+width: 28.57px;
+height: 28.57px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 15.7344px;
+isolation: isolate;
+
+width: 57.22px;
+height: 57.22px;
+
+border-radius: 143.04px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+width: 25.75px;
+height: 25.75px;
+
+background: #1A365D;
+border-radius: 2.8608px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* check_small */
+
+position: absolute;
+width: 34.33px;
+height: 34.33px;
+left: calc(50% - 34.33px/2 - 0px);
+top: calc(50% - 34.33px/2 - 0px);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* icon */
+
+position: absolute;
+left: 25%;
+right: 25%;
+top: 29.17%;
+bottom: 31.67%;
+
+/* M3/sys/light/on-primary */
+background: #FFFFFF;
+
+
+/* Seleção */
+
+width: 277px;
+height: 58px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 27.4235px;
+line-height: 57px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.285662px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 14 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 60.2754px 40.1836px;
+gap: 20.09px;
+
+width: 757.06px;
+height: 841.39px;
+
+background: #FFFFFF;
+box-shadow: 0px 0px 12.0551px 2.00918px rgba(0, 0, 0, 0.1);
+border-radius: 12.0551px;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Painel de Comando */
+
+width: 517px;
+height: 41px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 51.435px;
+line-height: 40px;
+/* identical to box height, or 78% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200918px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 24 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 62.2846px 65.0975px;
+gap: 4.02px;
+
+width: 665.44px;
+height: 36.57px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 535.25px;
+height: 0px;
+
+border: 2.00918px solid rgba(83, 86, 90, 0.3);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Group 3 */
+
+width: 298.16px;
+height: 55.86px;
+
+border: 4.01836px solid #1A365D;
+border-radius: 12.0551px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.0551px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2881px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200918px;
+
+color: #000000;
+
+
+
+/* Frame 21 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 4.01836px;
+
+width: 642.96px;
+height: 179.96px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Frame 18 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8.6431px;
+gap: 12.96px;
+
+width: 613.92px;
+height: 57.29px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 3.94702px;
+
+width: 18.67px;
+height: 18.67px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10.8543px;
+
+width: 39.47px;
+height: 39.47px;
+
+border-radius: 98.6754px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 17.76px;
+height: 17.76px;
+
+border: 1.97351px solid rgba(83, 86, 90, 0.3);
+border-radius: 1.97351px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Desabilitado */
+
+width: 565px;
+height: 40px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 18.918px;
+line-height: 39px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.197063px;
+
+color: rgba(83, 86, 90, 0.3);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 19 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8.6431px;
+gap: 12.96px;
+
+width: 634.92px;
+height: 57.29px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 3.94702px;
+
+width: 18.67px;
+height: 18.67px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10.8543px;
+
+width: 39.47px;
+height: 39.47px;
+
+border-radius: 98.6754px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 17.76px;
+height: 17.76px;
+
+border: 1.97351px solid rgba(83, 86, 90, 0.3);
+border-radius: 1.97351px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Desabilitado */
+
+width: 586px;
+height: 40px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 18.918px;
+line-height: 39px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.197063px;
+
+color: rgba(83, 86, 90, 0.3);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 17 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8.6778px;
+gap: 13.02px;
+
+width: 538.12px;
+height: 57.36px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 3.96286px;
+
+width: 18.74px;
+height: 18.74px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10.8979px;
+
+width: 39.63px;
+height: 39.63px;
+
+border-radius: 99.0715px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 17.83px;
+height: 17.83px;
+
+border: 1.98143px solid #53565A;
+border-radius: 1.98143px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* naoSeleção */
+
+width: 489px;
+height: 40px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 18.994px;
+line-height: 40px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.197854px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 22 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 2.67336px;
+
+width: 513.35px;
+height: 32.35px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Potência Motores Cabeceiras */
+
+width: 508px;
+height: 27px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 34.219px;
+line-height: 27px;
+/* identical to box height, or 78% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.133668px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 4 */
+
+width: 298.16px;
+height: 55.86px;
+
+border: 4.01836px solid #1A365D;
+border-radius: 12.0551px;
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.0551px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2881px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200918px;
+
+color: #000000;
+
+
+
+/* Group 5 */
+
+width: 298.16px;
+height: 55.86px;
+
+border: 4.01836px solid #1A365D;
+border-radius: 12.0551px;
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+border-radius: 12.0551px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2881px;
+line-height: 10px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200918px;
+
+color: #000000;
+
+
+
+/* Frame 23 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 4.01836px;
+
+width: 475.15px;
+height: 122.75px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 7;
+flex-grow: 0;
+
+
+/* Frame 17 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8.6778px;
+gap: 13.02px;
+
+width: 467.12px;
+height: 57.36px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 3.96286px;
+
+width: 18.74px;
+height: 18.74px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10.8979px;
+
+width: 39.63px;
+height: 39.63px;
+
+border-radius: 99.0715px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 17.83px;
+height: 17.83px;
+
+border: 1.98143px solid #53565A;
+border-radius: 1.98143px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* naoSeleção */
+
+width: 418px;
+height: 40px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 18.994px;
+line-height: 40px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.197854px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 24 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8.6778px;
+gap: 13.02px;
+
+width: 440.12px;
+height: 57.36px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 3.96286px;
+
+width: 18.74px;
+height: 18.74px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10.8979px;
+
+width: 39.63px;
+height: 39.63px;
+
+border-radius: 99.0715px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 17.83px;
+height: 17.83px;
+
+border: 1.98143px solid #53565A;
+border-radius: 1.98143px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* naoSeleção */
+
+width: 391px;
+height: 40px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 18.994px;
+line-height: 40px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.197854px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 25 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 5.60785px;
+
+width: 646.76px;
+height: 328.81px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Frame 24 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12.1103px;
+gap: 18.17px;
+
+width: 635.54px;
+height: 80.22px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5.53039px;
+
+width: 26.16px;
+height: 26.16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 15.2086px;
+
+width: 55.3px;
+height: 55.3px;
+
+border-radius: 138.26px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 24.89px;
+height: 24.89px;
+
+border: 2.7652px solid #53565A;
+border-radius: 2.7652px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* naoSeleção */
+
+width: 567px;
+height: 56px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 26.5071px;
+line-height: 55px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.276116px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 21 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12.0619px;
+gap: 18.09px;
+
+width: 410.27px;
+height: 79.12px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5.50828px;
+
+width: 26.05px;
+height: 26.05px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 15.1478px;
+
+width: 55.08px;
+height: 55.08px;
+
+border-radius: 137.707px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 24.79px;
+height: 24.79px;
+
+border: 2.75414px solid rgba(83, 86, 90, 0.3);
+border-radius: 2.75414px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Desabilitado */
+
+width: 342px;
+height: 55px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 26.4011px;
+line-height: 55px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.275012px;
+
+color: rgba(83, 86, 90, 0.3);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 22 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12.0619px;
+gap: 18.09px;
+
+width: 290.39px;
+height: 79.12px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5.44301px;
+
+width: 27.18px;
+height: 27.18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 14.9683px;
+isolation: isolate;
+
+width: 54.43px;
+height: 54.43px;
+
+border-radius: 136.075px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+width: 24.49px;
+height: 24.49px;
+
+background: rgba(83, 86, 90, 0.3);
+border-radius: 2.72151px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* check_small */
+
+position: absolute;
+width: 32.66px;
+height: 32.66px;
+left: calc(50% - 32.66px/2 + 0px);
+top: calc(50% - 32.66px/2 - 0px);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* icon */
+
+position: absolute;
+left: 25%;
+right: 25%;
+top: 29.17%;
+bottom: 31.67%;
+
+/* M3/sys/light/on-primary */
+background: #FFFFFF;
+
+
+/* Célula de Carga */
+
+width: 221px;
+height: 55px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 26.4011px;
+line-height: 55px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.275012px;
+
+color: rgba(83, 86, 90, 0.3);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 23 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12.0619px;
+gap: 18.09px;
+
+width: 325.27px;
+height: 79.12px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Checkboxes
+
+Checkboxes are a selection control which allow users to select one or more options from a set; present a list containing sub-selections; and turn an item on or off in a desktop environment
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5.50828px;
+
+width: 26.05px;
+height: 26.05px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* state-layer */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 15.1478px;
+
+width: 55.08px;
+height: 55.08px;
+
+border-radius: 137.707px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* container */
+
+box-sizing: border-box;
+
+width: 24.79px;
+height: 24.79px;
+
+border: 2.75414px solid rgba(83, 86, 90, 0.3);
+border-radius: 2.75414px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Desabilitado */
+
+width: 257px;
+height: 55px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 26.4011px;
+line-height: 55px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.275012px;
+
+color: rgba(83, 86, 90, 0.3);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 19 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40.0488px;
+gap: 20.02px;
+
+width: 754.52px;
+height: 784.56px;
+
+background: #FFFFFF;
+box-shadow: 0px 0px 12.0146px 2.00244px rgba(0, 0, 0, 0.1);
+border-radius: 12.0146px;
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 0;
+
+
+/* Group 2 */
+
+width: 674.42px;
+height: 131.36px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #1A365D;
+box-shadow: 0px 1.60195px 1.60195px rgba(0, 0, 0, 0.25);
+border-radius: 12.0146px;
+
+
+/* TCS002D06TF */
+
+position: absolute;
+left: 30.61%;
+right: 30.84%;
+top: 16.61%;
+bottom: 17.92%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 36.6143px;
+line-height: 86px;
+/* identical to box height, or 234% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.286049px;
+
+color: #FFFFFF;
+
+
+
+/* Frame 21 */
+
+width: 674.42px;
+height: 553.07px;
+
+border-radius: 12.0146px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Capacidade */
+
+position: absolute;
+width: 124px;
+height: 18px;
+left: 198.39px;
+top: 40.43px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 250 kg */
+
+position: absolute;
+width: 65px;
+height: 18px;
+left: 352.03px;
+top: 40.43px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Grupo de Trabalho */
+
+position: absolute;
+width: 185px;
+height: 18px;
+left: 137.39px;
+top: 70.71px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 2 m / M5 */
+
+position: absolute;
+width: 86px;
+height: 18px;
+left: 352.03px;
+top: 70.71px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Tipo Construtivo */
+
+position: absolute;
+width: 160px;
+height: 18px;
+left: 162.39px;
+top: 100.99px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Normal */
+
+position: absolute;
+width: 72px;
+height: 18px;
+left: 352.03px;
+top: 100.99px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Curso útil do gancho */
+
+position: absolute;
+width: 206px;
+height: 18px;
+left: 116.39px;
+top: 131.27px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 6 metros */
+
+position: absolute;
+width: 88px;
+height: 18px;
+left: 352.03px;
+top: 131.27px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Número de Ramais de Corrente */
+
+position: absolute;
+width: 311px;
+height: 18px;
+left: 11.39px;
+top: 161.55px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 1 */
+
+position: absolute;
+width: 7px;
+height: 18px;
+left: 352.03px;
+top: 161.55px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Potência motor elevação */
+
+position: absolute;
+width: 248px;
+height: 18px;
+left: 74.39px;
+top: 191.83px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 0,48 kW */
+
+position: absolute;
+width: 76px;
+height: 18px;
+left: 352.03px;
+top: 191.83px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Velocidade de elevação */
+
+position: absolute;
+width: 239px;
+height: 18px;
+left: 83.39px;
+top: 222.11px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 2,4 / 9,6 m/min */
+
+position: absolute;
+width: 149px;
+height: 18px;
+left: 352.03px;
+top: 222.11px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Movimento de translação */
+
+position: absolute;
+width: 253px;
+height: 18px;
+left: 69.39px;
+top: 252.4px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Fixa */
+
+position: absolute;
+width: 38px;
+height: 18px;
+left: 352.03px;
+top: 252.4px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Potência motor translação */
+
+position: absolute;
+width: 263px;
+height: 18px;
+left: 59.39px;
+top: 282.68px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* - */
+
+position: absolute;
+width: 11px;
+height: 18px;
+left: 352.03px;
+top: 282.68px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Velocidade de translação */
+
+position: absolute;
+width: 255px;
+height: 18px;
+left: 67.39px;
+top: 312.96px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* - */
+
+position: absolute;
+width: 11px;
+height: 18px;
+left: 352.03px;
+top: 312.96px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Freio no carro de translação */
+
+position: absolute;
+width: 278px;
+height: 18px;
+left: 44.39px;
+top: 343.24px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Não */
+
+position: absolute;
+width: 40px;
+height: 18px;
+left: 352.03px;
+top: 343.24px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Fim de curso sobe/desce */
+
+position: absolute;
+width: 249px;
+height: 18px;
+left: 73.39px;
+top: 373.52px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Subida/Descida */
+
+position: absolute;
+width: 158px;
+height: 18px;
+left: 352.03px;
+top: 373.52px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Fim de Curso direita/esquerda */
+
+position: absolute;
+width: 301px;
+height: 18px;
+left: 21.39px;
+top: 403.8px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* TCS002D06TF */
+
+position: absolute;
+width: 133px;
+height: 18px;
+left: 352.03px;
+top: 10.15px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Não */
+
+position: absolute;
+width: 40px;
+height: 18px;
+left: 352.03px;
+top: 403.8px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Guia para Corrente */
+
+position: absolute;
+width: 191px;
+height: 18px;
+left: 131.39px;
+top: 434.08px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Sim */
+
+position: absolute;
+width: 37px;
+height: 18px;
+left: 352.03px;
+top: 434.08px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Célula de carga */
+
+position: absolute;
+width: 158px;
+height: 18px;
+left: 164.39px;
+top: 464.37px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Não */
+
+position: absolute;
+width: 40px;
+height: 18px;
+left: 352.03px;
+top: 464.37px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Largura da viga padrão */
+
+position: absolute;
+width: 234px;
+height: 18px;
+left: 88.39px;
+top: 494.65px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Suspensão por Gancho */
+
+position: absolute;
+width: 230px;
+height: 18px;
+left: 352.03px;
+top: 494.65px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Peso Aproximado */
+
+position: absolute;
+width: 172px;
+height: 18px;
+left: 150.39px;
+top: 524.93px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* 26 kg */
+
+position: absolute;
+width: 53px;
+height: 18px;
+left: 352.03px;
+top: 524.93px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* Modelo da talha elétrica */
+
+position: absolute;
+width: 240px;
+height: 18px;
+left: 82.39px;
+top: 10.15px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.285px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200885px;
+
+color: #000000;
+
+
+
+/* image 2 */
+
+width: 423.95px;
+height: 423.95px;
+
+background: url(image.png);
+
+/* Inside auto layout */
+flex: none;
+order: 7;
+flex-grow: 0;
+
+
+/* Frame 26 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40.0646px;
+gap: 20.03px;
+
+width: 754.82px;
+height: 481.95px;
+
+background: #FFFFFF;
+box-shadow: 0px 0px 12.0194px 2.00323px rgba(0, 0, 0, 0.1);
+border-radius: 12.0194px;
+
+/* Inside auto layout */
+flex: none;
+order: 8;
+flex-grow: 0;
+
+
+/* Frame 21 */
+
+width: 674.69px;
+height: 401.83px;
+
+border-radius: 12.0194px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Tensão de trabalho */
+
+position: absolute;
+width: 192px;
+height: 18px;
+left: 130.52px;
+top: 40.45px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Trifásica */
+
+position: absolute;
+width: 83px;
+height: 18px;
+left: 352.17px;
+top: 40.45px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Tensão de comando */
+
+position: absolute;
+width: 204px;
+height: 18px;
+left: 118.52px;
+top: 70.74px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* 24 Vca */
+
+position: absolute;
+width: 68px;
+height: 18px;
+left: 352.17px;
+top: 70.74px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Sobe/Desce */
+
+position: absolute;
+width: 120px;
+height: 18px;
+left: 202.52px;
+top: 101.03px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* 2 velocidades */
+
+position: absolute;
+width: 137px;
+height: 18px;
+left: 352.17px;
+top: 101.03px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Direita/Esquerda */
+
+position: absolute;
+width: 166px;
+height: 18px;
+left: 156.52px;
+top: 131.33px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* 0 */
+
+position: absolute;
+width: 13px;
+height: 18px;
+left: 352.17px;
+top: 131.33px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Frente/Atrás */
+
+position: absolute;
+width: 122px;
+height: 18px;
+left: 200.52px;
+top: 161.62px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* - */
+
+position: absolute;
+width: 11px;
+height: 18px;
+left: 352.17px;
+top: 161.62px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Potencia do Motor da Ponte */
+
+position: absolute;
+width: 272px;
+height: 18px;
+left: 50.52px;
+top: 191.91px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* - */
+
+position: absolute;
+width: 11px;
+height: 18px;
+left: 352.17px;
+top: 191.91px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Botoeira */
+
+position: absolute;
+width: 82px;
+height: 18px;
+left: 240.52px;
+top: 222.21px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* 2 mov. 2 vel. + Emergência */
+
+position: absolute;
+width: 261px;
+height: 18px;
+left: 352.17px;
+top: 222.21px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Controle Remoto */
+
+position: absolute;
+width: 167px;
+height: 18px;
+left: 155.52px;
+top: 252.5px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Opcional */
+
+position: absolute;
+width: 89px;
+height: 18px;
+left: 352.17px;
+top: 252.5px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Transmissor Extra */
+
+position: absolute;
+width: 173px;
+height: 18px;
+left: 149.52px;
+top: 282.79px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Opcional */
+
+position: absolute;
+width: 89px;
+height: 18px;
+left: 352.17px;
+top: 282.79px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Sinalizador Sonoro */
+
+position: absolute;
+width: 182px;
+height: 18px;
+left: 140.52px;
+top: 313.09px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Opcional */
+
+position: absolute;
+width: 89px;
+height: 18px;
+left: 352.17px;
+top: 313.09px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Sinalizador Luminoso */
+
+position: absolute;
+width: 207px;
+height: 18px;
+left: 115.52px;
+top: 343.38px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Opcional */
+
+position: absolute;
+width: 89px;
+height: 18px;
+left: 352.17px;
+top: 343.38px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Tomada para troca Rápida */
+
+position: absolute;
+width: 269px;
+height: 18px;
+left: 53.52px;
+top: 373.67px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Opcional */
+
+position: absolute;
+width: 89px;
+height: 18px;
+left: 352.17px;
+top: 373.67px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* 2 Movimentos */
+
+position: absolute;
+width: 137px;
+height: 18px;
+left: 352.17px;
+top: 10.15px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Painel de comando tipo */
+
+position: absolute;
+width: 235px;
+height: 18px;
+left: 87.52px;
+top: 10.15px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 19.2925px;
+line-height: 18px;
+/* identical to box height, or 91% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.200964px;
+
+color: #000000;
+
+
+
+/* Frame 27 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: center;
+padding: 0px;
+
+width: 381.28px;
+height: 696.06px;
+
+border-radius: 14.2803px;
+
+/* Inside auto layout */
+flex: none;
+order: 9;
+flex-grow: 0;
+
+
+/* Frame 27 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 21.8965px 15.7083px;
+
+width: 381.28px;
+height: 127.09px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Talha Elétrica sem circuito */
+
+width: 349.87px;
+height: 48.55px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9199px;
+line-height: 48px;
+/* or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* 7.221,60 */
+
+width: 349.87px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 33.3207px;
+line-height: 35px;
+/* identical to box height, or 104% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 28 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 21.8965px 15.7083px;
+
+width: 336.54px;
+height: 113.79px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Circuito Elétrico Schneider */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9216px;
+line-height: 35px;
+/* identical to box height, or 152% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* - */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 33.3207px;
+line-height: 35px;
+/* identical to box height, or 104% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 29 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 21.8965px 15.7083px;
+
+width: 336.54px;
+height: 113.79px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Circuito Elétrico TCS */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9216px;
+line-height: 35px;
+/* identical to box height, or 152% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* - */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 33.3207px;
+line-height: 35px;
+/* identical to box height, or 104% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 30 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 21.8965px 15.7083px;
+
+width: 336.54px;
+height: 113.79px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Adaptador de Viga */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9216px;
+line-height: 35px;
+/* identical to box height, or 152% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* - */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 33.3207px;
+line-height: 35px;
+/* identical to box height, or 104% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 31 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 21.8965px 15.7083px;
+
+width: 365.1px;
+height: 113.79px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Total com Painel Schneider */
+
+width: 333.68px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9216px;
+line-height: 35px;
+/* identical to box height, or 152% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* 7.221,60 */
+
+width: 333.68px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 33.3207px;
+line-height: 35px;
+/* identical to box height, or 104% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 32 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 21.8965px 15.7083px;
+
+width: 336.54px;
+height: 113.79px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Total Com Painel TCS */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9216px;
+line-height: 35px;
+/* identical to box height, or 152% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* 7.221,60 */
+
+width: 305.12px;
+height: 35px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 33.3207px;
+line-height: 35px;
+/* identical to box height, or 104% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #1A365D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 33 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 23.8005px;
+gap: 4.76px;
+
+width: 754px;
+height: 166.53px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 10;
+flex-grow: 0;
+
+
+/* Código da configuração */
+
+width: 287px;
+height: 48px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 22.9216px;
+line-height: 48px;
+/* identical to box height, or 208% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238767px;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 3 */
+
+width: 706.4px;
+height: 66.17px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 0.47601px solid rgba(83, 86, 90, 0.3);
+filter: drop-shadow(0px 1.90404px 1.90404px rgba(0, 0, 0, 0.25));
+border-radius: 14.2803px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 22.8485px;
+line-height: 11px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238005px;
+
+color: #000000;
+
+
+
+/* Group 2 */
+
+width: 337.02px;
+height: 66.17px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 11;
+flex-grow: 0;
+
+
+/* Rectangle 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #1A365D;
+border-radius: 14.2803px;
+
+
+/* TCS002D06FX */
+
+position: absolute;
+left: 0%;
+right: 0.06%;
+top: 34.98%;
+bottom: 34.98%;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 22.8485px;
+line-height: 11px;
+/* or 50% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.238005px;
+
+color: #FFFFFF;
+
