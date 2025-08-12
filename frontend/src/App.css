@@ -1,0 +1,11 @@
+.app-container {
+  font-family: 'Poppins';
+  color: var(--azul-primario);
+  padding-top: var(--margem-site);
+  padding-bottom: var(--margem-site);
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--fundo);
+  justify-content: center;
+}
