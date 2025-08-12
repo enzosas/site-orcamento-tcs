@@ -1,0 +1,12 @@
+.model-container{
+    
+    background: #FFFFFF;
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+
+    max-width: 30em;
+    margin: 0 auto;
+    
+    
+}
+

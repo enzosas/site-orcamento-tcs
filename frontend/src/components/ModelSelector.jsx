@@ -2,8 +2,8 @@ import "./ModelSelector.css"
 
 function ModelSelector(){
     return (
-        <div className="header-container">
-            <h1> hello world </h1>
+        <div className="model-container">
+            <h2 className="modelo-title"> Escolha o modelo </h2>
         </div>
     )
 }

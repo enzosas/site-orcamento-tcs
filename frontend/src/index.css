@@ -1,8 +1,11 @@
 :root {
+  font-family: 'Poppins';
+  
   --azul-primario: #1A365D;
   --cinza: #53565A;
   --texto: #000000;
   --fundo: #ffffff;
-  --margem-site: 15vw;
-  --margem: 5vw;
+
+  font-size: 30px;
+  text-align: center;
 }

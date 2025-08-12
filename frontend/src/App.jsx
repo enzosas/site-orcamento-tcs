@@ -11,6 +11,7 @@ function App() {
     <div className="app-container">
       <Header />
       <ModelSelector />
+      <ModelSelector />
       {/* <ControlPanel /> */}
       {/* <ProductDetails /> */}
       {/* <PriceSummary /> */}
