@@ -1,12 +1,105 @@
-.model-container{
+.frame-branco{
     
     background: #FFFFFF;
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.1);
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 30px;
+    padding: 2em;
 
     max-width: 30em;
     margin: 0 auto;
-    
+    margin-bottom: 2em;
     
 }
 
+.model-title{
+    margin-bottom: 1em;
+}
+
+.selector{
+    padding: 1em;
+    font-family: 'Poppins';
+    user-select: none;
+
+    max-width: 12em;
+    margin: 0 auto;
+
+    max-height: 10em;
+    overflow-y: auto; 
+}
+
+.selector-border{
+    border: 0.2em solid var(--azul-primario);
+    border-radius: 15px;
+    max-width: 15em;
+    margin: 0 auto;
+}
+
+.modelo-opcao{
+    padding: 0.3em;
+}
+
+.modelo-opcao:hover {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.modelo-opcao.selecionado {
+  background-color: var(--azul-primario);
+  color: #FFFFFF;
+  border-radius: 15px;
+}
+
+select {
+    font-family: 'Poppins';
+    border: 0.2em solid var(--azul-primario);
+    border-radius: 15px;
+    padding: 1em;
+    width: 13.4em;
+}
+
+.headerSelect{
+    margin-bottom: 0.5em;
+    text-align: left;
+}
+
+.model-filter{
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    place-items: center;
+    gap: 2em; 
+    margin-bottom: 2em;
+}
+
+.model-filter-unidade{
+    max-width: 12em;
+}
+
+
+/* mouse! */
+
+
+
+.selector::-webkit-scrollbar {
+  width: 0.3em; 
+  background: transparent;
+}
+
+.selector::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+  margin: 1em;
+}
+
+.selector::-webkit-scrollbar-thumb {
+  background-color: var(--azul-primario);
+  border-radius: 4px;
+  border: none;
+}
+
+.selector::-webkit-scrollbar-thumb:hover {
+  background-color: var(--azul-primario);
+}
+
+.selector::-webkit-scrollbar-button {
+  display: none;
+}

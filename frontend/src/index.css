@@ -6,6 +6,26 @@
   --texto: #000000;
   --fundo: #ffffff;
 
-  font-size: 30px;
+  font-size: 15px;
   text-align: center;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: var(--cinza);
+  margin: 20px 0;    
+  opacity: 0.1;
+  border-radius: 30px;
+  margin: 2.5em;
+}
+
+input[type="checkbox"] {
+      width: 2em;
+      height: 1em;
+}
+

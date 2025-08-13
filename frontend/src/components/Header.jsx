@@ -10,6 +10,7 @@ function Header() {
       />
       <h1 className="header-title">Gerador de Orçamento</h1>
     </div>
+    
   );
 }
 
