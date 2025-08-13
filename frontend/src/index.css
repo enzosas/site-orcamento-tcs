@@ -29,3 +29,15 @@ input[type="checkbox"] {
       height: 1em;
 }
 
+.frame-branco{
+    
+    background: #FFFFFF;
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    padding: 2em;
+
+    max-width: 30em;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    
+}
