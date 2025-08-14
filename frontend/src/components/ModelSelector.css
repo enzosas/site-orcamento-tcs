@@ -23,7 +23,7 @@
 }
 
 .modelo-opcao:hover {
-  background-color: color-mix(in srgb, white 90%, black);
+  background-color: color-mix(in srgb, white 97.5%, black);
   cursor: pointer;
 }
 
