@@ -12,6 +12,10 @@
     margin-bottom: 1em;
 }
 
+.frame-caixas-selecao select{
+        width: 20em;
+}
+
 .titulo-cabeceira{
     font-weight:normal;
 }
@@ -24,4 +28,8 @@
     gap: 1em; 
     font-size: 1em;
     color: black;
+}
+
+select{
+        width: 15em;
 }

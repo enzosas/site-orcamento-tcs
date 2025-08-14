@@ -6,6 +6,7 @@
     max-width: 12em;
     margin: 0 auto;
 
+    min-height: 10em;
     max-height: 10em;
     overflow-y: auto; 
 }
@@ -37,7 +38,7 @@ select {
     border: 0.2em solid var(--azul-primario);
     border-radius: 15px;
     padding: 1em;
-    width: 13.4em;
+    width: 15em;
 }
 
 select:hover {

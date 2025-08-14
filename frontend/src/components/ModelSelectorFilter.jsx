@@ -1,7 +1,7 @@
 import "./ModelSelector.css";
 import React, { useEffect, useState } from "react";
 
-function ModelSelectorFilter() {
+function ModelSelectorFilter({ filtros, setFiltros }) {
     const [correntes, setCorrentes] = useState([]);
     const [capacidades, setCapacidades] = useState([]);
     const [tiposTrole, setTiposTrole] = useState([]);
@@ -29,12 +29,19 @@ function ModelSelectorFilter() {
             .catch((err) => console.error("Erro ao carregar cursos de gancho:", err));
     }, []);
 
+    const handleChange = (campo, valor) => {
+        setFiltros(prev => ({ ...prev, [campo]: valor }));
+    };
+
     return (
         <div className="model-filter">
-            {/* Cabo / Corrente */}
+            
             <div className="model-filter-unidade">
                 <h4 className="headerSelect">Cabo / Corrente</h4>
-                <select>
+                <select
+                    value={filtros.correnteCabo}
+                    onChange={(e) => handleChange("correnteCabo", e.target.value)}
+                >
                     <option value="">Sem filtro</option>
                     {correntes.map((item, index) => (
                         <option key={index} value={item}>{item}</option>
@@ -42,10 +49,12 @@ function ModelSelectorFilter() {
                 </select>
             </div>
 
-            {/* Capacidade */}
             <div className="model-filter-unidade">
                 <h4 className="headerSelect">Capacidade</h4>
-                <select>
+                <select
+                    value={filtros.capacidade}
+                    onChange={(e) => handleChange("capacidade", e.target.value)}
+                >
                     <option value="">Sem filtro</option>
                     {capacidades.map((item, index) => (
                         <option key={index} value={item}>{item}</option>
@@ -53,10 +62,12 @@ function ModelSelectorFilter() {
                 </select>
             </div>
 
-            {/* Tipo de Trole */}
             <div className="model-filter-unidade">
                 <h4 className="headerSelect">Tipo de Trole</h4>
-                <select>
+                <select
+                    value={filtros.tipoTrole}
+                    onChange={(e) => handleChange("tipoTrole", e.target.value)}
+                >
                     <option value="">Sem filtro</option>
                     {tiposTrole.map((item, index) => (
                         <option key={index} value={item}>{item}</option>
@@ -64,10 +75,12 @@ function ModelSelectorFilter() {
                 </select>
             </div>
 
-            {/* Curso Útil do Gancho */}
             <div className="model-filter-unidade">
                 <h4 className="headerSelect">Curso Útil do Gancho</h4>
-                <select>
+                <select
+                    value={filtros.cursoUtilGancho}
+                    onChange={(e) => handleChange("cursoUtilGancho", e.target.value)}
+                >
                     <option value="">Sem filtro</option>
                     {cursosGancho.map((item, index) => (
                         <option key={index} value={item}>{item}</option>
