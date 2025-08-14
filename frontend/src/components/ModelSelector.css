@@ -1,7 +1,3 @@
-.model-title{
-    margin-bottom: 1em;
-}
-
 .selector{
     padding: 1em;
     font-family: 'Poppins';
@@ -54,7 +50,7 @@ select {
     grid-template-columns: 1fr 1fr; 
     place-items: center;
     gap: 2em; 
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 .model-filter-unidade{

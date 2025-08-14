@@ -10,15 +10,14 @@
   text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
 hr {
   border: none;
-  height: 2px;
+  height: 0.1em;
   background-color: var(--cinza);
-  margin: 20px 0;    
   opacity: 0.1;
   border-radius: 30px;
   margin: 2.5em;
@@ -30,14 +29,19 @@ input[type="checkbox"] {
 }
 
 .frame-branco{
-    
     background: #FFFFFF;
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 30px;
     padding: 2em;
 
-    max-width: 30em;
+    max-width: 35em;
     margin: 0 auto;
-    margin-bottom: 2em;
-    
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
+
+.frame-branco-title{
+    margin-bottom: 1em;
+    padding: 0.5em;
+}
+

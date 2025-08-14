@@ -3,6 +3,25 @@
     font-size: 1.5em;
 }
 
-.frame-resto{
-    
+.frame-caixas-selecao{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 2em; 
+    margin-bottom: 1em;
+}
+
+.titulo-cabeceira{
+    font-weight:normal;
+}
+
+.frame-checkbox-extra{
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 1em; 
+    font-size: 1em;
+    color: black;
 }
