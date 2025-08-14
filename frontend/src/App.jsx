@@ -4,6 +4,10 @@ import ModelSelector from "./components/ModelSelector";
 import CommandPannel from "./components/CommandPannel"
 import ExtraOptions from "./components/ExtraOptions";
 import TalhaWindow from "./components/TalhaWindow";
+import ExtraInfo from "./components/ExtraInfo";
+import Pricing from "./components/Pricing";
+import Footer from "./components/Footer";
+
 
 function App() {
   return (
@@ -13,7 +17,9 @@ function App() {
       <CommandPannel />
       <ExtraOptions />
       <TalhaWindow />
-      {/* <PriceSummary /> */}
+      <ExtraInfo />
+      <Pricing />
+      <Footer />
     </div>
   );
 }

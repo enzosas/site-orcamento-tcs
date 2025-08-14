@@ -1,0 +1,13 @@
+.main-pricing{
+    padding: 1em;
+}
+
+.descricao{
+    color: black;
+}
+
+.dinheiro{
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 1em;
+}

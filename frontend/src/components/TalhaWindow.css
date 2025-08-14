@@ -23,3 +23,7 @@
     text-align: left;
     padding-left: 1em;
 }
+
+img{
+    max-width: 20em;
+}

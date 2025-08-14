@@ -28,6 +28,12 @@ input[type="checkbox"] {
       height: 1em;
 }
 
+.checkbox-item-disabled
+{
+  color: var(--cinza);
+  opacity: 50%;
+}
+
 .frame-branco{
     background: #FFFFFF;
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
@@ -42,6 +48,7 @@ input[type="checkbox"] {
 
 .frame-branco-title{
     margin-bottom: 1em;
-    padding: 0.5em;
 }
+
+
 
