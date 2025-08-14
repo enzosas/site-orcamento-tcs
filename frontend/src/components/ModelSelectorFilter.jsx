@@ -23,7 +23,7 @@ function ModelSelectorFilter() {
             .then((data) => setTiposTrole(data))
             .catch((err) => console.error("Erro ao carregar tipos de trole:", err));
 
-        fetch("http://localhost:8081/api/talhas/distinct-cursoUtil")
+        fetch("http://localhost:8081/api/talhas/distinct-cursoUtilGancho")
             .then((res) => res.json())
             .then((data) => setCursosGancho(data))
             .catch((err) => console.error("Erro ao carregar cursos de gancho:", err));

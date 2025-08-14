@@ -3,6 +3,7 @@ package com.tcs.site_orcamento.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.tcs.site_orcamento.entity.Talha;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -26,5 +27,17 @@ public interface TalhaRepository extends JpaRepository<Talha, String> {
 
     @Query("SELECT DISTINCT t.cursoUtilGancho FROM Talha t")
     List<String> findDistinctCursoUtilGancho();
+
+    @Query("SELECT t FROM Talha t " +
+            "WHERE (:correnteCabo IS NULL OR t.correnteCabo = :correnteCabo) " +
+            "AND (:capacidade IS NULL OR t.capacidade = :capacidade) " +
+            "AND (:tipoTrole IS NULL OR t.tipoTrole = :tipoTrole) " +
+            "AND (:cursoUtilGancho IS NULL OR t.cursoUtilGancho = :cursoUtilGancho)")
+    List<Talha> findByAll(
+            @Param("correnteCabo") String correnteCabo,
+            @Param("capacidade") Integer capacidade,
+            @Param("tipoTrole") String tipoTrole,
+            @Param("cursoUtilGancho") String cursoUtilGancho
+    );
 
 }

@@ -43,7 +43,7 @@ public class TalhaController {
         return talhaRepository.findByTipoTrole(tipoTrole);
     }
 
-    @GetMapping("/filtro-cursoUtil")
+    @GetMapping("/filtro-cursoUtilGancho")
     public List<Talha> filtrarPorcursoUtilGancho(@RequestParam Integer cursoUtilGancho) {
         return talhaRepository.findByCursoUtilGancho(cursoUtilGancho);
     }
@@ -58,14 +58,22 @@ public class TalhaController {
         return talhaRepository.findDistinctCapacidade();
     }
 
-    @GetMapping("/distinct-cursoUtil")
-    public List<String>  distinctCursoUtilGancho() {
-        return talhaRepository.findDistinctCursoUtilGancho();
-    }
-
     @GetMapping("/distinct-tipoTrole")
     public List<String>  distinctTipoTrole() {
         return talhaRepository.findDistinctTipoTrole();
     }
 
+    @GetMapping("/distinct-cursoUtilGancho")
+    public List<String>  distinctCursoUtilGancho() {
+        return talhaRepository.findDistinctCursoUtilGancho();
+    }
+
+    @GetMapping("/filtro")
+    public List<Talha> filtro(
+            @RequestParam(required = false) String correnteCabo,
+            @RequestParam(required = false) Integer capacidade,
+            @RequestParam(required = false) String tipoTrole,
+            @RequestParam(required = false) String cursoUtilGancho) {
+        return talhaRepository.findByAll(correnteCabo, capacidade, tipoTrole, cursoUtilGancho);
+    }
 }

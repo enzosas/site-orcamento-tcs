@@ -22,7 +22,7 @@
 }
 
 .modelo-opcao:hover {
-  background-color: #f8f8f8;
+  background-color: color-mix(in srgb, white 90%, black);
   cursor: pointer;
 }
 
@@ -38,6 +38,10 @@ select {
     border-radius: 15px;
     padding: 1em;
     width: 13.4em;
+}
+
+select:hover {
+  cursor: pointer;
 }
 
 .headerSelect{
