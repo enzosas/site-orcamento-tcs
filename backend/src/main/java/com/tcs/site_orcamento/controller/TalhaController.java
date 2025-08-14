@@ -23,7 +23,6 @@ public class TalhaController {
 
     @GetMapping("/{modelo}")
     public ResponseEntity<Talha> getTalhaPorModelo(@PathVariable String modelo) {
-        System.out.println(">>> GET /api/talhas/" + modelo);
         return talhaRepository.findById(modelo)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -31,25 +30,26 @@ public class TalhaController {
 
     @GetMapping("/filtro-correnteCabo")
     public List<Talha> filtrarPorCabo(@RequestParam String correnteCabo) {
-        System.out.println(">>> GET /filtro-correnteCabo?correnteCabo=" + correnteCabo);
         return talhaRepository.findByCorrenteCabo(correnteCabo);
     }
 
     @GetMapping("/filtro-capacidade")
     public List<Talha> filtrarPorCapacidade(@RequestParam Integer capacidade) {
-        System.out.println(">>> GET /filtro-capacidade?capacidade=" + capacidade);
         return talhaRepository.findByCapacidade(capacidade);
     }
 
     @GetMapping("/filtro-tipoTrole")
     public List<Talha> filtrarPorTipoTrole(@RequestParam String tipoTrole) {
-        System.out.println(">>> GET /filtro-tipoTrole?tipoTrole=" + tipoTrole);
         return talhaRepository.findByTipoTrole(tipoTrole);
     }
 
     @GetMapping("/filtro-cursoUtil")
     public List<Talha> filtrarPorcursoUtilGancho(@RequestParam Integer cursoUtilGancho) {
-        System.out.println(">>> GET /filtro-cursoUtil?cursoUtilGancho=" + cursoUtilGancho);
         return talhaRepository.findByCursoUtilGancho(cursoUtilGancho);
+    }
+
+    @GetMapping("/distinct-correnteCabo")
+    public List<String>  distinctCorrenteCabo() {
+        return talhaRepository.findDistinctCorrenteCabo();
     }
 }
