@@ -18,4 +18,13 @@ public interface TalhaRepository extends JpaRepository<Talha, String> {
     @Query("SELECT DISTINCT t.correnteCabo FROM Talha t")
     List<String> findDistinctCorrenteCabo();
 
+    @Query("SELECT DISTINCT t.capacidade FROM Talha t ORDER BY t.capacidade")
+    List<String> findDistinctCapacidade();
+
+    @Query("SELECT DISTINCT t.tipoTrole FROM Talha t")
+    List<String> findDistinctTipoTrole();
+
+    @Query("SELECT DISTINCT t.cursoUtilGancho FROM Talha t")
+    List<String> findDistinctCursoUtilGancho();
+
 }

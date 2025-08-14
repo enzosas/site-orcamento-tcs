@@ -52,4 +52,20 @@ public class TalhaController {
     public List<String>  distinctCorrenteCabo() {
         return talhaRepository.findDistinctCorrenteCabo();
     }
+
+    @GetMapping("/distinct-capacidade")
+    public List<String>  distinctCapacidade() {
+        return talhaRepository.findDistinctCapacidade();
+    }
+
+    @GetMapping("/distinct-cursoUtil")
+    public List<String>  distinctCursoUtilGancho() {
+        return talhaRepository.findDistinctCursoUtilGancho();
+    }
+
+    @GetMapping("/distinct-tipoTrole")
+    public List<String>  distinctTipoTrole() {
+        return talhaRepository.findDistinctTipoTrole();
+    }
+
 }
