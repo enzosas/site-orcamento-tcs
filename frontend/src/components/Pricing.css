@@ -1,7 +1,12 @@
 .main-pricing{
-    padding: 3em;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* padding: 1em; */
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    /* background-color: rebeccapurple; */
+}
+
+.unidade{
+    margin: 2em;
 }
 
 .descricao{
@@ -11,5 +16,5 @@
 .dinheiro{
     font-weight: bold;
     font-size: 2em;
-    margin-bottom: 2em;
+    /* margin-bottom: 2em; */
 }

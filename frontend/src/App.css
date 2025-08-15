@@ -1,11 +1,4 @@
 .app-container {
-  padding-top: 3em;
-  padding-bottom: 3em;
   background: var(--fundo);
   color: var(--azul-primario);
-}
-
-.content{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
 }
