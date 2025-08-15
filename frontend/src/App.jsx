@@ -29,7 +29,7 @@ function App() {
           <ExtraInfo />
         </div>
         <div className="collumn">
-          <CommandPannel />
+          <CommandPannel talha={talhaSelecionada}/>
           <Pricing />
           <Footer />  
           
