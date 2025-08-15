@@ -38,7 +38,6 @@ select {
     border: 0.2em solid var(--azul-primario);
     border-radius: 15px;
     padding: 1em;
-    width: 15em;
 }
 
 select:hover {
@@ -53,15 +52,14 @@ select:hover {
 .model-filter{
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    place-items: center;
     gap: 2em; 
     margin-bottom: 1em;
+    /* background-color: aqua; */
 }
 
-.model-filter-unidade{
-    max-width: 12em;
+.model-filter select{
+  width: 100%;
 }
-
 
 /* mouse! */
 

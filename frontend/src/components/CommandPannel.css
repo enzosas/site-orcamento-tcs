@@ -1,6 +1,6 @@
 .frame-checkbox-painel{
     padding: 2em;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 .frame-caixas-selecao{
@@ -26,10 +26,6 @@
     flex-direction: column;
     place-items: center;
     gap: 1em; 
-    font-size: 1em;
+    font-size: 1.2em;
     color: black;
-}
-
-select{
-        width: 15em;
 }

@@ -1,5 +1,7 @@
 .main-pricing{
-    padding: 1em;
+    padding: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .descricao{

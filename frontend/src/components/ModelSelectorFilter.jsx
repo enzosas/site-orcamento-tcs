@@ -35,7 +35,6 @@ function ModelSelectorFilter({ filtros, setFiltros }) {
 
     return (
         <div className="model-filter">
-            
             <div className="model-filter-unidade">
                 <h4 className="headerSelect">Cabo / Corrente</h4>
                 <select
@@ -57,7 +56,7 @@ function ModelSelectorFilter({ filtros, setFiltros }) {
                 >
                     <option value="">Sem filtro</option>
                     {capacidades.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
+                        <option key={index} value={item}>{item} kg</option>
                     ))}
                 </select>
             </div>
@@ -83,7 +82,7 @@ function ModelSelectorFilter({ filtros, setFiltros }) {
                 >
                     <option value="">Sem filtro</option>
                     {cursosGancho.map((item, index) => (
-                        <option key={index} value={item}>{item}</option>
+                        <option key={index} value={item}>{item} metros</option>
                     ))}
                 </select>
             </div>

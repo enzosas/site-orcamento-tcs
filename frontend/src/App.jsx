@@ -1,4 +1,5 @@
 import "./App.css";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import ModelSelector from "./components/ModelSelector";
 import CommandPannel from "./components/CommandPannel"
@@ -10,16 +11,35 @@ import Footer from "./components/Footer";
 
 
 function App() {
+  const [talhaSelecionada, setTalhaSelecionada] = useState(null);
+
+
   return (
     <div className="app-container">
       <Header />
-      <ModelSelector />
-      <CommandPannel />
-      <ExtraOptions />
-      <TalhaWindow />
-      <ExtraInfo />
-      <Pricing />
-      <Footer />
+      <div className="content">
+          <div className="collumn">
+          <ModelSelector setTalhaSelecionada={setTalhaSelecionada} />
+          <ExtraOptions />
+          
+        </div>
+        <div className="collumn">
+          <TalhaWindow talha={talhaSelecionada} />
+          <ExtraInfo />
+        </div>
+        <div className="collumn">
+          <CommandPannel />
+          <Pricing />
+          <Footer />  
+          
+          
+
+        </div>
+      </div>
+      
+      
+      
+      
     </div>
   );
 }
