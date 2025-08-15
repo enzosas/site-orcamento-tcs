@@ -45,7 +45,6 @@ function ModelSelector(){
             <hr></hr>
             <h2 className="frame-branco-title">Filtros</h2>
             <ModelSelectorFilter filtros={filtros} setFiltros={setFiltros} />
-
         </div>
     )
 }
