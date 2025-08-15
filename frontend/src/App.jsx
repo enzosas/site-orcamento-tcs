@@ -20,6 +20,7 @@ function App() {
       <div className="content">
           <div className="collumn">
           <ModelSelector setTalhaSelecionada={setTalhaSelecionada} />
+          <hr></hr>
           <ExtraOptions />
           
         </div>

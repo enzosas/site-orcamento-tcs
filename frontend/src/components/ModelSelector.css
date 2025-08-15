@@ -54,7 +54,6 @@ select:hover {
     grid-template-columns: 1fr 1fr; 
     gap: 2em; 
     margin-bottom: 1em;
-    /* background-color: aqua; */
 }
 
 .model-filter select{

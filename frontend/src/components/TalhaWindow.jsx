@@ -66,7 +66,7 @@ function TalhaWindow({ talha }){
                     <p className="frame-all-info-dir">{talha.peso} kg</p>
                 </div>
             </div>
-            <img src="/TCS002D06FX.jpg" alt="Logo" />
+            <img src={`/fotos/${talha.modelo}.jpg`}/>
         </div>
     )
 }

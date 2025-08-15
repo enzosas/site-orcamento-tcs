@@ -1,5 +1,7 @@
 .frame-checkbox-painel{
-    padding: 2em;
+    margin-top: 1.2em;
+    /* padding: 1em; */
+    /* background-color: rebeccapurple; */
     font-size: 2em;
 }
 
@@ -21,7 +23,7 @@
 }
 
 .frame-checkbox-extra{
-    padding: 2em;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     place-items: center;
