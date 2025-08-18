@@ -1,4 +1,19 @@
 .app-container {
   background: var(--fundo);
   color: var(--azul-primario);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.app-corpo{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.3rem;
+}
+
+.app-corpo-coluna{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }

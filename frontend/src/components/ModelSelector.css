@@ -1,20 +1,27 @@
+.modelselector-corpo{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+
 .selector{
-    padding: 1em;
+    padding: 0.5em;
     font-family: 'Poppins';
     user-select: none;
 
-    max-width: 12em;
+    max-width: 90%;
     margin: 0 auto;
 
-    min-height: 10em;
-    max-height: 10em;
+    min-height: 15em;
+    max-height: 15em;
     overflow-y: auto; 
+	text-align: center;
 }
 
 .selector-border{
     border: 0.2em solid var(--azul-primario);
-    border-radius: 15px;
-    max-width: 15em;
+    border-radius: 0.7em;
     margin: 0 auto;
 }
 
@@ -30,14 +37,14 @@
 .modelo-opcao.selecionado {
   background-color: var(--azul-primario);
   color: #FFFFFF;
-  border-radius: 15px;
+  border-radius: 0.7em;
 }
 
 select {
     font-family: 'Poppins';
     border: 0.2em solid var(--azul-primario);
-    border-radius: 15px;
-    padding: 1em;
+    border-radius: 0.7em;
+    padding: 0.2em;
 }
 
 select:hover {
@@ -45,22 +52,18 @@ select:hover {
 }
 
 .headerSelect{
-    margin-bottom: 0.5em;
     text-align: left;
 }
 
 .model-filter{
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 2em; 
-    margin-bottom: 1em;
+
 }
 
 .model-filter select{
   width: 100%;
 }
 
-/* mouse! */
+/* scroll! */
 
 
 
@@ -77,7 +80,7 @@ select:hover {
 
 .selector::-webkit-scrollbar-thumb {
   background-color: var(--azul-primario);
-  border-radius: 4px;
+  border-radius: 0.7em;
   border: none;
 }
 

@@ -11,24 +11,29 @@ import Footer from "./components/Footer";
 
 
 function App() {
-  const [talhaSelecionada, setTalhaSelecionada] = useState(null);
+	const [talhaSelecionada, setTalhaSelecionada] = useState(null);
 
 
-  return (
-    <div className="app-container">
-      <Header />
-      
-          <ModelSelector setTalhaSelecionada={setTalhaSelecionada} />
-          <CommandPannel talha={talhaSelecionada}/>
-          <ExtraOptions />
-          <TalhaWindow talha={talhaSelecionada} />
-          <ExtraInfo />
-          
-          <Pricing />
-          <Footer />  
-
-    </div>
-  );
+	return (
+		<div className="app-container">
+			<Header />
+			<div className="app-corpo">
+				<div className="app-corpo-coluna">
+					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} />
+					<CommandPannel talha={talhaSelecionada}/>
+					<ExtraOptions />
+				</div>
+				<div className="app-corpo-coluna">
+					<TalhaWindow talha={talhaSelecionada} />
+					<ExtraInfo />
+				</div>
+				<div className="app-corpo-coluna">
+					<Pricing />
+					<Footer />  
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default App;

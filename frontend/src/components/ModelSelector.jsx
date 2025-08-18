@@ -44,17 +44,16 @@ function ModelSelector({ setTalhaSelecionada }){
     return (
         <div>
             <div className="frame-branco">
-                <h2 className="frame-branco-title">Escolha o modelo:</h2>
-                <ModelSelectorList modelos={modelos} onSelect={setTalhaSelecionada} />
-                <hr></hr>
-                <h2 className="frame-branco-title">Filtros</h2>
-                <ModelSelectorFilter filtros={filtros} setFiltros={setFiltros} />
-            </div>
-            <div className="frame-checkbox-painel">
-                <label >
-                    <input type="checkbox"></input>
-                    Incluir Painel de Comando
-                </label>
+                <div className="modelselector-corpo">
+                    <div className="modelselector-corpo-left">
+                        <h2 className="frame-branco-title">Escolha o modelo:</h2>
+                        <ModelSelectorList modelos={modelos} onSelect={setTalhaSelecionada} />
+                    </div>
+                    <div className="modelselector-corpo-left">
+                        <h2 className="frame-branco-title">Filtros</h2>
+                        <ModelSelectorFilter filtros={filtros} setFiltros={setFiltros} />
+                    </div>
+                </div>
             </div>
         </div>
     )
