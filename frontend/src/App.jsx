@@ -18,16 +18,16 @@ function App() {
 		<div className="app-container">
 			<Header />
 			<div className="app-corpo">
-				<div className="app-corpo-coluna">
+				<div className="coluna">
 					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} />
 					<CommandPannel talha={talhaSelecionada}/>
 					<ExtraOptions />
 				</div>
-				<div className="app-corpo-coluna">
+				<div className="coluna">
 					<TalhaWindow talha={talhaSelecionada} />
 					<ExtraInfo />
 				</div>
-				<div className="app-corpo-coluna">
+				<div className="coluna">
 					<Pricing />
 					<Footer />  
 				</div>

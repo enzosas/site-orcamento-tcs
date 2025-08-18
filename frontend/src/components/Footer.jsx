@@ -10,7 +10,6 @@ function Footer(){
             <div className="gerar-pdf">
                 <p>Gerar Pdf</p>
             </div>
-
          </div>
         
     )

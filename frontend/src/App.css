@@ -1,5 +1,5 @@
 .app-container {
-  background: var(--fundo);
+  background: var(--background);
   color: var(--azul-primario);
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   gap: 0.3rem;
 }
 
-.app-corpo-coluna{
+.app-corpo .coluna{
   display: flex;
   flex-direction: column;
   gap: 0.3rem;

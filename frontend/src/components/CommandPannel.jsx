@@ -35,7 +35,6 @@ function CommandPannel({ talha }){
     return (
         <div className="frame-branco">
             <h2 className="frame-branco-title">Painel de Comando</h2>
-            <hr></hr>
             
         
             <div className="frame-caixas-selecao">

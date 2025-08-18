@@ -7,8 +7,7 @@
     color: black;
     display: flex;
     flex-direction: column;
-    place-items: center;
-    gap: 2em; 
+    place-items: left;
     margin-bottom: 1em;
 }
 
@@ -25,11 +24,8 @@
 }
 
 .frame-checkbox-extra{
-    padding: 1em;
     display: flex;
     flex-direction: column;
-    place-items: center;
-    gap: 1em; 
-    font-size: 1.2em;
+    place-items: left;
     color: black;
 }

@@ -47,7 +47,7 @@ input[type="checkbox"] {
 
 .frame-branco{
     background: #FFFFFF;
-    box-shadow: 0em 0em 1em 1em   rgba(0, 0, 0, 0.05);
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
     padding: 1rem;
     flex-grow: 100%;

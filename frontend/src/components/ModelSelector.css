@@ -53,6 +53,7 @@ select:hover {
 
 .headerSelect{
     text-align: left;
+	color: var(--azul-primario);
 }
 
 .model-filter{

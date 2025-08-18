@@ -3,7 +3,7 @@ import "./CommandPannel.css"
 function ExtraOptions(){
     return (
         <div>
-            <div className="frame-checkbox-extra">
+            <div className="frame-branco frame-checkbox-extra">
                 <label >
                     <input type="checkbox"></input>
                     Fim de Curso de Cruzeta Esquerda/Direita
