@@ -1,6 +1,6 @@
 .app-container {
   background: var(--background);
-  color: var(--azul-primario);
+  color: var(--corPrincipal);
   display: flex;
   flex-direction: column;
   gap: 0.3rem;

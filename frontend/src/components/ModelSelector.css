@@ -20,7 +20,7 @@
 }
 
 .selector-border{
-    border: 0.15em solid var(--azul-primario);
+    border: 0.15em solid var(--corPrincipal);
     border-radius: 0.7em;
     margin: 0 auto;
 }
@@ -30,23 +30,18 @@
 }
 
 .modelo-opcao:hover {
-  background-color: color-mix(in srgb, white 97.5%, black);
+  background-color: var(--corDesfoqueForte);
   cursor: pointer;
 }
 
 .modelo-opcao.selecionado {
-  background-color: var(--azul-primario);
+  background-color: var(--corPrincipal);
   color: #FFFFFF;
   border-radius: 0.7em;
 }
 
 select:hover {
   cursor: pointer;
-}
-
-.headerSelect{
-    text-align: left;
-	color: var(--azul-primario);
 }
 
 .model-filter select{
@@ -69,13 +64,13 @@ select:hover {
 }
 
 .selector::-webkit-scrollbar-thumb {
-  background-color: var(--azul-primario);
+  background-color: var(--corPrincipal);
   border-radius: 0.7em;
   border: none;
 }
 
 .selector::-webkit-scrollbar-thumb:hover {
-  background-color: var(--azul-primario);
+  background-color: var(--corPrincipal);
 }
 
 .selector::-webkit-scrollbar-button {

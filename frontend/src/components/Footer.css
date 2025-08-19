@@ -4,9 +4,9 @@
 }
 
 .config-config{
-    color: var(--cinza);
+    color: var(--corDesfoqueFraco);
     background: #FFFFFF;
-    border: var(--cinza);
+    border: var(--corDesfoqueFraco);
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
     padding: 0.5em;
@@ -17,7 +17,7 @@
 }
 
 .gerar-pdf{
-    background-color: var(--azul-primario);
+    background-color: var(--corPrincipal);
     color: white;
     font-weight: bold;
     border-radius: 0.7em;
@@ -27,5 +27,5 @@
 
 .gerar-pdf:hover{
     cursor: pointer;
-    background-color: color-mix(in srgb, var(--azul-primario) 90%, black);
+    background-color: color-mix(in srgb, var(--corPrincipal) 90%, black);
 }

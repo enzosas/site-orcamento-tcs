@@ -1,10 +1,11 @@
 :root {
   font-family: 'Poppins';
   
-  --azul-primario: #1A365D;
-  --cinza: #53565A;
-  --texto: #000000;
-  --fundo: #ffffff;
+  --corPrincipal: #1A365D;
+  --corDesfoqueFraco: color-mix(in srgb, white 66%, var(--corTexto));;
+  --corDesfoqueForte: color-mix(in srgb, white 97.5%, var(--corTexto));;
+  --corTexto: #000000;
+  --corFundo: #ffffff;
 
   font-size: 12px;
 }
@@ -28,7 +29,7 @@ h1 {
 hr {
   border: none;
   height: 0.1em;
-  background-color: var(--cinza);
+  background-color: var(--corDesfoqueFraco);
   opacity: 0.1;
   border-radius: 0.7em;
   margin: 2.5em;
@@ -39,17 +40,34 @@ input[type="checkbox"] {
       height: 1em;
 }
 
+.headerSelect{
+    text-align: left;
+	color: var(--corPrincipal);
+}
+
+.headerSelect.disabled{
+	color: var(--corDesfoqueFraco);
+}
+
 select {
     font-family: 'Poppins';
-    border: 0.15em solid var(--azul-primario);
+    border: 0.15em solid var(--corPrincipal);
     border-radius: 0.7em;
     padding: 0.2em;
 }
 
+select:disabled {
+    font-family: 'Poppins';
+    border: 0.15em solid var(--corDesfoqueFraco);
+    border-radius: 0.7em;
+    padding: 0.2em;
+    opacity: 1;
+    color: var(--corDesfoqueFraco);
+}
+
 .checkbox-item-disabled
 {
-  color: var(--cinza);
-  opacity: 50%;
+  color: var(--corDesfoqueFraco);
 }
 
 .frame-branco{
