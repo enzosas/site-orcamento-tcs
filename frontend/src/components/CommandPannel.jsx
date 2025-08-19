@@ -39,6 +39,14 @@ function CommandPannel({ talha }){
         
             <div className="frame-caixas-selecao">
                 
+                <label class={`${talha.painelParaPonteRolante === false ? "checkbox-item-disabled" : ""}`}>
+                    <input 
+                        type="checkbox" 
+                        disabled={talha.painelParaPonteRolante === false} 
+                    ></input>
+                    Incluir Painel de Comando
+                </label>
+                
                 <div className="frame-unidade-caixa-selecao">
                     <h4 className="headerSelect">Tensão</h4>
                     <select name="opcoesTensao">

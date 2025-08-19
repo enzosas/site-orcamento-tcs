@@ -20,7 +20,7 @@
 }
 
 .selector-border{
-    border: 0.2em solid var(--azul-primario);
+    border: 0.15em solid var(--azul-primario);
     border-radius: 0.7em;
     margin: 0 auto;
 }
@@ -40,13 +40,6 @@
   border-radius: 0.7em;
 }
 
-select {
-    font-family: 'Poppins';
-    border: 0.2em solid var(--azul-primario);
-    border-radius: 0.7em;
-    padding: 0.2em;
-}
-
 select:hover {
   cursor: pointer;
 }
@@ -54,10 +47,6 @@ select:hover {
 .headerSelect{
     text-align: left;
 	color: var(--azul-primario);
-}
-
-.model-filter{
-
 }
 
 .model-filter select{

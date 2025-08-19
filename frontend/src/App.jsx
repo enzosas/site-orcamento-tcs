@@ -8,6 +8,7 @@ import TalhaWindow from "./components/TalhaWindow";
 import ExtraInfo from "./components/ExtraInfo";
 import Pricing from "./components/Pricing";
 import Footer from "./components/Footer";
+import Imagem from "./components/Imagem";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 					<ExtraInfo />
 				</div>
 				<div className="coluna">
+					<Imagem talha={talhaSelecionada} />
 					<Pricing />
 					<Footer />  
 				</div>

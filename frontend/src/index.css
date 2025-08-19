@@ -39,6 +39,13 @@ input[type="checkbox"] {
       height: 1em;
 }
 
+select {
+    font-family: 'Poppins';
+    border: 0.15em solid var(--azul-primario);
+    border-radius: 0.7em;
+    padding: 0.2em;
+}
+
 .checkbox-item-disabled
 {
   color: var(--cinza);

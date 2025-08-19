@@ -1,13 +1,14 @@
-.unidade{
-    margin: 2em;
-}
-
 .descricao{
     color: black;
 }
 
 .dinheiro{
     font-weight: bold;
-    font-size: 2em;
-    /* margin-bottom: 2em; */
+}
+
+.main-pricing{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    padding: 1rem;
 }
