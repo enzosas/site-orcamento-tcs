@@ -15,7 +15,16 @@ function App() {
 
 	const [talhaSelecionada, setTalhaSelecionada] = useState(null);
 	
-	const opcoes = []
+	const [config, setConfig] = useState({
+		excluirPainel: false,
+        painel6Mov: false,
+        controleRemoto: false,
+        duplaVelocidadeElevacao: false,
+        duplaVelocidadeTranslacao: false,
+        transmissorExtra: false,
+        potenciaMotores: "",
+        modeloControle: ""
+	})
 
 	return (
 		<div className="app-container">
@@ -23,7 +32,7 @@ function App() {
 			<div className="app-corpo">
 				<div className="coluna">
 					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} />
-					<CommandPannel talha={talhaSelecionada}/>
+					<CommandPannel talha={talhaSelecionada} config={config} setConfig={setConfig}/>
 					<ExtraOptions />
 				</div>
 				<div className="coluna">
