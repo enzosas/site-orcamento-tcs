@@ -12,8 +12,10 @@ import Imagem from "./components/Imagem";
 
 
 function App() {
-	const [talhaSelecionada, setTalhaSelecionada] = useState(null);
 
+	const [talhaSelecionada, setTalhaSelecionada] = useState(null);
+	
+	const opcoes = []
 
 	return (
 		<div className="app-container">
@@ -26,7 +28,7 @@ function App() {
 				</div>
 				<div className="coluna">
 					<TalhaWindow talha={talhaSelecionada} />
-					<ExtraInfo />
+					<ExtraInfo talha={talhaSelecionada}/>
 				</div>
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />

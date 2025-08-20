@@ -48,7 +48,7 @@ function TalhaWindow({ talha }){
                     <p className="frame-all-info-dir">{talha.frenoNoCarroTranslacao ? "Sim" : "Não"}</p>
 
                     <p className="frame-all-info-esq">Fim de curso sobe/desce</p>
-                    <p className="frame-all-info-dir">Subida/Descida</p>
+                    <p className="frame-all-info-dir">Subida/Descida [AJUSTAR]</p>
 
                     <p className="frame-all-info-esq">Fim de curso direita/esquerda</p>
                     <p className="frame-all-info-dir">{talha.fimCursoDireitaEsquerdaDisponivel ? "Sim" : "Não"}</p>

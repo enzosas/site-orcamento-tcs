@@ -9,10 +9,11 @@ function CommandPannel({ talha }) {
     const [controleRemoto, setControleRemoto] = useState(false);
 
     useEffect(() => {
-        if (talha.exclusaoPainelComandoForca === true) {
-            setExcluirPainel(true);
+        if (talha.exclusaoPainelComandoForca === false) {
+            setExcluirPainel(false);
+            setPainel6Mov(false);
+            setControleRemoto(false);
         }
-        else setExcluirPainel(false);
     }, [talha.exclusaoPainelComandoForca]);
 
     let opcoesPotencia = [
@@ -37,11 +38,11 @@ function CommandPannel({ talha }) {
 
             <div className="frame-caixas-selecao">
                 {/* Caixa principal: Excluir Painel */}
-                <label className={`${talha.exclusaoPainelComandoForca === true ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${talha.exclusaoPainelComandoForca === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
                         checked={excluirPainel}
-                        disabled={talha.exclusaoPainelComandoForca === true}
+                        disabled={talha.exclusaoPainelComandoForca === false}
                         onChange={(e) => setExcluirPainel(e.target.checked)}
                     />
                     Sem Painel de Comando
@@ -102,8 +103,8 @@ function CommandPannel({ talha }) {
                     </select>
                 </div>
 
-                <label className={`${excluirPainel ? "checkbox-item-disabled" : ""}`}>
-                    <input type="checkbox" disabled={excluirPainel} />
+                <label className={`${excluirPainel || !controleRemoto ? "checkbox-item-disabled" : ""}`}>
+                    <input type="checkbox" disabled={excluirPainel || !controleRemoto} />
                     Transmissor Extra para Controle Remoto
                 </label>
             </div>
