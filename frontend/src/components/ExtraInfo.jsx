@@ -2,7 +2,7 @@ import "./TalhaWindow.css"
 import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
 
-function ExtraInfo({ talha }){
+function ExtraInfo({ talha, config }){
     if (!talha) return null;
     return (
          <div className="frame-branco">
@@ -11,7 +11,7 @@ function ExtraInfo({ talha }){
                 <p className="frame-all-info-dir">{talha.painelComandoPadrao}</p>
 
                 <p className="frame-all-info-esq">Tensão de trabalho</p>
-                <p className="frame-all-info-dir">Trifásica [AJUSTAR]</p>
+                <p className="frame-all-info-dir">{config.tensao}</p>
 
                 <p className="frame-all-info-esq">Tensão de comando</p>
                 <p className="frame-all-info-dir">{talha.tensaoComando}</p>
@@ -32,10 +32,10 @@ function ExtraInfo({ talha }){
                 <p className="frame-all-info-dir">{talha.botoeira}</p>
 
                 <p className="frame-all-info-esq">Controle Remoto</p>
-                <p className="frame-all-info-dir">Opcional[AJUSTAR]</p>
+                <p className="frame-all-info-dir">{config.controleRemoto ? "Sim" : "Não"}</p>
 
                 <p className="frame-all-info-esq">Transmissor Extra</p>
-                <p className="frame-all-info-dir">Opcional[AJUSTAR]</p>
+                <p className="frame-all-info-dir">{config.transmissorExtra ? "Sim" : "Não"}</p>
 
                 <p className="frame-all-info-esq">Sinalizador Sonoro</p>
                 <p className="frame-all-info-dir">Opcional[AJUSTAR]</p>

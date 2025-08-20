@@ -1,6 +1,12 @@
 import "./CommandPannel.css"
 import { useState, useEffect } from "react";
 
+//    useEffect(() => {
+//        if (config.painel6Mov) {
+//            setConfig(prev => ({ ...prev, modeloControle: opcoesControle }));
+//        }
+//    }, [CONDICAO]);
+
 function CommandPannel({ talha, config, setConfig }) {
     if (!talha) return null;
 
@@ -8,16 +14,14 @@ function CommandPannel({ talha, config, setConfig }) {
         if (talha.exclusaoPainelComandoForca === false) {
             setConfig(prev => ({
                 ...prev,
-                excluirPainel: false,
-                painel6Mov: false,
-                controleRemoto: false
+                excluirPainelAllow: false,
             }))
         }
     }, [talha.exclusaoPainelComandoForca]);
 
     useEffect(() => {
         if (config.painel6Mov) {
-            setConfig(prev => ({ ...prev, modeloControle: opcoesControle[0] }));
+            setConfig(prev => ({ ...prev, modeloControle: opcoesControle }));
         }
     }, [config.painel6Mov]);
 
@@ -28,6 +32,13 @@ function CommandPannel({ talha, config, setConfig }) {
             potenciaMotores: opcoesPotencia[0]
         }))
     }, [])
+
+   useEffect(() => {
+       if (!config.controleRemoto) {
+           setConfig(prev => ({ ...prev, transmissorExtra: false }));
+       }
+   }, [config]);
+
 
     let opcoesPotencia = [
         "2 x 0,25 kW","2 x 0,37 kW","2 x 0,55 kW","2 x 0,75 kW","2 x 1,1 kW",
@@ -51,49 +62,49 @@ function CommandPannel({ talha, config, setConfig }) {
                 <label className={`${talha.exclusaoPainelComandoForca === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        checked={config.excluirPainel}
+                        checked={config.excluirPainelAllow}
                         disabled={talha.exclusaoPainelComandoForca === false}
-                        onChange={(e) => setConfig(prev => ({ ...prev, excluirPainel: e.target.checked }))}
+                        onChange={(e) => setConfig(prev => ({ ...prev, excluirPainelAllow: e.target.checked }))}
                     />
                     Sem Painel de Comando
                 </label>
 
                 {/* Dependentes */}
-                <label className={`${config.excluirPainel || talha.duplaVelocidadeElevacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${config.excluirPainelAllow || talha.duplaVelocidadeElevacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        disabled={config.excluirPainel || talha.duplaVelocidadeElevacaoInversor === false}
+                        disabled={config.excluirPainelAllow || talha.duplaVelocidadeElevacaoInversor === false}
                         checked={config.duplaVelocidadeElevacao}
                         onChange={(e) => setConfig(prev => ({ ...prev, duplaVelocidadeElevacao: e.target.checked }))}
                     />
                     Dupla Velocidade de Elevação com inversor de frequência
                 </label>
 
-                <label className={`${config.excluirPainel || talha.duplaVelocidadeTranslacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${config.excluirPainelAllow || talha.duplaVelocidadeTranslacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        disabled={config.excluirPainel || talha.duplaVelocidadeTranslacaoInversor === false}
+                        disabled={config.excluirPainelAllow || talha.duplaVelocidadeTranslacaoInversor === false}
                         checked={config.duplaVelocidadeTranslacao}
                         onChange={(e) => setConfig(prev => ({ ...prev, duplaVelocidadeTranslacao: e.target.checked }))}
                     />
                     Dupla Velocidade de Translação com inversor de frequência
                 </label>
 
-                <label className={`${config.excluirPainel || talha.painelParaPonteRolante === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${config.excluirPainelAllow || talha.painelParaPonteRolante === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
                         checked={config.painel6Mov}
-                        disabled={config.excluirPainel || talha.painelParaPonteRolante === false}
+                        disabled={config.excluirPainelAllow || talha.painelParaPonteRolante === false}
                         onChange={(e) => setConfig(prev => ({ ...prev, painel6Mov: e.target.checked }))}
                     />
                     Painel 6 Movimentos com 2 velocidades
                 </label>
 
                 <div className="frame-unidade-caixa-selecao">
-                    <h4 className={`headerSelect ${config.excluirPainel || !config.painel6Mov ? "disabled" : ""}`}>Potência Motores Cabeceiras</h4>
+                    <h4 className={`headerSelect ${config.excluirPainelAllow || !config.painel6Mov ? "disabled" : ""}`}>Potência Motores Cabeceiras</h4>
                     <select
                         name="opcoesPotencia"
-                        disabled={config.excluirPainel || !config.painel6Mov}
+                        disabled={config.excluirPainelAllow || !config.painel6Mov}
                         value={config.potenciaMotores}
                         onChange={(e) => setConfig(prev => ({ ...prev, potenciaMotores: e.target.value }))}
                     >
@@ -103,10 +114,10 @@ function CommandPannel({ talha, config, setConfig }) {
                     </select>
                 </div>
 
-                <label className={`${config.excluirPainel ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${config.excluirPainelAllow ? "checkbox-item-disabled" : ""}`}>
                     <input 
                         type="checkbox" 
-                        disabled={config.excluirPainel || talha.controleRemotoDisponivel === false}
+                        disabled={config.excluirPainelAllow || talha.controleRemotoDisponivel === false}
                         checked={config.controleRemoto}
                         onChange={(e) => setConfig(prev => ({ ...prev, controleRemoto: e.target.checked }))}
                     />
@@ -114,10 +125,10 @@ function CommandPannel({ talha, config, setConfig }) {
                 </label>
 
                 <div className="frame-unidade-caixa-selecao">
-                    <h4 className={`headerSelect ${config.excluirPainel || !config.controleRemoto ? "disabled" : ""}`}>Modelo do Controle</h4>
+                    <h4 className={`headerSelect ${config.excluirPainelAllow || !config.controleRemoto ? "disabled" : ""}`}>Modelo do Controle</h4>
                     <select
                         name="opcoesControle"
-                        disabled={config.excluirPainel || !config.controleRemoto}
+                        disabled={config.excluirPainelAllow || !config.controleRemoto}
                         value={config.modeloControle}
                         onChange={(e) => setConfig(prev => ({ ...prev, modeloControle: e.target.value }))}
                     >
@@ -127,10 +138,10 @@ function CommandPannel({ talha, config, setConfig }) {
                     </select>
                 </div>
 
-                <label className={`${config.excluirPainel || !config.controleRemoto ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${config.excluirPainelAllow || !config.controleRemoto ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        disabled={config.excluirPainel || !config.controleRemoto}
+                        disabled={config.excluirPainelAllow || !config.controleRemoto}
                         checked={config.transmissorExtra}
                         onChange={(e) => setConfig(prev => ({ ...prev, transmissorExtra: e.target.checked }))}
                     />
