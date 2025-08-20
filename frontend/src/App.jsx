@@ -20,7 +20,7 @@ function App() {
 			<Header />
 			<div className="app-corpo">
 				<div className="coluna">
-					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} />
+					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} />
 					<CommandPannel talha={talhaSelecionada}/>
 					<ExtraOptions />
 				</div>

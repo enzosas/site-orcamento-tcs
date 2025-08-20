@@ -6,19 +6,11 @@ function CommandPannel({ talha }) {
 
     const [incluirPainel, setIncluirPainel] = useState(false);
 
-    // se o painel não for permitido, desmarca e garante que não fique true
     useEffect(() => {
         if (talha.painelParaPonteRolante === false) {
             setIncluirPainel(false);
         }
     }, [talha.painelParaPonteRolante]);
-
-    let opcoesTensao = [];
-    if (talha.tensaoTrifasica === "220/380V - Trifásica") {
-        opcoesTensao = ["220V - Trifásica", "380V - Trifásica"];
-    } else {
-        opcoesTensao = [talha.tensaoTrifasica];
-    }
 
     let opcoesPotencia = [
         "2 x 0,25 kW","2 x 0,37 kW","2 x 0,55 kW","2 x 0,75 kW","2 x 1,1 kW",
@@ -44,14 +36,6 @@ function CommandPannel({ talha }) {
                 </label>
 
                 {/* Dependentes */}
-                <div className="frame-unidade-caixa-selecao">
-                    <h4 className="headerSelect">Tensão</h4>
-                    <select name="opcoesTensao" disabled={!incluirPainel}>
-                        {opcoesTensao.map((opcao, i) => (
-                            <option key={i} value={opcao}>{opcao}</option>
-                        ))}
-                    </select>
-                </div>
 
                 <label className={`${!incluirPainel || talha.duplaVelocidadeElevacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
                     <input

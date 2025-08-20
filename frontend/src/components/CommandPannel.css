@@ -11,12 +11,8 @@
     margin-bottom: 1em;
 }
 
-.frame-caixas-selecao select{
-        width: 100%
-}
-
 .frame-unidade-caixa-selecao {
-    width: 100%
+    width: 100%;
 }
 
 .titulo-cabeceira{

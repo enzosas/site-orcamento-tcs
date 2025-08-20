@@ -49,11 +49,16 @@ input[type="checkbox"] {
 	color: var(--corDesfoqueFraco);
 }
 
+.frame-caixas-selecao select{
+        width: 100%;
+}
+
 select {
     font-family: 'Poppins';
     border: 0.15em solid var(--corPrincipal);
     border-radius: 0.7em;
     padding: 0.2em;
+    width: 100%;
 }
 
 select:disabled {
