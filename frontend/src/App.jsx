@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ModelSelector from "./components/ModelSelector";
 import CommandPannel from "./components/CommandPannel"
@@ -25,6 +25,10 @@ function App() {
         potenciaMotores: "",
         modeloControle: ""
 	})
+
+	useEffect(() => {
+			console.log(config);
+		}, [config]);
 
 	return (
 		<div className="app-container">

@@ -15,6 +15,14 @@ function CommandPannel({ talha, config, setConfig }) {
         }
     }, [talha.exclusaoPainelComandoForca]);
 
+    useEffect(() => {
+        setConfig(prev => ({
+            ...prev,
+            modeloControle: opcoesControle[0],
+            potenciaMotores: opcoesPotencia[0]
+        }))
+    }, [])
+
     let opcoesPotencia = [
         "2 x 0,25 kW","2 x 0,37 kW","2 x 0,55 kW","2 x 0,75 kW","2 x 1,1 kW",
         "2 x 1,5 kW","2 x 2,2 kW","2 x 3,0 kW","2 x 3,7 kW","2 x 4,5 kW","2 x 5,5 kW"
