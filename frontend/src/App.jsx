@@ -23,7 +23,8 @@ function App() {
         duplaVelocidadeTranslacao: false,
         transmissorExtra: false,
         potenciaMotores: "",
-        modeloControle: ""
+        modeloControle: "",
+		tensao: ""
 	})
 
 	useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
 			<Header />
 			<div className="app-corpo">
 				<div className="coluna">
-					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} />
+					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} config={config} setConfig={setConfig} />
 					<CommandPannel talha={talhaSelecionada} config={config} setConfig={setConfig}/>
 					<ExtraOptions />
 				</div>

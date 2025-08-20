@@ -3,7 +3,7 @@ import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
 import React, { useState, useEffect } from "react";
 
-function ModelSelector({ setTalhaSelecionada, talha }){
+function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
     const [filtros, setFiltros] = useState({
         correnteCabo: "",
@@ -15,11 +15,19 @@ function ModelSelector({ setTalhaSelecionada, talha }){
     let opcoesTensao = [];
         if (talha) {
         if (talha.tensaoTrifasica === "220/380V - Trifásica") {
-            opcoesTensao = ["220V - Trifásica", "380V - Trifásica"];
+            opcoesTensao = ["380V - Trifásica", "220V - Trifásica"];
         } else {
             opcoesTensao = [talha.tensaoTrifasica];
+        }
     }
-}
+
+    useEffect(() => {
+        setConfig(prev => ({
+            ...prev,
+            tensao: opcoesTensao[0]
+        }))
+        
+    }, [talha])
 
     const [modelos, setModelos] = useState([]);
 
@@ -66,7 +74,12 @@ function ModelSelector({ setTalhaSelecionada, talha }){
                 {talha && (
                         <div className="frame-unidade-caixa-selecao">
                             <h4 className="headerSelect">Tensão</h4>
-                            <select name="opcoesTensao" disabled={!talha}>
+                            <select
+                                name="opcoesTensao" 
+                                disabled={!talha}
+                                value={config.tensao}
+                                onChange={(e) => setConfig(prev => ({ ...prev, tensao: e.target.value }))}
+                            >
                                 {opcoesTensao.map((opcao, i) => (
                                     <option key={i} value={opcao}>{opcao}</option>
                                 ))}

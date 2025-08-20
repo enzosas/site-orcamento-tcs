@@ -16,6 +16,12 @@ function CommandPannel({ talha, config, setConfig }) {
     }, [talha.exclusaoPainelComandoForca]);
 
     useEffect(() => {
+        if (config.painel6Mov) {
+            setConfig(prev => ({ ...prev, modeloControle: opcoesControle[0] }));
+        }
+    }, [config.painel6Mov]);
+
+    useEffect(() => {
         setConfig(prev => ({
             ...prev,
             modeloControle: opcoesControle[0],
