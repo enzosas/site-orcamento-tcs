@@ -6,6 +6,7 @@ function CommandPannel({ talha }) {
 
     const [excluirPainel, setExcluirPainel] = useState(false);
     const [painel6Mov, setPainel6Mov] = useState(false);
+    const [controleRemoto, setControleRemoto] = useState(false);
 
     useEffect(() => {
         if (talha.exclusaoPainelComandoForca === true) {
@@ -82,19 +83,24 @@ function CommandPannel({ talha }) {
                     </select>
                 </div>
 
+                <label className={`${excluirPainel ? "checkbox-item-disabled" : ""}`}>
+                    <input 
+                        type="checkbox" 
+                        disabled={excluirPainel || talha.controleRemotoDisponivel === false}
+                        checked={controleRemoto}
+                        onChange={(e) => setControleRemoto(e.target.checked)}
+                    />
+                    Controle Remoto 1 transmissor + 1 Receptor
+                </label>
+
                 <div className="frame-unidade-caixa-selecao">
-                    <h4 className={`headerSelect ${excluirPainel ? "disabled" : ""}`}>Modelo do Controle</h4>
-                    <select name="opcoesControle" disabled={excluirPainel}>
+                    <h4 className={`headerSelect ${excluirPainel || !controleRemoto ? "disabled" : ""}`}>Modelo do Controle</h4>
+                    <select name="opcoesControle" disabled={excluirPainel || !controleRemoto}>
                         {opcoesControle.map((opcao, i) => (
                             <option key={i} value={opcao}>{opcao}</option>
                         ))}
                     </select>
                 </div>
-
-                <label className={`${excluirPainel ? "checkbox-item-disabled" : ""}`}>
-                    <input type="checkbox" disabled={excluirPainel} />
-                    Controle Remoto 1 transmissor + 1 Receptor
-                </label>
 
                 <label className={`${excluirPainel ? "checkbox-item-disabled" : ""}`}>
                     <input type="checkbox" disabled={excluirPainel} />
