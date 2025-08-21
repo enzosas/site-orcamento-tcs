@@ -31,13 +31,13 @@ function CommandPannel({ talha, config, setConfig }) {
             modeloControle: opcoesControle[0],
             potenciaMotores: opcoesPotencia[0]
         }))
-    }, [])
+    }, [config.modeloControle === "" || config.potenciaMotores ===""])
 
    useEffect(() => {
        if (!config.controleRemoto) {
            setConfig(prev => ({ ...prev, transmissorExtra: false }));
        }
-   }, [config]);
+   }, [config.controleRemoto]);
 
 
     let opcoesPotencia = [

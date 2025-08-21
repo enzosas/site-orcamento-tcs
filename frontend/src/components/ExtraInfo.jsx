@@ -17,13 +17,13 @@ function ExtraInfo({ talha, config }){
                 <p className="frame-all-info-dir">{talha.tensaoComando}</p>
 
                 <p className="frame-all-info-esq">Sobe/Desce</p>
-                <p className="frame-all-info-dir">2 velocidades [AJUSTAR]</p>
+                <p className="frame-all-info-dir">{talha.acionamentoMotorElevacao}</p>
 
                 <p className="frame-all-info-esq">Direita/Esquerda</p>
-                <p className="frame-all-info-dir">0 [AJUSTAR]</p>
+                <p className="frame-all-info-dir">{talha.acionamentoMotorTranslacao}</p>
 
                 <p className="frame-all-info-esq">Frente/Atrás</p>
-                <p className="frame-all-info-dir">- [AJUSTAR]</p>
+                <p className="frame-all-info-dir">{talha.painel6Mov ? "2 movimentos" : "-"}</p>
 
                 <p className="frame-all-info-esq">Potência do Motor da Ponte</p>
                 <p className="frame-all-info-dir">- [AJUSTAR]</p>
@@ -32,7 +32,7 @@ function ExtraInfo({ talha, config }){
                 <p className="frame-all-info-dir">{talha.botoeira}</p>
 
                 <p className="frame-all-info-esq">Controle Remoto</p>
-                <p className="frame-all-info-dir">{config.controleRemoto ? "Sim" : "Não"}</p>
+                <p className="frame-all-info-dir">{config.controleRemoto ? config.modeloControle : "Não"}</p>
 
                 <p className="frame-all-info-esq">Transmissor Extra</p>
                 <p className="frame-all-info-dir">{config.transmissorExtra ? "Sim" : "Não"}</p>
