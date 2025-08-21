@@ -40,10 +40,6 @@
   border-radius: 0.7em;
 }
 
-select:hover {
-  cursor: pointer;
-}
-
 .model-filter select{
   width: 100%;
 }

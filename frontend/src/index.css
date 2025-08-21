@@ -59,6 +59,7 @@ select {
     border-radius: 0.7em;
     padding: 0.2em;
     width: 100%;
+    cursor: pointer;
 }
 
 select:disabled {
@@ -68,6 +69,7 @@ select:disabled {
     padding: 0.2em;
     opacity: 1;
     color: var(--corDesfoqueFraco);
+    cursor: default;
 }
 
 .checkbox-item-disabled

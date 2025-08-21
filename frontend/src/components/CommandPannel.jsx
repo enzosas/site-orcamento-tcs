@@ -31,7 +31,7 @@ function CommandPannel({ talha, config, setConfig }) {
             modeloControle: opcoesControle[0],
             potenciaMotores: opcoesPotencia[0]
         }))
-    }, [config.modeloControle === "" || config.potenciaMotores ===""])
+    }, [config.controleRemoto || config.painel6Mov])
 
    useEffect(() => {
        if (!config.controleRemoto) {
@@ -39,15 +39,22 @@ function CommandPannel({ talha, config, setConfig }) {
        }
    }, [config.controleRemoto]);
 
+    let opcoesPotencia = [];
 
-    let opcoesPotencia = [
-        "2 x 0,25 kW","2 x 0,37 kW","2 x 0,55 kW","2 x 0,75 kW","2 x 1,1 kW",
-        "2 x 1,5 kW","2 x 2,2 kW","2 x 3,0 kW","2 x 3,7 kW","2 x 4,5 kW","2 x 5,5 kW"
-    ];
+        if (config.painel6Mov)
+        {
+            opcoesPotencia = ["2 x 0,25 kW","2 x 0,37 kW","2 x 0,55 kW","2 x 0,75 kW","2 x 1,1 kW",
+        "2 x 1,5 kW","2 x 2,2 kW","2 x 3,0 kW","2 x 3,7 kW","2 x 4,5 kW","2 x 5,5 kW"];
+        }
+        else opcoesPotencia = [];
 
     let opcoesControle = [];
-    
-        if (config.painel6Mov) {
+
+        if (!config.controleRemoto)
+        {
+            opcoesControle = [""];
+        }
+        else if (config.painel6Mov) {
             opcoesControle = ["BCI 808"];
         } else {
             opcoesControle = ["BCI 404", "BCI 808"];     

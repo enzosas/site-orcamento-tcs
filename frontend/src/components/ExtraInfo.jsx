@@ -23,10 +23,10 @@ function ExtraInfo({ talha, config }){
                 <p className="frame-all-info-dir">{talha.acionamentoMotorTranslacao}</p>
 
                 <p className="frame-all-info-esq">Frente/Atrás</p>
-                <p className="frame-all-info-dir">{talha.painel6Mov ? "2 movimentos" : "-"}</p>
+                <p className="frame-all-info-dir">{config.painel6Mov ? "2 movimentos" : "Não"}</p>
 
                 <p className="frame-all-info-esq">Potência do Motor da Ponte</p>
-                <p className="frame-all-info-dir">- [AJUSTAR]</p>
+                <p className="frame-all-info-dir">{config.painel6Mov ? config.potenciaMotores : ""}</p>
 
                 <p className="frame-all-info-esq">Botoeira</p>
                 <p className="frame-all-info-dir">{talha.botoeira}</p>
