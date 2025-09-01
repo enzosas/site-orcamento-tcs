@@ -1,5 +1,7 @@
 package com.tcs.site_orcamento.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,14 @@ public class MaxiprodService {
                 .build();
     }
 
+    public WebClient getClient() {
+        return webClient;
+    }
+
+
+
+
+
     public Mono<String> queryLegal(String codigo) {
         String query = """
         query {
@@ -61,7 +71,74 @@ public class MaxiprodService {
                 .bodyToMono(String.class);
     }
 
-    public WebClient getClient() {
-        return webClient;
+    public double getPrecoDeVenda(String codigo) {
+        String query = """
+        query {
+            itens(where: { codigo: { eq: "%s" } }) {
+                items {
+                    precoDeVenda
+                }
+            }
+        }
+        """.formatted(codigo);
+        Map<String, String> body = Map.of("query", query);
+
+        String response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response);
+            return root.path("data")
+                    .path("itens")
+                    .path("items")
+                    .get(0)
+                    .path("precoDeVenda")
+                    .asDouble();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL", e);
+        }
     }
+
+    public double getIpi(String codigo) {
+        String query = """
+        query {
+            itens(where: { codigo: { eq: "%s" } }) {
+                items {
+                    ncm {
+                        ipiAliquota
+                    }
+                }
+            }
+        }
+        """.formatted(codigo);
+        Map<String, String> body = Map.of("query", query);
+
+        String response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response);
+            return root.path("data")
+                    .path("itens")
+                    .path("items")
+                    .get(0)
+                    .path("ncm")
+                    .path("ipiAliquota")
+                    .asDouble();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL", e);
+        }
+    }
+
+
 }

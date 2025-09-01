@@ -15,8 +15,18 @@ public class MaxiprodController {
     @Autowired
     private MaxiprodService maxiprodService;
 
-    @GetMapping("/dadosPreco/{codigo}")
+    @GetMapping("/queryLegal/{codigo}")
     public Mono<String> queryLegal(@PathVariable String codigo) {
         return maxiprodService.queryLegal(codigo);
+    }
+
+    @GetMapping("/getPrecoDeVenda/{codigo}")
+    public Double getPrecoDeVenda(@PathVariable String codigo) {
+        return maxiprodService.getPrecoDeVenda(codigo);
+    }
+
+    @GetMapping("/getIpi/{codigo}")
+    public Double getIpi(@PathVariable String codigo) {
+        return maxiprodService.getIpi(codigo);
     }
 }
