@@ -71,7 +71,7 @@ public class MaxiprodService {
                 .bodyToMono(String.class);
     }
 
-    public double getPrecoDeVenda(String codigo) {
+    public Double getPrecoDeVenda(String codigo) {
         String query = """
         query {
             itens(where: { codigo: { eq: "%s" } }) {
@@ -104,18 +104,18 @@ public class MaxiprodService {
         }
     }
 
-    public double getIpi(String codigo) {
+    public Double getIpi(String codigo) {
         String query = """
-        query {
-            itens(where: { codigo: { eq: "%s" } }) {
-                items {
-                    ncm {
-                        ipiAliquota
+                query {
+                    itens(where: { codigo: { eq: "%s" } }) {
+                        items {
+                            ncm {
+                                ipiAliquota
+                            }
+                        }
                     }
                 }
-            }
-        }
-        """.formatted(codigo);
+                """.formatted(codigo);
         Map<String, String> body = Map.of("query", query);
 
         String response = webClient.post()
@@ -140,5 +140,36 @@ public class MaxiprodService {
         }
     }
 
+    public Double getPrecoDeAquisicao(String codigo) {
+        String query = """
+        query {
+            itens(where: { codigo: { eq: "%s" } }) {
+                items {
+                    aquisicaoOuOrcamentacaoCusto
+                }
+            }
+        }
+        """.formatted(codigo);
+        Map<String, String> body = Map.of("query", query);
 
-}
+        String response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response);
+            return root.path("data")
+                    .path("itens")
+                    .path("items")
+                    .get(0)
+                    .path("aquisicaoOuOrcamentacaoCusto")
+                    .asDouble();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL", e);
+        }
+        }
+    }

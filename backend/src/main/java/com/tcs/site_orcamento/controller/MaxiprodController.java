@@ -29,4 +29,9 @@ public class MaxiprodController {
     public Double getIpi(@PathVariable String codigo) {
         return maxiprodService.getIpi(codigo);
     }
+
+    @GetMapping("/getPrecoDeAquisicao/{codigo}")
+    public Double getPrecoDeAquisicao(@PathVariable String codigo) {
+        return maxiprodService.getPrecoDeAquisicao(codigo);
+    }
 }
