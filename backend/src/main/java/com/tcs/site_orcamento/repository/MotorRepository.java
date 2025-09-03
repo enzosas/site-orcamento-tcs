@@ -10,7 +10,7 @@ import java.util.List;
 public interface MotorRepository extends JpaRepository<Motor, String> {
 
     @Query("SELECT m FROM Motor m WHERE m.motor = :motor AND m.tensao = :tensao")
-    List<Motor> findByMotorAndTensao(
+    Motor findByMotorAndTensao(
             @Param("motor") String motor,
             @Param("tensao") Integer tensao
     );
