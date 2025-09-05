@@ -17,10 +17,10 @@ function ExtraInfo({ talha, config }){
                 <p className="frame-all-info-dir">{talha.tensaoComando}</p>
 
                 <p className="frame-all-info-esq">Sobe/Desce</p>
-                <p className="frame-all-info-dir">{talha.acionamentoMotorElevacao}</p>
+                <p className="frame-all-info-dir">{config.duplaVelocidadeElevacao? "2 velocidades com inversor" : talha.acionamentoMotorElevacao}</p>
 
                 <p className="frame-all-info-esq">Direita/Esquerda</p>
-                <p className="frame-all-info-dir">{talha.acionamentoMotorTranslacao}</p>
+                <p className="frame-all-info-dir">{config.duplaVelocidadeTranslacao? "2 velocidades com inversor" : talha.acionamentoMotorTranslacao}</p>
 
                 <p className="frame-all-info-esq">Frente/Atrás</p>
                 <p className="frame-all-info-dir">{config.painel6Mov ? "2 movimentos" : "Não"}</p>

@@ -68,6 +68,16 @@ public class TalhaController {
         return talhaRepository.findDistinctCursoUtilGancho();
     }
 
+    @GetMapping("/distinct-acionamentoMotorElevacao")
+    public List<String>  distinctAcionamentoMotorElevacao() {
+        return talhaRepository.findDistinctAcionamentoMotorElevacao();
+    }
+
+    @GetMapping("/distinct-acionamentoMotorTranslacao")
+    public List<String>  distinctAcionamentoMotorTranslacao() {
+        return talhaRepository.findDistinctAcionamentoMotorTranslacao();
+    }
+
     @GetMapping("/filtro")
     public List<Talha> filtro(
             @RequestParam(required = false) String correnteCabo,

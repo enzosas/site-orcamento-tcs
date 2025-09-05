@@ -86,4 +86,9 @@ select:disabled {
 }
 
 
+:focus-visible {
+    outline: 3px solid #77879E;
+    outline-offset: -2px;
+}
+
 

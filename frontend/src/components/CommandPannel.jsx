@@ -10,6 +10,24 @@ import { useState, useEffect } from "react";
 function CommandPannel({ talha, config, setConfig }) {
     if (!talha) return null;
 
+   useEffect(() => {
+	if (talha.duplaVelocidadeElevacaoInversor === false) {
+			if (talha.acionamentoMotorElevacao === "2 velocidades com inversor"){
+                setConfig(prev => ({ ...prev, duplaVelocidadeElevacao: true }));
+            } else {
+                setConfig(prev => ({ ...prev, duplaVelocidadeElevacao: false }));
+            }        
+       }
+	   if (talha.duplaVelocidadeTranslacaoInversor === false) {
+			if (talha.acionamentoMotorElevacao === "2 velocidades com inversor"){
+                setConfig(prev => ({ ...prev, duplaVelocidadeTranslacao: true }));
+            } else {
+                setConfig(prev => ({ ...prev, duplaVelocidadeTranslacao: false }));
+            }        
+       }
+
+   }, [talha]);
+
     useEffect(() => {
         if (talha.exclusaoPainelComandoForca === false) {
             setConfig(prev => ({
