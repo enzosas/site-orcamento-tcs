@@ -16,7 +16,7 @@ function App() {
 	const [talhaSelecionada, setTalhaSelecionada] = useState(null);
 	
 	const [config, setConfig] = useState({
-		excluirPainelAllow: false,
+		excluirPainel: false,
 		painel6Mov: false,
 		controleRemoto: false,
 		duplaVelocidadeElevacao: false,
