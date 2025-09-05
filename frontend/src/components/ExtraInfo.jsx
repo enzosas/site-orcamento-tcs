@@ -38,13 +38,13 @@ function ExtraInfo({ talha, config }){
                 <p className="frame-all-info-dir">{config.transmissorExtra ? "Sim" : "Não"}</p>
 
                 <p className="frame-all-info-esq">Sinalizador Sonoro</p>
-                <p className="frame-all-info-dir">Opcional[AJUSTAR]</p>
+                <p className="frame-all-info-dir">{!config.excluirPainel ? (config.incluirSinalizadores ? "Sim" : "Não") : "Não"}</p>
 
                 <p className="frame-all-info-esq">Sinalizador Luminoso</p>
-                <p className="frame-all-info-dir">Opcional[AJUSTAR]</p>
+                <p className="frame-all-info-dir">{!config.excluirPainel ? (config.incluirSinalizadores ? "Sim" : "Não") : "Não"}</p>
 
                 <p className="frame-all-info-esq">Tomada para troca Rápida</p>
-                <p className="frame-all-info-dir">Opcional[AJUSTAR]</p>
+                <p className="frame-all-info-dir">{!config.excluirPainel ? "Sim" : "Não"}</p>
             </div>
         </div>
         

@@ -1,9 +1,26 @@
 import "./CommandPannel.css"
+import React, { useState, useEffect } from "react";
 
 function ExtraOptions({config, setConfig}){
+    
+    useEffect(() => {
+            if(config.painel6Mov){
+                config.incluirSinalizadores = true;
+            }
+        }, [config.painel6Mov]);
+    
     return (
         <div>
             <div className="frame-branco frame-checkbox-extra">
+                <label >
+                    <input
+                        type="checkbox"
+                        checked={config.incluirSinalizadores}
+                        disabled={config.painel6Mov}
+                        onChange={(e) => setConfig(prev => ({ ...prev, incluirSinalizadores: e.target.checked }))}
+                    />
+                    Incluir Sinalizadores Sonoro e Luminoso
+                </label>
                 <label >
                     <input
                         type="checkbox"

@@ -25,6 +25,7 @@ function App() {
 		potenciaMotores: "",
 		modeloControle: "",
 		tensao: "",
+		incluirSinalizadores: false,
 		fimCursoEsquerdaDireita: false,
 		guiaCaboAco: false,
 		celulaCarga: false,
