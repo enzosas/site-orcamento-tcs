@@ -3,9 +3,8 @@ package com.tcs.site_orcamento.controller;
 
 import com.tcs.site_orcamento.entity.Motor;
 import com.tcs.site_orcamento.repository.MotorRepository;
-import com.tcs.site_orcamento.service.MotorService;
+import com.tcs.site_orcamento.service.PrecoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class MotorController {
     private MotorRepository motorRepository;
 
     @Autowired
-    private MotorService motorService;
+    private PrecoService precoService;
 
     @GetMapping("/")
     public List<Motor> motores(){
@@ -33,12 +32,10 @@ public class MotorController {
         return motorRepository.findByMotorAndTensao(motor, tensao);
     }
 
-    @GetMapping("/filtroPreco")
-    public Double filtroPreco(
-            @RequestParam(required = true) String motor,
-            @RequestParam(required = true) Integer tensao)
+    @GetMapping("/abc")
+    public String abc(
+            @RequestParam(required = true) String talha)
     {
-        Motor motorObjeto = motorRepository.findByMotorAndTensao(motor, tensao);
-        return motorService.calculaPrecoDeVenda(motorObjeto);
+        return precoService.calculaPrecoDeVenda(talha);
     }
 }
