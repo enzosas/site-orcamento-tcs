@@ -14,14 +14,20 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
     let opcoesTensao = [];
         if (talha) {
-        if (talha.tensaoTrifasica === "220/380V - Trifásica") {
-            opcoesTensao = ["380V - Trifásica", "220V - Trifásica"];
-        } else {
-            opcoesTensao = [talha.tensaoTrifasica];
+            if (talha.tensaoTrifasica === "220/380V - Trifásica") {
+                opcoesTensao = ["380V - Trifásica", "220V - Trifásica"];
+            } else {
+                opcoesTensao = [talha.tensaoTrifasica];
         }
     }
 
     useEffect(() => {
+        if (talha){
+            setConfig(prev => ({
+                ...prev,
+                talhaSelecionada: talha.modelo,
+            }))
+        }
         setConfig(prev => ({
             ...prev,
             tensao: opcoesTensao[0]

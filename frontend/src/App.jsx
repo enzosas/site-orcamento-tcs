@@ -16,6 +16,7 @@ function App() {
 	const [talhaSelecionada, setTalhaSelecionada] = useState(null);
 	
 	const [config, setConfig] = useState({
+		talhaSelecionada: "",
 		excluirPainel: false,
 		painel6Mov: false,
 		controleRemoto: false,
@@ -30,9 +31,33 @@ function App() {
 		guiaCaboAco: false,
 		celulaCarga: false,
 		adaptadorViga: false
-});
+	});
+
+	const enviarConfiguracaoParaBackend = async () => {
+		try {
+			const url = 'http://localhost:8081/api/config'; 
+
+			const response = await fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(config), 
+			});
+
+			if (!response.ok) {
+			throw new Error(`Erro na requisição: ${response.statusText}`);
+			}
+
+			const resultado = await response.json();
+		} catch (error) {
+			console.error('Falha ao enviar configuração:', error);
+		}
+		console
+	};
 
 	useEffect(() => {
+			enviarConfiguracaoParaBackend();
 			console.log(config);
 		}, [config]);
 
