@@ -31,11 +31,4 @@ public class MotorController {
     {
         return motorRepository.findByMotorAndTensao(motor, tensao);
     }
-
-    @GetMapping("/abc")
-    public String abc(
-            @RequestParam(required = true) String talha)
-    {
-        return precoService.calculaPrecoDeVenda(talha);
-    }
 }
