@@ -100,7 +100,7 @@ public class MaxiprodService {
                     .path("precoDeVenda")
                     .asDouble();
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao processar a resposta do GraphQL", e);
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL para o código: " + codigo, e);
         }
     }
 
@@ -136,7 +136,7 @@ public class MaxiprodService {
                     .path("ipiAliquota")
                     .asDouble();
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao processar a resposta do GraphQL", e);
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL para o código: " + codigo, e);
         }
     }
 
@@ -169,7 +169,7 @@ public class MaxiprodService {
                     .path("aquisicaoOuOrcamentacaoCusto")
                     .asDouble();
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao processar a resposta do GraphQL", e);
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL para o código: " + codigo, e);
         }
         }
     }

@@ -8,9 +8,7 @@ import com.tcs.site_orcamento.repository.TalhaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.StyledEditorKit;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class PrecoService {
@@ -34,15 +32,7 @@ public class PrecoService {
         }
     }
 
-    public Double calculaPrecoDeVenda(ConfigDTO config) {
-
-        Boolean ipi = false;
-
-        Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
-                .orElseThrow(() -> new RuntimeException("?????????Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
-
-        System.out.println(config.getTalhaSelecionada());
-        System.out.println(talha.getMotorElevacao());
+    private Integer getTensaoInt(ConfigDTO config){
 
         Integer tensao;
         if(Objects.equals(config.getTensao(), "380V - Trifásica")){
@@ -54,18 +44,17 @@ public class PrecoService {
         else{
             throw new IllegalArgumentException("Tensão inválida ou não suportada: " + config.getTensao());
         }
+        return tensao;
+    }
 
-        System.out.println(tensao);
+    private String getMotor6MovPotencia(ConfigDTO config){
+        return config.getPotenciaMotores().replace("2 x ", "");
 
-        Motor motor = motorRepository.findByMotorAndTensao(talha.getMotorElevacao(), tensao);
+    }
 
-        System.out.println("motorid:" + motor.getId());
+    private Double calculaPrecoDeVendaPainelBase(Talha talha, Boolean ipi){
 
-        System.out.println("CodigoPainelTalhaSemOpcional:" + talha.getCodigoPainelTalhaSemOpcional());
-
-        Double precoTotal = 0.0;
-        Double precoPainel = 0.0;
-
+        double precoPainel;
         if(Objects.equals(talha.getCodigoPainelTalhaSemOpcional(), "CIRC.ORIGINAL")){
             precoPainel = 0.0;
         }
@@ -74,35 +63,94 @@ public class PrecoService {
         }
 
         System.out.println("precoPainel:" + precoPainel);
+        return precoPainel;
+    }
 
+    private Double calculaPrecoDeVendaPainelAdicional(Talha talha, Boolean ipi){
 
-        Double precoPainel6Mov = 0.0;
-        if (talha.getCodigoPainel6Mov() != null && !talha.getCodigoPainel6Mov().isEmpty()) {
-            precoPainel6Mov = maxiprodService.getPrecoDeVenda(motor.getResistor());
+        double precoPainel = 0.0;
+        if(talha.getCodigoPainel6Mov() != null && !talha.getCodigoPainel6Mov().isEmpty()){
+
+            System.out.println("getCodigoPainel6Mov:" + talha.getCodigoPainel6Mov());
+            precoPainel = getPreco(talha.getCodigoPainel6Mov(), ipi);
         }
+        System.out.println("precoPainelAdd:" + precoPainel);
+        return precoPainel;
+    }
 
-        Double precoContatora = getPreco(motor.getContatora(), ipi);
+    private Double calculaPrecoDeVendaDuplaVelocidadeElevacao(Motor motor, ConfigDTO config, Boolean ipi){
 
-        Double precoDisjuntorContatora = getPreco(motor.getDisjuntorContatora(), ipi);
-
-        Double precoDisjuntorInversor = getPreco(motor.getDisjuntorInversor(), ipi);
-
-        Double precoInversor = getPreco(motor.getInversor(), ipi);
-
-        Double precoResistor = 0.0;
-        if (motor.getResistor() != null && !motor.getResistor().isEmpty()) {
-            precoResistor = maxiprodService.getPrecoDeVenda(motor.getResistor());
+        double precoTotal = 0.0;
+        if(!config.isDuplaVelocidadeElevacao()){
+            precoTotal += 2 * getPreco(motor.getContatoraSch(), ipi);
+            System.out.println("getContatora:" + motor.getContatoraSch());
+            System.out.println("getContatora:" + "preco" + 2 * getPreco(motor.getContatoraSch(), ipi));
+            precoTotal += getPreco(motor.getDisjuntorContatoraSch(), ipi);
+            System.out.println("getDisjuntorContatora:" + motor.getDisjuntorContatoraSch());
+            System.out.println("getDisjuntorContatora:" + "preco" + getPreco(motor.getDisjuntorContatoraSch(), ipi));
         }
+        else{
+            precoTotal += getPreco(motor.getInversorSch(), ipi);
+            System.out.println("getInversor:" + motor.getInversorSch());
+            System.out.println("getInversor:" + "preco" + getPreco(motor.getInversorSch(), ipi));
+            precoTotal += getPreco(motor.getDisjuntorInversorSch(), ipi);
+            System.out.println("getDisjuntorInversor:" + motor.getDisjuntorInversorSch());
+            System.out.println("getDisjuntorInversor:" + "preco" + getPreco(motor.getDisjuntorInversorSch(), ipi));
+        }
+        return precoTotal;
+    }
 
-        System.out.println();
-        System.out.println("--- Detalhes do Cálculo de Preços ---");
-        System.out.println("Preço Painel 6 Mov: " + precoPainel6Mov);
-        System.out.println("Preço Contatora: " + precoContatora);
-        System.out.println("Preço Disjuntor Contatora: " + precoDisjuntorContatora);
-        System.out.println("Preço Disjuntor Inversor: " + precoDisjuntorInversor);
-        System.out.println("Preço Inversor: " + precoInversor);
-        System.out.println("Preço Resistor: " + precoResistor);
-        System.out.println("------------------------------------");
+    private Double calculaPrecoDeVendaDuplaVelocidadeTranslacao(Motor motor, ConfigDTO config, Boolean ipi){
+
+        double precoTotal = 0.0;
+        if(config.isDuplaVelocidadeTranslacao()) {
+            precoTotal += getPreco(motor.getInversorSch(), ipi);
+            System.out.println("getInversor:" + motor.getInversorSch());
+            System.out.println("getInversor:" + "preco" + getPreco(motor.getInversorSch(), ipi));
+            precoTotal += getPreco(motor.getDisjuntorInversorSch(), ipi);
+            System.out.println("getDisjuntorInversor:" + motor.getDisjuntorInversorSch());
+            System.out.println("getDisjuntorInversor:" + "preco" + getPreco(motor.getDisjuntorInversorSch(), ipi));
+        }
+        return precoTotal;
+    }
+
+    private Double calculaPrecoDeVenda6Movimentos(Motor motor, ConfigDTO config, Boolean ipi){
+
+        double precoTotal = 0.0;
+        if(config.isPainel6Mov()) {
+            precoTotal += getPreco(motor.getInversorSch(), ipi);
+            System.out.println("getInversor:" + motor.getInversorSch());
+            System.out.println("getInversor:" + "preco" + getPreco(motor.getInversorSch(), ipi));
+            precoTotal += getPreco(motor.getDisjuntorInversorSch(), ipi);
+            System.out.println("getDisjuntorInversor:" + motor.getDisjuntorInversorSch());
+            System.out.println("getDisjuntorInversor:" + "preco" + getPreco(motor.getDisjuntorInversorSch(), ipi));
+        }
+        return precoTotal;
+    }
+
+    public Double calculaPrecoDeVenda(ConfigDTO config) {
+
+        Boolean ipi = false;
+
+        Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
+                .orElseThrow(() -> new RuntimeException("?????????Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
+        Motor motorElevacao = motorRepository.findByMotorAndTensao(talha.getMotorElevacao(), getTensaoInt(config));
+        Motor motorTranslacao = motorRepository.findByMotorAndTensao(talha.getMotorTranslacao(), getTensaoInt(config));
+        Motor motor6Mov = motorRepository.findByMotorAndTensao(getMotor6MovPotencia(config), getTensaoInt(config));
+
+        System.out.println("talha:" +config.getTalhaSelecionada());
+        System.out.println("motorPotencia:" +talha.getMotorElevacao());
+        System.out.println("motorid:" + motorElevacao.getId());
+        System.out.println("motorid:" + motorElevacao.getId());
+        System.out.println("motorid:" + motorElevacao.getId());
+        System.out.println("CodigoPainelTalhaSemOpcional:" + talha.getCodigoPainelTalhaSemOpcional());
+
+        Double precoTotal = 0.0;
+        precoTotal += calculaPrecoDeVendaPainelBase(talha, ipi);
+        precoTotal += calculaPrecoDeVendaPainelAdicional(talha, ipi);
+        precoTotal += calculaPrecoDeVendaDuplaVelocidadeElevacao(motorElevacao, config, ipi);
+        precoTotal += calculaPrecoDeVendaDuplaVelocidadeTranslacao(motorTranslacao, config, ipi);
+        precoTotal += calculaPrecoDeVenda6Movimentos(motor6Mov, config, ipi);
 
         return precoTotal;
     }

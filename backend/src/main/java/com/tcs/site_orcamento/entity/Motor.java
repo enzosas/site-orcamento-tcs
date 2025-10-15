@@ -23,17 +23,32 @@ public class Motor {
     private Integer tensao;
 
     @Column(length = 20, nullable = false)
-    private String contatora;
+    private String contatoraSch;
 
-    @Column(name = "disjuntor_contatora", length = 20, nullable = false)
-    private String disjuntorContatora;
+    @Column(name = "disjuntor_contatora_sch", length = 20, nullable = false)
+    private String disjuntorContatoraSch;
 
-    @Column(name = "disjuntor_inversor", length = 20, nullable = false)
-    private String disjuntorInversor;
+    @Column(name = "disjuntor_inversor_sch", length = 20, nullable = false)
+    private String disjuntorInversorSch;
 
     @Column(length = 30, nullable = false)
-    private String inversor;
+    private String inversorSch;
 
     @Column(length = 50)
-    private String resistor;
+    private String resistorSch;
+
+    @Column(length = 20, nullable = false)
+    private String contatoraTcs;
+
+    @Column(name = "disjuntor_contatora_tcs", length = 20, nullable = false)
+    private String disjuntorContatoraTcs;
+
+    @Column(name = "disjuntor_inversor_tcs", length = 20, nullable = false)
+    private String disjuntorInversorTcs;
+
+    @Column(length = 30, nullable = false)
+    private String inversorTcs;
+
+    @Column(length = 50)
+    private String resistorTcs;
 }
