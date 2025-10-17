@@ -35,7 +35,7 @@ public class Motor {
     private String inversorSch;
 
     @Column(length = 50)
-    private String resistorSch;
+    private String resistorTcs;
 
     @Column(length = 20, nullable = false)
     private String contatoraTcs;
@@ -49,6 +49,4 @@ public class Motor {
     @Column(length = 30, nullable = false)
     private String inversorTcs;
 
-    @Column(length = 50)
-    private String resistorTcs;
 }
