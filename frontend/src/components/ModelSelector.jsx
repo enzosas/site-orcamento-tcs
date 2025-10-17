@@ -2,6 +2,7 @@ import "./ModelSelector.css"
 import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from '../config';
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
@@ -47,7 +48,7 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 if (filtros.tipoTrole) query.append("tipoTrole", filtros.tipoTrole);
                 if (filtros.cursoUtilGancho) query.append("cursoUtilGancho", filtros.cursoUtilGancho);
 
-                const response = await fetch(`http://localhost:8081/api/talhas/filtro?${query.toString()}`);
+                const response = await fetch(`${API_BASE_URL}/api/talhas/filtro?${query.toString()}`);
                 const data = await response.json();
 
                 setModelos(data);

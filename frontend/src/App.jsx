@@ -9,6 +9,7 @@ import ExtraInfo from "./components/ExtraInfo";
 import Pricing from "./components/Pricing";
 import Footer from "./components/Footer";
 import Imagem from "./components/Imagem";
+import { API_BASE_URL } from './config';
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
 
 	const enviarConfiguracaoParaBackend = async () => {
 		try {
-			const url = 'http://localhost:8081/api/config'; 
+			const url = `${API_BASE_URL}/api/config`; 
 
 			const response = await fetch(url, {
 			method: 'POST',
