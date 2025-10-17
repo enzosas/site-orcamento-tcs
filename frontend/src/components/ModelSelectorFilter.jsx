@@ -20,9 +20,9 @@ function ModelSelectorFilter({ filtros, setFiltros }) {
             .catch((err) => console.error("Erro ao carregar capacidades:", err));
 
         fetch(`${API_BASE_URL}/api/talhas/distinct-tipoTrole`)
-            .thn((res) => res.json())
-            .thn((data) => setTiposTrole(data))
-            .cach((err) => console.error("Erro ao carregar tipos de trole:", err));
+            .then((res) => res.json())
+            .then((data) => setTiposTrole(data))
+            .catch((err) => console.error("Erro ao carregar tipos de trole:", err));
         fetch(`${API_BASE_URL}/api/talhas/distinct-cursoUtilGancho`)
             .then((res) => res.json())
             .then((data) => setCursosGancho(data))
