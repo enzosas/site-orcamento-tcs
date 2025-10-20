@@ -15,8 +15,13 @@ public class PrecoController {
     @Autowired
     PrecoService precoService;
 
-    @PostMapping("/precoTotalSch")
+    @PostMapping("/totalSch")
     public Double precoTotalSch(@RequestBody ConfigDTO dto) {
         return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.SCH);
+    }
+
+    @PostMapping("/totalTcs")
+    public Double precoTotalTcs(@RequestBody ConfigDTO dto) {
+        return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.TCS);
     }
 }

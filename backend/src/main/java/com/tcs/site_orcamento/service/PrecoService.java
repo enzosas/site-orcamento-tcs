@@ -205,10 +205,15 @@ public class PrecoService {
 
     public Double calculaPrecoDeVenda(ConfigDTO config, TipoMotor tipoMotor) {
 
+        System.out.println(config);
+        System.out.println("check");
+
         Boolean ipi = false;
+        System.out.println("check");
 
         Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
                 .orElseThrow(() -> new RuntimeException("?????????Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
+        System.out.println("check");
         Motor motorElevacao = motorRepository.findByMotorAndTensao(talha.getMotorElevacao(), getTensaoInt(config));
         Motor motorTranslacao = motorRepository.findByMotorAndTensao(talha.getMotorTranslacao(), getTensaoInt(config));
         Motor motor6Mov = null;
