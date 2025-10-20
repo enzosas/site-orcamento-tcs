@@ -16,16 +16,26 @@
     margin-top: 1em;
 }
 
-.gerar-pdf{
+.gerar-pdf {
     background-color: var(--corPrincipal);
     color: white;
     font-weight: bold;
+    text-align: center;
     border-radius: 0.7em;
-    padding: 0.5em;
-    margin: 0 auto
+    padding: 1em;
+    margin: 0 auto;
+    line-height: 1em;
+    width: 30%;
+    transition: transform 0.1s ease-out, background-color 0.2s ease;
+    user-select: none;
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.0.5);
 }
 
-.gerar-pdf:hover{
+.gerar-pdf:hover {
     cursor: pointer;
     background-color: color-mix(in srgb, var(--corPrincipal) 90%, black);
+}
+
+.gerar-pdf:active {
+    transform: scale(0.95);
 }
