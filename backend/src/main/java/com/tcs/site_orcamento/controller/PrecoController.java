@@ -17,11 +17,11 @@ public class PrecoController {
 
     @PostMapping("/totalSch")
     public Double precoTotalSch(@RequestBody ConfigDTO dto) {
-        return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.SCH);
+        return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.SCH).getPrecoTotal();
     }
 
     @PostMapping("/totalTcs")
     public Double precoTotalTcs(@RequestBody ConfigDTO dto) {
-        return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.TCS);
+        return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.TCS).getPrecoTotal();
     }
 }

@@ -115,7 +115,7 @@ public class Talha {
     @Column(length = 255)
     private String resistorFrenagem;
 
-    @Column(length = 255)
+    @Column(length = 255, name = "codigo_painel_6_mov")
     private String codigoPainel6Mov;
 
     private Boolean exclusaoPainelComandoForca;

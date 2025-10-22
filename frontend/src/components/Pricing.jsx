@@ -37,7 +37,6 @@ function Pricing({ config }){
 
     useEffect(() => {
         
-        console.log("banana");
         setPrecoTotalSch(null);
         setPrecoTotalTcs(null);
         const fetchPrecos = async () => {
@@ -46,10 +45,10 @@ function Pricing({ config }){
 
             const [precoCalculadoSch, precoCalculadoTcs] = await Promise.all([
                 calcularPreco('totalSch', config),
-                // calcularPreco('totalTcs', config)
+                calcularPreco('totalTcs', config)
             ]);
             setPrecoTotalSch(precoCalculadoSch);
-            // setPrecoTotalTcs(precoCalculadoTcs);
+            setPrecoTotalTcs(precoCalculadoTcs);
         }
     };
 
