@@ -60,14 +60,16 @@ public class PrecoService {
     private ComponentePrecoDTO calculaPrecoDeVendaPainelBase(Talha talha, Boolean ipi){
 
         Set<String> listaForaDoMaxiprod = Set.of(
-                "CIRC.ORIGINAL",
                 "CIRC.BASE.60X80"
         );
+        if(Objects.equals(talha.getCodigoPainelTalhaSemOpcional(), "CIRC.ORIGINAL")){
+            return new ComponentePrecoDTO("Painel Base Original", talha.getCodigoPainelTalhaSemOpcional(), 0.0);
+        }
         if(listaForaDoMaxiprod.contains(talha.getCodigoPainelTalhaSemOpcional())){
-            return new ComponentePrecoDTO("painelBase fora do max", talha.getCodigoPainelTalhaSemOpcional(), 0.0);
+            return new ComponentePrecoDTO("Painel Base fora do max", talha.getCodigoPainelTalhaSemOpcional(), 0.0);
         }
         else {
-            return new ComponentePrecoDTO("painelBase", talha.getCodigoPainelTalhaSemOpcional(), getPreco(talha.getCodigoPainelTalhaSemOpcional(), ipi));
+            return new ComponentePrecoDTO("Painel Base", talha.getCodigoPainelTalhaSemOpcional(), getPreco(talha.getCodigoPainelTalhaSemOpcional(), ipi));
         }
     }
 
@@ -77,11 +79,14 @@ public class PrecoService {
                 "CIRC.PTE1"
         );
         if(config.isPainel6Mov()){
+            if(talha.getCodigoPainelTalhaSemOpcional().equals("CIRC.BASE.60X80")){
+                return new ComponentePrecoDTO("Painel Adicional incluso CIRC.BASE.60X80", talha.getCodigoPainel6Mov(), 0.0);
+            }
             if(listaForaDoMaxiprod.contains(talha.getCodigoPainel6Mov())){
-                return new ComponentePrecoDTO("painelAdicional fora do max", talha.getCodigoPainel6Mov(), 0.0);
+                return new ComponentePrecoDTO("Painel Adicional fora do max", talha.getCodigoPainel6Mov(), 0.0);
             }
             if(talha.getCodigoPainel6Mov() != null && !talha.getCodigoPainel6Mov().isEmpty()){
-                return new ComponentePrecoDTO("painelAdicional", talha.getCodigoPainel6Mov(), getPreco(talha.getCodigoPainel6Mov(), ipi));
+                return new ComponentePrecoDTO("Painel Adicional", talha.getCodigoPainel6Mov(), getPreco(talha.getCodigoPainel6Mov(), ipi));
             } else {
                 throw new IllegalArgumentException("Sem painel6mov para a talha: " + talha.getModelo());
             }
@@ -207,6 +212,78 @@ public class PrecoService {
         return dto;
     }
 
+    private String getCodigoControle(String controle){
+        switch(controle){
+            case "BCI 404":
+                return "CR.BCI404";
+            case "BCI 808":
+                return "CR.BCI808";
+            default:
+                throw new IllegalArgumentException("Tipo de controle desconhecido: " + controle);
+        }
+    }
+
+    private ComponentePrecoDTO calculaPrecoDeVendaControle(ConfigDTO config, Boolean ipi){
+
+        if(config.isControleRemoto()) {
+            String controleRemoto = getCodigoControle(config.getModeloControle());
+            return new ComponentePrecoDTO("Controle Remoto", controleRemoto, getPreco(controleRemoto, ipi));
+        }
+        return null;
+    }
+
+    private List<ComponentePrecoDTO> calculaPrecoDeVendaSinalizadores(ConfigDTO config, Boolean ipi, TipoMotor tipo){
+
+        List<ComponentePrecoDTO> dto = new ArrayList<>();
+
+        String sinalizador;
+        String sirene;
+        if(config.isIncluirSinalizadores()) {
+            switch(tipo){
+                case TCS:
+                    sinalizador = "SIN.LUM.TCS";
+                    break;
+                case SCH:
+                    sinalizador = "SIN.LUM.10W.24V";
+                    break;
+                default:
+                    throw new IllegalArgumentException("Tipo de painel desconhecido: " + tipo);
+            }
+            sirene = "SIR.DP250.24V";
+            dto.add(new ComponentePrecoDTO("Sinalizador", sinalizador, getPreco(sinalizador, ipi)));
+            dto.add(new ComponentePrecoDTO("Sirene", sirene, getPreco(sirene, ipi)));
+        }
+        return dto;
+    }
+
+    private ComponentePrecoDTO calculaPrecoDeVendaFimDeCurso(ConfigDTO config, Boolean ipi, TipoMotor tipo){
+
+        String fimDeCurso;
+        if(config.isFimCursoEsquerdaDireita()) {
+            switch(tipo){
+                case TCS:
+                    fimDeCurso = "FCR006.TCS";
+                    break;
+                case SCH:
+                    fimDeCurso = "FCR006";
+                    break;
+                default:
+                    throw new IllegalArgumentException("Tipo de painel desconhecido: " + tipo);
+            }
+            return new ComponentePrecoDTO("Fim De Curso EsqDir", fimDeCurso, getPreco(fimDeCurso, ipi));
+        }
+        return null;
+    }
+
+    private ComponentePrecoDTO calculaPrecoDeVendaAdaptadorViga(ConfigDTO config, Boolean ipi, TipoMotor tipo){
+
+        String adaptadorViga = "AC0912-400";
+        if(config.isAdaptadorViga()) {
+            return new ComponentePrecoDTO("Adaptador Viga", adaptadorViga, getPreco(adaptadorViga, ipi));
+        }
+        return null;
+    }
+
     public PrecoDTO calculaPrecoDeVenda(ConfigDTO config, TipoMotor tipoMotor) {
 
         List<ComponentePrecoDTO> componentes = new ArrayList<>();
@@ -229,13 +306,21 @@ public class PrecoService {
         componentes.addAll(calculaPrecoDeVendaDuplaVelocidadeTranslacao(motorTranslacao, config, ipi, tipoMotor));
         componentes.addAll(calculaPrecoDeVenda6Movimentos(motor6Mov, config, ipi, tipoMotor));
 
+        componentes.add(calculaPrecoDeVendaControle(config, ipi));
+
+        componentes.addAll(calculaPrecoDeVendaSinalizadores(config, ipi, tipoMotor));
+        componentes.add(calculaPrecoDeVendaFimDeCurso(config, ipi, tipoMotor));
+        componentes.add(calculaPrecoDeVendaAdaptadorViga(config, ipi, tipoMotor));
+
         Double precoTotal = 0.0;
         for (ComponentePrecoDTO componente : componentes) {
             if(componente != null){
                 precoTotal += componente.getPreco();
+                System.out.print(tipoMotor + " ");
                 System.out.println(componente);
             }
         }
+        System.out.println();
         return new PrecoDTO(precoTotal, componentes);
     }
 }

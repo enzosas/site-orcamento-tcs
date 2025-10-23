@@ -26,6 +26,11 @@ async function calcularPreco(tipo, config) {
     }
 }
 
+const formatadorPreco = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+});
+
 function Pricing({ config }){
 
     const [precoTotalSch, setPrecoTotalSch] = useState(null);
@@ -61,28 +66,27 @@ function Pricing({ config }){
             
             <div className="unidade">
                 <p className="descricao">Talha Elétrica sem circuito</p>
-                <p className="dinheiro">{talhaSemCircuito !== null ? talhaSemCircuito.toFixed(2) : "-"}</p>
-
-            </div>
-            <div className="unidade">
-                <p className="descricao">Circuito Elétrico Schneider</p>
-                <p className="dinheiro">{circuitoSch !== null ? circuitoSch : "-"}</p>
-            </div>
-            <div className="unidade">
-                <p className="descricao">Circuito Elétrico TCS</p>
-                <p className="dinheiro">{circuitoTcs !== null ? circuitoTcs : "-"}</p>
+                <p className="dinheiro">{talhaSemCircuito !== null ? formatadorPreco.format(talhaSemCircuito) : "-"}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Adaptador de Viga</p>
-                <p className="dinheiro">{adaptadorViga !== null ? adaptadorViga : "-"}</p>
+                <p className="dinheiro">{adaptadorViga !== null ? formatadorPreco.format(adaptadorViga) : "-"}</p>
+            </div>
+            <div className="unidade">
+                <p className="descricao">Circuito Elétrico Schneider</p>
+                <p className="dinheiro">{circuitoSch !== null ? formatadorPreco.format(circuitoSch) : "-"}</p>
+            </div>
+            <div className="unidade">
+                <p className="descricao">Circuito Elétrico TCS</p>
+                <p className="dinheiro">{circuitoTcs !== null ? formatadorPreco.format(circuitoTcs) : "-"}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Total com Painel Schneider</p>
-                <p className="dinheiro">{precoTotalSch !== null ? ("R$ " + precoTotalSch.toFixed(2)) : "-"}</p>
+                <p className="dinheiro">{precoTotalSch !== null ? formatadorPreco.format(precoTotalSch) : "-"}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Total Com Painel TCS</p>
-                <p className="dinheiro">{precoTotalTcs !== null ? ("R$ " + precoTotalTcs.toFixed(2)) : "-"}</p>
+                <p className="dinheiro">{precoTotalTcs !== null ? formatadorPreco.format(precoTotalTcs) : "-"}</p>
             </div>
         </div>
     )
