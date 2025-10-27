@@ -27,6 +27,8 @@ public class PrecoService {
     @Autowired
     private MotorRepository motorRepository;
 
+    public Boolean ipi = false;
+
     public enum TipoMotor {
         TCS,
         SCH
@@ -55,6 +57,10 @@ public class PrecoService {
             throw new IllegalArgumentException("Tensão inválida ou não suportada: " + config.getTensao());
         }
         return tensao;
+    }
+
+    public ComponentePrecoDTO calculaPrecoDeVendaTalhaSemCircuito(Talha talha, Boolean ipi){
+        return new ComponentePrecoDTO("Talha sem Circuito", talha.getModelo(), getPreco(talha.getModelo(), ipi));
     }
 
     private ComponentePrecoDTO calculaPrecoDeVendaPainelBase(Talha talha, Boolean ipi){
@@ -95,7 +101,7 @@ public class PrecoService {
         }
     }
 
-    private List<ComponentePrecoDTO> calculaPrecoDeVendaDuplaVelocidadeElevacao(Motor motor, ConfigDTO config, Boolean ipi, TipoMotor tipo ){
+    private List<ComponentePrecoDTO> calculaPrecoDeVendaDuplaVelocidadeElevacao(Talha talha, Motor motor, ConfigDTO config, Boolean ipi, TipoMotor tipo ){
 
         List<ComponentePrecoDTO> dto = new ArrayList<>();
 
@@ -105,38 +111,41 @@ public class PrecoService {
         String inversor;
         String resistor;
 
-        switch (tipo){
-            case TCS:
-                contatora = motor.getContatoraTcs();
-                if(contatora.isEmpty()){contatora = motor.getContatoraSch();}
-                disjuntorContatora = motor.getDisjuntorContatoraTcs();
-                if(disjuntorContatora.isEmpty()){disjuntorContatora = motor.getDisjuntorContatoraSch();}
-                inversor = motor.getInversorTcs();
-                if(inversor.isEmpty()){inversor = motor.getInversorSch();}
-                disjuntorInversor = motor.getDisjuntorInversorTcs();
-                if(disjuntorInversor.isEmpty()){disjuntorInversor = motor.getDisjuntorInversorSch();}
-                break;
-            case SCH:
-                contatora = motor.getContatoraSch();
-                disjuntorContatora = motor.getDisjuntorContatoraSch();
-                inversor = motor.getInversorSch();
-                disjuntorInversor = motor.getDisjuntorInversorSch();
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de painel desconhecido: " + tipo);
-        }
+        if(!Objects.equals(talha.getCodigoPainelTalhaSemOpcional(), "CIRC.ORIGINAL")){
 
-        resistor = motor.getResistorTcs();
+            switch (tipo){
+                case TCS:
+                    contatora = motor.getContatoraTcs();
+                    if(contatora.isEmpty()){contatora = motor.getContatoraSch();}
+                    disjuntorContatora = motor.getDisjuntorContatoraTcs();
+                    if(disjuntorContatora.isEmpty()){disjuntorContatora = motor.getDisjuntorContatoraSch();}
+                    inversor = motor.getInversorTcs();
+                    if(inversor.isEmpty()){inversor = motor.getInversorSch();}
+                    disjuntorInversor = motor.getDisjuntorInversorTcs();
+                    if(disjuntorInversor.isEmpty()){disjuntorInversor = motor.getDisjuntorInversorSch();}
+                    break;
+                case SCH:
+                    contatora = motor.getContatoraSch();
+                    disjuntorContatora = motor.getDisjuntorContatoraSch();
+                    inversor = motor.getInversorSch();
+                    disjuntorInversor = motor.getDisjuntorInversorSch();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Tipo de painel desconhecido: " + tipo);
+            }
 
-        if(!config.isDuplaVelocidadeElevacao()){
-            dto.add(new ComponentePrecoDTO("Contatora 2x", contatora, 2 * getPreco(contatora, ipi)));
-            dto.add(new ComponentePrecoDTO("Disjuntor Contatora", disjuntorContatora, getPreco(disjuntorContatora, ipi)));
+            resistor = motor.getResistorTcs();
 
-        } else {
-            dto.add(new ComponentePrecoDTO("Inversor", inversor, getPreco(inversor, ipi)));
-            dto.add(new ComponentePrecoDTO("Disjuntor Inversor", disjuntorInversor, getPreco(disjuntorInversor, ipi)));
-            if(motor.getResistorTcs() != null && !motor.getResistorTcs().isEmpty()){
-                dto.add(new ComponentePrecoDTO("Resistor", resistor, getPreco(resistor, ipi)));
+            if(!config.isDuplaVelocidadeElevacao()){
+                dto.add(new ComponentePrecoDTO("Contatora 2x", contatora, 2 * getPreco(contatora, ipi)));
+                dto.add(new ComponentePrecoDTO("Disjuntor Contatora", disjuntorContatora, getPreco(disjuntorContatora, ipi)));
+
+            } else {
+                dto.add(new ComponentePrecoDTO("Inversor", inversor, getPreco(inversor, ipi)));
+                dto.add(new ComponentePrecoDTO("Disjuntor Inversor", disjuntorInversor, getPreco(disjuntorInversor, ipi)));
+                if(motor.getResistorTcs() != null && !motor.getResistorTcs().isEmpty()){
+                    dto.add(new ComponentePrecoDTO("Resistor", resistor, getPreco(resistor, ipi)));
+                }
             }
         }
         return dto;
@@ -162,8 +171,8 @@ public class PrecoService {
                     disjuntorInversor = motor.getDisjuntorInversorSch();
                     inversor = motor.getInversorSch();
                     break;
-                    default:
-                        throw new IllegalArgumentException("Tipo de painel desconhecido: " + tipo);
+                default:
+                    throw new IllegalArgumentException("Tipo de painel desconhecido: " + tipo);
             }
 
             dto.add(new ComponentePrecoDTO("Inversor", inversor, getPreco(inversor, ipi)));
@@ -275,7 +284,7 @@ public class PrecoService {
         return null;
     }
 
-    private ComponentePrecoDTO calculaPrecoDeVendaAdaptadorViga(ConfigDTO config, Boolean ipi, TipoMotor tipo){
+    public ComponentePrecoDTO calculaPrecoDeVendaAdaptadorViga(ConfigDTO config, Boolean ipi){
 
         String adaptadorViga = "AC0912-400";
         if(config.isAdaptadorViga()) {
@@ -286,9 +295,11 @@ public class PrecoService {
 
     public PrecoDTO calculaPrecoDeVenda(ConfigDTO config, TipoMotor tipoMotor) {
 
-        List<ComponentePrecoDTO> componentes = new ArrayList<>();
+        ComponentePrecoDTO talhaSemCircuito;
+        List<ComponentePrecoDTO> componentesCircuito = new ArrayList<>();
+        List<ComponentePrecoDTO> componentesTalha = new ArrayList<>();
+
         System.out.println(config);
-        Boolean ipi = false;
 
         Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
                 .orElseThrow(() -> new RuntimeException("Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
@@ -299,28 +310,30 @@ public class PrecoService {
         motor6Mov = motorRepository.findByMotorAndTensao(config.getPotenciaMotores(), getTensaoInt(config));
         }
 
-        componentes.add(calculaPrecoDeVendaPainelBase(talha, ipi));
-        componentes.add(calculaPrecoDeVendaPainelAdicional(talha, config, ipi));
+        talhaSemCircuito = calculaPrecoDeVendaTalhaSemCircuito(talha, ipi);
 
-        componentes.addAll(calculaPrecoDeVendaDuplaVelocidadeElevacao(motorElevacao, config, ipi, tipoMotor));
-        componentes.addAll(calculaPrecoDeVendaDuplaVelocidadeTranslacao(motorTranslacao, config, ipi, tipoMotor));
-        componentes.addAll(calculaPrecoDeVenda6Movimentos(motor6Mov, config, ipi, tipoMotor));
+        componentesCircuito.add(calculaPrecoDeVendaPainelBase(talha, ipi));
+        componentesCircuito.add(calculaPrecoDeVendaPainelAdicional(talha, config, ipi));
+        componentesCircuito.addAll(calculaPrecoDeVendaDuplaVelocidadeElevacao(talha, motorElevacao, config, ipi, tipoMotor));
+        componentesCircuito.addAll(calculaPrecoDeVendaDuplaVelocidadeTranslacao(motorTranslacao, config, ipi, tipoMotor));
+        componentesCircuito.addAll(calculaPrecoDeVenda6Movimentos(motor6Mov, config, ipi, tipoMotor));
+        componentesCircuito.add(calculaPrecoDeVendaControle(config, ipi));
+        componentesCircuito.addAll(calculaPrecoDeVendaSinalizadores(config, ipi, tipoMotor));
+        componentesCircuito.add(calculaPrecoDeVendaFimDeCurso(config, ipi, tipoMotor));
+        componentesCircuito.add(calculaPrecoDeVendaAdaptadorViga(config, ipi));
 
-        componentes.add(calculaPrecoDeVendaControle(config, ipi));
-
-        componentes.addAll(calculaPrecoDeVendaSinalizadores(config, ipi, tipoMotor));
-        componentes.add(calculaPrecoDeVendaFimDeCurso(config, ipi, tipoMotor));
-        componentes.add(calculaPrecoDeVendaAdaptadorViga(config, ipi, tipoMotor));
+        componentesTalha.add(talhaSemCircuito);
+        componentesTalha.addAll(componentesCircuito);
 
         Double precoTotal = 0.0;
-        for (ComponentePrecoDTO componente : componentes) {
+        for (ComponentePrecoDTO componente : componentesTalha) {
             if(componente != null){
                 precoTotal += componente.getPreco();
-                System.out.print(tipoMotor + " ");
-                System.out.println(componente);
+                System.out.println(tipoMotor + " " + componente);
             }
         }
-        System.out.println();
-        return new PrecoDTO(precoTotal, componentes);
+        Double precoCircuito = precoTotal - talhaSemCircuito.getPreco();
+
+        return new PrecoDTO(precoTotal, precoCircuito, componentesCircuito);
     }
 }

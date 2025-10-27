@@ -48,10 +48,18 @@ function Pricing({ config }){
         if (config && config.talhaSelecionada && config.talhaSelecionada !== "") {
             console.log("Condição válida, buscando preços para:", config.talhaSelecionada);
 
-            const [precoCalculadoSch, precoCalculadoTcs] = await Promise.all([
+            const [precoCalculadoSemCircuito, precoCalculadoAdaptadorViga, precoCalculadoCircuitoSch, precoCalculadoCircuitoTcs, precoCalculadoSch, precoCalculadoTcs] = await Promise.all([
+                calcularPreco('talhaSemCircuito', config),
+                calcularPreco('adaptadorViga', config),
+                calcularPreco('circuitoSch', config),
+                calcularPreco('circuitoTcs', config),
                 calcularPreco('totalSch', config),
                 calcularPreco('totalTcs', config)
             ]);
+            setTalhaSemCircuito(precoCalculadoSemCircuito);
+            setAdaptadorViga(precoCalculadoAdaptadorViga);
+            setCircuitoSch(precoCalculadoCircuitoSch);
+            setCircuitoTcs(precoCalculadoCircuitoTcs);
             setPrecoTotalSch(precoCalculadoSch);
             setPrecoTotalTcs(precoCalculadoTcs);
         }

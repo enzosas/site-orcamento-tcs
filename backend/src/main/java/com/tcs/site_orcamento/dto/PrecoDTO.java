@@ -11,5 +11,6 @@ import java.util.List;
 @Data
 public class PrecoDTO {
     private Double precoTotal;
+    private Double precoCircuito;
     private List<ComponentePrecoDTO> componentes;
 }
