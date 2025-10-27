@@ -2,6 +2,7 @@ package com.tcs.site_orcamento.service;
 
 import com.tcs.site_orcamento.dto.ComponentePrecoDTO;
 import com.tcs.site_orcamento.dto.ConfigDTO;
+import com.tcs.site_orcamento.dto.OrcamentoCompletoDTO;
 import com.tcs.site_orcamento.dto.PrecoDTO;
 import com.tcs.site_orcamento.entity.Motor;
 import com.tcs.site_orcamento.entity.Talha;
@@ -116,13 +117,24 @@ public class PrecoService {
             switch (tipo){
                 case TCS:
                     contatora = motor.getContatoraTcs();
-                    if(contatora.isEmpty()){contatora = motor.getContatoraSch();}
+                    if(contatora == null || contatora.isEmpty()){
+                        contatora = motor.getContatoraSch();
+                    }
+
                     disjuntorContatora = motor.getDisjuntorContatoraTcs();
-                    if(disjuntorContatora.isEmpty()){disjuntorContatora = motor.getDisjuntorContatoraSch();}
+                    if(disjuntorContatora == null || disjuntorContatora.isEmpty()){
+                        disjuntorContatora = motor.getDisjuntorContatoraSch();
+                    }
+
                     inversor = motor.getInversorTcs();
-                    if(inversor.isEmpty()){inversor = motor.getInversorSch();}
+                    if(inversor == null || inversor.isEmpty()){
+                        inversor = motor.getInversorSch();
+                    }
+
                     disjuntorInversor = motor.getDisjuntorInversorTcs();
-                    if(disjuntorInversor.isEmpty()){disjuntorInversor = motor.getDisjuntorInversorSch();}
+                    if(disjuntorInversor == null || disjuntorInversor.isEmpty()){
+                        disjuntorInversor = motor.getDisjuntorInversorSch();
+                    }
                     break;
                 case SCH:
                     contatora = motor.getContatoraSch();
@@ -336,5 +348,26 @@ public class PrecoService {
         Double precoCircuito = precoTotal - talhaSemCircuito.getPreco();
 
         return new PrecoDTO(precoTotal, precoCircuito, componentesCircuito);
+    }
+
+    public OrcamentoCompletoDTO calculaOrcamentoCompleto(ConfigDTO config) {
+
+        Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
+                .orElseThrow(() -> new RuntimeException("Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
+
+        PrecoDTO dtoSch = this.calculaPrecoDeVenda(config, TipoMotor.SCH);
+        PrecoDTO dtoTcs = this.calculaPrecoDeVenda(config, TipoMotor.TCS);
+
+        ComponentePrecoDTO compTalha = this.calculaPrecoDeVendaTalhaSemCircuito(talha, ipi);
+        ComponentePrecoDTO compAdaptador = this.calculaPrecoDeVendaAdaptadorViga(config, ipi);
+
+        return new OrcamentoCompletoDTO(
+                dtoSch.getPrecoTotal(),
+                dtoTcs.getPrecoTotal(),
+                dtoSch.getPrecoCircuito(),
+                dtoTcs.getPrecoCircuito(),
+                (compTalha != null) ? compTalha.getPreco() : 0.0,
+                (compAdaptador != null) ? compAdaptador.getPreco() : 0.0
+        );
     }
 }

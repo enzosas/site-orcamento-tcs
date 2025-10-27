@@ -2,10 +2,12 @@ package com.tcs.site_orcamento.controller;
 
 import com.tcs.site_orcamento.dto.ComponentePrecoDTO;
 import com.tcs.site_orcamento.dto.ConfigDTO;
+import com.tcs.site_orcamento.dto.OrcamentoCompletoDTO;
 import com.tcs.site_orcamento.entity.Talha;
 import com.tcs.site_orcamento.repository.TalhaRepository;
 import com.tcs.site_orcamento.service.PrecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,5 +59,11 @@ public class PrecoController {
     @PostMapping("/circuitoTcs")
     public Double precoCircuitoTcs(@RequestBody ConfigDTO dto) {
         return precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.TCS).getPrecoCircuito();
+    }
+
+    @PostMapping("/orcamentoCompleto")
+    public ResponseEntity<OrcamentoCompletoDTO> getOrcamentoCompleto(@RequestBody ConfigDTO dto) {
+        OrcamentoCompletoDTO orcamento = precoService.calculaOrcamentoCompleto(dto);
+        return ResponseEntity.ok(orcamento);
     }
 }
