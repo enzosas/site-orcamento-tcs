@@ -69,7 +69,7 @@ function App() {
 				<div className="coluna">
 					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} config={config} setConfig={setConfig} />
 					<CommandPannel talha={talhaSelecionada} config={config} setConfig={setConfig}/>
-					<ExtraOptions config={config} setConfig={setConfig}/>
+					<ExtraOptions talha={talhaSelecionada} config={config} setConfig={setConfig}/>
 				</div>
 				<div className="coluna">
 					<TalhaWindow talha={talhaSelecionada} />

@@ -326,6 +326,7 @@ public class PrecoService {
         componentesTalha.addAll(componentesCircuito);
 
         Double precoTotal = 0.0;
+        System.out.println("Talha:");
         for (ComponentePrecoDTO componente : componentesTalha) {
             if(componente != null){
                 precoTotal += componente.getPreco();
