@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from '../config';
 
 
-async function calcularPreco(tipo, config) {
+async function fetchOrcamentoCompleto(config) {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/preco/${tipo}`, {
+        const response = await fetch(`${API_BASE_URL}/api/preco/orcamentoCompleto`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -14,14 +14,15 @@ async function calcularPreco(tipo, config) {
         });
 
         if (!response.ok) {
-            throw new Error(`Erro na requisição para ${tipo}: ${response.statusText}`);
+            const errorBody = await response.text();
+            throw new Error(`Erro na requisição: ${response.status} - [Backend: ${errorBody}]`);
         }
         
-        const preco = await response.json();
-        return preco;
+        const orcamento = await response.json();
+        return orcamento;
         
     } catch (error) {
-        console.error(`Falha ao calcular o preço para ${tipo}:`, error);
+        console.error(`Falha ao calcular o orçamento completo:`, error);
         return null; 
     }
 }
@@ -44,28 +45,27 @@ function Pricing({ config }){
         
         setPrecoTotalSch(null);
         setPrecoTotalTcs(null);
+        setCircuitoTcs(null);
+        setCircuitoSch(null);
+        setAdaptadorViga(null);
+        setTalhaSemCircuito(null);
+
         const fetchPrecos = async () => {
-        if (config && config.talhaSelecionada && config.talhaSelecionada !== "") {
-            console.log("Condição válida, buscando preços para:", config.talhaSelecionada);
+            if (config && config.talhaSelecionada && config.talhaSelecionada !== "") {
+                const orcamento = await fetchOrcamentoCompleto(config);
 
-            const [precoCalculadoSemCircuito, precoCalculadoAdaptadorViga, precoCalculadoCircuitoSch, precoCalculadoCircuitoTcs, precoCalculadoSch, precoCalculadoTcs] = await Promise.all([
-                calcularPreco('talhaSemCircuito', config),
-                calcularPreco('adaptadorViga', config),
-                calcularPreco('circuitoSch', config),
-                calcularPreco('circuitoTcs', config),
-                calcularPreco('totalSch', config),
-                calcularPreco('totalTcs', config)
-            ]);
-            setTalhaSemCircuito(precoCalculadoSemCircuito);
-            setAdaptadorViga(precoCalculadoAdaptadorViga);
-            setCircuitoSch(precoCalculadoCircuitoSch);
-            setCircuitoTcs(precoCalculadoCircuitoTcs);
-            setPrecoTotalSch(precoCalculadoSch);
-            setPrecoTotalTcs(precoCalculadoTcs);
-        }
-    };
+                if (orcamento) {
+                    setTalhaSemCircuito(orcamento.talhaSemCircuito);
+                    setAdaptadorViga(orcamento.adaptadorViga);
+                    setCircuitoSch(orcamento.circuitoSch);
+                    setCircuitoTcs(orcamento.circuitoTcs);
+                    setPrecoTotalSch(orcamento.totalSch);
+                    setPrecoTotalTcs(orcamento.totalTcs);
+                }
+            }
+        };
 
-    fetchPrecos();
+        fetchPrecos();
         
     }, [config]);
 
