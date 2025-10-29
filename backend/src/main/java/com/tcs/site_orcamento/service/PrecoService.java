@@ -253,6 +253,16 @@ public class PrecoService {
         return null;
     }
 
+    private ComponentePrecoDTO calculaPrecoDeVendaTransmissorExtra(ConfigDTO config, Boolean ipi){
+
+        if(config.isTransmissorExtra()) {
+            String controleRemoto = getCodigoControle(config.getModeloControle());
+            Double preco = getPreco(controleRemoto, ipi) * 0.5;
+            return new ComponentePrecoDTO("Transmissor Extra", controleRemoto, preco);
+        }
+        return null;
+    }
+
     private List<ComponentePrecoDTO> calculaPrecoDeVendaSinalizadores(ConfigDTO config, Boolean ipi, TipoMotor tipo){
 
         List<ComponentePrecoDTO> dto = new ArrayList<>();
@@ -330,6 +340,7 @@ public class PrecoService {
         componentesCircuito.addAll(calculaPrecoDeVendaDuplaVelocidadeTranslacao(motorTranslacao, config, ipi, tipoMotor));
         componentesCircuito.addAll(calculaPrecoDeVenda6Movimentos(motor6Mov, config, ipi, tipoMotor));
         componentesCircuito.add(calculaPrecoDeVendaControle(config, ipi));
+        componentesCircuito.add(calculaPrecoDeVendaTransmissorExtra(config, ipi));
         componentesCircuito.addAll(calculaPrecoDeVendaSinalizadores(config, ipi, tipoMotor));
         componentesCircuito.add(calculaPrecoDeVendaFimDeCurso(config, ipi, tipoMotor));
         componentesCircuito.add(calculaPrecoDeVendaAdaptadorViga(config, ipi));
