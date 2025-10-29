@@ -1,23 +1,51 @@
+.margem{
+    flex-grow: 100%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.header{
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .login__frame-branco{
     background: #FFFFFF;
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
-    padding: 5rem;
-    flex-grow: 100%;
-    margin: 5rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
-.login__frame-branco h1{
-    font-size: 4rem;
+
+h1{
+    font-size: 2.5rem;
     line-height: 1em;
+    color: var(--corPrincipal);
 }
 
 .login__frame-branco label{
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1em;
+}
+
+.login__frame-branco input{
+    border: 0.15em solid var(--corPrincipal);
+    border-radius: 0.7em;
+    font-size: 1rem;
 }
 
 .login__frame-branco__labelCampo{
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
