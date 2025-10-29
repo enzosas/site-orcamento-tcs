@@ -1,15 +1,15 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import Header from "./components/Header";
-import ModelSelector from "./components/ModelSelector";
-import CommandPannel from "./components/CommandPannel"
-import ExtraOptions from "./components/ExtraOptions";
-import TalhaWindow from "./components/TalhaWindow";
-import ExtraInfo from "./components/ExtraInfo";
-import Pricing from "./components/Pricing";
-import Footer from "./components/Footer";
-import Imagem from "./components/Imagem";
-import { API_BASE_URL } from './config';
+import Header from "./components/Header/Header";
+import ModelSelector from "./components/ModelSelector/ModelSelector";
+import CommandPannel from "./components/CommandPannel/CommandPannel"
+import ExtraOptions from "./components/Extra/ExtraOptions";
+import TalhaWindow from "./components/TalhaWindow/TalhaWindow";
+import ExtraInfo from "./components/Extra/ExtraInfo";
+import Pricing from "./components/Pricing/Pricing";
+import Footer from "./components/Footer/Footer";
+import Imagem from "./components/TalhaWindow/Imagem";
+import { API_BASE_URL } from '../../config';
 
 
 function App() {

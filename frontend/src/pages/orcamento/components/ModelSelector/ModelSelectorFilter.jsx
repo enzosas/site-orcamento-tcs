@@ -1,6 +1,6 @@
 import "./ModelSelector.css";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../../../config';
 
 function ModelSelectorFilter({ filtros, setFiltros }) {
     const [correntes, setCorrentes] = useState([]);

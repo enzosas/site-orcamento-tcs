@@ -1,7 +1,3 @@
-import "./TalhaWindow.css"
-import ModelSelectorFilter from "./ModelSelectorFilter";
-import ModelSelectorList from "./ModelSelectorList";
-
 function ExtraInfo({ talha, config }){
     if (!talha) return null;
     return (

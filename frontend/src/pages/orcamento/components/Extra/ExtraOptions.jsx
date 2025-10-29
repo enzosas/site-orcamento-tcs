@@ -1,4 +1,3 @@
-import "./CommandPannel.css"
 import React, { useState, useEffect } from "react";
 
 function ExtraOptions({talha, config, setConfig}){

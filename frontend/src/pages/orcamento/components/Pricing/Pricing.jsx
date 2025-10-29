@@ -1,6 +1,6 @@
 import "./Pricing.css"
 import React, { useState, useEffect } from "react";
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../../../config';
 
 
 async function fetchOrcamentoCompleto(config) {

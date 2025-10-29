@@ -2,7 +2,7 @@ import "./ModelSelector.css"
 import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
 import React, { useState, useEffect } from "react";
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../../../config';
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
