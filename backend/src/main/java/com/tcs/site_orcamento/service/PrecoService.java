@@ -352,6 +352,7 @@ public class PrecoService {
 
     public OrcamentoCompletoDTO calculaOrcamentoCompleto(ConfigDTO config) {
 
+        System.out.println("- - - NOVA REQUISICAO DE ORCAMENTO - - -");
         Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
                 .orElseThrow(() -> new RuntimeException("Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
 

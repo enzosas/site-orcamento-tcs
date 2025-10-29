@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 
 function ExtraOptions({talha, config, setConfig}){
     
+    if (!talha) return null;
+
     useEffect(() => {
             if(config.painel6Mov){
                 config.incluirSinalizadores = true;
