@@ -1,10 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import DefaultApp from './pages/orcamento/App.jsx'
+import Orcamento from './pages/orcamento/App.jsx'
+import Login from './pages/login/login.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <DefaultApp />
+    <Login />
   </StrictMode>,
 )
