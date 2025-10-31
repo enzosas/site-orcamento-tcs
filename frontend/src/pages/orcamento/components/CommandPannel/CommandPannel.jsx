@@ -1,16 +1,70 @@
 import "./CommandPannel.css"
 import { useState, useEffect } from "react";
 
-//    useEffect(() => {
-//        if (config.painel6Mov) {
-//            setConfig(prev => ({ ...prev, modeloControle: opcoesControle }));
-//        }
-//    }, [CONDICAO]);
+
+function getOpcoesPotencia(isPainel6Mov) {
+    if (isPainel6Mov) {
+        return [
+            "2 x 0,25 kW", 
+            "2 x 0,37 kW", 
+            "2 x 0,55 kW", 
+            "2 x 0,75 kW", 
+            "2 x 1,1 kW",
+            "2 x 1,5 kW", 
+            "2 x 2,2 kW", 
+            "2 x 3,0 kW", 
+            "2 x 3,7 kW", 
+            "2 x 4,5 kW", 
+            "2 x 5,5 kW"
+        ];
+    }
+    return [];
+}
+
+function getOpcoesControle(isControleRemoto, isPainel6Mov) {
+    if (!isControleRemoto) {
+        return [""]; // Opção vazia se o controle não estiver selecionado
+    }
+    if (isPainel6Mov) {
+        return ["BCI 808"]; // 'painel6Mov' força "BCI 808"
+    }
+    return ["BCI 404", "BCI 808"]; // Padrão
+}
 
 function CommandPannel({ talha, config, setConfig }) {
     if (!talha) return null;
+    
+    const handleControleRemotoChange = (e) => {
+        const isChecked = e.target.checked;
+        const novasOpcoesControle = getOpcoesControle(isChecked, config.painel6Mov);
+        const novoModeloControle = novasOpcoesControle[0] || "";
 
-   useEffect(() => {
+        setConfig(prev => ({
+            ...prev,
+            controleRemoto: isChecked,
+            modeloControle: novoModeloControle,
+            // Se 'isChecked' for falso, define 'transmissorExtra' como falso também
+            ...(!isChecked && { transmissorExtra: false }) 
+        }));
+    };
+
+    const handlePainel6MovChange = (e) => {
+        const isChecked = e.target.checked;
+        const novasOpcoesPotencia = getOpcoesPotencia(isChecked);
+        const novaPotencia = novasOpcoesPotencia[0] || "";
+        const novasOpcoesControle = getOpcoesControle(config.controleRemoto, isChecked);
+        const novoModeloControle = novasOpcoesControle[0] || "";
+        
+        setConfig(prev => ({
+            ...prev,
+            painel6Mov: isChecked,
+            potenciaMotores: novaPotencia,
+            modeloControle: novoModeloControle,
+            ...(isChecked && { incluirSinalizadores: true }) 
+        }));
+    };
+
+    useEffect(() => {
 		if (talha.duplaVelocidadeElevacaoInversor === false) {
 			if (talha.acionamentoMotorElevacao === "2 velocidades com inversor"){
 				setConfig(prev => ({ ...prev, duplaVelocidadeElevacao: true }));
@@ -28,13 +82,16 @@ function CommandPannel({ talha, config, setConfig }) {
 	}, [talha]);
 
 	useEffect(() => {
-		setConfig(prev => ({
+		if (config.excluirPainel) {
+        setConfig(prev => ({
             ...prev,
             painel6Mov: false,
-            controleRemoto: false
-        }))
+            controleRemoto: false,
+            transmissorExtra: false // Você provavelmente quer resetar este também
+            }));
+        }
         
-    }, [config.excluirPainel === false]);
+    }, [config.excluirPainel]);
 
     useEffect(() => {
         if (talha.exclusaoPainelComandoForca === false) {
@@ -45,46 +102,8 @@ function CommandPannel({ talha, config, setConfig }) {
         }
     }, [talha.exclusaoPainelComandoForca]);
 
-    useEffect(() => {
-        if (config.painel6Mov) {
-            setConfig(prev => ({ ...prev, modeloControle: opcoesControle }));
-        }
-    }, [config.painel6Mov]);
-
-    useEffect(() => {
-        setConfig(prev => ({
-            ...prev,
-            modeloControle: opcoesControle[0],
-            potenciaMotores: opcoesPotencia[0]
-        }))
-    }, [config.controleRemoto || config.painel6Mov])
-
-   useEffect(() => {
-       if (!config.controleRemoto) {
-           setConfig(prev => ({ ...prev, transmissorExtra: false }));
-       }
-   }, [config.controleRemoto]);
-
-    let opcoesPotencia = [];
-
-        if (config.painel6Mov)
-        {
-            opcoesPotencia = ["2 x 0,25 kW","2 x 0,37 kW","2 x 0,55 kW","2 x 0,75 kW","2 x 1,1 kW",
-        "2 x 1,5 kW","2 x 2,2 kW","2 x 3,0 kW","2 x 3,7 kW","2 x 4,5 kW","2 x 5,5 kW"];
-        }
-        else opcoesPotencia = [];
-
-    let opcoesControle = [];
-
-        if (!config.controleRemoto)
-        {
-            opcoesControle = [""];
-        }
-        else if (config.painel6Mov) {
-            opcoesControle = ["BCI 808"];
-        } else {
-            opcoesControle = ["BCI 404", "BCI 808"];     
-        }
+    const opcoesPotencia = getOpcoesPotencia(config.painel6Mov);
+    const opcoesControle = getOpcoesControle(config.controleRemoto, config.painel6Mov);
 
     return (
         <div className="frame-branco">
@@ -128,7 +147,7 @@ function CommandPannel({ talha, config, setConfig }) {
                         type="checkbox"
                         checked={config.painel6Mov}
                         disabled={config.excluirPainel || talha.painelParaPonteRolante === false}
-                        onChange={(e) => setConfig(prev => ({ ...prev, painel6Mov: e.target.checked }))}
+                        onChange={handlePainel6MovChange}
                     />
                     Painel 6 Movimentos com 2 velocidades
                 </label>
@@ -152,7 +171,7 @@ function CommandPannel({ talha, config, setConfig }) {
                         type="checkbox" 
                         disabled={config.excluirPainel || talha.controleRemotoDisponivel === false}
                         checked={config.controleRemoto}
-                        onChange={(e) => setConfig(prev => ({ ...prev, controleRemoto: e.target.checked }))}
+                        onChange={handleControleRemotoChange}
                     />
                     Controle Remoto 1 transmissor + 1 Receptor
                 </label>

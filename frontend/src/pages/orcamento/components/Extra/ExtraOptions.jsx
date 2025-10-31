@@ -5,12 +5,6 @@ function ExtraOptions({talha, config, setConfig}){
     if (!talha) return null;
 
     useEffect(() => {
-            if(config.painel6Mov){
-                config.incluirSinalizadores = true;
-            }
-        }, [config.painel6Mov]);
-
-    useEffect(() => {
         if (talha.celulaCargaDisponivel === false){
             setConfig(prev => ({ ...prev, celulaCarga: false }));
         }
