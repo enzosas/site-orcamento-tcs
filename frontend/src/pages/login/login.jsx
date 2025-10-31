@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./login.css"
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     
@@ -7,12 +9,27 @@ function Login() {
     
     const [senha, setSenha] = useState('');
 
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const handleUsuarioChange = (evento) => {
         setUsuario(evento.target.value);
     };
 
     const handleSenhaChange = (evento) => {
         setSenha(evento.target.value);
+    };
+
+    const handleLoginSubmit = () => {
+        
+        if (usuario === 'admin' && senha === '123') {
+            login(); 
+            navigate('/');
+            
+        } else {
+            alert('Usuário ou senha incorretos!');
+            setSenha('');
+        }
     };
 
 
@@ -45,12 +62,16 @@ function Login() {
                         Senha
                     </label>
                     <input 
-                        type="text" 
+                        type="password" 
                         value={senha} 
                         onChange={handleSenhaChange} 
                     />
                 </div>
-                <button type="button" className="botao">
+                <button 
+                    type="button" 
+                    className="botao"
+                    onClick={handleLoginSubmit}
+                >
                     Entrar
                 </button>
                 

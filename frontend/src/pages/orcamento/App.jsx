@@ -59,7 +59,7 @@ function App() {
 
 	useEffect(() => {
 			enviarConfiguracaoParaBackend();
-			console.log(config);
+			// console.log(config);
 		}, [config]);
 
 	return (
