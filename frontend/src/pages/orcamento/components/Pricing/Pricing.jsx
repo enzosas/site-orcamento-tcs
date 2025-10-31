@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from '../../../../config';
 
 
-async function fetchOrcamentoCompleto(config) {
+async function fetchOrcamentoCompleto(config, signal) {
     try {
         const response = await fetch(`${API_BASE_URL}/api/preco/orcamentoCompleto`, {
             method: 'POST',
@@ -11,6 +11,7 @@ async function fetchOrcamentoCompleto(config) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(config),
+            signal: signal,
         });
 
         if (!response.ok) {
@@ -22,7 +23,10 @@ async function fetchOrcamentoCompleto(config) {
         return orcamento;
         
     } catch (error) {
-        console.error(`Falha ao calcular o orçamento completo:`, error);
+
+        if (error.name !== 'AbortError') {
+            console.error(`Falha ao calcular o orçamento completo:`, error);
+        }
         throw error;
     }
 }
@@ -44,6 +48,8 @@ function Pricing({ config }){
     const [error, setError] = useState(null);
 
     useEffect(() => {
+
+        const controller = new AbortController();
         
         setPrecoTotalSch(null);
         setPrecoTotalTcs(null);
@@ -56,7 +62,7 @@ function Pricing({ config }){
         const fetchPrecos = async () => {
             if (config && config.talhaSelecionada && config.talhaSelecionada !== "") {
                 try {
-                    const orcamento = await fetchOrcamentoCompleto(config);
+                    const orcamento = await fetchOrcamentoCompleto(config, controller.signal);
 
                     setTalhaSemCircuito(orcamento.talhaSemCircuito);
                     setAdaptadorViga(orcamento.adaptadorViga);
@@ -65,12 +71,17 @@ function Pricing({ config }){
                     setPrecoTotalSch(orcamento.totalSch);
                     setPrecoTotalTcs(orcamento.totalTcs);
                 } catch (err) {
-                    setError(err);
+                    if (err.name != 'AbortError') {
+                        setError(err);
+                    }
                 }
             }
         };
 
         fetchPrecos();
+        return () => {
+            controller.abort();
+        };
         
     }, [config]);
 
