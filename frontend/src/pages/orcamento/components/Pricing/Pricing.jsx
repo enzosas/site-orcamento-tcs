@@ -23,7 +23,7 @@ async function fetchOrcamentoCompleto(config) {
         
     } catch (error) {
         console.error(`Falha ao calcular o orçamento completo:`, error);
-        return null; 
+        throw error;
     }
 }
 
@@ -41,6 +41,8 @@ function Pricing({ config }){
     const [adaptadorViga, setAdaptadorViga] = useState(null);
     const [talhaSemCircuito, setTalhaSemCircuito] = useState(null);
 
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         
         setPrecoTotalSch(null);
@@ -49,18 +51,21 @@ function Pricing({ config }){
         setCircuitoSch(null);
         setAdaptadorViga(null);
         setTalhaSemCircuito(null);
+        setError(null);
 
         const fetchPrecos = async () => {
             if (config && config.talhaSelecionada && config.talhaSelecionada !== "") {
-                const orcamento = await fetchOrcamentoCompleto(config);
+                try {
+                    const orcamento = await fetchOrcamentoCompleto(config);
 
-                if (orcamento) {
                     setTalhaSemCircuito(orcamento.talhaSemCircuito);
                     setAdaptadorViga(orcamento.adaptadorViga);
                     setCircuitoSch(orcamento.circuitoSch);
                     setCircuitoTcs(orcamento.circuitoTcs);
                     setPrecoTotalSch(orcamento.totalSch);
                     setPrecoTotalTcs(orcamento.totalTcs);
+                } catch (err) {
+                    setError(err);
                 }
             }
         };
@@ -74,27 +79,27 @@ function Pricing({ config }){
             
             <div className="unidade">
                 <p className="descricao">Talha Elétrica sem circuito</p>
-                <p className="dinheiro">{talhaSemCircuito !== null ? formatadorPreco.format(talhaSemCircuito) : "-"}</p>
+                <p className="dinheiro">{error? "Erro" : (talhaSemCircuito !== null ? formatadorPreco.format(talhaSemCircuito) : "-")}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Adaptador de Viga</p>
-                <p className="dinheiro">{adaptadorViga !== null ? formatadorPreco.format(adaptadorViga) : "-"}</p>
+                <p className="dinheiro">{error? "Erro" : (adaptadorViga !== null ? formatadorPreco.format(adaptadorViga) : "-")}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Circuito Elétrico Schneider</p>
-                <p className="dinheiro">{circuitoSch !== null ? formatadorPreco.format(circuitoSch) : "-"}</p>
+                <p className="dinheiro">{error? "Erro" : (circuitoSch !== null ? formatadorPreco.format(circuitoSch) : "-")}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Circuito Elétrico TCS</p>
-                <p className="dinheiro">{circuitoTcs !== null ? formatadorPreco.format(circuitoTcs) : "-"}</p>
+                <p className="dinheiro">{error? "Erro" : (circuitoTcs !== null ? formatadorPreco.format(circuitoTcs) : "-")}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Total com Painel Schneider</p>
-                <p className="dinheiro">{precoTotalSch !== null ? formatadorPreco.format(precoTotalSch) : "-"}</p>
+                <p className="dinheiro">{error? "Erro" : (precoTotalSch !== null ? formatadorPreco.format(precoTotalSch) : "-")}</p>
             </div>
             <div className="unidade">
                 <p className="descricao">Total Com Painel TCS</p>
-                <p className="dinheiro">{precoTotalTcs !== null ? formatadorPreco.format(precoTotalTcs) : "-"}</p>
+                <p className="dinheiro">{error? "Erro" : (precoTotalTcs !== null ? formatadorPreco.format(precoTotalTcs) : "-")}</p>
             </div>
         </div>
     )
