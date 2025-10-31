@@ -20,8 +20,9 @@ function Login() {
         setSenha(evento.target.value);
     };
 
-    const handleLoginSubmit = () => {
+    const handleLoginSubmit = (evento) => {
         
+        evento.preventDefault();
         if (usuario === 'admin' && senha === '123') {
             login(); 
             navigate('/');
@@ -44,8 +45,10 @@ function Login() {
                 />
                 <h1>Gerador de Orçamento</h1>
             </div>
-            <div className="login__frame-branco">
-                
+            <form 
+                className="login__frame-branco"
+                onSubmit={handleLoginSubmit}
+            >
                 <h1>Login</h1>
                 <div className="login__frame-branco__labelCampo ">
                     <label>
@@ -68,14 +71,13 @@ function Login() {
                     />
                 </div>
                 <button 
-                    type="button" 
+                    type="submit" 
                     className="botao"
-                    onClick={handleLoginSubmit}
                 >
                     Entrar
                 </button>
                 
-            </div>
+            </form>
         </div>
         
     )
