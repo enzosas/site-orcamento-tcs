@@ -1,12 +1,19 @@
+body {
+    margin: 0;
+}
+
 .margem{
     flex-grow: 100%;
     padding: 4rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
     align-items: center;
+    justify-content: center;
     user-select: none;
     -webkit-user-drag: none;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .header{
@@ -42,6 +49,7 @@ h1{
     border: 0.15em solid var(--corPrincipal);
     border-radius: 0.7em;
     font-size: 1rem;
+    width: 30rem;
 }
 
 .login__frame-branco__labelCampo{
