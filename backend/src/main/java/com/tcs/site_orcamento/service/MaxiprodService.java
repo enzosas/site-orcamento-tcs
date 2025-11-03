@@ -25,11 +25,7 @@ public class MaxiprodService {
 
     public MaxiprodService(WebClient.Builder builder) throws IOException {
 
-        Path path = Path.of("backend/maxitoken.txt");
-        if (!Files.exists(path)) {
-            throw new IllegalStateException("Arquivo maxitoken.txt não encontrado em " + path.toAbsolutePath());
-        }
-        String apiToken = Files.readString(path, StandardCharsets.UTF_8).trim();
+        String apiToken = System.getenv("MAXIPROD_TOKEN").trim();
 
         this.webClient = builder
                 .baseUrl("https://api.maxiprod.com.br/graphql/")
