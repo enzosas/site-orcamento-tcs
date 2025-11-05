@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./login.css"
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from "../../config";
 
 function Login() {
     
@@ -20,19 +21,40 @@ function Login() {
         setSenha(evento.target.value);
     };
 
-    const handleLoginSubmit = (evento) => {
+    const handleLoginSubmit = async (evento) => {
         
         evento.preventDefault();
-        if (usuario === 'admin' && senha === '123') {
-            login(); 
-            navigate('/');
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                method:'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: usuario,
+                    password: senha,
+                }),
+            });
+
+            if(response.ok){
+
+                const data = await response.json();
+                localStorage.setItem('authToken', data.token);
+                login();
+                navigate('/');
+
+            } else {
+                
+                throw new Error('falha no login');
+            }
+        
+        } catch (error) {
             
-        } else {
             alert('Usuário ou senha incorretos!');
             setSenha('');
         }
     };
-
 
     return (
         <div className="margem">
