@@ -1,5 +1,7 @@
 package com.tcs.site_orcamento.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tcs.site_orcamento.dto.ComponentePrecoDTO;
 import com.tcs.site_orcamento.dto.ConfigDTO;
 import com.tcs.site_orcamento.dto.OrcamentoCompletoDTO;
@@ -8,6 +10,7 @@ import com.tcs.site_orcamento.entity.Motor;
 import com.tcs.site_orcamento.entity.Talha;
 import com.tcs.site_orcamento.repository.MotorRepository;
 import com.tcs.site_orcamento.repository.TalhaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +19,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Service
+@Slf4j
 public class PrecoService {
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private MaxiprodService maxiprodService;
@@ -33,6 +44,16 @@ public class PrecoService {
     public enum TipoMotor {
         TCS,
         SCH
+    }
+
+    private String toJson(Object obj) {
+        try {
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            // Use 'log' (minúsculo) que o Lombok criou
+            log.warn("Erro ao serializar objeto para JSON: {}", e.getMessage());
+            return obj.toString();
+        }
     }
 
     private Double getPreco(String codigo, Boolean ipi){
@@ -321,8 +342,6 @@ public class PrecoService {
         List<ComponentePrecoDTO> componentesCircuito = new ArrayList<>();
         List<ComponentePrecoDTO> componentesTalha = new ArrayList<>();
 
-        System.out.println(config);
-
         Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
                 .orElseThrow(() -> new RuntimeException("Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
         Motor motorElevacao = motorRepository.findByMotorAndTensao(talha.getMotorElevacao(), getTensaoInt(config));
@@ -349,11 +368,11 @@ public class PrecoService {
         componentesTalha.addAll(componentesCircuito);
 
         Double precoTotal = 0.0;
-        System.out.println("Talha:");
+
         for (ComponentePrecoDTO componente : componentesTalha) {
             if(componente != null){
                 precoTotal += componente.getPreco();
-                System.out.println(tipoMotor + " " + componente);
+                log.debug("\n[{}] Componente:\n{}", tipoMotor, toJson(componente));
             }
         }
         Double precoCircuito = precoTotal - talhaSemCircuito.getPreco();
@@ -363,7 +382,8 @@ public class PrecoService {
 
     public OrcamentoCompletoDTO calculaOrcamentoCompleto(ConfigDTO config) {
 
-        System.out.println("- - - NOVA REQUISICAO DE ORCAMENTO - - -");
+        log.info("\n- - - NOVA REQUISICAO DE ORCAMENTO (Talha: {}) - - -", config.getTalhaSelecionada());
+        log.debug("\nConfig DTO recebido: \n{}", toJson(config));
         Talha talha = talhaRepository.findById(config.getTalhaSelecionada())
                 .orElseThrow(() -> new RuntimeException("Talha não encontrada com o ID: " + config.getTalhaSelecionada()));
 
