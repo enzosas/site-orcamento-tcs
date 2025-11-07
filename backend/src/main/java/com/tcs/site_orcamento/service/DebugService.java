@@ -7,10 +7,7 @@ import com.tcs.site_orcamento.repository.TalhaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,33 +36,55 @@ public class DebugService {
         }
     }
 
-    public List<String> getCodigosFaltando(){
+    public Map<String, List<String>> getCodigosFaltando() {
 
-        Set<String> codigosParaTestar = new LinkedHashSet<>();
+        Map<String, Set<String>> codigosParaTestar = new LinkedHashMap<>();
 
-        List<Talha> talhas = talhaRepository.findAll();
-        for (Talha talha : talhas) {
-            codigosParaTestar.add(talha.getCodigoPainelTalhaSemOpcional());
-            codigosParaTestar.add(talha.getCodigoPainel6Mov());
-            codigosParaTestar.add(talha.getModelo());
+        Set<String> talhas = new LinkedHashSet<>();
+        Set<String> paineis = new LinkedHashSet<>();
+        Set<String> contatoras = new LinkedHashSet<>();
+        Set<String> disjuntores = new LinkedHashSet<>();
+        Set<String> inversores = new LinkedHashSet<>();
+        Set<String> resistores = new LinkedHashSet<>();
+
+        codigosParaTestar.put("talhas", talhas);
+        codigosParaTestar.put("paineis", paineis);
+        codigosParaTestar.put("contatoras", contatoras);
+        codigosParaTestar.put("disjuntores", disjuntores);
+        codigosParaTestar.put("inversores", inversores);
+        codigosParaTestar.put("resistores", resistores);
+
+        List<Talha> talhasAll = talhaRepository.findAll();
+        for (Talha talha : talhasAll) {
+            paineis.add(talha.getCodigoPainelTalhaSemOpcional());
+            paineis.add(talha.getCodigoPainel6Mov());
+            talhas.add(talha.getModelo());
         }
 
         List<Motor> motores = motorRepository.findAll();
         for (Motor motor : motores) {
-            codigosParaTestar.add(motor.getContatoraSch());
-            codigosParaTestar.add(motor.getContatoraTcs());
-            codigosParaTestar.add(motor.getDisjuntorContatoraSch());
-            codigosParaTestar.add(motor.getDisjuntorContatoraTcs());
-            codigosParaTestar.add(motor.getInversorSch());
-            codigosParaTestar.add(motor.getInversorTcs());
-            codigosParaTestar.add(motor.getDisjuntorInversorSch());
-            codigosParaTestar.add(motor.getDisjuntorInversorTcs());
-            codigosParaTestar.add(motor.getResistorTcs());
+            contatoras.add(motor.getContatoraSch());
+            contatoras.add(motor.getContatoraTcs());
+            disjuntores.add(motor.getDisjuntorContatoraSch());
+            disjuntores.add(motor.getDisjuntorContatoraTcs());
+            inversores.add(motor.getInversorSch());
+            inversores.add(motor.getInversorTcs());
+            disjuntores.add(motor.getDisjuntorInversorSch());
+            disjuntores.add(motor.getDisjuntorInversorTcs());
+            resistores.add(motor.getResistorTcs());
         }
 
-        List<String> codigosComErro = codigosParaTestar.parallelStream() // <-- MUDANÇA AQUI
-                .filter(this::isCodigoFaltando) // <-- Filtra: mantém apenas os que retornam true
-                .collect(Collectors.toList());  // <-- Coleta os resultados em uma nova lista
+        Map<String, List<String>> codigosComErro = codigosParaTestar.entrySet().parallelStream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entry -> entry.getValue().stream()
+                    .filter(Objects::nonNull)
+                    .filter(codigo -> !codigo.isEmpty())
+                    .filter(this::isCodigoFaltando)
+                    .collect(Collectors.toList()),
+                (list1, list2) -> list1,
+                LinkedHashMap::new
+            ));
 
         return codigosComErro;
     }
