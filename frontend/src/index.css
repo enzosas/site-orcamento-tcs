@@ -8,6 +8,8 @@
   --corFundo: #ffffff;
 
   font-size: 12px;
+  --lineHeight: 1.5em;
+  line-height: var(--lineHeight);
 }
 
 body {
