@@ -34,34 +34,6 @@ function App() {
 		adaptadorViga: false
 	});
 
-	const enviarConfiguracaoParaBackend = async () => {
-		try {
-			const url = `${API_BASE_URL}/api/config`; 
-
-			const response = await fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(config), 
-			});
-
-			if (!response.ok) {
-			throw new Error(`Erro na requisição: ${response.statusText}`);
-			}
-
-			const resultado = await response.json();
-		} catch (error) {
-			console.error('Falha ao enviar configuração:', error);
-		}
-		console
-	};
-
-	useEffect(() => {
-			enviarConfiguracaoParaBackend();
-			// console.log(config);
-		}, [config]);
-
 	return (
 		<div className="app-container">
 			<Header />
