@@ -15,9 +15,14 @@ public class DebugController {
     @Autowired
     DebugService debugService;
 
-    @GetMapping("/getCodigosFaltando")
+    @GetMapping("/codigosFaltando")
     public Map<String, List<String>> getCodigosFaltando() {
         return debugService.getCodigosFaltando();
+    }
+
+    @GetMapping("/allPrecosTalhas")
+    public Map<String, Double> getPrecoTalhaAll() {
+        return debugService.getPrecoTalhaAll();
     }
 
 }
