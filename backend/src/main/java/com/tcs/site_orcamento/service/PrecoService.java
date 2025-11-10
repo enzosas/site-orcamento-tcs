@@ -75,6 +75,9 @@ public class PrecoService {
         else if(Objects.equals(config.getTensao(), "220V - Trifásica")){
             tensao = 220;
         }
+        else if(Objects.equals(config.getTensao(), "220v - Monofásica")){
+            tensao = 220;
+        }
         else{
             throw new IllegalArgumentException("Tensão inválida ou não suportada: " + config.getTensao());
         }
