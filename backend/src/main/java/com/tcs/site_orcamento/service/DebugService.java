@@ -107,4 +107,24 @@ public class DebugService {
         }
         return info;
     }
+
+    public Map<String, String> getDisjuntoresContatoraAll() {
+
+        Map<String, String> disjuntores = new LinkedHashMap<>();
+        List<Motor> motorAll = motorRepository.findAll();
+        for (Motor motor : motorAll) {
+            disjuntores.put(motor.getDisjuntorContatoraSch(), motor.getDisjuntorContatoraTcs());
+        }
+        return disjuntores;
+    }
+
+    public Map<String, String> getDisjuntoresInversorAll() {
+
+        Map<String, String> disjuntores = new LinkedHashMap<>();
+        List<Motor> motorAll = motorRepository.findAll();
+        for (Motor motor : motorAll) {
+            disjuntores.put(motor.getDisjuntorInversorSch(), motor.getDisjuntorInversorTcs());
+        }
+        return disjuntores;
+    }
 }

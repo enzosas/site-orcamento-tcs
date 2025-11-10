@@ -25,4 +25,14 @@ public class DebugController {
         return debugService.getPrecoTalhaAll();
     }
 
+    @GetMapping("/disjuntoresContatora")
+    public Map<String, String> getDisjuntoresContatoraAll() {
+        return debugService.getDisjuntoresContatoraAll();
+    }
+
+    @GetMapping("/disjuntoresInversor")
+    public Map<String, String> getDisjuntoresInversorAll() {
+        return debugService.getDisjuntoresInversorAll();
+    }
+
 }
