@@ -113,7 +113,12 @@ public class DebugService {
         Map<String, String> disjuntores = new LinkedHashMap<>();
         List<Motor> motorAll = motorRepository.findAll();
         for (Motor motor : motorAll) {
-            disjuntores.put(motor.getDisjuntorContatoraSch(), motor.getDisjuntorContatoraTcs());
+            String disjuntorAndExisteSch = motor.getDisjuntorContatoraSch();
+            String disjuntorAndExisteTcs = motor.getDisjuntorContatoraTcs();
+            disjuntorAndExisteSch += (isCodigoFaltando(disjuntorAndExisteSch)? " out" : " in");
+            disjuntorAndExisteTcs += (isCodigoFaltando(disjuntorAndExisteTcs)? " out" : " in");
+
+            disjuntores.put(disjuntorAndExisteSch, disjuntorAndExisteTcs);
         }
         return disjuntores;
     }
@@ -123,7 +128,12 @@ public class DebugService {
         Map<String, String> disjuntores = new LinkedHashMap<>();
         List<Motor> motorAll = motorRepository.findAll();
         for (Motor motor : motorAll) {
-            disjuntores.put(motor.getDisjuntorInversorSch(), motor.getDisjuntorInversorTcs());
+            String disjuntorAndExisteSch = motor.getDisjuntorInversorSch();
+            String disjuntorAndExisteTcs = motor.getDisjuntorInversorTcs();
+            disjuntorAndExisteSch += (isCodigoFaltando(disjuntorAndExisteSch)? " out" : " in");
+            disjuntorAndExisteTcs += (isCodigoFaltando(disjuntorAndExisteTcs)? " out" : " in");
+
+            disjuntores.put(disjuntorAndExisteSch, disjuntorAndExisteTcs);
         }
         return disjuntores;
     }
