@@ -1,5 +1,8 @@
 package com.tcs.site_orcamento.service;
 
+import com.tcs.site_orcamento.entity.Usuario;
+import com.tcs.site_orcamento.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -7,17 +10,23 @@ import java.util.Objects;
 @Service
 public class AuthService {
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
     public String authenticateAndGetToken(String username, String password){
 
-        if(Objects.equals(username, "admin") && Objects.equals(password, "123")){
+        Usuario usuario;
 
-            return  "tokenTokenToken";
-
-        } else {
-
+        try {
+            usuario = usuarioRepository.findByUsername(username);
+        } catch (Exception e) {
             throw new RuntimeException("Usuario ou senha incorretos");
-
         }
 
+        if(Objects.equals(password, usuario.getPassword())){
+            return  "tokenTokenToken";
+        } else {
+            throw new RuntimeException("Usuario ou senha incorretos");
+        }
     }
 }
