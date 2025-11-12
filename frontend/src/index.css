@@ -75,7 +75,7 @@ button {
     margin: 0 auto;
     line-height: 1em;
     user-select: none;
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.0.5);
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     cursor: pointer;
     border-width: 0;
 }
