@@ -28,7 +28,7 @@
     width: 30%;
     transition: transform 0.1s ease-out, background-color 0.2s ease;
     user-select: none;
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.0.5);
+    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
 }
 
 .gerar-pdf:hover {
