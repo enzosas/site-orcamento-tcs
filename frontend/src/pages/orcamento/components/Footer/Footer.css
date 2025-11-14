@@ -3,17 +3,55 @@
     padding: 1rem;
 }
 
-.config-config{
+.config--retangulo_branco{
     color: var(--corDesfoqueFraco);
-    background: #FFFFFF;
+    background-color: #ffffff;
     border: var(--corDesfoqueFraco);
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
-    padding: 0.5em;
+    padding: 1em;
+    display: flex;
+    max-width: 100%;
+    overflow-x: auto;
+    align-items: center;
+    line-height: 1em;
+    justify-content: right;
+    gap: 1em;
 
     margin: 0 auto;
     margin-bottom: 1em;
     margin-top: 1em;
+}
+
+.config--retangulo_branco button{
+    max-height: 1.3em;
+    color: var(--corPrincipal);
+    background-color: rgba(0, 0, 0, 0.0);
+    box-shadow: 0em 0em 0em 0em;
+    padding: 0em;
+    display: flex;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 0.7em;
+    align-items: center;
+    padding: 1em;
+}
+
+.config--retangulo_branco button:hover{
+    background-color: var(--corDesfoqueForte);
+}
+
+.config--retangulo_branco--esquerda{
+    display: flex;
+    overflow-wrap:anywhere;
+    width: 100%;
+    line-height: var(--lineHeight);
+}
+.config--retangulo_branco--direita{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 0.5em;
 }
 
 .gerar-pdf {

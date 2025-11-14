@@ -50,7 +50,7 @@ function App() {
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />
 					<Pricing config={config} />
-					<Footer />  
+					<Footer talha={talhaSelecionada} config={config}/>  
 				</div>
 			</div>
 		</div>
