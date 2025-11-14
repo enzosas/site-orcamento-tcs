@@ -1,6 +1,6 @@
 import "./TalhaWindow.css"
 
-function TalhaWindow({ talha }){
+function TalhaWindow({ talha, config }){
     if (!talha) return null;
     return (
         <div>
@@ -49,13 +49,13 @@ function TalhaWindow({ talha }){
                     <p className="frame-all-info-dir">{talha.fimCursoSobe}</p>
 
                     <p className="frame-all-info-esq">Fim de curso direita/esquerda</p>
-                    <p className="frame-all-info-dir">{talha.fimCursoDireitaEsquerdaDisponivel ? "Sim" : "Não"}</p>
+                    <p className="frame-all-info-dir">{config.fimCursoEsquerdaDireita ? "Sim" : "Não"}</p>
 
-                    <p className="frame-all-info-esq">Guia para Corrente</p>
-                    <p className="frame-all-info-dir">{talha.guiaCabo ? "Sim" : "Não"}</p>
+                    <p className="frame-all-info-esq">{talha.correnteCabo === "Corrente" ? "Guia para Corrente" : "Guia para Cabo"}</p>
+                    <p className="frame-all-info-dir">{config.guiaCaboAco ? "Sim" : "Não"}</p>
 
                     <p className="frame-all-info-esq">Célula de carga</p>
-                    <p className="frame-all-info-dir">{talha.celulaCargaDisponivel ? "Sim" : "Não"}</p>
+                    <p className="frame-all-info-dir">{config.celulaCarga ? "Sim" : "Não"}</p>
 
                     <p className="frame-all-info-esq">Largura da viga padrão</p>
                     <p className="frame-all-info-dir">{talha.larguraVigaPadrao}</p>

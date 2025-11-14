@@ -44,7 +44,7 @@ function App() {
 					<ExtraOptions talha={talhaSelecionada} config={config} setConfig={setConfig}/>
 				</div>
 				<div className="coluna">
-					<TalhaWindow talha={talhaSelecionada} />
+					<TalhaWindow talha={talhaSelecionada} config={config}/>
 					<ExtraInfo talha={talhaSelecionada} config={config}/>
 				</div>
 				<div className="coluna">
