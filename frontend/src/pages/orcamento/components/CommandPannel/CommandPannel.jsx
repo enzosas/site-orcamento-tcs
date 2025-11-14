@@ -87,7 +87,7 @@ function CommandPannel({ talha, config, setConfig }) {
             ...prev,
             painel6Mov: false,
             controleRemoto: false,
-            transmissorExtra: false // Você provavelmente quer resetar este também
+            transmissorExtra: false
             }));
         }
         

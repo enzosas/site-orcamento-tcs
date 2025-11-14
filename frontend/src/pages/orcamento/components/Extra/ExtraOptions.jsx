@@ -11,11 +11,13 @@ function ExtraOptions({talha, config, setConfig}){
         if (talha.fimCursoDireitaEsquerdaDisponivel === false){
             setConfig(prev => ({ ...prev, fimCursoEsquerdaDireita: false }));
         }
-        if (talha.guiaCaboDisponivel === false){
-            setConfig(prev => ({ ...prev, guiaCaboAco: false }));
-        }
         if (talha.adaptadorVigaDisponivel === false){
             setConfig(prev => ({ ...prev, adaptadorViga: false }));
+        }
+        if (talha.guiaCabo === "Sim"){
+            setConfig(prev => ({ ...prev, guiaCaboAco: true }));
+        } else if (talha.guiaCabo === "Não"){
+            setConfig(prev => ({ ...prev, guiaCaboAco: false }));
         }
 	}, [talha]);
     
@@ -47,7 +49,7 @@ function ExtraOptions({talha, config, setConfig}){
                         disabled={talha.guiaCaboDisponivel === false}
                         onChange={(e) => setConfig(prev => ({ ...prev, guiaCaboAco: e.target.checked }))}
                     />
-                    Guia para o Cabo de Aço
+                    {talha.correnteCabo === "Corrente" ? "Guia para Corrente" : "Guia para Cabo de Aço"}
                 </label>
                 <label className={`${talha.celulaCargaDisponivel === false ? "checkbox-item-disabled" : ""}`}>
                     <input
