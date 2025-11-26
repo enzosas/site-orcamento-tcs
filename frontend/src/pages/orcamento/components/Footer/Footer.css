@@ -4,23 +4,24 @@
 }
 
 .config--retangulo_branco{
+    user-select: none;
     color: var(--corDesfoqueFraco);
     background-color: #ffffff;
     border: var(--corDesfoqueFraco);
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
     padding: 1em;
+    overflow: hidden;
     display: flex;
     max-width: 100%;
-    overflow-x: auto;
     align-items: center;
     line-height: 1em;
-    justify-content: right;
+    justify-content: space-between;
     gap: 1em;
-
     margin: 0 auto;
     margin-bottom: 1em;
     margin-top: 1em;
+    box-sizing: border-box;
 }
 
 .config--retangulo_branco button{
@@ -43,10 +44,24 @@
 
 .config--retangulo_branco--esquerda{
     display: flex;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
     overflow-wrap:anywhere;
     width: 100%;
     line-height: var(--lineHeight);
 }
+
+.config--retangulo_branco--esquerda p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    width: 100%;
+    display: block;
+}
+
+
 .config--retangulo_branco--direita{
     display: flex;
     align-items: center;

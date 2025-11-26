@@ -1,6 +1,12 @@
 import "./Footer.css"
 import React, { useState, useEffect } from 'react';
 
+const CheckIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+);
+
 function Footer({ talha, config }){
 
     function getCodigoConfig(){
@@ -12,14 +18,18 @@ function Footer({ talha, config }){
     }
     
     const [codigo, setCodigo] = useState(null);
+    const [copiado, setCopiado] = useState(false);
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
         .then(() => {
-            alert("Código copiado!"); 
+            setCopiado(true);
+            setTimeout(() => {
+                setCopiado(false);
+            }, 2000);
         })
         .catch(err => {
-            console.error('Falha ao copiar o texto: ', err);
+            alert('Falha ao copiar o texto: ', err);
         });
     };
 
@@ -39,10 +49,24 @@ function Footer({ talha, config }){
                         <p>{getCodigoConfig()}</p>
                     </div>
                     <div className="config--retangulo_branco--direita">
-                        <button class="botao-icone" aria-label="Copiar código" onClick={handleCopyClick}>
-                            Copiar
+                        <button class="botao-icone" aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
+                            <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
+                                Copiar
+                            </span>
+                            {copiado && (
+                                <div style={{ 
+                                    position: 'absolute', 
+                                    top: '50%', 
+                                    left: '50%', 
+                                    transform: 'translate(-50%, -50%)',
+                                    display: 'flex',
+                                    transition: 'opacity 0.2s'
+                                }}>
+                                    <CheckIcon />
+                                </div>
+                            )}
                         </button>
-                         <button class="botao-icone" aria-label="Copiar código">
+                         <button class="botao-icone" aria-label="Importar">
                             Importar
                         </button>
                     </div>
