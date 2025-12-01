@@ -3,8 +3,8 @@
 
     --corPrincipal: #1A365D;
     --corSelecao: #77879E;
-    --corTexto: #000000;
-    --corFundo: #ffffff;
+    --corTexto: #1A365D;
+    --corFundo: #1A365D;
     --corDesfoqueFraco: color-mix(in srgb, var(--corFundo) 66%, var(--corTexto));;
     --corDesfoqueForte: color-mix(in srgb, var(--corFundo) 97.5%, var(--corTexto));;
 
@@ -59,6 +59,7 @@ input[type="checkbox"] {
 
 select {
     font-family: 'Poppins';
+    color: var(--corTexto);
     border: 0.15rem solid var(--corPrincipal);
     background-color: var(--corFundo);
     border-radius: 0.7em;
