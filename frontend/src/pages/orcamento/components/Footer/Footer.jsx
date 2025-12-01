@@ -1,5 +1,6 @@
 import "./Footer.css"
 import React, { useState, useEffect } from 'react';
+import Import from "./Import.jsx"
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -7,7 +8,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-function Footer({ talha, config }){
+function Footer({ talha, config, setConfig }){
 
     function getCodigoConfig(){
 
@@ -19,6 +20,7 @@ function Footer({ talha, config }){
     
     const [codigo, setCodigo] = useState(null);
     const [copiado, setCopiado] = useState(false);
+    const [importAberto, setImportAberto] = useState(false);
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
@@ -66,11 +68,16 @@ function Footer({ talha, config }){
                                 </div>
                             )}
                         </button>
-                         <button class="botao-icone" aria-label="Importar">
+                         <button class="botao-icone" aria-label="Importar" onClick={() => setImportAberto(true)}>
                             Importar
                         </button>
                     </div>
                 </div>
+                <Import
+                    isOpen = {importAberto}
+                    onClose={() => setImportAberto(false)}
+                    setConfig={setConfig}
+                />
             </div>
             <div className="gerar-pdf">
                 <p>Gerar Pdf</p>
