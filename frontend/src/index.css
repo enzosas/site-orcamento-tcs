@@ -3,8 +3,8 @@
 
     --corPrincipal: #1A365D;
     --corSelecao: #77879E;
-    --corTexto: #1A365D;
-    --corFundo: #1A365D;
+    --corTexto: #000000;
+    --corFundo: #ffffff;
     --corDesfoqueFraco: color-mix(in srgb, var(--corFundo) 66%, var(--corTexto));;
     --corDesfoqueForte: color-mix(in srgb, var(--corFundo) 97.5%, var(--corTexto));;
 
