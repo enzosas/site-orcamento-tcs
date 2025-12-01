@@ -1,13 +1,13 @@
 .titulo-talha{
     background-color: var(--corPrincipal);
     border-radius: 0.7em;
-    color: white;
+    color: var(--corFundo);
     padding: 0.8em;
     margin-bottom: 1em;
 }
 
 .frame-all-info{
-    color: black;
+    color: var(--corTexto);
     display: grid;
     grid-template-columns: 1fr 1fr; 
     word-break: break-word;

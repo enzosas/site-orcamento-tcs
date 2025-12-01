@@ -1,5 +1,5 @@
 .descricao{
-    color: black;
+    color: var(--corTexto);
 }
 
 .dinheiro{

@@ -4,7 +4,7 @@
 }
 
 .frame-caixas-selecao{
-    color: black;
+    color: var(--corTexto);
     display: flex;
     flex-direction: column;
     place-items: left;
@@ -23,5 +23,5 @@
     display: flex;
     flex-direction: column;
     place-items: left;
-    color: black;
+    color: var(--corTexto);
 }

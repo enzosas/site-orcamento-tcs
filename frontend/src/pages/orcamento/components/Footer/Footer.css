@@ -3,20 +3,15 @@
     to { opacity: 1; }
 }
 
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
 .main-footer{
-    color: black;
+    color: var(--corTexto);
     padding: 1rem;
 }
 
 .config--retangulo_branco{
     user-select: none;
     color: var(--corDesfoqueFraco);
-    background-color: #ffffff;
+    background-color: var(--corFundo);
     border: var(--corDesfoqueFraco);
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
@@ -37,7 +32,7 @@
 .config--retangulo_branco button{
     max-height: 1.3em;
     color: var(--corPrincipal);
-    background-color:white;
+    background-color:var(--corFundo);
     box-shadow: 0em 0em 0em 0em;
     padding: 0em;
     display: flex;
@@ -77,7 +72,7 @@
 
 .gerar-pdf {
     background-color: var(--corPrincipal);
-    color: white;
+    color: var(--corFundo);
     font-weight: bold;
     text-align: center;
     border-radius: 0.7em;
@@ -113,7 +108,7 @@
 }
 
 .import .frame{
-    background: #FFFFFF;
+    background: var(--corFundo);
     box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
     border-radius: 0.7em;
     padding: 3rem;
@@ -166,7 +161,7 @@
 
 .import .botao_branco{
     color: var(--corPrincipal);
-    background-color:white;
+    background-color:var(--corFundo);
     box-shadow: 0em 0em 0em 0em;
     padding: 0em;
     display: flex;

@@ -1,5 +1,5 @@
 .app-container {
-  background: var(--background);
+  background: var(--corFundo);
   color: var(--corPrincipal);
   display: flex;
   flex-direction: column;

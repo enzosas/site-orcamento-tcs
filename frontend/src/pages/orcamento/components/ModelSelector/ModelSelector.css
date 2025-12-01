@@ -36,7 +36,7 @@
 
 .modelo-opcao.selecionado {
   background-color: var(--corPrincipal);
-  color: #FFFFFF;
+  color: var(--corFundo);
   border-radius: 0.7em;
 }
 
