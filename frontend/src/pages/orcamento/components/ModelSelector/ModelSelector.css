@@ -20,7 +20,7 @@
 }
 
 .selector-border{
-    border: 0.15em solid var(--corPrincipal);
+    border: 0.15rem solid var(--corPrincipal);
     border-radius: 0.7em;
     margin: 0 auto;
 }
