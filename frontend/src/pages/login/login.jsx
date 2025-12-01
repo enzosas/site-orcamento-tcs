@@ -95,6 +95,7 @@ function Login() {
                 <button 
                     type="submit" 
                     className="botao"
+                    style={{margin: "0 auto"}}
                 >
                     Entrar
                 </button>
