@@ -76,6 +76,7 @@ function Footer({ talha, config, setConfig }){
                 <Import
                     isOpen = {importAberto}
                     onClose={() => setImportAberto(false)}
+                    config={config}
                     setConfig={setConfig}
                 />
             </div>
