@@ -107,6 +107,7 @@ input {
     padding: 0.5em;
     line-height: 1em;
     background-color: var(--corFundo);
+    color: var(--corTexto);
 }
 
 select:disabled {
