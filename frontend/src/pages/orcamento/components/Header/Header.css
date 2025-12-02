@@ -9,3 +9,13 @@
   user-select: none;
   -webkit-user-drag: none;
 }
+
+[data-theme="dark"] .header-logo {
+  filter: 
+    brightness(0) saturate(100%)
+    invert(52%) sepia(14%) saturate(550%) hue-rotate(176deg) brightness(97%) contrast(93%);
+}
+
+.header-botao-tema{
+  cursor: pointer;
+}

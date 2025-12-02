@@ -27,6 +27,7 @@
 .frame-imagem img{
     max-height: 20rem;
     min-height: 20rem;
+    border-radius: 1em;
 }
 
 .frame-imagem{

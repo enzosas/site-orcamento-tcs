@@ -13,7 +13,7 @@
     color: var(--corDesfoqueFraco);
     background-color: var(--corFundo);
     border: var(--corDesfoqueFraco);
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
     border-radius: 0.7em;
     padding: 1em;
     overflow: hidden;
@@ -82,7 +82,7 @@
     width: 30%;
     transition: transform 0.1s ease-out, background-color 0.2s ease;
     user-select: none;
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
 }
 
 .gerar-pdf:hover {
@@ -109,7 +109,7 @@
 
 .import .frame{
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
     border-radius: 0.7em;
     padding: 3rem;
     display: flex;

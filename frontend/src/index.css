@@ -5,13 +5,23 @@
     --corSelecao: #77879E;
     --corTexto: #000000;
     --corFundo: #ffffff;
+    --corSombra: rgba(0, 0, 0, 0.05);
     --corDesfoqueFraco: color-mix(in srgb, var(--corFundo) 66%, var(--corTexto));;
     --corDesfoqueForte: color-mix(in srgb, var(--corFundo) 97.5%, var(--corTexto));;
+    
 
     font-size: 12px;
     --lineHeight: 1.5em;
     line-height: var(--lineHeight);
     background-color: var(--corFundo);
+}
+
+[data-theme="dark"] {
+    --corPrincipal: #77879E;
+    --corSelecao: #1A365D;
+    --corTexto: #ffffff;
+    --corFundo: #1c2430;
+    --corSombra: rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -42,6 +52,10 @@ hr {
 input[type="checkbox"] {
     width: 2em;
     height: 1em;
+}
+
+* {
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .headerSelect{
@@ -78,7 +92,7 @@ button {
     padding: 1em;
     line-height: 1em;
     user-select: none;
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
     cursor: pointer;
     border-width: 0;
 }
@@ -92,6 +106,7 @@ input {
     font-family: 'Poppins';
     padding: 0.5em;
     line-height: 1em;
+    background-color: var(--corFundo);
 }
 
 select:disabled {
@@ -111,7 +126,7 @@ select:disabled {
 
 .frame-branco{
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   rgba(0, 0, 0, 0.05);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
     border-radius: 0.7em;
     padding: 1rem;
     flex-grow: 100%;
