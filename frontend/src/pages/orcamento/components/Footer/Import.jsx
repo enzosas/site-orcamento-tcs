@@ -34,6 +34,7 @@ const validarConfigLogica = async (objImportado) => {
     const talhaAtual = objImportado.talhaSelecionada;
     const response = await fetch(`${API_BASE_URL}/api/talhas/${talhaAtual}`);
     const data = await response.json();
+    return null;
 }
 
 function Import({ isOpen, onClose, config, setConfig }) {
@@ -42,41 +43,44 @@ function Import({ isOpen, onClose, config, setConfig }) {
     const [erro, setErro] = useState("");
     const [showErro, setShowErro] = useState(false);
     
-    const handleConfirmar = () => {
+    const handleConfirmar = async () => {
     
         try {
 
             const jsonString = atob(texto);
             const arrayImportado = JSON.parse(jsonString);
-
+            
             const erroValidacaoForma = validarConfigForma(config, arrayImportado);
             
             if (erroValidacaoForma) {
                 setErro(erroValidacaoForma);
-                showErro(true);
+                setShowErro(true);
                 return;
             }
-
+            
             const chavesModelo = Object.keys(config);
             const novoObjConfig = {};
             chavesModelo.forEach((chave, index) => {
                 novoObjConfig[chave] = arrayImportado[index];
             });
-
-            const erroValidacaoLogica = validarConfigLogica(config, arrayImportado);
+            
+            const erroValidacaoLogica = await validarConfigLogica(config, arrayImportado);
             if (erroValidacaoLogica) {
                 setErro(erroValidacaoLogica);
-                showErro(true);
+                setShowErro(true);
                 return;
             }
             
             setConfig(novoObjConfig);
             setErro("");
             setShowErro(false);
+            onClose();
+            setTexto("");
             
         } catch (e) {
-            setErro("Código inválido ou corrompido.");
+            setErro("Erro interno.");
             setShowErro(true);
+            console.log(e);
         }
     }
 
