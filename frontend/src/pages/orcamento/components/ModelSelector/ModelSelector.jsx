@@ -27,8 +27,20 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     useEffect(() => {
         if (talha) {
             setConfig(prev => {
+                
+                const resetarValores = {
+
+                    excluirPainel: false,
+                    duplaVelocidadeElevacao: false,
+                    duplaVelocidadeTranslacao: false,
+                    painel6Mov: false,
+                    controleRemoto: false,
+                    incluirSinalizadores: false
+                }
+                
                 const configBase = {
                     ...prev,
+                    ...resetarValores,
                     talhaSelecionada: talha.modelo,
                     tensao: opcoesTensao[0]
                 };
