@@ -16,7 +16,7 @@
     min-height: 15em;
     max-height: 15em;
     overflow-y: auto; 
-	  text-align: center;
+	text-align: center;
 }
 
 .selector-border{
@@ -28,24 +28,24 @@
 .modelo-opcao{
     padding: 0.3em;
     border-radius: 0.7em;
-    background-color: var(--corFundo);
-    transition: filter 0.2s ease, background-color 0.5s ease;
+    transition: none;
 }
-
-.modelo-opcao:hover {
-  transition: opacity 0.2s;
-  filter: brightness(0.975);
-  cursor: pointer;
+  
+  .modelo-opcao:hover {
+    transition: opacity 0.2s;
+    filter: brightness(0.975);
+    background-color: var(--corFundo);
+    cursor: pointer;
 }
 
 .modelo-opcao.selecionado {
-  /* transition: none; */
-  background-color: var(--corPrincipal);
-  color: var(--corFundo);
+    transition: filter 0.2s ease, background-color 0.5s ease;
+    background-color: var(--corPrincipal);
+    color: var(--corFundo);
 }
 
 .model-filter select{
-  width: 100%;
+    width: 100%;
 }
 
 /* scroll! */
