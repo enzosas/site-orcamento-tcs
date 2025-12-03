@@ -27,6 +27,16 @@ export function getOpcoesControle(isControleRemoto, isPainel6Mov) {
     return ["BCI 404", "BCI 808"];
 }
 
+export function getOpcoesTensao(talha) {
+    if (talha) {
+        if (talha.tensaoTrifasica === "220/380V - Trifásica") {
+            return ["380V - Trifásica", "220V - Trifásica"];
+        } else {
+            return [talha.tensaoTrifasica];
+        }
+    }
+}
+
 export function fixConfig(configOld, talha) {
 
     let config = {...configOld};

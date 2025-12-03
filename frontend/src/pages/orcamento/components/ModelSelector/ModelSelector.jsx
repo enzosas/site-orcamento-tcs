@@ -3,7 +3,7 @@ import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
 import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from '../../../../config';
-import { fixConfig, getOpcoesPotencia, getOpcoesControle } from "../../../../utils/regrasConfig.js"
+import { fixConfig, getOpcoesPotencia, getOpcoesControle, getOpcoesTensao } from "../../../../utils/regrasConfig.js"
 
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
@@ -15,14 +15,7 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
         cursoUtilGancho: ""
     });
 
-    let opcoesTensao = [];
-        if (talha) {
-            if (talha.tensaoTrifasica === "220/380V - Trifásica") {
-                opcoesTensao = ["380V - Trifásica", "220V - Trifásica"];
-            } else {
-                opcoesTensao = [talha.tensaoTrifasica];
-        }
-    }
+    const opcoesTensao = talha ? getOpcoesTensao(talha) : [];
 
     useEffect(() => {
         if (talha) {
