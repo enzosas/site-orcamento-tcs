@@ -3,6 +3,8 @@ import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
 import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from '../../../../config';
+import { fixConfig, getOpcoesPotencia, getOpcoesControle } from "../../../../utils/regrasConfig.js"
+
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
@@ -23,18 +25,24 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     }
 
     useEffect(() => {
-        if (talha){
-            setConfig(prev => ({
-                ...prev,
-                talhaSelecionada: talha.modelo,
-            }))
+        if (talha) {
+            setConfig(prev => {
+                const configBase = {
+                    ...prev,
+                    talhaSelecionada: talha.modelo,
+                    tensao: opcoesTensao[0]
+                };
+                return fixConfig(configBase, talha);
+            })
         }
-        setConfig(prev => ({
-            ...prev,
-            tensao: opcoesTensao[0]
-        }))
-        
     }, [talha])
+
+    const atualizarConfig = (alteracoesParciais) => {
+        setConfig((prevConfig) => {
+            const configProvisoria = { ...prevConfig, ...alteracoesParciais };
+            return fixConfig(configProvisoria, talha)
+        });
+    };
 
     const [modelos, setModelos] = useState([]);
 
@@ -55,7 +63,7 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
                 if (data.length > 0) {
                 setTalhaSelecionada(data[0]);
-            }
+                }
             
             } catch (error) {
                 console.error("Erro ao buscar os modelos:", error);
@@ -80,12 +88,12 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 </div>
                 {talha && (
                         <div className="frame-unidade-caixa-selecao">
-                            <h4 className="headerSelect">Tensão</h4>
+                            <h4 className={`headerSelect ${talha.tensaoTrifasica !== "220/380V - Trifásica" ? "disabled" : ""}`}>Tensão</h4>
                             <select
                                 name="opcoesTensao" 
-                                disabled={!talha}
+                                disabled={!talha || talha.tensaoTrifasica !== "220/380V - Trifásica"}
                                 value={config.tensao}
-                                onChange={(e) => setConfig(prev => ({ ...prev, tensao: e.target.value }))}
+                                onChange={(e) => atualizarConfig({tensao: e.target.value })}
                             >
                                 {opcoesTensao.map((opcao, i) => (
                                     <option key={i} value={opcao}>{opcao}</option>
