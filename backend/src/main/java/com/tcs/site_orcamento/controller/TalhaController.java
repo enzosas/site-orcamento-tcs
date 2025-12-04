@@ -16,7 +16,7 @@ public class TalhaController {
     @Autowired
     private TalhaRepository talhaRepository;
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<Talha> getTalhasAll() {
         return talhaRepository.findAll();
     }
