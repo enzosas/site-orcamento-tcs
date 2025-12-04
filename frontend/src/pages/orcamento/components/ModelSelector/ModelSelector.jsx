@@ -21,13 +21,8 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     const [modelos, setModelos] = useState([]);
 
     useEffect( () => {
-        console.log("banana");
-        console.log(modelos.length);
-        console.log(jaCarregouPrimeiraTalhaInit);
         if(modelos.length > 0 && !jaCarregouPrimeiraTalhaInit.current) {
-            console.log("banana2");
             handleSelecaoManual(modelos[0]);
-            console.table(talha);
             jaCarregouPrimeiraTalhaInit.current = true;
         }
     }, [modelos]);
