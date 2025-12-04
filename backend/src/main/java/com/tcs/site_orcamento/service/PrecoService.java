@@ -90,14 +90,8 @@ public class PrecoService {
 
     private ComponentePrecoDTO calculaPrecoDeVendaPainelBase(Talha talha, Boolean ipi){
 
-        Set<String> listaForaDoMaxiprod = Set.of(
-                "CIRC.BASE.60X80"
-        );
         if(Objects.equals(talha.getCodigoPainelTalhaSemOpcional(), "CIRC.ORIGINAL")){
             return new ComponentePrecoDTO("Painel Base Original", talha.getCodigoPainelTalhaSemOpcional(), 0.0);
-        }
-        if(listaForaDoMaxiprod.contains(talha.getCodigoPainelTalhaSemOpcional())){
-            return new ComponentePrecoDTO("Painel Base fora do max", talha.getCodigoPainelTalhaSemOpcional(), 0.0);
         }
         else {
             return new ComponentePrecoDTO("Painel Base", talha.getCodigoPainelTalhaSemOpcional(), getPreco(talha.getCodigoPainelTalhaSemOpcional(), ipi));
@@ -106,15 +100,9 @@ public class PrecoService {
 
     private ComponentePrecoDTO calculaPrecoDeVendaPainelAdicional(Talha talha, ConfigDTO config, Boolean ipi){
 
-        Set<String> listaForaDoMaxiprod = Set.of(
-                "CIRC.PTE1"
-        );
         if(config.isPainel6Mov()){
             if(talha.getCodigoPainelTalhaSemOpcional().equals("CIRC.BASE.60X80")){
                 return new ComponentePrecoDTO("Painel Adicional incluso CIRC.BASE.60X80", talha.getCodigoPainel6Mov(), 0.0);
-            }
-            if(listaForaDoMaxiprod.contains(talha.getCodigoPainel6Mov())){
-                return new ComponentePrecoDTO("Painel Adicional fora do max", talha.getCodigoPainel6Mov(), 0.0);
             }
             if(talha.getCodigoPainel6Mov() != null && !talha.getCodigoPainel6Mov().isEmpty()){
                 return new ComponentePrecoDTO("Painel Adicional", talha.getCodigoPainel6Mov(), getPreco(talha.getCodigoPainel6Mov(), ipi));
