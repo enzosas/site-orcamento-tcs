@@ -8,7 +8,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-function Footer({ talha, config, setConfig }){
+function Footer({ setTalhaSelecionada, config, setConfig }){
 
     function getCodigoConfig(){
 
@@ -78,6 +78,7 @@ function Footer({ talha, config, setConfig }){
                     onClose={() => setImportAberto(false)}
                     config={config}
                     setConfig={setConfig}
+                    setTalhaSelecionada={setTalhaSelecionada}
                 />
             </div>
             <div className="gerar-pdf">

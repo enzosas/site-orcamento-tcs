@@ -1,12 +1,14 @@
 import "./ModelSelector.css"
 import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { API_BASE_URL } from '../../../../config';
 import { fixConfig, getOpcoesPotencia, getOpcoesControle, getOpcoesTensao } from "../../../../utils/regrasConfig.js"
 
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
+
+    const jaCarregouPrimeiraTalhaInit = useRef(false);
 
     const [filtros, setFiltros] = useState({
         correnteCabo: "",
@@ -14,26 +16,27 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
         tipoTrole: "",
         cursoUtilGancho: ""
     });
-
+    
     const opcoesTensao = talha ? getOpcoesTensao(talha) : [];
+    const [modelos, setModelos] = useState([]);
+
+    useEffect( () => {
+        console.log("banana");
+        console.log(modelos.length);
+        console.log(jaCarregouPrimeiraTalhaInit);
+        if(modelos.length > 0 && !jaCarregouPrimeiraTalhaInit.current) {
+            console.log("banana2");
+            handleSelecaoManual(modelos[0]);
+            console.table(talha);
+            jaCarregouPrimeiraTalhaInit.current = true;
+        }
+    }, [modelos]);
 
     useEffect(() => {
         if (talha) {
             setConfig(prev => {
-                
-                const resetarValores = {
-
-                    excluirPainel: false,
-                    duplaVelocidadeElevacao: false,
-                    duplaVelocidadeTranslacao: false,
-                    painel6Mov: false,
-                    controleRemoto: false,
-                    incluirSinalizadores: false
-                }
-                
                 const configBase = {
                     ...prev,
-                    ...resetarValores,
                     talhaSelecionada: talha.modelo,
                     tensao: opcoesTensao[0]
                 };
@@ -49,7 +52,36 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
         });
     };
 
-    const [modelos, setModelos] = useState([]);
+    const handleSelecaoManual = (novaTalha) => {
+        
+        setTalhaSelecionada(novaTalha);
+
+        setConfig(prev => {
+            const resetarValores = {
+                excluirPainel: false,
+                painel6Mov: false,
+                controleRemoto: false,
+                duplaVelocidadeElevacao: false,
+                duplaVelocidadeTranslacao: false,
+                transmissorExtra: false,
+                potenciaMotores: "",
+                modeloControle: "",
+                tensao: "",
+                incluirSinalizadores: false,
+                fimCursoEsquerdaDireita: false,
+                guiaCaboAco: false,
+                celulaCarga: false,
+                adaptadorViga: false
+            };
+            const configBase = {
+                ...prev,
+                ...resetarValores,
+                talhaSelecionada: novaTalha.modelo,
+                tensao: opcoesTensao[0]
+            };
+            return fixConfig(configBase, novaTalha);
+        });
+    };
 
     useEffect(() => {
         const fetchModelos = async () => {
@@ -65,10 +97,6 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 const data = await response.json();
 
                 setModelos(data);
-
-                if (data.length > 0) {
-                setTalhaSelecionada(data[0]);
-                }
             
             } catch (error) {
                 console.error("Erro ao buscar os modelos:", error);
@@ -84,7 +112,7 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 <div className="modelselector-corpo">
                     <div className="modelselector-corpo-left">
                         <h2 className="frame-branco-title">Escolha o modelo:</h2>
-                        <ModelSelectorList modelos={modelos} onSelect={setTalhaSelecionada} />
+                        <ModelSelectorList modelos={modelos} onSelect={handleSelecaoManual} talhaAtiva={talha} />
                     </div>
                     <div className="modelselector-corpo-left">
                         <h2 className="frame-branco-title">Filtros</h2>

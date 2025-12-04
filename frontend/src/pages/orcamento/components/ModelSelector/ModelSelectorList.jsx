@@ -1,17 +1,28 @@
 import "./ModelSelector.css"
 import React, { useState, useEffect, useRef } from "react";
 
-function ModelSelectorList({ modelos, onSelect }) {
+function ModelSelectorList({ modelos, onSelect, talhaAtiva }) {
+    
     const [selecionado, setSelecionado] = useState(0);
     const containerRef = useRef(null);
     const scrollContainerRef = useRef(null);
 
+    // useEffect(() => {
+    //     if (modelos.length > 0) {
+    //         setSelecionado(0);
+    //     }
+    // }, [modelos]);
+
     useEffect(() => {
-        if (modelos.length > 0) {
-            setSelecionado(0);
-            onSelect(modelos[0]);
+        setSelecionado(-1);
+        if (talhaAtiva && modelos.length > 0) {
+            const index = modelos.findIndex(m => m.modelo === talhaAtiva.modelo);
+            console.log(index);
+            if (index !== -1) {
+                setSelecionado(index);
+            }
         }
-    }, [modelos, onSelect]);
+    }, [talhaAtiva, modelos]);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -45,7 +56,6 @@ function ModelSelectorList({ modelos, onSelect }) {
                     const novo = (prev - 1 + modelos.length) % modelos.length;
                     onSelect(modelos[novo]);
 
-                    // 2. FAZ O SCROLL MANUAL
                     const selectedItemEl = scrollEl.children[novo];
                     if (selectedItemEl) {
                         selectedItemEl.scrollIntoView({

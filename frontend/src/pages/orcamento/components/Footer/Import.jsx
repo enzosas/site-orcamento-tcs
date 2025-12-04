@@ -29,15 +29,7 @@ const validarConfigForma = (objModelo, arrayImportado) => {
     return null;
 }
 
-const validarConfigLogica = async (objImportado) => {
-    
-    const talhaAtual = objImportado.talhaSelecionada;
-    const response = await fetch(`${API_BASE_URL}/api/talhas/${talhaAtual}`);
-    const data = await response.json();
-    return null;
-}
-
-function Import({ isOpen, onClose, config, setConfig }) {
+function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada }) {
     
     const [texto, setTexto] = useState("");
     const [erro, setErro] = useState("");
@@ -51,7 +43,6 @@ function Import({ isOpen, onClose, config, setConfig }) {
             const arrayImportado = JSON.parse(jsonString);
             
             const erroValidacaoForma = validarConfigForma(config, arrayImportado);
-            
             if (erroValidacaoForma) {
                 setErro(erroValidacaoForma);
                 setShowErro(true);
@@ -64,13 +55,16 @@ function Import({ isOpen, onClose, config, setConfig }) {
                 novoObjConfig[chave] = arrayImportado[index];
             });
             
-            const erroValidacaoLogica = await validarConfigLogica(config, arrayImportado);
-            if (erroValidacaoLogica) {
-                setErro(erroValidacaoLogica);
+            const nomeModelo = novoObjConfig.talhaSelecionada;
+            const response = await fetch(`${API_BASE_URL}/api/talhas/${nomeModelo}`);
+            if (!response.ok) {
+                setErro(`O modelo "${nomeModelo}" não foi encontrado no banco de dados.`);
                 setShowErro(true);
                 return;
             }
-            
+            const novaTalha = await response.json();
+
+            setTalhaSelecionada(novaTalha);
             setConfig(novoObjConfig);
             setErro("");
             setShowErro(false);
