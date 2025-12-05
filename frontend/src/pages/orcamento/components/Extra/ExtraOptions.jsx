@@ -3,23 +3,6 @@ import React, { useState, useEffect } from "react";
 function ExtraOptions({talha, config, setConfig}){
     
     if (!talha) return null;
-
-    useEffect(() => {
-        if (talha.celulaCargaDisponivel === false){
-            setConfig(prev => ({ ...prev, celulaCarga: false }));
-        }
-        if (talha.fimCursoDireitaEsquerdaDisponivel === false){
-            setConfig(prev => ({ ...prev, fimCursoEsquerdaDireita: false }));
-        }
-        if (talha.adaptadorVigaDisponivel === false){
-            setConfig(prev => ({ ...prev, adaptadorViga: false }));
-        }
-        if (talha.guiaCabo === "Sim"){
-            setConfig(prev => ({ ...prev, guiaCaboAco: true }));
-        } else if (talha.guiaCabo === "Não"){
-            setConfig(prev => ({ ...prev, guiaCaboAco: false }));
-        }
-	}, [talha]);
     
     return (
         <div>

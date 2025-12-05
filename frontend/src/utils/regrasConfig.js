@@ -48,6 +48,20 @@ export function fixConfig(configOld, talha) {
         if (talha.duplaVelocidadeTranslacaoInversor  === false) {
             config.duplaVelocidadeTranslacao = (talha.acionamentoMotorTranslacao === "2 velocidades com inversor");
         }
+        if (talha.celulaCargaDisponivel === false) {
+            config.celulaCarga = false;
+        }
+        if (talha.fimCursoDireitaEsquerdaDisponivel === false) {
+            config.fimCursoEsquerdaDireita = false;
+        }
+        if (talha.adaptadorVigaDisponivel === false) {
+            config.adaptadorViga = false;
+        }
+        if (talha.guiaCabo === "Sim") {
+            config.guiaCaboAco = true ;
+        } else if (talha.guiaCabo === "Não") {
+            config.guiaCaboAco = false ;
+        }
     }
 
     if (config.excluirPainel) {
