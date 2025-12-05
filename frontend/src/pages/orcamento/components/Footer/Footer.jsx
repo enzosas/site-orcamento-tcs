@@ -55,7 +55,10 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                 const errorBody = await response.text();
                 throw new Error(`Erro na requisição: ${response.status} - [Backend: ${errorBody}]`);
             }
+            const novoCodigo = (await response.json()).id;
+            setCodigo(novoCodigo);
             setSalvo(true);
+            alert(`Configuração salva com o código: ${novoCodigo}`)
             setTimeout(() => {
                 setSalvo(false);
             }, 2000);
@@ -108,7 +111,7 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                         <button class="botao-icone" aria-label="Importar" onClick={() => setImportAberto(true)}>
                             Importar
                         </button>
-                        <button class="botao-icone" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={salvo}>
+                        <button class="botao-icone" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
                             <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
                                 Salvar
                             </span>

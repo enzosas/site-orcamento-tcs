@@ -43,6 +43,11 @@
     padding: 1em;
 }
 
+.config--retangulo_branco button:disabled{
+    color: var(--corDesfoqueFraco);
+    cursor: default;
+}
+
 .config--retangulo_branco--esquerda{
     display: flex;
     flex: 1;
@@ -169,8 +174,4 @@
     border-radius: 0.7em;
     align-items: center;
     padding: 1em;
-}
-
-.import .botao_branco:disabled {
-    background-color: red;
 }

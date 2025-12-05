@@ -102,6 +102,10 @@ button:hover{
     filter: brightness(0.975);
 }
 
+.config--retangulo_branco button:disabled:hover{
+    filter: brightness(1);
+}
+
 input {
     font-family: 'Poppins';
     padding: 0.5em;
