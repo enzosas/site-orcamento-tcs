@@ -1,6 +1,7 @@
 import "./Footer.css"
 import React, { useState, useEffect } from 'react';
 import Import from "./Import.jsx"
+import { API_BASE_URL } from "../../../../config.js";
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -12,14 +13,15 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
 
     function getCodigoConfig(){
 
-        const valoresArray = Object.values(config);
-        const jsonString = JSON.stringify(valoresArray);
-        const codigo = btoa(jsonString)
-        return codigo;
+        if (codigo === null) {
+            return "Configuração não salva."
+        }
+        else return codigo;
     }
     
     const [codigo, setCodigo] = useState(null);
     const [copiado, setCopiado] = useState(false);
+    const [salvo, setSalvo] = useState(false);
     const [importAberto, setImportAberto] = useState(false);
 
     const handleCopyClick = () => {
@@ -35,10 +37,39 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
         });
     };
 
+    const handleSaveClick = async () => {
+        
+        if (salvo) {
+            return;
+        }
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/orcamentos/salvar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(config),
+            });
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`Erro na requisição: ${response.status} - [Backend: ${errorBody}]`);
+            }
+            setSalvo(true);
+            setTimeout(() => {
+                setSalvo(false);
+            }, 2000);
+        } catch (error) {
+
+            if (error.name !== 'AbortError') {
+                console.error(`Falha ao salvar o orçamento:`, error);
+            }
+            throw error;
+        }
+    };
 
     useEffect(() => {
 
-        setCodigo(getCodigoConfig());
+        getCodigoConfig();
 
     }, [config]);
 
@@ -68,8 +99,25 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                                 </div>
                             )}
                         </button>
-                         <button class="botao-icone" aria-label="Importar" onClick={() => setImportAberto(true)}>
+                        <button class="botao-icone" aria-label="Importar" onClick={() => setImportAberto(true)}>
                             Importar
+                        </button>
+                        <button class="botao-icone" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={salvo}>
+                            <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
+                                Salvar
+                            </span>
+                            {salvo && (
+                                <div style={{ 
+                                    position: 'absolute', 
+                                    top: '50%', 
+                                    left: '50%', 
+                                    transform: 'translate(-50%, -50%)',
+                                    display: 'flex',
+                                    transition: 'opacity 0.2s'
+                                }}>
+                                    <CheckIcon />
+                                </div>
+                            )}
                         </button>
                     </div>
                 </div>
@@ -79,6 +127,7 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                     config={config}
                     setConfig={setConfig}
                     setTalhaSelecionada={setTalhaSelecionada}
+                    setCodigo={setCodigo}
                 />
             </div>
             <div className="gerar-pdf">
