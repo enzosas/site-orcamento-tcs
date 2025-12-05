@@ -170,3 +170,7 @@
     align-items: center;
     padding: 1em;
 }
+
+.import .botao_branco:disabled {
+    background-color: red;
+}

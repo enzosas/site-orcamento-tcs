@@ -17,7 +17,6 @@ function ModelSelectorList({ modelos, onSelect, talhaAtiva }) {
         setSelecionado(-1);
         if (talhaAtiva && modelos.length > 0) {
             const index = modelos.findIndex(m => m.modelo === talhaAtiva.modelo);
-            console.log(index);
             if (index !== -1) {
                 setSelecionado(index);
             }

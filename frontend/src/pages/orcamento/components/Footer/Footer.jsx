@@ -1,5 +1,5 @@
 import "./Footer.css"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Import from "./Import.jsx"
 import { API_BASE_URL } from "../../../../config.js";
 
@@ -23,6 +23,7 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
     const [copiado, setCopiado] = useState(false);
     const [salvo, setSalvo] = useState(false);
     const [importAberto, setImportAberto] = useState(false);
+    const isImporting = useRef(false);
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
@@ -69,7 +70,12 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
 
     useEffect(() => {
 
-        getCodigoConfig();
+        console.table(config)
+        if (isImporting.current) {
+            isImporting.current = false;
+        } else {
+            setCodigo(null);
+        }
 
     }, [config]);
 
@@ -128,6 +134,7 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                     setConfig={setConfig}
                     setTalhaSelecionada={setTalhaSelecionada}
                     setCodigo={setCodigo}
+                    isImporting={isImporting}
                 />
             </div>
             <div className="gerar-pdf">

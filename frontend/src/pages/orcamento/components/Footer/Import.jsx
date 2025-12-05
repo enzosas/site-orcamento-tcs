@@ -1,5 +1,5 @@
 import "./Footer.css"
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../config";
 
 
@@ -19,7 +19,7 @@ const validarNovaConfig = (velhaConfig, novaConfig) => {
     return null;
 }
 
-function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCodigo }) {
+function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCodigo, isImporting }) {
     
     const [texto, setTexto] = useState("");
     const [erro, setErro] = useState("");
@@ -67,6 +67,7 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
 
             const novaTalha = await responseTalha.json();
 
+            isImporting.current = true;
             setTalhaSelecionada(novaTalha);
             setConfig(novaConfig);
             setCodigo(codigo);
