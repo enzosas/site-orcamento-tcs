@@ -27,19 +27,6 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
         }
     }, [modelos]);
 
-    useEffect(() => {
-        if (talha) {
-            setConfig(prev => {
-                const configBase = {
-                    ...prev,
-                    talhaSelecionada: talha.modelo,
-                    tensao: opcoesTensao[0]
-                };
-                return fixConfig(configBase, talha);
-            })
-        }
-    }, [talha])
-
     const atualizarConfig = (alteracoesParciais) => {
         setConfig((prevConfig) => {
             const configProvisoria = { ...prevConfig, ...alteracoesParciais };
