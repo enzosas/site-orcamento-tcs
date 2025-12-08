@@ -2,6 +2,7 @@ package com.tcs.site_orcamento.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tcs.site_orcamento.dto.ClienteDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -167,5 +168,71 @@ public class MaxiprodService {
         } catch (Exception e) {
             throw new RuntimeException("Erro ao processar a resposta do GraphQL para o código: " + codigo, e);
         }
+    }
+
+    public ClienteDTO getCliente(String cnpj) {
+
+        String query = """
+                query NotasFiscais {
+                     empresas(where: { cnpjOuCpf: { eq: "%s" } }) {
+                         items {
+                             cnpjOuCpf
+                             razaoSocial
+                             inscricaoEstadual
+                             endereco {
+                                 cep
+                                 logradouro
+                                 numero
+                                 complemento
+                                 bairro
+                                 municipio {
+                                     descricao
+                                     uf {
+                                         sigla
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+                """.formatted(cnpj);
+        Map<String, String> body = Map.of("query", query);
+
+        String response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response);
+            JsonNode items = root.path("data").path("empresas").path("items");
+
+            if(items.isEmpty()) {
+
+                throw new RuntimeException("Erro ao processar a resposta do GraphQL para o CNPJ: " + cnpj);
+            }
+
+            JsonNode empresaNode = items.get(0);
+            JsonNode enderecoNode = empresaNode.path("endereco");
+            JsonNode municipioNode = enderecoNode.path("municipio");
+
+            return new ClienteDTO(
+                    empresaNode.path("cnpjOuCpf").asText(),
+                    empresaNode.path("razaoSocial").asText(),
+                    empresaNode.path("inscricaoEstadual").asText(),
+                    enderecoNode.path("cep").asText(),
+                    enderecoNode.path("logradouro").asText(),
+                    enderecoNode.path("numero").asText(),
+                    enderecoNode.path("complemento").asText(),
+                    enderecoNode.path("bairro").asText(),
+                    municipioNode.path("descricao").asText(),
+                    municipioNode.path("uf").path("sigla").asText()
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL para o CNPJ: " + cnpj, e);
         }
     }
+}

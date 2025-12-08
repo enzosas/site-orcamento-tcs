@@ -1,6 +1,7 @@
 package com.tcs.site_orcamento.controller;
 
 
+import com.tcs.site_orcamento.dto.ClienteDTO;
 import com.tcs.site_orcamento.service.MaxiprodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +39,10 @@ public class MaxiprodController {
     @GetMapping("/getPrecoDeAquisicao/{codigo}")
     public Double getPrecoDeAquisicao(@PathVariable String codigo) {
         return maxiprodService.getPrecoDeAquisicao(codigo);
+    }
+
+    @GetMapping("/getCliente/{cnpj}")
+    public ClienteDTO getCliente(@PathVariable String cnpj) {
+        return maxiprodService.getCliente(cnpj);
     }
 }

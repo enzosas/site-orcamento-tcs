@@ -259,9 +259,16 @@
     padding: 1em;
 }
 
-.cliente .frame_botoes{
+.cliente .frame_botoes {
     display: flex;
     flex-direction: row;
     gap: 1em;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.cliente .frame_botoes .dir,
+.cliente .frame_botoes .esq{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
 }

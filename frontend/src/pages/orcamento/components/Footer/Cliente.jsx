@@ -149,14 +149,21 @@ function Cliente({ isOpen, onClose }) {
                     
                 </div>
                 <div className="frame_botoes">
-                    <button className="botao_branco" onClick={onClose}>
-                        Cancelar
-                    </button>
-                    <button 
-                        onClick={() => {handleConfirmar()}}
-                    >
-                        Confirmar
-                    </button>
+                    <div className="esq">
+                        <button className="botao_branco">
+                            Importar
+                        </button>
+                    </div>
+                    <div className="dir">
+                        <button className="botao_branco" onClick={onClose}>
+                            Cancelar
+                        </button>
+                        <button onClick={() => {handleConfirmar()}} >
+                            Confirmar
+                        </button>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
