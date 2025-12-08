@@ -2,6 +2,7 @@ import "./Footer.css"
 import React, { useState, useEffect, useRef } from 'react';
 import Import from "./Import.jsx"
 import { API_BASE_URL } from "../../../../config.js";
+import Cliente from "./Cliente.jsx";
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -23,7 +24,23 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
     const [copiado, setCopiado] = useState(false);
     const [salvo, setSalvo] = useState(false);
     const [importAberto, setImportAberto] = useState(false);
+    const [clienteAberto, setClienteAberto] = useState(false);
     const isImporting = useRef(false);
+
+    const [cliente, setCliente] = useState({
+		cnpj: "",
+        razaoSocial: "",
+        inscricaoEstadual: "",
+        cep: "",
+        endereco: "",
+        bairro: "",
+        cidade: "",
+        estado: "",
+        telefone: "",
+        pessoaContato: "",
+        email: "",
+        whatsapp: ""
+	});
 
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
@@ -139,9 +156,18 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                     setCodigo={setCodigo}
                     isImporting={isImporting}
                 />
+                <Cliente
+                    isOpen = {clienteAberto}
+                    onClose={() => setClienteAberto(false)}
+                />
             </div>
-            <div className="gerar-pdf">
-                <p>Gerar Pdf</p>
+            <div aria-label="Cliente" className="footer_frame_botoes">
+                <button onClick={() => setClienteAberto(true)}>
+                    Cliente
+                </button>
+                <button aria-label="Gerar PDF">
+                    Gerar PDF
+                </button>
             </div>
          </div>
         
