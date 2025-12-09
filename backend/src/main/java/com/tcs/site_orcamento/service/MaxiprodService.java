@@ -191,6 +191,7 @@ public class MaxiprodService {
                                          sigla
                                      }
                                  }
+                                 telefone1
                              }
                          }
                      }
@@ -218,18 +219,19 @@ public class MaxiprodService {
             JsonNode empresaNode = items.get(0);
             JsonNode enderecoNode = empresaNode.path("endereco");
             JsonNode municipioNode = enderecoNode.path("municipio");
-
+            
             return new ClienteDTO(
-                    empresaNode.path("cnpjOuCpf").asText(),
-                    empresaNode.path("razaoSocial").asText(),
-                    empresaNode.path("inscricaoEstadual").asText(),
-                    enderecoNode.path("cep").asText(),
-                    enderecoNode.path("logradouro").asText(),
-                    enderecoNode.path("numero").asText(),
-                    enderecoNode.path("complemento").asText(),
-                    enderecoNode.path("bairro").asText(),
-                    municipioNode.path("descricao").asText(),
-                    municipioNode.path("uf").path("sigla").asText()
+                    empresaNode.path("cnpjOuCpf").asText(null),
+                    empresaNode.path("razaoSocial").asText(null),
+                    empresaNode.path("inscricaoEstadual").asText(null),
+                    enderecoNode.path("cep").asText(null),
+                    enderecoNode.path("logradouro").asText(null),
+                    enderecoNode.path("numero").asText(null),
+                    enderecoNode.path("complemento").asText(null),
+                    enderecoNode.path("bairro").asText(null),
+                    municipioNode.path("descricao").asText(null),
+                    municipioNode.path("uf").path("sigla").asText(null),
+                    enderecoNode.path("telefone1").asText(null)
             );
         } catch (Exception e) {
             throw new RuntimeException("Erro ao processar a resposta do GraphQL para o CNPJ: " + cnpj, e);

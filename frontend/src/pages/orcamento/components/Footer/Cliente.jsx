@@ -110,7 +110,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
             setClienteLocal(() => ({
                 ...novoCliente,
-                endereco: endereco
+                endereco: endereco,
             }));
             setImportAberto(false);
             setShowErro(false);

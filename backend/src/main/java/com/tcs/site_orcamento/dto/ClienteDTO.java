@@ -19,4 +19,5 @@ public class ClienteDTO {
     String bairro;
     String cidade;
     String estado;
+    String telefone;
 }
