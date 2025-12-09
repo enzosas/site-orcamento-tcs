@@ -156,7 +156,7 @@
     font-size: 1rem;
 }
 
-.import .erro{
+.erro{
     color: red;
     max-height: 0;
     opacity: 0;
@@ -164,7 +164,7 @@
     transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
 }
 
-.import .erro.true{
+.erro.true{
     max-height: 2em;
     opacity: 1;
 }
@@ -237,13 +237,17 @@
     overflow: hidden;
 }
 
+.cliente .body_import {
+    gap: 1rem;
+}
+
 .cliente .body_cliente.open{
     max-height: 30rem;
     opacity: 1;
 }
 
 .cliente .body_import.open{
-    max-height: 5rem;
+    max-height: 8rem;
     opacity: 1;
 }
 
