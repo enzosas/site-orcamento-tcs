@@ -159,6 +159,8 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                 <Cliente
                     isOpen = {clienteAberto}
                     onClose={() => setClienteAberto(false)}
+                    cliente={cliente}
+                    setCliente={setCliente}
                 />
             </div>
             <div aria-label="Cliente" className="footer_frame_botoes">
