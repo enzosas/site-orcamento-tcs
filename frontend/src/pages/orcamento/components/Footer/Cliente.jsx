@@ -59,6 +59,23 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
         return cepFinal;
     }
 
+    const limpaCliente = () => {
+        setClienteLocal({
+            cnpj: "",
+            razaoSocial: "",
+            inscricaoEstadual: "",
+            cep: "",
+            endereco: "",
+            bairro: "",
+            cidade: "",
+            estado: "",
+            telefone: "",
+            pessoaContato: "",
+            email: "",
+            whatsapp: ""
+            });
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         let valorFinal = value;
@@ -377,6 +394,9 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                         </button>
                     </div>
                     <div className="dir">
+                        <button className="botao_branco" onClick={limpaCliente}>
+                            Limpar
+                        </button>
                         <button className="botao_branco" onClick={() => {
                             setImportAberto(false);
                             onClose();
