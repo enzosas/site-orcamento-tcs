@@ -6,9 +6,12 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
     const [isImportAberto, setImportAberto] = useState(false);
     const [cnpjImportacao, setCnpjImportacao] = useState("");
+    const [textoRazaoSocial, setTextoRazaoSocial] = useState("");
     const [clienteLocal, setClienteLocal] = useState({ ...cliente });
     const [erro, setErro] = useState("");
     const [showErro, setShowErro] = useState(false);
+    const [listaResultados, setListaResultados] = useState([]); 
+    const [showListaResultados, setShowListaResultados] = useState(false); 
 
     useEffect(() => {
         if (isOpen) {
@@ -74,16 +77,16 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
     const handleConfirmar = () => {
         if (isImportAberto) {
-            importarCliente(cnpjImportacao);
+            importarClienteCnpj(cnpjImportacao);
         } else {
             setCliente(clienteLocal);
             onClose();
         }
     };
 
-    const importarCliente = async (cnpj) => {
+    const importarClienteCnpj = async (cnpj) => {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/max/getCliente/${cnpj}`);
+            const response = await fetch(`${API_BASE_URL}/api/max/getClienteCnpj/${cnpj}`);
             if (!response.ok) {
                 setErro(`O cnpj ${cnpj} não existe no sistema.`);
                 setShowErro(true);
@@ -123,6 +126,69 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
         }
     }
 
+    const importarClienteRazaoSocial = async (razaoSocial) => {
+        
+        if (razaoSocial.length < 3) {
+            setErro(`Pesquisa muito curta.`);
+            setShowErro(true);
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/max/getClienteRazaoSocial/${razaoSocial}`);
+            const dados = await response.json();
+
+            if (!dados || dados.length === 0) {
+                setErro("Nenhum cliente encontrado com essa Razão Social.");
+                setShowErro(true);
+                return;
+            }
+
+            const clientesFormatados = dados.map((item) => {
+                const clienteLimpo = {};
+                
+                Object.keys(item).forEach((key) => {
+                    const valor = item[key];
+                    if (valor === null || valor === undefined || valor === "null") {
+                        clienteLimpo[key] = "";
+                    } else {
+                        clienteLimpo[key] = valor;
+                    }
+                });
+
+                const endereco = [
+                    clienteLimpo.logradouro,
+                    clienteLimpo.enderecoNumero,
+                    clienteLimpo.complemento
+                ].filter(Boolean).join(", ");
+
+                return {
+                    ...clienteLimpo,
+                    endereco: endereco
+                };
+            
+            });
+
+
+            if (clientesFormatados.length === 1) {
+                setClienteLocal(clientesFormatados[0]);
+                setImportAberto(false);
+                setListaResultados([]);
+            } else {
+                setListaResultados(clientesFormatados);
+                setShowListaResultados(true);
+            }
+            
+            setShowErro(false);
+            setErro("");
+
+        } catch (e) {
+            console.log(e);
+            setErro("Erro de conexão com o servidor ou ao processar dados.");
+            setShowErro(true);
+        }
+    }
+
     if (!isOpen) return null;
 
     // ao colocar elementos aqui, alterar altura maxima no css!
@@ -143,7 +209,53 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                                     }   
                                 />
                             </div>
+                            <button className="botao_branco" onClick={() => {importarClienteCnpj(cnpjImportacao)}}>
+                                Importar
+                            </button>
                         </div>
+                        <div className="fileira">
+                            <div className="input_com_label preencher">
+                                <p>Insira a razão social para buscar</p>
+                                <input 
+                                    value={textoRazaoSocial}
+                                    onChange={(e) => {
+                                        setShowErro(false);
+                                        setTextoRazaoSocial(e.target.value)
+                                    }}   
+                                />
+                            </div>
+                            <button className="botao_branco" onClick={() => {importarClienteRazaoSocial(textoRazaoSocial)}}>
+                                Buscar
+                            </button>
+                        </div>
+                        
+
+                        
+                        <div className="fileira">
+                            <div
+                                className={`selector-border footer ${showListaResultados ? "open" : ""}`}
+                            >
+                                <div className="selector footer">
+                                    {listaResultados.map((item, index) => (
+                                        <div
+                                            key={index}
+                                            className={"modelo-opcao footer"}
+                                            onClick={() => {
+                                                setClienteLocal(item);
+                                                setShowListaResultados(false);
+                                                setImportAberto(false);
+                                                setListaResultados([]);
+                                            }}
+                                        >
+                                            {item.razaoSocial}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+
+
                         <div className={`erro ${showErro ? 'true' : ''}`}>
                             {erro}
                         </div>

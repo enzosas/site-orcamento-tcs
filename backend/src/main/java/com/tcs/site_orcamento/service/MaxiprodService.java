@@ -9,16 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class MaxiprodService {
@@ -170,7 +164,7 @@ public class MaxiprodService {
         }
     }
 
-    public ClienteDTO getCliente(String cnpj) {
+    public ClienteDTO getClienteByCnpj(String cnpj) {
 
         String query = """
                 query NotasFiscais {
@@ -219,7 +213,7 @@ public class MaxiprodService {
             JsonNode empresaNode = items.get(0);
             JsonNode enderecoNode = empresaNode.path("endereco");
             JsonNode municipioNode = enderecoNode.path("municipio");
-            
+
             return new ClienteDTO(
                     empresaNode.path("cnpjOuCpf").asText(null),
                     empresaNode.path("razaoSocial").asText(null),
@@ -235,6 +229,79 @@ public class MaxiprodService {
             );
         } catch (Exception e) {
             throw new RuntimeException("Erro ao processar a resposta do GraphQL para o CNPJ: " + cnpj, e);
+        }
+    }
+
+    public List<ClienteDTO> getClienteByRazaoSocial(String razaoSocial) {
+
+        String query = """
+                query NotasFiscais {
+                     empresas(where: { razaoSocial: { contains: "%s" } }) {
+                         items {
+                             cnpjOuCpf
+                             razaoSocial
+                             inscricaoEstadual
+                             endereco {
+                                 cep
+                                 logradouro
+                                 numero
+                                 complemento
+                                 bairro
+                                 municipio {
+                                     descricao
+                                     uf {
+                                         sigla
+                                     }
+                                 }
+                                 telefone1
+                             }
+                         }
+                     }
+                 }
+                """.formatted(razaoSocial);
+        Map<String, String> body = Map.of("query", query);
+
+        String response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response);
+            JsonNode items = root.path("data").path("empresas").path("items");
+
+            List<ClienteDTO> listaClientes = new ArrayList<>();
+
+            if(items.isEmpty()) {
+                return listaClientes;
+            }
+
+            for (JsonNode empresaNode : items) {
+
+                JsonNode enderecoNode = empresaNode.path("endereco");
+                JsonNode municipioNode = enderecoNode.path("municipio");
+
+                listaClientes.add(new ClienteDTO(
+                    empresaNode.path("cnpjOuCpf").asText(null),
+                    empresaNode.path("razaoSocial").asText(null),
+                    empresaNode.path("inscricaoEstadual").asText(null),
+                    enderecoNode.path("cep").asText(null),
+                    enderecoNode.path("logradouro").asText(null),
+                    enderecoNode.path("numero").asText(null),
+                    enderecoNode.path("complemento").asText(null),
+                    enderecoNode.path("bairro").asText(null),
+                    municipioNode.path("descricao").asText(null),
+                    municipioNode.path("uf").path("sigla").asText(null),
+                    enderecoNode.path("telefone1").asText(null)
+                ));
+            }
+            return listaClientes;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao processar a resposta do GraphQL para a razao social: " + razaoSocial, e);
         }
     }
 }

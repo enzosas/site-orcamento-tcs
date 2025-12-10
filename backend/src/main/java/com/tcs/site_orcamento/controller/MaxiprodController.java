@@ -41,8 +41,13 @@ public class MaxiprodController {
         return maxiprodService.getPrecoDeAquisicao(codigo);
     }
 
-    @GetMapping("/getCliente/{cnpj}")
-    public ClienteDTO getCliente(@PathVariable String cnpj) {
-        return maxiprodService.getCliente(cnpj);
+    @GetMapping("/getClienteCnpj/{cnpj}")
+    public ClienteDTO getClienteCNPJ(@PathVariable String cnpj) {
+        return maxiprodService.getClienteByCnpj(cnpj);
+    }
+
+    @GetMapping("/getClienteRazaoSocial/{razaoSocial}")
+    public List<ClienteDTO> getClienteRazaoSocial(@PathVariable String razaoSocial) {
+        return maxiprodService.getClienteByRazaoSocial(razaoSocial);
     }
 }

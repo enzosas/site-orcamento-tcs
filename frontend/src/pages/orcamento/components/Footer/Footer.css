@@ -247,7 +247,7 @@
 }
 
 .cliente .body_import.open{
-    max-height: 8rem;
+    max-height: 30rem;
     opacity: 1;
 }
 
@@ -260,6 +260,11 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
+}
+
+.cliente .body_import .fileira {
+    gap: 1rem;
+    align-items: flex-end;
 }
 
 .preencher {
@@ -288,4 +293,46 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
+}
+
+.main-footer .selector.footer{
+    padding: 0.5em;
+    font-family: 'Poppins';
+    user-select: none;
+
+    max-width: 95%;
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    min-height: 10em;
+    max-height: 10em;
+    overflow-y: auto; 
+	text-align: left;
+}
+
+.main-footer .selector-border.footer{
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    border: 0.15rem solid var(--corPrincipal);
+    border-radius: 0.7em;
+    margin: 0;
+    max-width: 100%;
+    flex: 1;
+    max-height: 0;
+    opacity: 0;
+}
+
+.main-footer .selector-border.open.footer{
+    max-height: 11em;
+    opacity: 1;
+}
+
+.main-footer .modelo-opcao.footer{
+    padding: 0.3em;
+    border-radius: 0.7em;
+    transition: none;
+}
+  
+.main-footer .modelo-opcao.footer:hover {
+    transition: opacity 0.2s;
+    filter: brightness(0.975);
+    background-color: var(--corFundo);
+    cursor: pointer;
 }
