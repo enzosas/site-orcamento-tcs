@@ -236,7 +236,7 @@ public class MaxiprodService {
 
         String query = """
                 query NotasFiscais {
-                     empresas(where: { razaoSocial: { contains: "%s" } }) {
+                     empresas(where: { razaoSocial: { contains: "%s" } }, take: 10000) {
                          items {
                              cnpjOuCpf
                              razaoSocial

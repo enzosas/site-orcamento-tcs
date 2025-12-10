@@ -145,7 +145,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
     const importarClienteRazaoSocial = async (razaoSocial) => {
         
-        if (razaoSocial.length < 3) {
+        if (razaoSocial.length < 1) {
             setErro(`Pesquisa muito curta.`);
             setShowErro(true);
             return;
