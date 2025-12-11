@@ -39,12 +39,15 @@ const formatadorPreco = new Intl.NumberFormat('pt-BR', {
 
 function Pricing({ config }){
 
-    const [precoTotalSch, setPrecoTotalSch] = useState(null);
-    const [precoTotalTcs, setPrecoTotalTcs] = useState(null);
-    const [circuitoTcs, setCircuitoTcs] = useState(null);
-    const [circuitoSch, setCircuitoSch] = useState(null);
-    const [adaptadorViga, setAdaptadorViga] = useState(null);
-    const [talhaSemCircuito, setTalhaSemCircuito] = useState(null);
+    
+    const [precos, setPrecos] = useState ({
+        totalSch: null,
+        totalTcs: null,
+        circuitoTcs: null,
+        circuitoSch: null,
+        adaptadorViga: null,
+        talhaSemCircuito: null
+    });
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -52,13 +55,6 @@ function Pricing({ config }){
     useEffect(() => {
 
         const controller = new AbortController();
-        
-        setPrecoTotalSch(null);
-        setPrecoTotalTcs(null);
-        setCircuitoTcs(null);
-        setCircuitoSch(null);
-        setAdaptadorViga(null);
-        setTalhaSemCircuito(null);
         setError(null);
         
         const fetchPrecos = async () => {
@@ -67,12 +63,14 @@ function Pricing({ config }){
                 try {
                     const orcamento = await fetchOrcamentoCompleto(config, controller.signal);
                     
-                    setTalhaSemCircuito(orcamento.talhaSemCircuito);
-                    setAdaptadorViga(orcamento.adaptadorViga);
-                    setCircuitoSch(orcamento.circuitoSch);
-                    setCircuitoTcs(orcamento.circuitoTcs);
-                    setPrecoTotalSch(orcamento.totalSch);
-                    setPrecoTotalTcs(orcamento.totalTcs);
+                    setPrecos(() => ({
+                        totalSch: orcamento.totalSch,
+                        totalTcs: orcamento.totalTcs,
+                        circuitoSch: orcamento.circuitoSch,
+                        circuitoTcs: orcamento.circuitoTcs,
+                        adaptadorViga: orcamento.adaptadorViga,
+                        talhaSemCircuito: orcamento.talhaSemCircuito
+                    }))
                 } catch (err) {
                     if (err.name != 'AbortError') {
                         setError(err);
@@ -99,37 +97,37 @@ function Pricing({ config }){
                 <p className="descricao">Talha Elétrica sem circuito</p>
                 <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (talhaSemCircuito !== null ? formatadorPreco.format(talhaSemCircuito) : "-"))}</div>
+                        (precos.talhaSemCircuito !== null ? formatadorPreco.format(precos.talhaSemCircuito) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Adaptador de Viga</p>
                 <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (adaptadorViga !== null ? formatadorPreco.format(adaptadorViga) : "-"))}</div>
+                        (precos.adaptadorViga !== null ? formatadorPreco.format(precos.adaptadorViga) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Circuito Elétrico Schneider</p>
                 <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (circuitoSch !== null ? formatadorPreco.format(circuitoSch) : "-"))}</div>
+                        (precos.circuitoSch !== null ? formatadorPreco.format(precos.circuitoSch) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Circuito Elétrico TCS</p>
                 <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (circuitoTcs !== null ? formatadorPreco.format(circuitoTcs) : "-"))}</div>
+                        (precos.circuitoTcs !== null ? formatadorPreco.format(precos.circuitoTcs) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Total com Painel Schneider</p>
                 <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (precoTotalSch !== null ? formatadorPreco.format(precoTotalSch) : "-"))}</div>
+                        (precos.totalSch !== null ? formatadorPreco.format(precos.totalSch) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Total Com Painel TCS</p>
                 <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (precoTotalTcs !== null ? formatadorPreco.format(precoTotalTcs) : "-"))}</div>
+                        (precos.totalTcs !== null ? formatadorPreco.format(precos.totalTcs) : "-"))}</div>
             </div>
         </div>
     )
