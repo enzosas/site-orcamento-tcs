@@ -97,39 +97,39 @@ function Pricing({ config }){
             
             <div className="unidade">
                 <p className="descricao">Talha Elétrica sem circuito</p>
-                <p className="dinheiro">{error? "Erro" : 
+                <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (talhaSemCircuito !== null ? formatadorPreco.format(talhaSemCircuito) : "-"))}</p>
+                        (talhaSemCircuito !== null ? formatadorPreco.format(talhaSemCircuito) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Adaptador de Viga</p>
-                <p className="dinheiro">{error? "Erro" : 
+                <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (adaptadorViga !== null ? formatadorPreco.format(adaptadorViga) : "-"))}</p>
+                        (adaptadorViga !== null ? formatadorPreco.format(adaptadorViga) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Circuito Elétrico Schneider</p>
-                <p className="dinheiro">{error? "Erro" : 
+                <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (circuitoSch !== null ? formatadorPreco.format(circuitoSch) : "-"))}</p>
+                        (circuitoSch !== null ? formatadorPreco.format(circuitoSch) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Circuito Elétrico TCS</p>
-                <p className="dinheiro">{error? "Erro" : 
+                <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (circuitoTcs !== null ? formatadorPreco.format(circuitoTcs) : "-"))}</p>
+                        (circuitoTcs !== null ? formatadorPreco.format(circuitoTcs) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Total com Painel Schneider</p>
-                <p className="dinheiro">{error? "Erro" : 
+                <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (precoTotalSch !== null ? formatadorPreco.format(precoTotalSch) : "-"))}</p>
+                        (precoTotalSch !== null ? formatadorPreco.format(precoTotalSch) : "-"))}</div>
             </div>
             <div className="unidade">
                 <p className="descricao">Total Com Painel TCS</p>
-                <p className="dinheiro">{error? "Erro" : 
+                <div className="dinheiro">{error? "Erro" : 
                     (isLoading ? <LoadingDots /> :
-                        (precoTotalTcs !== null ? formatadorPreco.format(precoTotalTcs) : "-"))}</p>
+                        (precoTotalTcs !== null ? formatadorPreco.format(precoTotalTcs) : "-"))}</div>
             </div>
         </div>
     )
