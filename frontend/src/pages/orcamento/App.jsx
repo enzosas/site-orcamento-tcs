@@ -33,6 +33,15 @@ function App() {
 		celulaCarga: false,
 		adaptadorViga: false
 	});
+	
+	const [precos, setPrecos] = useState ({
+		totalSch: null,
+		totalTcs: null,
+		circuitoTcs: null,
+		circuitoSch: null,
+		adaptadorViga: null,
+		talhaSemCircuito: null
+	});
 
 	return (
 		<div className="app-container">
@@ -49,7 +58,7 @@ function App() {
 				</div>
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />
-					<Pricing config={config} />
+					<Pricing config={config} precos={precos} setPrecos={setPrecos} />
 					<Footer setTalhaSelecionada={setTalhaSelecionada} config={config} setConfig={setConfig}/>  
 				</div>
 			</div>

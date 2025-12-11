@@ -37,17 +37,7 @@ const formatadorPreco = new Intl.NumberFormat('pt-BR', {
     currency: 'BRL',
 });
 
-function Pricing({ config }){
-
-    
-    const [precos, setPrecos] = useState ({
-        totalSch: null,
-        totalTcs: null,
-        circuitoTcs: null,
-        circuitoSch: null,
-        adaptadorViga: null,
-        talhaSemCircuito: null
-    });
+function Pricing({ config, precos, setPrecos }){
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
