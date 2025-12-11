@@ -17,7 +17,7 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
         cursoUtilGancho: ""
     });
     
-    const opcoesTensao = talha ? getOpcoesTensao(talha) : [];
+    let opcoesTensao = talha ? getOpcoesTensao(talha) : [];
     const [modelos, setModelos] = useState([]);
 
     useEffect( () => {
@@ -37,7 +37,10 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     const handleSelecaoManual = (novaTalha) => {
         
         setTalhaSelecionada(novaTalha);
-
+        if(!opcoesTensao) {
+            console.log("banana")
+        }
+        opcoesTensao = getOpcoesTensao(novaTalha);
         setConfig(prev => {
             const resetarValores = {
                 excluirPainel: false,

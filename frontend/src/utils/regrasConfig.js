@@ -62,6 +62,9 @@ export function fixConfig(configOld, talha) {
         } else if (talha.guiaCabo === "Não") {
             config.guiaCaboAco = false ;
         }
+        if (talha.tensao === "") {
+            config.tensao = getOpcoesTensao(talha)[0];
+        }
     }
 
     if (config.excluirPainel) {
@@ -95,7 +98,6 @@ export function fixConfig(configOld, talha) {
         config.modeloControle = "";
         config.transmissorExtra = false;
     }
-
     return config;
 }
 

@@ -90,7 +90,6 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
 
     useEffect(() => {
 
-        console.table(config)
         if (isImporting.current) {
             isImporting.current = false;
         } else {
@@ -108,7 +107,7 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                         <p>{getCodigoConfig()}</p>
                     </div>
                     <div className="config--retangulo_branco--direita">
-                        <button class="botao-icone" aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
+                        <button aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
                             <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
                                 Copiar
                             </span>
@@ -125,10 +124,10 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                                 </div>
                             )}
                         </button>
-                        <button class="botao-icone" aria-label="Importar" onClick={() => setImportAberto(true)}>
+                        <button aria-label="Importar" onClick={() => setImportAberto(true)}>
                             Importar
                         </button>
-                        <button class="botao-icone" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
+                        <button aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
                             <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
                                 Salvar
                             </span>
