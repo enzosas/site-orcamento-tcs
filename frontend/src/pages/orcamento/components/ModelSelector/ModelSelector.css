@@ -10,7 +10,7 @@
     font-family: 'Poppins';
     user-select: none;
 
-    max-width: 90%;
+    max-width: calc(100% - 2em);
     margin: 0 auto;
 
     min-height: 15em;
