@@ -59,7 +59,7 @@ function App() {
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />
 					<Pricing config={config} precos={precos} setPrecos={setPrecos} />
-					<Footer setTalhaSelecionada={setTalhaSelecionada} config={config} setConfig={setConfig}/>  
+					<Footer talha={talhaSelecionada} setTalhaSelecionada={setTalhaSelecionada} config={config} setConfig={setConfig} precos={precos}/>  
 				</div>
 			</div>
 		</div>

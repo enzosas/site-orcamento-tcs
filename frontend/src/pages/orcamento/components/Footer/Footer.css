@@ -176,13 +176,11 @@
     justify-content: flex-end;
 }
 
-.import .botao_branco{
+.botao_branco {
     color: var(--corPrincipal);
     background-color:var(--corFundo);
     box-shadow: 0em 0em 0em 0em;
     padding: 0em;
-    display: flex;
-    max-width: 100%;
     border-radius: 0.7em;
     align-items: center;
     padding: 1em;
@@ -271,16 +269,6 @@
     flex: 1;
 }
 
-.cliente .botao_branco{
-    color: var(--corPrincipal);
-    background-color:var(--corFundo);
-    box-shadow: 0em 0em 0em 0em;
-    padding: 0em;
-    border-radius: 0.7em;
-    align-items: center;
-    padding: 1em;
-}
-
 .cliente .frame_botoes {
     display: flex;
     flex-direction: row;
@@ -335,4 +323,37 @@
     filter: brightness(0.975);
     background-color: var(--corFundo);
     cursor: pointer;
+}
+
+.pdf {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.1s ease-in-out;
+    z-index: 1000;
+}
+
+.pdf .frame {
+    background: var(--corFundo);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    border-radius: 0.7em;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: right;
+    gap: 1rem;
+    height: 90vh;
+    width: 90vw;
+}
+
+.pdf button {
+    width: 10%;
+    align-self: flex-end;
 }

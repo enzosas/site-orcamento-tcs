@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Import from "./Import.jsx"
 import { API_BASE_URL } from "../../../../config.js";
 import Cliente from "./Cliente.jsx";
+import Pdf from "./PdfViewerTela.jsx"
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -10,7 +11,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-function Footer({ setTalhaSelecionada, config, setConfig }){
+function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
 
     function getCodigoConfig(){
 
@@ -20,15 +21,17 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
         else return codigo;
     }
     
+    
     const [codigo, setCodigo] = useState(null);
     const [copiado, setCopiado] = useState(false);
     const [salvo, setSalvo] = useState(false);
     const [importAberto, setImportAberto] = useState(false);
     const [clienteAberto, setClienteAberto] = useState(false);
+    const [pdfAberto, setPdfAberto] = useState(false);
     const isImporting = useRef(false);
-
+    
     const [cliente, setCliente] = useState({
-		cnpj: "",
+        cnpj: "",
         razaoSocial: "",
         inscricaoEstadual: "",
         cep: "",
@@ -41,7 +44,11 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
         email: "",
         whatsapp: ""
 	});
-
+    console.table(talha)
+    console.table(config)
+    console.table(cliente)
+    console.table(precos)
+    
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
         .then(() => {
@@ -161,12 +168,20 @@ function Footer({ setTalhaSelecionada, config, setConfig }){
                     cliente={cliente}
                     setCliente={setCliente}
                 />
+                <Pdf
+                    isOpen = {pdfAberto}
+                    onClose = {() => setPdfAberto(false)}
+                    talha = {talha} 
+                    config = {config} 
+                    cliente = {cliente} 
+                    precos = {precos}
+                />
             </div>
             <div aria-label="Cliente" className="footer_frame_botoes">
                 <button onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
-                <button aria-label="Gerar PDF">
+                <button aria-label="Gerar PDF" onClick={() => setPdfAberto(true)}>
                     Gerar PDF
                 </button>
             </div>
