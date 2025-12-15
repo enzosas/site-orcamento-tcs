@@ -43,7 +43,7 @@ function TalhaWindow({ talha, config }){
                     <p className="frame-all-info-dir">{talha.velTranslacaoPadrao}</p>
 
                     <p className="frame-all-info-esq">Freio no carro de translação</p>
-                    <p className="frame-all-info-dir">{talha.frenoNoCarroTranslacao ? "Sim" : "Não"}</p>
+                    <p className="frame-all-info-dir">{talha.freioNoCarroTranslacao ? "Sim" : "Não"}</p>
 
                     <p className="frame-all-info-esq">Fim de curso sobe/desce</p>
                     <p className="frame-all-info-dir">{talha.fimCursoSobe}</p>

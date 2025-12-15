@@ -205,7 +205,7 @@ export const RelatorioPDF = ({ dados, talha, config, cliente, precos }) => (
           <Text style={[styles.text, styles.alignRight]}>Freio no carro de translação:</Text>
         </View>
         <View style={styles.coluna}>
-          <Text style={styles.text}>{talha.frenoNoCarroTranslacao ? "Sim" : "Não"}</Text>
+          <Text style={styles.text}>{talha.freioNoCarroTranslacao ? "Sim" : "Não"}</Text>
         </View>
       </View>
       <View style={styles.rowSimple}>
