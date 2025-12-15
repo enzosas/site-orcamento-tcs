@@ -19,11 +19,19 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
         }
     }, [isOpen, cliente]);
 
-    const mascaraCNPJ = (valor) => {
+    const mascaraCpfCnpj = (valor) => {
         if (!valor) return "";
-        
+
         const v = valor.replace(/\D/g, "");
-        
+
+        if (v.length <= 11) {
+            return v
+                .replace(/(\d{3})(\d)/, "$1.$2")
+                .replace(/(\d{3})(\d)/, "$1.$2")
+                .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+                .substring(0, 14);
+        }
+
         return v
             .replace(/^(\d{2})(\d)/, "$1.$2")
             .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
@@ -32,7 +40,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
             .substring(0, 18);
     };
 
-    const limpaCNPJ = (cnpj) => {
+    const limpaCNPJCPF = (cnpj) => {
         let cpnjFinal = cnpj.replace(/\D/g, "");
         if (cpnjFinal.length > 14) {
                 cpnjFinal = cpnjFinal.slice(0, 14);
@@ -81,7 +89,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
         let valorFinal = value;
 
         if (name === "cnpj") {
-            valorFinal = limpaCNPJ(value);
+            valorFinal = limpaCNPJCPF(value);
         }
         if (name === "cep") {
             valorFinal = limpaCEP(value);
@@ -217,12 +225,12 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                     <div className={`body_import ${ isImportAberto ? "open" : ""}`}>
                         <div className="fileira">
                             <div className="input_com_label preencher">
-                                <p>Insira o CNPJ para importar os dados do cliente</p>
+                                <p>Insira CNPJ ou CPF para importar os dados do cliente</p>
                                 <input 
-                                    value={(mascaraCNPJ(cnpjImportacao || ""))}
+                                    value={(cnpjImportacao || "")}
                                     onChange={(e) => {
                                         setShowErro(false);
-                                        setCnpjImportacao(limpaCNPJ(e.target.value))}
+                                        setCnpjImportacao(limpaCNPJCPF(e.target.value))}
                                     }   
                                 />
                             </div>
@@ -280,10 +288,10 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                     <div className={`body_cliente ${isImportAberto ? "" : "open"}`}>
                         <div className="fileira">
                             <div className="input_com_label">
-                                <p>CNPJ</p>
+                                <p>CNPJ / CPF</p>
                                 <input 
                                     name="cnpj"
-                                    value={mascaraCNPJ(clienteLocal.cnpj || "")}
+                                    value={mascaraCpfCnpj(clienteLocal.cnpj || "")}
                                     onChange={handleChange}
                                 />
                             </div>
