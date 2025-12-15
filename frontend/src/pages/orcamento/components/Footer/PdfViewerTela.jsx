@@ -15,7 +15,7 @@ const PDFViewerTela = ({ isOpen, onClose, talha, config, cliente, precos }) => {
         <div className='pdf'>
             <div className='frame'>
                 <PDFViewer width="99.8%" height="99.8%">
-                    <RelatorioPDF dados={dadosExemplo} />
+                    <RelatorioPDF talha={talha} config={config} cliente={cliente} precos={precos} />
                 </PDFViewer>
                 <button onClick={() => onClose()}>
                     Voltar

@@ -83,7 +83,7 @@ const cliente = {
     estado: "RS",
     telefone: "(55) 3222 4474",
     endereco: "Rua Júlio Colpo do Amaral, 270",
-    pessoaContato: "enzo",
+    pessoaContato: "Enzo Silveira",
     email: "enzo.silveira@acad.ufsm.br",
     whatsapp: "(54) 98112-0386"
 };
@@ -101,7 +101,7 @@ const precos = {
         <div className='pdf'>
             <div className='frame'>
                 <PDFViewer width="99.8%" height="99.8%">
-                    <RelatorioPDF dados={dadosExemplo} />
+                    <RelatorioPDF talha={talha} config={config} cliente={cliente} precos={precos} />
                 </PDFViewer>
                 <button onClick={() => onClose()}>
                     Voltar
