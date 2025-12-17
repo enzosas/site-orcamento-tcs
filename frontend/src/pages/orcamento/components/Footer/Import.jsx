@@ -24,6 +24,21 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
     const [texto, setTexto] = useState("");
     const [erro, setErro] = useState("");
     const [showErro, setShowErro] = useState(false);
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen && inputRef.current) {
+            setTimeout(() => {
+                inputRef.current.focus();
+            }, 50);
+        }
+    }, [isOpen]);
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleConfirmar();
+        }
+    };
     
     const handleConfirmar = async () => {
     
@@ -92,11 +107,13 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
                 <div className="body">
                     <div>Cole o código aqui:</div>
                     <input 
+                        ref={inputRef}
                         value={texto}
                         onChange={(e) => {
                             setTexto(e.target.value);
                             setShowErro(false);
                         }}
+                        onKeyDown={handleKeyDown}
                         placeholder="Ex: 123"
                     />
                 <div className={`erro ${showErro ? 'true' : ''}`}>

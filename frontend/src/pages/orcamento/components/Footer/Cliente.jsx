@@ -84,6 +84,12 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
             });
     };
 
+    const onEnter = (acao) => (e) => {
+        if (e.key === 'Enter') {
+            acao();
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         let valorFinal = value;
@@ -228,6 +234,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                                 <p>Insira CNPJ ou CPF para importar os dados do cliente</p>
                                 <input 
                                     value={(cnpjImportacao || "")}
+                                    onKeyDown={onEnter(() => importarClienteCnpj(cnpjImportacao))}
                                     onChange={(e) => {
                                         setShowErro(false);
                                         setCnpjImportacao(limpaCNPJCPF(e.target.value))}
@@ -243,6 +250,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                                 <p>Insira a razão social para buscar</p>
                                 <input 
                                     value={textoRazaoSocial}
+                                    onKeyDown={onEnter(() => importarClienteRazaoSocial(textoRazaoSocial))}
                                     onChange={(e) => {
                                         setShowErro(false);
                                         setTextoRazaoSocial(e.target.value)
