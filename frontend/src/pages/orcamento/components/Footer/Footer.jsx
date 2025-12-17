@@ -179,8 +179,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 <button onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
-                <button aria-label="Gerar PDF" onClick={() => gerarDocx(talha, config, cliente, precos)}>
-                    Gerar PDF
+                <button aria-label="Gerar Docx" onClick={() => gerarDocx(talha, config, cliente, precos)}>
+                    Gerar DOCX
                 </button>
             </div>
          </div>
