@@ -10,6 +10,9 @@ function CommandPannel({ talha, config, setConfig }) {
     const opcoesControle = getOpcoesControle(config.controleRemoto, config.painel6Mov);
 
     const atualizarConfig = (alteracoesParciais) => {
+        if (alteracoesParciais.painel6Mov === false) {
+            alteracoesParciais.incluirSinalizadores = false;
+        }
         setConfig((prevConfig) => {
             const configProvisoria = { ...prevConfig, ...alteracoesParciais };
             return fixConfig(configProvisoria, talha);;
@@ -21,7 +24,6 @@ function CommandPannel({ talha, config, setConfig }) {
             <h2 className="frame-branco-title">Painel de Comando</h2>
 
             <div className="frame-caixas-selecao">
-                {/* Caixa principal: Excluir Painel */}
                 <label className={`${talha.exclusaoPainelComandoForca === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
@@ -32,7 +34,6 @@ function CommandPannel({ talha, config, setConfig }) {
                     Sem Painel de Comando
                 </label>
 
-                {/* Dependentes */}
                 <label className={`${config.excluirPainel || talha.duplaVelocidadeElevacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
