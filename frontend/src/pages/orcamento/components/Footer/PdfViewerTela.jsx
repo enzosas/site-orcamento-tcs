@@ -3,11 +3,6 @@ import { PDFViewer } from '@react-pdf/renderer';
 import { RelatorioPDF } from '../../../../utils/orcamentoPDF';
 
 const PDFViewerTela = ({ isOpen, onClose, talha, config, cliente, precos }) => {
-    const dadosExemplo = {
-        nome: "Maria Oliveira",
-        email: "maria@teste.com",
-        pedidoId: "98765"
-    };
 
     if (!isOpen) return null;
 

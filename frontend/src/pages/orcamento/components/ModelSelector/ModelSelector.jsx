@@ -37,9 +37,6 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     const handleSelecaoManual = (novaTalha) => {
         
         setTalhaSelecionada(novaTalha);
-        if(!opcoesTensao) {
-            console.log("banana")
-        }
         opcoesTensao = getOpcoesTensao(novaTalha);
         setConfig(prev => {
             const resetarValores = {
