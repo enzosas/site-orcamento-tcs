@@ -1,9 +1,18 @@
 const boolParaTexto = (valor) => valor ? "Sim" : "Não";
 
-const medida = (valor, unidade) => (valor !== null) ? `${valor} ${unidade}` : ""; 
+const medida = (valor, unidade) => (valor !== null && valor !== undefined && valor != '') ? `${valor} ${unidade}` : ""; 
+
+const limpaNull = (obj) => {
+    Object.keys(obj).forEach(key => {
+        if (obj[key] === null || obj[key] === undefined) {
+            obj[key] = "";
+        }
+    });
+}
 
 export function formatarTalhaExibicao(talha) {
-    return {
+    
+    const obj = {
         ...talha,
         capacidade: medida(talha.capacidade, "kg"),
         cursoUtilGancho: medida(talha.cursoUtilGancho, "metros"),
@@ -12,15 +21,19 @@ export function formatarTalhaExibicao(talha) {
         fimCursoEsquerdaDireita: boolParaTexto(talha.fimCursoEsquerdaDireita),
         peso: medida(talha.peso, "kg")
     };
+    limpaNull(obj);
+    return obj;
 }
 
 export function formatarConfigExibicao(config) {
-    return {
+    const obj = {
         ...config,
         fimCursoEsquerdaDireita: boolParaTexto(config.fimCursoEsquerdaDireita),
         guiaCaboAco: boolParaTexto(config.guiaCaboAco),
         celulaCarga: boolParaTexto(config.celulaCarga),
     }
+    limpaNull(obj);
+    return obj;
 }
 
 export function getDadosExibicao(talha, config) {
@@ -53,5 +66,6 @@ export function getDadosExibicao(talha, config) {
         dados.sinalizadores = "";
         dados.tomadaTrocaRapida = "";
     }
+    limpaNull(dados);
     return dados;
 }

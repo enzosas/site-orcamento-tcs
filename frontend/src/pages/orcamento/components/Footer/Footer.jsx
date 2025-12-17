@@ -4,6 +4,8 @@ import Import from "./Import.jsx"
 import { API_BASE_URL } from "../../../../config.js";
 import Cliente from "./Cliente.jsx";
 import Pdf from "./PdfViewerTela.jsx"
+import { gerarDocx } from '../../../../utils/gerarDocx';
+
 
 const CheckIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -44,10 +46,6 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         email: "",
         whatsapp: ""
 	});
-    console.table(talha)
-    console.table(config)
-    console.table(cliente)
-    console.table(precos)
     
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
@@ -181,7 +179,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 <button onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
-                <button aria-label="Gerar PDF" onClick={() => setPdfAberto(true)}>
+                <button aria-label="Gerar PDF" onClick={() => gerarDocx(talha, config, cliente, precos)}>
                     Gerar PDF
                 </button>
             </div>
