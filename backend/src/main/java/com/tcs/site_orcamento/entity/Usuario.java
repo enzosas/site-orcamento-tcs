@@ -19,4 +19,7 @@ public class Usuario {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private Boolean isAdmin;
 }
