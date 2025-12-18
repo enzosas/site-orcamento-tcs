@@ -4,6 +4,7 @@ import Import from "./Import.jsx"
 import { API_BASE_URL } from "../../../../config.js";
 import Cliente from "./Cliente.jsx";
 import Pdf from "./PdfViewerTela.jsx"
+import Adm from "./Administracao/Administracao.jsx"
 import { gerarDocx } from '../../../../utils/gerarDocx';
 
 
@@ -30,6 +31,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
     const [importAberto, setImportAberto] = useState(false);
     const [clienteAberto, setClienteAberto] = useState(false);
     const [pdfAberto, setPdfAberto] = useState(false);
+    const [admAberto, setAdmAberto] = useState(false);
     const isImporting = useRef(false);
     
     const [cliente, setCliente] = useState({
@@ -174,13 +176,22 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                     cliente = {cliente} 
                     precos = {precos}
                 />
+                <Adm
+                    isOpen = {admAberto}
+                    onClose={() => setAdmAberto(false)}
+                />
             </div>
-            <div aria-label="Cliente" className="footer_frame_botoes">
-                <button onClick={() => setClienteAberto(true)}>
+            <div className="footer_frame_botoes">
+                <button aria-label="Cliente" onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
                 <button aria-label="Gerar Docx" onClick={() => gerarDocx(talha, config, cliente, precos)}>
                     Gerar DOCX
+                </button>
+            </div>
+            <div className="footer_frame_botoes admbutton">
+                <button aria-label="A" onClick={() => setAdmAberto(true)}>
+                    Administração
                 </button>
             </div>
          </div>
