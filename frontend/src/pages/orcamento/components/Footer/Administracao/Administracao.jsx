@@ -1,6 +1,8 @@
 import "../Footer.css"
 import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
+import RegistrarUsuario from "./RegistrarUsuario"
+import ListarUsuarios from "./ListarUsuarios"
 
 function Administracao({ isOpen, onClose }) {
 
@@ -39,10 +41,7 @@ function Administracao({ isOpen, onClose }) {
                 </div>
                 <div className="direita">
                      <div className="main">
-                        {/* {renderMainContent()} */}
-                        <p>adsdasd</p>
-                        <p>adsdasd</p>
-                        <p>adsdasd</p>
+                        {renderMainContent()}
                     </div>
                     <div className="embaixo">
                         <button className="botao_branco" onClick={() => {
