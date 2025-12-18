@@ -24,6 +24,11 @@ public class AuthService {
         }
 
         if(Objects.equals(password, usuario.getPassword())){
+            if (usuario.getAcessos() == null) {
+                usuario.setAcessos(0);
+            }
+            usuario.setAcessos(usuario.getAcessos() + 1);
+            usuarioRepository.save(usuario);
             return  "tokenTokenToken";
         } else {
             throw new RuntimeException("Usuario ou senha incorretos");
