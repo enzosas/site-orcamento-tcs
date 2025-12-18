@@ -169,12 +169,6 @@
     color: var(--corPrincipal);
 }
 
-.import input{
-    border: 0.15em solid var(--corPrincipal);
-    border-radius: 0.7em;
-    font-size: 1rem;
-}
-
 .erro{
     color: red;
     max-height: 0;
