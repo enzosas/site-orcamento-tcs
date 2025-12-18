@@ -4,13 +4,13 @@ import com.tcs.site_orcamento.dto.ConfigDTO;
 import com.tcs.site_orcamento.dto.LoginRequestDTO;
 import com.tcs.site_orcamento.dto.LoginResponseDTO;
 import com.tcs.site_orcamento.entity.Usuario;
+import com.tcs.site_orcamento.repository.UsuarioRepository;
 import com.tcs.site_orcamento.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -19,6 +19,9 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO){
@@ -47,5 +50,10 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/list")
+    public List<Usuario> listUsers(){
+        return usuarioRepository.findAll();
     }
 }
