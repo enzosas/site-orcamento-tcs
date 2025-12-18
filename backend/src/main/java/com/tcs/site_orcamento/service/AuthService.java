@@ -16,7 +16,6 @@ public class AuthService {
     public String authenticateAndGetToken(String username, String password){
 
         Usuario usuario;
-
         try {
             usuario = usuarioRepository.findByUsername(username);
         } catch (Exception e) {
@@ -33,5 +32,13 @@ public class AuthService {
         } else {
             throw new RuntimeException("Usuario ou senha incorretos");
         }
+    }
+
+    public Usuario registerUser(Usuario user){
+        if (user.getIsAdmin() == null) {
+            user.setIsAdmin(false);
+        }
+        user.setAcessos(0);
+        return usuarioRepository.save(user);
     }
 }

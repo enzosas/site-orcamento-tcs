@@ -3,6 +3,7 @@ package com.tcs.site_orcamento.controller;
 import com.tcs.site_orcamento.dto.ConfigDTO;
 import com.tcs.site_orcamento.dto.LoginRequestDTO;
 import com.tcs.site_orcamento.dto.LoginResponseDTO;
+import com.tcs.site_orcamento.entity.Usuario;
 import com.tcs.site_orcamento.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,16 @@ public class AuthController {
 
             return ResponseEntity.status(401).build();
 
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Usuario> register(@RequestBody Usuario usuario){
+        try {
+            Usuario novoUsuario = authService.registerUser(usuario);
+            return ResponseEntity.ok(novoUsuario);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 }
