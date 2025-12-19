@@ -52,6 +52,15 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/delete")
+    public ResponseEntity<Usuario> delete(@PathVariable Integer id){
+        if (!usuarioRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        usuarioRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/list")
     public List<Usuario> listUsers(){
         return usuarioRepository.findAll();
