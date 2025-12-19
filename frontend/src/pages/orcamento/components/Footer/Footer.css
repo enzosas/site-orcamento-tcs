@@ -439,6 +439,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    overflow: hidden;
 }
 
 .adm .frame .direita .embaixo {
@@ -463,4 +464,79 @@
 .adm .registrar .input_com_label {
     display: flex;
     flex-direction: column;
+}
+
+.adm .listar {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.adm .listar .table {
+    width: 100%;
+    border: 0.15rem solid var(--corPrincipal);
+    background-color: var(--corFundo);
+    border-radius: 0.7em;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.adm .listar .table .header {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--corPrincipal);
+    color: var(--corFundo);
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    gap: 0;
+}
+
+.adm .listar .table .body {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+
+.listar .table .row {
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.listar .table .col {
+    flex: 1;
+    word-break: break-all;
+}
+
+
+.adm .listar .table .body::-webkit-scrollbar {
+  width: 0.5em; 
+  background: transparent;
+}
+
+.adm .listar .table .body::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+    margin: -0.2em;
+}
+
+.adm .listar .table .body::-webkit-scrollbar-thumb {
+    background-color: var(--corPrincipal);
+    border-radius: 0.7em;
+    border: none;
+}
+
+.adm .listar .table .body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--corPrincipal);
+}
+
+.adm .listar .table .body::-webkit-scrollbar-button {
+  display: none;
 }

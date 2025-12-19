@@ -16,7 +16,7 @@ body {
     box-sizing: border-box;
 }
 
-.header{
+.headerLogin{
     gap: 2rem;
     display: flex;
     flex-direction: column;

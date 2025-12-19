@@ -58,7 +58,7 @@ function Login() {
 
     return (
         <div className="margem">
-            <div className="header">
+            <div className="headerLogin">
                 <img
                     src="tcsind.png"
                     alt="TCS Indústria Metalúrgica"
