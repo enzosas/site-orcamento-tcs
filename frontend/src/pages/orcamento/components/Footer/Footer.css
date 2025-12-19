@@ -446,3 +446,21 @@
     flex-direction: row;
     justify-content: right;
 }
+
+.adm .registrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.adm .registrar .body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+}
+
+.adm .registrar .input_com_label {
+    display: flex;
+    flex-direction: column;
+}

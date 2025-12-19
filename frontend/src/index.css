@@ -102,6 +102,11 @@ button:hover{
     filter: brightness(0.975);
 }
 
+button:disabled {
+    background-color: var(--corDesfoqueFraco);
+    cursor: default;
+}
+
 .config--retangulo_branco button:disabled:hover{
     filter: brightness(1);
 }

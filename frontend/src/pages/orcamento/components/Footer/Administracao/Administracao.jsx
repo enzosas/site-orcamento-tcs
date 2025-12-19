@@ -13,7 +13,7 @@ function Administracao({ isOpen, onClose }) {
             case 'listar':
                 return <ListarUsuarios />;
             case 'registrar':
-                return <RegistrarUsuario onVoltar={() => setView('listar')} />;
+                return <RegistrarUsuario />;
             default:
                 return <ListarUsuarios />;
         }
