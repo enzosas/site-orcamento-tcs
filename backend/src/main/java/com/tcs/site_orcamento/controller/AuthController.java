@@ -52,8 +52,8 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/delete")
-    public ResponseEntity<Usuario> delete(@PathVariable Integer id){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
         if (!usuarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
