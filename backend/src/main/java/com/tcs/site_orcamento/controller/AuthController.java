@@ -28,17 +28,21 @@ public class AuthController {
 
         try{
 
-            String token = authService.authenticateAndGetToken(
+            Usuario usuario = authService.authenticateAndGetUser(
                     loginRequestDTO.getUsername(),
                     loginRequestDTO.getPassword()
             );
-            LoginResponseDTO loginResponseDTO = new LoginResponseDTO(token);
-            return ResponseEntity.ok(loginResponseDTO);
+            String token = "tokenTokenToken";
+            LoginResponseDTO response = new LoginResponseDTO(
+                    token,
+                    usuario.getId(),
+                    usuario.getUsername(),
+                    usuario.getIsAdmin()
+            );
+            return ResponseEntity.ok(response);
 
         } catch (Exception e){
-
             return ResponseEntity.status(401).build();
-
         }
     }
 

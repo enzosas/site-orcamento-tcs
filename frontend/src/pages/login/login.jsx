@@ -40,17 +40,14 @@ function Login() {
             if(response.ok){
 
                 const data = await response.json();
-                localStorage.setItem('authToken', data.token);
-                login();
+                login(data);
                 navigate('/');
 
             } else {
-                
                 throw new Error('falha no login');
             }
         
         } catch (error) {
-            
             alert('Usuário ou senha incorretos!');
             setSenha('');
         }

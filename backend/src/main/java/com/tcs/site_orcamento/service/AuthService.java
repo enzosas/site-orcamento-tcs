@@ -13,7 +13,7 @@ public class AuthService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public String authenticateAndGetToken(String username, String password){
+    public Usuario authenticateAndGetUser(String username, String password){
 
         Usuario usuario;
         try {
@@ -27,8 +27,7 @@ public class AuthService {
                 usuario.setAcessos(0);
             }
             usuario.setAcessos(usuario.getAcessos() + 1);
-            usuarioRepository.save(usuario);
-            return  "tokenTokenToken";
+            return usuarioRepository.save(usuario);
         } else {
             throw new RuntimeException("Usuario ou senha incorretos");
         }

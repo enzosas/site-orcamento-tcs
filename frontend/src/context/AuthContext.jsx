@@ -1,29 +1,30 @@
 import React, { createContext, useState, useContext } from 'react';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    // Você pode inicializar isso lendo um token do localStorage, por exemplo
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
 
-    const login = () => {
-        // Lógica de login (ex: chamar API, salvar token)
-        setIsAuthenticated(true);
+    const login = (dadosUsuario) => {
+        setUser(dadosUsuario);
     };
 
     const logout = () => {
-        // Lógica de logout (ex: limpar token)
-        setIsAuthenticated(false);
+        setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ 
+            user, 
+            isAuthenticated: !!user,
+            login, 
+            logout,
+        }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// 3. Cria um hook customizado para facilitar o uso
 export const useAuth = () => {
     return useContext(AuthContext);
 };

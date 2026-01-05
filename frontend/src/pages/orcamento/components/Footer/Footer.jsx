@@ -1,11 +1,12 @@
 import "./Footer.css"
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Import from "./Import.jsx"
 import { API_BASE_URL } from "../../../../config.js";
 import Cliente from "./Cliente.jsx";
 import Pdf from "./PdfViewerTela.jsx"
 import Adm from "./Administracao/Administracao.jsx"
 import { gerarDocx } from '../../../../utils/gerarDocx';
+import { AuthContext } from '../../../../context/AuthContext.jsx'
 
 
 const CheckIcon = () => (
@@ -15,6 +16,8 @@ const CheckIcon = () => (
 );
 
 function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
+
+    const { user } = useContext(AuthContext);
 
     function getCodigoConfig(){
 
@@ -107,80 +110,82 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
 
     return (
          <div className="main-footer">
-            <div className="frame-config">
-                <p>Código da configuração</p>
-                <div className="config--retangulo_branco">
-                    <div className="config--retangulo_branco--esquerda">
-                        <p>{getCodigoConfig()}</p>
+            {user?.isAdmin && (
+                <div className="frame-config">
+                    <p>Código da configuração</p>
+                    <div className="config--retangulo_branco">
+                        <div className="config--retangulo_branco--esquerda">
+                            <p>{getCodigoConfig()}</p>
+                        </div>
+                        <div className="config--retangulo_branco--direita">
+                            <button aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
+                                <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
+                                    Copiar
+                                </span>
+                                {copiado && (
+                                    <div style={{ 
+                                        position: 'absolute', 
+                                        top: '50%', 
+                                        left: '50%', 
+                                        transform: 'translate(-50%, -50%)',
+                                        display: 'flex',
+                                        transition: 'opacity 0.2s'
+                                    }}>
+                                        <CheckIcon />
+                                    </div>
+                                )}
+                            </button>
+                            <button aria-label="Importar" onClick={() => setImportAberto(true)}>
+                                Importar
+                            </button>
+                            <button aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
+                                <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
+                                    Salvar
+                                </span>
+                                {salvo && (
+                                    <div style={{ 
+                                        position: 'absolute', 
+                                        top: '50%', 
+                                        left: '50%', 
+                                        transform: 'translate(-50%, -50%)',
+                                        display: 'flex',
+                                        transition: 'opacity 0.2s'
+                                    }}>
+                                        <CheckIcon />
+                                    </div>
+                                )}
+                            </button>
+                        </div>
                     </div>
-                    <div className="config--retangulo_branco--direita">
-                        <button aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
-                            <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
-                                Copiar
-                            </span>
-                            {copiado && (
-                                <div style={{ 
-                                    position: 'absolute', 
-                                    top: '50%', 
-                                    left: '50%', 
-                                    transform: 'translate(-50%, -50%)',
-                                    display: 'flex',
-                                    transition: 'opacity 0.2s'
-                                }}>
-                                    <CheckIcon />
-                                </div>
-                            )}
-                        </button>
-                        <button aria-label="Importar" onClick={() => setImportAberto(true)}>
-                            Importar
-                        </button>
-                        <button aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
-                            <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
-                                Salvar
-                            </span>
-                            {salvo && (
-                                <div style={{ 
-                                    position: 'absolute', 
-                                    top: '50%', 
-                                    left: '50%', 
-                                    transform: 'translate(-50%, -50%)',
-                                    display: 'flex',
-                                    transition: 'opacity 0.2s'
-                                }}>
-                                    <CheckIcon />
-                                </div>
-                            )}
-                        </button>
-                    </div>
+                    <Import
+                        isOpen = {importAberto}
+                        onClose={() => setImportAberto(false)}
+                        config={config}
+                        setConfig={setConfig}
+                        setTalhaSelecionada={setTalhaSelecionada}
+                        setCodigo={setCodigo}
+                        isImporting={isImporting}
+                    />
                 </div>
-                <Import
-                    isOpen = {importAberto}
-                    onClose={() => setImportAberto(false)}
-                    config={config}
-                    setConfig={setConfig}
-                    setTalhaSelecionada={setTalhaSelecionada}
-                    setCodigo={setCodigo}
-                    isImporting={isImporting}
-                />
-                <Cliente
-                    isOpen = {clienteAberto}
-                    onClose={() => setClienteAberto(false)}
-                    cliente={cliente}
-                    setCliente={setCliente}
-                />
-                <Pdf
-                    isOpen = {pdfAberto}
-                    onClose = {() => setPdfAberto(false)}
-                    talha = {talha} 
-                    config = {config} 
-                    cliente = {cliente} 
-                    precos = {precos}
-                />
-                <Adm
-                    isOpen = {admAberto}
-                    onClose={() => setAdmAberto(false)}
-                />
-            </div>
+            )}
+            <Cliente
+                isOpen = {clienteAberto}
+                onClose={() => setClienteAberto(false)}
+                cliente={cliente}
+                setCliente={setCliente}
+            />
+            <Pdf
+                isOpen = {pdfAberto}
+                onClose = {() => setPdfAberto(false)}
+                talha = {talha} 
+                config = {config} 
+                cliente = {cliente} 
+                precos = {precos}
+            />
+            <Adm
+                isOpen = {admAberto}
+                onClose={() => setAdmAberto(false)}
+            />
             <div className="footer_frame_botoes">
                 <button aria-label="Cliente" onClick={() => setClienteAberto(true)}>
                     Cliente
@@ -189,11 +194,13 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                     Gerar DOCX
                 </button>
             </div>
-            <div className="footer_frame_botoes admbutton">
-                <button aria-label="A" onClick={() => setAdmAberto(true)}>
-                    Administração
-                </button>
-            </div>
+            {user?.isAdmin && (
+                <div className="footer_frame_botoes admbutton">
+                    <button aria-label="Admin" onClick={() => setAdmAberto(true)}>
+                        Administração
+                    </button>
+                </div>
+            )}
          </div>
         
     )
