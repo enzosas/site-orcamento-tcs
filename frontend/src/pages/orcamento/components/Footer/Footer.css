@@ -479,6 +479,7 @@
     flex-direction: column;
     flex: 1;
     min-height: 0;
+    gap: 1rem;
 }
 
 .adm .listar .table {
@@ -515,7 +516,12 @@
     display: flex;
     flex-direction: row;
     padding: 1em;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid color-mix(in srgb, var(--corFundo) 90%,black);
+    background-color: var(--corFundo);
+}
+
+.listar .table .row.selecionado {
+    filter: brightness(0.95);
 }
 
 .listar .table .col {
@@ -547,4 +553,29 @@
 
 .adm .listar .table .body::-webkit-scrollbar-button {
   display: none;
+}
+
+.acoes-usuario {
+    background: var(--corFundo);
+    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    border-radius: 0.7em;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    justify-content: space-between;
+}
+
+.acoes-usuario--closed {
+    opacity: 0;
+    max-height: 0;
+}
+
+.acoes-usuario__esq, 
+.acoes-usuario__dir {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
 }

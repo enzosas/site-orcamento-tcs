@@ -1,15 +1,25 @@
 import "../Footer.css"
 import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
+import ListarUsuariosAcoes from "./ListarUsuariosAcoes";
 
 function ListarUsuarios( ) {
 
     const [usuarios, setUsuarios] = useState(null);
     const [carregando, setCarregando] = useState(true);
+    const [selecionado, setSelecionado] = useState(null);
 
     useEffect(() => {
         fetchUsuarios();
     }, []);
+
+    const handleSelecionar = (user) => {
+        if(!selecionado || user.id !== selecionado.id){
+            setSelecionado(user);
+        } else {
+            setSelecionado(null);
+        }
+    }
 
     const fetchUsuarios = async () => {
         try {
@@ -38,6 +48,7 @@ function ListarUsuarios( ) {
     return (
         <div className="listar">
             <h1>Listar Usuários</h1>
+            <p>Clique em um usuário para ver as ações.</p>
             <div className="table">
                 <div className="header">
                         <div className="col">Usuário</div>
@@ -46,8 +57,12 @@ function ListarUsuarios( ) {
                         <div className="col">Acessos</div>
                 </div>
                 <div className="body">
-                {usuarios && usuarios.map((user) => (
-                        <div className="row" key={user.id}>
+                {usuarios && usuarios.map((user, index) => (
+                        <div 
+                            className={`row ${selecionado?.id === user.id ? "selecionado" : ""}`} 
+                            key={user.id}
+                            onClick={() => handleSelecionar(user)}
+                        >
                             <div className="col">{user.username}</div>
                             <div className="col">{user.password}</div>
                             <div className="col">{user.isAdmin ? "Sim" : "Não"}</div>
@@ -56,6 +71,14 @@ function ListarUsuarios( ) {
                     ))}
                 </div>
             </div>
+            <ListarUsuariosAcoes 
+                user={selecionado} 
+                isOpen={selecionado}
+                onUpdate={() => {
+                    fetchUsuarios();
+                    setSelecionado(null);
+                }}
+            />
         </div>
     );
 }
