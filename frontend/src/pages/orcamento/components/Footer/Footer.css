@@ -555,6 +555,100 @@
   display: none;
 }
 
+.adm .template {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.adm .template .body .botao_branco.download {
+    padding: 0.5rem;
+}
+
+.adm .template .body .botao_branco.remover {
+    padding: 0;
+}
+
+.adm .template .body .botao_branco.upload {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    height: 10rem;
+    box-shadow: 0em 0em 0.5em 0em   rgba(0, 0, 0, 0.1);
+    font-size: 2em;
+    transition: box-shadow 0.1s ease-in-out;
+    justify-content: center;
+    user-select: none;
+}
+
+.adm .template .body .botao_branco.upload:hover {
+    width: 10rem;
+    height: 10rem;
+    box-shadow: 0em 0em 0em 0em   rgba(0, 0, 0, 0.01);
+    font-size: 2em;
+    filter: brightness(0.975);
+    cursor: pointer;
+}
+
+.adm .template .body .botao_branco.upload span{
+    font-size: 2em;
+}
+
+.adm .template .body {
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    width: 50%;
+}
+
+.adm .template .body .titulo {
+    font-size: 1.5em;
+}
+
+.adm .template .body .linha {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.adm .template .body .linha.upload {
+    gap: 1rem;
+}
+
+.adm .template .body .coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.adm .template .body .texto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.adm .template .body .arquivoinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.adm .template .body .arquivoinfo.nenhum {
+    justify-content: flex-end;
+}
+
+.adm .template .body .carregado {
+    font-size: 2em;
+    line-height: 1em;
+    color: var(--corPrincipal);
+}
+
 .acoes-usuario {
     background: var(--corFundo);
     box-shadow: 0em 0em 1em 0em   var(--corSombra);

@@ -18,6 +18,7 @@ const CheckIcon = () => (
 function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
 
     const { user } = useContext(AuthContext);
+    const [arquivo, setArquivo] = useState(null);
 
     function getCodigoConfig(){
 
@@ -185,12 +186,14 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
             <Adm
                 isOpen = {admAberto}
                 onClose={() => setAdmAberto(false)}
+                arquivo={arquivo}
+                setArquivo={setArquivo}
             />
             <div className="footer_frame_botoes">
                 <button aria-label="Cliente" onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
-                <button aria-label="Gerar Docx" onClick={() => gerarDocx(talha, config, cliente, precos)}>
+                <button aria-label="Gerar Docx" onClick={() => gerarDocx(talha, config, cliente, precos, arquivo)}>
                     Gerar DOCX
                 </button>
             </div>

@@ -3,8 +3,9 @@ import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import RegistrarUsuario from "./RegistrarUsuario"
 import ListarUsuarios from "./ListarUsuarios"
+import TemplateDocx from "./TemplateDocx";
 
-function Administracao({ isOpen, onClose }) {
+function Administracao({ isOpen, onClose, arquivo, setArquivo }) {
 
     const [view, setView] = useState('listar');
 
@@ -14,6 +15,8 @@ function Administracao({ isOpen, onClose }) {
                 return <ListarUsuarios />;
             case 'registrar':
                 return <RegistrarUsuario />;
+            case 'template':
+                return <TemplateDocx arquivo={arquivo} setArquivo={setArquivo} />;
             default:
                 return <ListarUsuarios />;
         }
@@ -37,6 +40,12 @@ function Administracao({ isOpen, onClose }) {
                     onClick={() => setView('registrar')}
                     >
                         Registrar Usuário
+                    </button>
+                    <button 
+                    className={`botao_branco ${view === 'template' ? 'active' : ''}`} 
+                    onClick={() => setView('template')}
+                    >
+                        Template DOCX
                     </button>
                 </div>
                 <div className="direita">

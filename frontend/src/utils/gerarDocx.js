@@ -40,15 +40,19 @@ const formatadorPreco = new Intl.NumberFormat('pt-BR', {
     currency: 'BRL',
 });
 
-export const gerarDocx = async (talha, config, cliente, precos) => {
+export const gerarDocx = async (talha, config, cliente, precos, arquivo=null) => {
   try {
-    const response = await fetch(templatePath);
-
-    if (!response.ok) {
-      throw new Error('Erro ao carregar template');
+    let content
+    if (arquivo) {
+        content = await arquivo.arrayBuffer();
+    } else {
+        const response = await fetch(templatePath);
+        if (!response.ok) {
+          throw new Error('Erro ao carregar template');
+        }
+        content = await response.arrayBuffer();
     }
 
-    const content = await response.arrayBuffer();
     const zip = new PizZip(content);
     const doc = new Docxtemplater(zip, {
         paragraphLoop: true,
