@@ -88,7 +88,11 @@ public class PrecoService {
         return new ComponentePrecoDTO("Talha sem Circuito", talha.getModelo(), getPreco(talha.getModelo(), ipi));
     }
 
-    private ComponentePrecoDTO calculaPrecoDeVendaPainelBase(Talha talha, Boolean ipi){
+    private ComponentePrecoDTO calculaPrecoDeVendaPainelBase(Talha talha, ConfigDTO config, Boolean ipi){
+
+        if (config.isExcluirPainel()) {
+            return null;
+        }
 
         if(Objects.equals(talha.getCodigoPainelTalhaSemOpcional(), "CIRC.ORIGINAL")){
             return new ComponentePrecoDTO("Painel Base Original", talha.getCodigoPainelTalhaSemOpcional(), 0.0);
@@ -100,6 +104,10 @@ public class PrecoService {
 
     private ComponentePrecoDTO calculaPrecoDeVendaPainelAdicional(Talha talha, ConfigDTO config, Boolean ipi){
 
+        if (config.isExcluirPainel()) {
+            return null;
+        }
+        
         if(config.isPainel6Mov()){
             if(talha.getCodigoPainelTalhaSemOpcional().equals("CIRC.BASE.60X80")){
                 return new ComponentePrecoDTO("Painel Adicional incluso CIRC.BASE.60X80", talha.getCodigoPainel6Mov(), 0.0);
@@ -115,6 +123,10 @@ public class PrecoService {
     }
 
     private List<ComponentePrecoDTO> calculaPrecoDeVendaDuplaVelocidadeElevacao(Talha talha, Motor motor, ConfigDTO config, Boolean ipi, TipoMotor tipo ){
+
+        if (config.isExcluirPainel()) {
+            return List.of();
+        }
 
         List<ComponentePrecoDTO> dto = new ArrayList<>();
 
@@ -177,6 +189,10 @@ public class PrecoService {
 
     private List<ComponentePrecoDTO> calculaPrecoDeVendaDuplaVelocidadeTranslacao(Motor motor, ConfigDTO config, Boolean ipi, TipoMotor tipo){
 
+        if (config.isExcluirPainel()) {
+            return List.of();
+        }
+
         List<ComponentePrecoDTO> dto = new ArrayList<>();
 
         String disjuntorInversor;
@@ -211,6 +227,10 @@ public class PrecoService {
     }
 
     private List<ComponentePrecoDTO> calculaPrecoDeVenda6Movimentos(Motor motor, ConfigDTO config, Boolean ipi, TipoMotor tipo){
+
+        if (config.isExcluirPainel()) {
+            return List.of();
+        }
 
         List<ComponentePrecoDTO> dto = new ArrayList<>();
 
@@ -344,7 +364,7 @@ public class PrecoService {
 
         talhaSemCircuito = calculaPrecoDeVendaTalhaSemCircuito(talha, ipi);
 
-        componentesCircuito.add(calculaPrecoDeVendaPainelBase(talha, ipi));
+        componentesCircuito.add(calculaPrecoDeVendaPainelBase(talha, config, ipi));
         componentesCircuito.add(calculaPrecoDeVendaPainelAdicional(talha, config, ipi));
         componentesCircuito.addAll(calculaPrecoDeVendaDuplaVelocidadeElevacao(talha, motorElevacao, config, ipi, tipoMotor));
         componentesCircuito.addAll(calculaPrecoDeVendaDuplaVelocidadeTranslacao(motorTranslacao, config, ipi, tipoMotor));
