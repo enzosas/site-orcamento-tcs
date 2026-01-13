@@ -1,3 +1,5 @@
 temporizador.txt
 backend/maxitoken.txt
 /.idea
+/.vscode
+*.class
