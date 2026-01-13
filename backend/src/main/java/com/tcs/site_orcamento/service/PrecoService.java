@@ -363,10 +363,11 @@ public class PrecoService {
         for (ComponentePrecoDTO componente : componentesTalha) {
             if(componente != null){
                 precoTotal += componente.getPreco();
-                log.debug("\n[{}] Componente:\n{}", tipoMotor, toJson(componente));
             }
         }
         Double precoCircuito = precoTotal - talhaSemCircuito.getPreco();
+
+        log.debug("\n[{}] Lista Completa de Componentes:\n{}", tipoMotor, toJson(componentesTalha));
 
         return new PrecoDTO(precoTotal, precoCircuito, componentesCircuito);
     }
@@ -383,6 +384,8 @@ public class PrecoService {
 
         ComponentePrecoDTO compTalha = this.calculaPrecoDeVendaTalhaSemCircuito(talha, ipi);
         ComponentePrecoDTO compAdaptador = this.calculaPrecoDeVendaAdaptadorViga(config, ipi);
+
+
 
         return new OrcamentoCompletoDTO(
                 dtoSch.getPrecoTotal(),
