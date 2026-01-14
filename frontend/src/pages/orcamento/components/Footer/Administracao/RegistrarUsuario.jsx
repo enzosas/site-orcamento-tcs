@@ -41,7 +41,6 @@ function RegistrarUsuario( ) {
                 throw new Error(`Erro ao verificar disponibilidade do usuário.`);
             }
             const allUsers = await allUsersResponse.json();
-            console.table(allUsers)
             
             let usuarioJaExiste = false;
 

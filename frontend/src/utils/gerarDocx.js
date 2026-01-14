@@ -64,12 +64,6 @@ export const gerarDocx = async (talha, config, cliente, precos, arquivo=null) =>
     const talhaFormatada = formatarTalhaExibicao(talha);
     const configFormatada = formatarConfigExibicao(config);
 
-    console.table(talhaFormatada)
-    console.table(configFormatada)
-    console.table(cliente)
-    console.table(precos)
-    console.table(dados)
-
     dados = {
         ...dados,
         cepCidadeUF: `${cliente.cep} - ${cliente.cidade}/${cliente.estado}`,
