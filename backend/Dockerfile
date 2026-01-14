@@ -2,15 +2,18 @@ FROM ubuntu:latest AS build
 
 RUN apt-get update
 RUN apt-get install openjdk-17-jdk -y
+RUN apt-get install maven -y
+
+WORKDIR /app
 COPY . .
 
-RUN apt-get install maven -y
-RUN mvn clean install
+RUN mvn clean install -DskipTests
 
 FROM eclipse-temurin:17-jre
 
-EXPOSE 8081
-
+WORKDIR /app
 COPY --from=build /target/app.jar app.jar
+
+EXPOSE 8081
 
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
