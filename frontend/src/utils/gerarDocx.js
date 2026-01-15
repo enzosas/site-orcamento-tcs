@@ -39,15 +39,14 @@ export const gerarDocx = async (talha, config, cliente, precos, arquivo = null) 
         const talhaFormatada = formatarTalhaExibicao(talha);
         const configFormatada = formatarConfigExibicao(config);
         const dadosTalha = getDadosExibicao(talha, config);
-        const safeCliente = cliente || {};
 
         const dados = {
-            cepCidadeUF: `${safeCliente.cep || ''} - ${safeCliente.cidade || ''}/${safeCliente.estado || ''}`,
+            cepCidadeUF: `${cliente.cep || ''} - ${cliente.cidade || ''}/${cliente.estado || ''}`,
             correnteOuCabo: talha.correnteCabo === "Corrente" ? "Guia para Corrente" : "Guia para Cabo",
             preco: formatadorPreco.format(precos.totalTcs || 0),
             data: new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }),
             imagemTalha: imagemObjeto || "",
-            ...safeCliente,
+            ...cliente,
             ...talhaFormatada,
             ...configFormatada,
             ...dadosTalha
@@ -60,7 +59,7 @@ export const gerarDocx = async (talha, config, cliente, precos, arquivo = null) 
             type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
         });
 
-        saveAs(blobFinal, `Orcamento_${safeCliente.razaoSocial || 'Cliente'}.docx`);
+        saveAs(blobFinal, `Orcamento_${cliente.razaoSocial || 'Cliente'}.docx`);
 
     } catch (error) {
         console.error(error);
