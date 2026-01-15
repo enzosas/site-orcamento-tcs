@@ -8,6 +8,7 @@
     --corSombra: rgba(0, 0, 0, 0.05);
     --corDesfoqueFraco: color-mix(in srgb, var(--corFundo) 66%, var(--corTexto));;
     --corDesfoqueForte: color-mix(in srgb, var(--corFundo) 97.5%, var(--corTexto));;
+    --sombraPadrao: 0em 0em 1em 0em var(--corSombra);
     
 
     font-size: 12px;
@@ -22,6 +23,7 @@
     --corTexto: #ffffff;
     --corFundo: #1c2430;
     --corSombra: rgba(0, 0, 0, 0.2);
+    --sombraPadrao: 0em 0em 0em 0em var(--corSombra);
 }
 
 body {
@@ -92,7 +94,7 @@ button {
     padding: 1em;
     line-height: 1em;
     user-select: none;
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     cursor: pointer;
     border-width: 0;
 }
@@ -139,7 +141,7 @@ select:disabled {
 
 .frame-branco{
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 1rem;
     flex-grow: 100%;

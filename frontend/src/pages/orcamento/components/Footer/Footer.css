@@ -23,7 +23,7 @@
     color: var(--corDesfoqueFraco);
     background-color: var(--corFundo);
     border: var(--corDesfoqueFraco);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 1em;
     overflow: hidden;
@@ -94,7 +94,7 @@
     width: 30%;
     transition: transform 0.1s ease-out, background-color 0.2s ease;
     user-select: none;
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
 }
 
 .gerar-pdf:hover {
@@ -147,7 +147,7 @@
 
 .import .frame{
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 3rem;
     display: flex;
@@ -215,7 +215,7 @@
 
 .cliente .frame {
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 3rem;
     display: flex;
@@ -354,7 +354,7 @@
 
 .pdf .frame {
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 1rem;
     display: flex;
@@ -387,7 +387,7 @@
 
 .adm .frame {
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 1rem;
     display: flex;
@@ -411,7 +411,7 @@
 }
 
 .adm .frame .menu button {
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border: 0.15rem solid var(--corPrincipal);  
 }
 
@@ -432,7 +432,7 @@
 
 .adm .frame .direita .main {
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 3rem;
     display: flex;
@@ -651,7 +651,7 @@
 
 .acoes-usuario {
     background: var(--corFundo);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 1rem;
     display: flex;

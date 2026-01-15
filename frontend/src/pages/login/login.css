@@ -26,7 +26,7 @@ body {
 .login__frame-branco{
     background: var(--corFundo);
     color: var(--corTexto);
-    box-shadow: 0em 0em 1em 0em   var(--corSombra);
+    box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 3rem;
     display: flex;
