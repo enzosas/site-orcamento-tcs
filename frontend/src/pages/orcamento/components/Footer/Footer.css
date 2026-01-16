@@ -199,6 +199,10 @@
     padding: 1em;
 }
 
+.botao_branco:hover {
+    filter: brightness(0.975);
+}
+
 .cliente {
     position: fixed; 
     top: 0;

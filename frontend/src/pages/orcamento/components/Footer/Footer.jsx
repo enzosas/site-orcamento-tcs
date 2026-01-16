@@ -146,7 +146,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                             <p>{getCodigoConfig()}</p>
                         </div>
                         <div className="config--retangulo_branco--direita">
-                            <button aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
+                            <button className="botao_branco" aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
                                 <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
                                     Copiar
                                 </span>
@@ -163,10 +163,10 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                                     </div>
                                 )}
                             </button>
-                            <button aria-label="Importar" onClick={() => setImportAberto(true)}>
+                            <button className="botao_branco" aria-label="Importar" onClick={() => setImportAberto(true)}>
                                 Importar
                             </button>
-                            <button aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
+                            <button className="botao_branco" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
                                 <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
                                     Salvar
                                 </span>
@@ -240,7 +240,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
             )}
             {user?.isAdmin && (
                 <div className="footer_frame_botoes admbutton">
-                    <button aria-label="Admin" onClick={() => setAdmAberto(true)}>
+                    <button className="botao_branco" aria-label="Admin" onClick={() => setAdmAberto(true)}>
                         Administração
                     </button>
                 </div>

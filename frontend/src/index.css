@@ -102,11 +102,15 @@ button {
     box-shadow: var(--sombraPadrao);
     cursor: pointer;
     border-width: 0;
+    transition: filter 0.1s ease-out, transform 0.1s ease;
 }
 
 button:hover{
-    transition: filter 0.2s ease, transform 0.1s ease;
-    filter: brightness(0.975);
+    filter: brightness(0.9);
+}
+
+button:active{
+    transform: scale(0.95);
 }
 
 button:disabled {
