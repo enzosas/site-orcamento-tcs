@@ -36,6 +36,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
     const [clienteAberto, setClienteAberto] = useState(false);
     const [pdfAberto, setPdfAberto] = useState(false);
     const [admAberto, setAdmAberto] = useState(false);
+    const [mostrarResumoCliente, setMostrarResumoCliente] = useState(false);
     const isImporting = useRef(false);
     
     const [cliente, setCliente] = useState({
@@ -52,6 +53,32 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         email: "",
         whatsapp: ""
 	});
+
+    const validarCliente = () => {
+        const { pessoaContato, email, whatsapp, ...camposObrigatorios } = cliente;
+        const valido = Object.values(camposObrigatorios).every(valor => {
+            return valor !== null && valor.trim() !== "";
+        });
+        return valido;
+    }
+
+    const validarClientePessoaContato = () => {
+        const valoresContato = [
+            cliente.pessoaContato, 
+            cliente.email, 
+            cliente.whatsapp
+        ];
+        const valido = valoresContato.every(valor => {
+            return valor !== null && valor !== undefined && valor.trim() !== "";
+        })
+        console.log("pessoa ta completo? " + valido);
+        return valido;
+    }
+
+    useEffect(() => {
+        console.table(cliente);
+        setMostrarResumoCliente(validarCliente());
+    }, [cliente]);
     
     const handleCopyClick = () => {
         navigator.clipboard.writeText(codigo)
@@ -197,6 +224,20 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                     Gerar DOCX
                 </button>
             </div>
+            {mostrarResumoCliente ? (
+                <div>
+                    <p>Empresa Cliente: {cliente.razaoSocial}</p>
+                    {validarClientePessoaContato()? (
+                        <p>Responsável: {cliente.pessoaContato}</p>
+                    ) : (
+                        <p>Pessoa para contato não preenchida</p>
+                    )}
+                </div>
+            ) : (
+                <div>
+                    <p>Empresa não preenchida</p>
+                </div>
+            )}
             {user?.isAdmin && (
                 <div className="footer_frame_botoes admbutton">
                     <button aria-label="Admin" onClick={() => setAdmAberto(true)}>
