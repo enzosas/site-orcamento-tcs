@@ -10,7 +10,6 @@ body {
     gap: 4rem;
     align-items: center;
     justify-content: center;
-    user-select: none;
     -webkit-user-drag: none;
     min-height: 100vh;
     box-sizing: border-box;
@@ -31,7 +30,6 @@ body {
     padding: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
 }
 
 
@@ -46,6 +44,23 @@ body {
     line-height: 1em;
 }
 
+.login__frame-branco__botaologin{
+    margin-top: 2rem;
+    width: 25%;
+    align-self: center;
+    transition: all 0.25s ease;
+}
+
+.login__frame-branco__botaologin--hide{
+    pointer-events: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 .login__frame-branco input{
     border: 0.15em solid var(--corPrincipal);
     border-radius: 0.7em;
@@ -54,7 +69,49 @@ body {
 }
 
 .login__frame-branco__labelCampo{
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.login__carregando {
+    transition: all 0.5s ease;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.login__carregando__loader {
+    width: 1em;
+    height: 1em;
+    border: 0.2em solid var(--corPrincipal);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+
+.login__carregando--hide {
+    pointer-events: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
 }

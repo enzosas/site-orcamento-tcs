@@ -7,8 +7,8 @@ import { API_BASE_URL } from "../../config";
 function Login() {
     
     const [usuario, setUsuario] = useState('');
-    
     const [senha, setSenha] = useState('');
+    const [showCarregando, setShowCarregando] = useState(false);
 
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -24,6 +24,7 @@ function Login() {
     const handleLoginSubmit = async (evento) => {
         
         evento.preventDefault();
+        setShowCarregando(true);
         
         try {
             const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
@@ -50,6 +51,7 @@ function Login() {
         } catch (error) {
             alert('Usuário ou senha incorretos!');
             setSenha('');
+            setShowCarregando(false);
         }
     };
 
@@ -69,7 +71,7 @@ function Login() {
                 onSubmit={handleLoginSubmit}
             >
                 <h1>Login</h1>
-                <div className="login__frame-branco__labelCampo ">
+                <div className="login__frame-branco__labelCampo">
                     <label>
                         Usuário
                     </label>
@@ -79,7 +81,7 @@ function Login() {
                         onChange={handleUsuarioChange} 
                     />
                 </div>
-                <div className="login__frame-branco__labelCampo ">
+                <div className="login__frame-branco__labelCampo">
                     <label>
                         Senha
                     </label>
@@ -91,12 +93,14 @@ function Login() {
                 </div>
                 <button 
                     type="submit" 
-                    className="botao"
-                    style={{margin: "0 auto"}}
+                    className={`login__frame-branco__botaologin ${showCarregando ? 'login__frame-branco__botaologin--hide' : ''}`}
                 >
                     Entrar
                 </button>
-                
+                <div className={`login__carregando ${showCarregando ? "" : "login__carregando--hide"}`}>
+                    <span className="login__carregando__loader"></span>
+                    <p>Carregando, pode levar alguns segundos.</p>
+                </div>
             </form>
         </div>
         
