@@ -52,15 +52,15 @@ function TemplateDocx({ arquivo, setArquivo }) {
                         <p>Carregue um arquivo docx. As seções entre chaves presentes no modelo original podem ser usadas no arquivo carregado e serão substituidas pelas informações na versão gerada.</p>
                     </div>
                     <div className="linha upload">
-                        <label className="botao_branco upload">
-                            <input
-                                type="file"
-                                ref={inputRef}
-                                style={{ display: 'none' }}
-                                onChange={handleFileChange}
-                            />
+                        <input
+                            type="file"
+                            ref={inputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleFileChange}
+                        />
+                        <button className="botao_branco upload" onClick={handleButtonClick}>
                             <span className="material-symbols-outlined">upload</span>
-                        </label>
+                        </button>
                         {arquivo ? (
                             <div className="arquivoinfo">
                                 <p className="carregado">Template carregado</p>

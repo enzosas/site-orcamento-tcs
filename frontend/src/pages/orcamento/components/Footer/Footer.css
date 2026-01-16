@@ -577,22 +577,12 @@
 .adm .template .body .botao_branco.upload {
     display: flex;
     flex-direction: column;
-    width: 10rem;
-    height: 10rem;
+    width: 14rem;
+    height: 14rem;
     box-shadow: 0em 0em 0.5em 0em   rgba(0, 0, 0, 0.1);
     font-size: 2em;
-    transition: box-shadow 0.1s ease-in-out;
     justify-content: center;
     user-select: none;
-}
-
-.adm .template .body .botao_branco.upload:hover {
-    width: 10rem;
-    height: 10rem;
-    box-shadow: 0em 0em 0em 0em   rgba(0, 0, 0, 0.01);
-    font-size: 2em;
-    filter: brightness(0.975);
-    cursor: pointer;
 }
 
 .adm .template .body .botao_branco.upload span{
