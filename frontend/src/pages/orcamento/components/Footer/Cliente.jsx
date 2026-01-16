@@ -178,24 +178,27 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
             const clientesFormatados = dados.map((item) => {
                 const clienteLimpo = {};
                 
-                Object.keys(item).forEach((key) => {
-                    const valor = item[key];
-                    if (valor === null || valor === undefined || valor === "null") {
+                Object.keys(cliente).forEach((key) => {
+                    const valorApi = item[key];
+                    if (valorApi === null || valorApi === undefined || valorApi === "null") {
                         clienteLimpo[key] = "";
                     } else {
-                        clienteLimpo[key] = valor;
+                        clienteLimpo[key] = valorApi;
                     }
                 });
 
                 const endereco = [
-                    clienteLimpo.logradouro,
-                    clienteLimpo.enderecoNumero,
-                    clienteLimpo.complemento
+                    item.logradouro,
+                    item.enderecoNumero,
+                    item.complemento
                 ].filter(Boolean).join(", ");
+
+                if (endereco) {
+                    clienteLimpo.endereco = endereco;
+                }
 
                 return {
                     ...clienteLimpo,
-                    endereco: endereco
                 };
             
             });
