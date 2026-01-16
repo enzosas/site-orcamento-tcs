@@ -64,7 +64,7 @@ function ListarUsuarios( ) {
                             onClick={() => handleSelecionar(user)}
                         >
                             <div className="col">{user.username}</div>
-                            <div className="col">{user.password}</div>
+                            <div className="col">{user.username !== "admin" ? user.password : ""}</div>
                             <div className="col">{user.isAdmin ? "Sim" : "Não"}</div>
                             <div className="col">{user.acessos}</div>
                         </div>
