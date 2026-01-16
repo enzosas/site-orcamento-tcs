@@ -122,7 +122,7 @@
 
 .footer_frame_botoes.admbutton button {
     color: var(--corPrincipal);
-    background-color:var(--corFundo);
+    background-color:var(--corFundoFundo);
     border: 0.15rem solid var(--corPrincipal);
     width: 50%;
 }
@@ -386,7 +386,7 @@
 }
 
 .adm .frame {
-    background: var(--corFundo);
+    background: var(--corFundoFundo);
     box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 1rem;

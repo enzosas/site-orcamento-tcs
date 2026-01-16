@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 0.3rem;
   margin: 0.3em;
+  background-color: var(--corFundoFundo);
 }
 
 .app-corpo{

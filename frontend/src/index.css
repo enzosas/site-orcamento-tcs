@@ -5,29 +5,34 @@
     --corSelecao: #77879E;
     --corTexto: #000000;
     --corFundo: #ffffff;
+    --corFundoFundo: var(--corFundo);
     --corSombra: rgba(0, 0, 0, 0.05);
     --corDesfoqueFraco: color-mix(in srgb, var(--corFundo) 66%, var(--corTexto));;
     --corDesfoqueForte: color-mix(in srgb, var(--corFundo) 97.5%, var(--corTexto));;
     --sombraPadrao: 0em 0em 1em 0em var(--corSombra);
     
-
     font-size: 12px;
     --lineHeight: 1.5em;
     line-height: var(--lineHeight);
-    background-color: var(--corFundo);
 }
 
 [data-theme="dark"] {
     --corPrincipal: #77879E;
     --corSelecao: #1A365D;
     --corTexto: #ffffff;
-    --corFundo: #1c2430;
+    --corFundo: #1c2130;
+    --corFundoFundo: #191d2a;
     --corSombra: rgba(0, 0, 0, 0.2);
     --sombraPadrao: 0em 0em 0em 0em var(--corSombra);
 }
 
+html {
+    background-color: var(--corFundoFundo);
+}
+
 body {
     margin: 0.3rem;
+    background-color: var(--corFundoFundo);
 }
 
 h1, h2, h3, h4, h5, h6, p {
