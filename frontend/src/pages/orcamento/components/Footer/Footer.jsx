@@ -104,13 +104,19 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         if (salvo) {
             return;
         }
+
+        const dadosParaEnviar = {
+            config: config,
+            cliente: cliente
+        }
+
         try {
             const response = await fetch(`${API_BASE_URL}/api/orcamentos/salvar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(config),
+                body: JSON.stringify(dadosParaEnviar),
             });
             if (!response.ok) {
                 const errorBody = await response.text();

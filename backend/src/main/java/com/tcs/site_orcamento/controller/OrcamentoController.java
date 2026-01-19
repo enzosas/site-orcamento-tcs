@@ -1,6 +1,7 @@
 package com.tcs.site_orcamento.controller;
 
 import com.tcs.site_orcamento.dto.ConfigDTO;
+import com.tcs.site_orcamento.dto.SalvarOrcamentoDTO;
 import com.tcs.site_orcamento.entity.Orcamento;
 import com.tcs.site_orcamento.repository.OrcamentoRepository;
 import com.tcs.site_orcamento.service.OrcamentoService;
@@ -30,8 +31,11 @@ public class OrcamentoController {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<Orcamento> salvar(@RequestBody ConfigDTO config) {
-        Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(config);
+    public ResponseEntity<Orcamento> salvar(@RequestBody SalvarOrcamentoDTO request) {
+        Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(
+            request.getConfig(),
+            request.getCliente()
+        );
         return ResponseEntity.ok(orcamentoSalvo);
     }
 }

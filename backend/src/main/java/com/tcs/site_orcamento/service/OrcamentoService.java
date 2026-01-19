@@ -3,6 +3,9 @@ package com.tcs.site_orcamento.service;
 import com.tcs.site_orcamento.dto.ConfigDTO;
 import com.tcs.site_orcamento.entity.Orcamento;
 import com.tcs.site_orcamento.repository.OrcamentoRepository;
+
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ public class OrcamentoService {
     @Autowired
     private OrcamentoRepository orcamentoRepository;
 
-    public Orcamento salvarOrcamento(ConfigDTO config) {
+    public Orcamento salvarOrcamento(ConfigDTO config, Map<String, Object> dadosCliente) {
         Orcamento orcamento = new Orcamento();
         orcamento.setTalhaSelecionada(config.getTalhaSelecionada());
         orcamento.setExcluirPainel(config.isExcluirPainel());
@@ -31,6 +34,8 @@ public class OrcamentoService {
         orcamento.setGuiaCaboAco(config.isGuiaCaboAco());
         orcamento.setCelulaCarga(config.isCelulaCarga());
         orcamento.setAdaptadorViga(config.isAdaptadorViga());
+
+        orcamento.setCliente(dadosCliente);
 
         return orcamentoRepository.save(orcamento);
     }

@@ -1,5 +1,10 @@
 package com.tcs.site_orcamento.entity;
 
+import java.util.Map;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,5 +63,9 @@ public class Orcamento {
 
     @Column(nullable = false)
     private Boolean adaptadorViga;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "cliente", columnDefinition = "jsonb")
+    private Map<String, Object> cliente;
 
 }
