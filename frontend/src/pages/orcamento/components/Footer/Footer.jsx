@@ -27,6 +27,14 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         }
         else return codigo;
     }
+
+    const handleGerarDocx = () => {
+        if (!validarClientePessoaContato()) {
+            alert("Preencha todos os campos na seção cliente para gerar o orçamento.");
+        } else {
+            gerarDocx(talha, config, cliente, precos, arquivo);
+        }
+    }
     
     
     const [codigo, setCodigo] = useState(null);
@@ -71,12 +79,10 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         const valido = valoresContato.every(valor => {
             return valor !== null && valor !== undefined && valor.trim() !== "";
         })
-        console.log("pessoa ta completo? " + valido);
         return valido;
     }
 
     useEffect(() => {
-        console.table(cliente);
         setMostrarResumoCliente(validarCliente());
     }, [cliente]);
     
@@ -220,7 +226,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 <button aria-label="Cliente" onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
-                <button aria-label="Gerar Docx" onClick={() => gerarDocx(talha, config, cliente, precos, arquivo)}>
+                <button aria-label="Gerar Docx" onClick={() => handleGerarDocx()}>
                     Gerar DOCX
                 </button>
             </div>
