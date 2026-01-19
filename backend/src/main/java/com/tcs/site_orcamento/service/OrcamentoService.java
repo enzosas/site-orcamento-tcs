@@ -1,6 +1,7 @@
 package com.tcs.site_orcamento.service;
 
 import com.tcs.site_orcamento.dto.ConfigDTO;
+import com.tcs.site_orcamento.dto.SalvarOrcamentoDTO;
 import com.tcs.site_orcamento.entity.Orcamento;
 import com.tcs.site_orcamento.repository.OrcamentoRepository;
 
@@ -40,7 +41,7 @@ public class OrcamentoService {
         return orcamentoRepository.save(orcamento);
     }
 
-    public ConfigDTO orcToDto(Orcamento orcamento) {
+    public SalvarOrcamentoDTO orcToDto(Orcamento orcamento) {
         ConfigDTO dto = new ConfigDTO();
         dto.setTalhaSelecionada(orcamento.getTalhaSelecionada());
         dto.setExcluirPainel(orcamento.getExcluirPainel());
@@ -57,6 +58,12 @@ public class OrcamentoService {
         dto.setGuiaCaboAco(orcamento.getGuiaCaboAco());
         dto.setCelulaCarga(orcamento.getCelulaCarga());
         dto.setAdaptadorViga(orcamento.getAdaptadorViga());
-        return dto;
+
+        SalvarOrcamentoDTO dtoCompleto = new SalvarOrcamentoDTO();
+
+        dtoCompleto.setConfig(dto);
+        dtoCompleto.setCliente(orcamento.getCliente()); 
+
+        return dtoCompleto;
     }
 }

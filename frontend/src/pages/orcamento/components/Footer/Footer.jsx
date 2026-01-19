@@ -205,6 +205,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                         setTalhaSelecionada={setTalhaSelecionada}
                         setCodigo={setCodigo}
                         isImporting={isImporting}
+                        cliente={cliente}
+                        setCliente={setCliente}
                     />
                 </div>
             )}

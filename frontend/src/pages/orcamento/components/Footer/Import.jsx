@@ -19,7 +19,7 @@ const validarNovaConfig = (velhaConfig, novaConfig) => {
     return null;
 }
 
-function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCodigo, isImporting }) {
+function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCodigo, isImporting, cliente, setCliente }) {
     
     const [texto, setTexto] = useState("");
     const [erro, setErro] = useState("");
@@ -62,13 +62,31 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
                 return;
             }
 
-            const novaConfig = await responseConfig.json();
+            const jsonConfigCliente = await responseConfig.json();
+
+            const novaConfig = jsonConfigCliente.config;
 
             const erroValidacaoConfig = validarNovaConfig(config, novaConfig);
             if (erroValidacaoConfig) {
                 setErro(erroValidacaoConfig);
                 setShowErro(true);
                 return;
+            }
+
+            const clienteImportado = jsonConfigCliente.cliente;
+            if (clienteImportado && clienteImportado !== "null") {
+                setCliente(() => {
+                    const novoCliente = { ...cliente }
+                    Object.keys(cliente).forEach((key) => {
+                        novoCliente[key] === "";
+                    })
+                    Object.keys(cliente).forEach((key) => {
+                        if (clienteImportado[key] !== undefined) {
+                            novoCliente[key] = clienteImportado[key];
+                        }
+                    })
+                    return novoCliente;
+                })
             }
 
             const modeloTalha = novaConfig.talhaSelecionada;

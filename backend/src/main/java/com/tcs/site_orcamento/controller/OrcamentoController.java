@@ -21,10 +21,10 @@ public class OrcamentoController {
     private OrcamentoService orcamentoService;
 
     @GetMapping("/buscar")
-    public ResponseEntity<ConfigDTO> buscar(@RequestParam Integer id) {
+    public ResponseEntity<SalvarOrcamentoDTO> buscar(@RequestParam Integer id) {
         return orcamentoRepository.findById(id)
                 .map(orcamento -> {
-                    ConfigDTO dto = orcamentoService.orcToDto(orcamento);
+                    SalvarOrcamentoDTO dto = orcamentoService.orcToDto(orcamento);
                     return ResponseEntity.ok(dto);
                 })
                 .orElse(ResponseEntity.notFound().build());
