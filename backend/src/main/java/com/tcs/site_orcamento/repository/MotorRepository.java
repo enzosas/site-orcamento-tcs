@@ -5,9 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
-public interface MotorRepository extends JpaRepository<Motor, String> {
+public interface MotorRepository extends JpaRepository<Motor, Long> {
 
     @Query("SELECT m FROM Motor m WHERE m.motor = :motor AND m.tensao = :tensao")
     Motor findByMotorAndTensao(
