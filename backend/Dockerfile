@@ -1,17 +1,19 @@
-FROM ubuntu:latest AS build
-
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-RUN apt-get install maven -y
+FROM maven:3.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
-COPY . .
 
-RUN mvn clean install -DskipTests
+COPY pom.xml .
+
+RUN mvn dependency:go-offline
+
+COPY src ./src
+
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre
 
 WORKDIR /app
+
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8081
