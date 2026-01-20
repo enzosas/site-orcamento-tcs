@@ -54,6 +54,7 @@
 
 .selector::-webkit-scrollbar {
   width: 0.4em; 
+  height: 0.4em;
   background: transparent;
 }
 
