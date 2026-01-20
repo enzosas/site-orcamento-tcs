@@ -611,7 +611,7 @@
     flex-direction: column;
     width: 12rem;
     height: 12rem;
-    box-shadow: 0em 0em 0.5em 0em   rgba(0, 0, 0, 0.1);
+    box-shadow: var(--sombraBotao);
     font-size: 2em;
     justify-content: center;
     user-select: none;

@@ -10,6 +10,7 @@
     --corDesfoqueFraco: color-mix(in srgb, var(--corFundo) 66%, var(--corTexto));;
     --corDesfoqueForte: color-mix(in srgb, var(--corFundo) 97.5%, var(--corTexto));;
     --sombraPadrao: 0em 0em 1em 0em var(--corSombra);
+    --sombraBotao: 0em 0em 0.5em 0em   rgba(0, 0, 0, 0.1);
     
     font-size: 12px;
     --lineHeight: 1.5em;
@@ -24,6 +25,7 @@
     --corFundoFundo: #191d2a;
     --corSombra: rgba(0, 0, 0, 0.2);
     --sombraPadrao: 0em 0em 0em 0em var(--corSombra);
+    --sombraBotao: 0em 0em 0.5em 0.2em   rgba(0, 0, 0, 0.2);
 }
 
 html {
