@@ -231,7 +231,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
             <div className="frame">
                 <h1>Cliente</h1>
                 <div className="body">
-                    <div className={`body_import ${ isImportAberto ? "open" : ""}`}>
+                    <div className={`body_import ${ isImportAberto ? "" : "closed"}`}>
                         <div className="fileira">
                             <div className="input_com_label preencher">
                                 <p>Insira CNPJ ou CPF para importar os dados do cliente</p>
@@ -296,7 +296,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                             {erro}
                         </div>
                     </div>
-                    <div className={`body_cliente ${isImportAberto ? "" : "open"}`}>
+                    <div className={`body_cliente ${isImportAberto ? "closed" : ""}`}>
                         <div className="fileira">
                             <div className="input_com_label">
                                 <p>CNPJ / CPF</p>
