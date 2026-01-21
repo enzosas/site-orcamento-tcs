@@ -62,6 +62,17 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         whatsapp: ""
 	});
 
+    useEffect(() => {
+        if (importAberto || clienteAberto || pdfAberto || admAberto) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [importAberto, clienteAberto, pdfAberto, admAberto]);
+
     const validarCliente = () => {
         const { pessoaContato, email, whatsapp, ...camposObrigatorios } = cliente;
         const valido = Object.values(camposObrigatorios).every(valor => {
