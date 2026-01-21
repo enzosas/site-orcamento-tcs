@@ -348,7 +348,7 @@
 }
 
 .main-footer .selector-border.footer{
-    transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    transition: max-height 0.2s ease, opacity 0.2s ease-in;
     border: 0.15rem solid var(--corPrincipal);
     border-radius: 0.7em;
     margin: 0;
