@@ -408,7 +408,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                 </div>
                 <div className="frame_botoes">
                     <div className="esq">
-                        <button className="botao_branco" onClick={() => setImportAberto(!isImportAberto)}>
+                        <button className="botao_branco" onClick={() => {setImportAberto(!isImportAberto), setShowListaResultados(false)}}>
                             {isImportAberto ? "Voltar" : "Importar"}
                         </button>
                     </div>
