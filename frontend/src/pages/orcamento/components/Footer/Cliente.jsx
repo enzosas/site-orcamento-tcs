@@ -264,29 +264,24 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                                 Buscar
                             </button>
                         </div>
-                        
-
-                        
-                        <div className="fileira">
-                            <div
-                                className={`selector-border footer ${showListaResultados ? "open" : ""}`}
-                            >
-                                <div className="selector footer">
-                                    {listaResultados.map((item, index) => (
-                                        <div
-                                            key={index}
-                                            className={"modelo-opcao footer"}
-                                            onClick={() => {
-                                                setClienteLocal(item);
-                                                setShowListaResultados(false);
-                                                setImportAberto(false);
-                                                setListaResultados([]);
-                                            }}
-                                        >
-                                            {item.razaoSocial}
-                                        </div>
-                                    ))}
-                                </div>
+                        <div
+                            className={`selector-border footer ${showListaResultados ? "open" : ""}`}
+                        >
+                            <div className="selector footer">
+                                {listaResultados.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className={"modelo-opcao footer"}
+                                        onClick={() => {
+                                            setClienteLocal(item);
+                                            setShowListaResultados(false);
+                                            setImportAberto(false);
+                                            setListaResultados([]);
+                                        }}
+                                    >
+                                        {item.razaoSocial}
+                                    </div>
+                                ))}
                             </div>
                         </div>
 

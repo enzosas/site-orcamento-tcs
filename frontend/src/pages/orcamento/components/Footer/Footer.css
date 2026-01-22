@@ -147,6 +147,10 @@
     z-index: 1000;
 }
 
+.import input {
+    padding: 0.5em;
+}
+
 .import .frame{
     background: var(--corFundo);
     box-shadow: var(--sombraPadrao);
@@ -179,11 +183,13 @@
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    margin: 0 !important;
 }
 
 .erro.true{
     max-height: 2em;
     opacity: 1;
+    margin-top: 1rem !important;
 }
 
 .import .frame_botoes{
@@ -273,9 +279,10 @@
     font-size: 1rem;
     width: 100%;
     box-sizing: border-box;
+    padding: 0.5em;
 }
 
-.cliente .body_import,
+
 .cliente .body_cliente{
     display: flex;
     flex-direction: column;
@@ -284,8 +291,15 @@
     overflow: hidden;
 }
 
-.cliente .body_import {
-    gap: 1rem;
+.cliente .body_import{
+    display: flex;
+    flex-direction: column;
+    transition: max-height 0.5s ease, opacity 0.2s ease;
+    overflow: hidden;
+}
+
+.body_import > div:not(:first-child) {
+    margin-top: 2rem;
 }
 
 .cliente .body_import.closed,
@@ -334,33 +348,39 @@
     gap: 1em;
 }
 
+
+.main-footer .selector-border.footer{
+    transition: max-height 0.2s ease, opacity 0.2s ease-in;
+    border: 0.15rem solid var(--corPrincipal);
+    border-radius: 0.7em;
+    max-width: 100%;
+    flex: 1;
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    pointer-events: none;
+}
+
 .main-footer .selector.footer{
     padding: 0.5em;
     font-family: 'Poppins';
     user-select: none;
+    margin: 0;
 
     max-width: calc(100% - 2em);;
     transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
     min-height: 10em;
     max-height: 10em;
     overflow-y: auto; 
-	text-align: left;
-}
-
-.main-footer .selector-border.footer{
-    transition: max-height 0.2s ease, opacity 0.2s ease-in;
-    border: 0.15rem solid var(--corPrincipal);
-    border-radius: 0.7em;
-    margin: 0;
-    max-width: 100%;
-    flex: 1;
-    max-height: 0;
-    opacity: 0;
+    text-align: left;
+    width: 100%;
 }
 
 .main-footer .selector-border.open.footer{
     max-height: 11em;
     opacity: 1;
+    pointer-events: all;
+    margin-top: 1rem;
 }
 
 .main-footer .modelo-opcao.footer{
