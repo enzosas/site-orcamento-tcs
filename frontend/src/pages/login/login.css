@@ -65,6 +65,7 @@ body {
     border: 0.15em solid var(--corPrincipal);
     border-radius: 0.7em;
     font-size: 1rem;
+    padding: 0.5em;
     width: 30rem;
 }
 
