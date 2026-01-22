@@ -5,7 +5,7 @@ import { formatarTalhaExibicao, formatarConfigExibicao, getDadosExibicao } from 
 
 const formatadorPreco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
-export const gerarDocx = async (talha, config, cliente, precos, arquivo = null) => {
+export const gerarDocx = async (talha, config, cliente, precos, pagamento, arquivo = null) => {
     try {
         let templateBlob;
         if (arquivo) {
@@ -40,6 +40,17 @@ export const gerarDocx = async (talha, config, cliente, precos, arquivo = null) 
         const configFormatada = formatarConfigExibicao(config);
         const dadosTalha = getDadosExibicao(talha, config);
 
+        const precoBaseTalha = pagamento.tipoPainel === "TCS" 
+            ? precos.totalTcs 
+            : precos.totalSch;
+
+        const precoTotalGeral = precoBaseTalha 
+            + Number(pagamento.ajusteTalha) 
+            + Number(pagamento.valorMontagem) 
+            + Number(pagamento.valorFrete);
+
+        const precoTotalGeralQuant = precoTotalGeral * Number(pagamento.quantidade);
+
         const dados = {
             cepCidadeUF: `${cliente.cep || ''} - ${cliente.cidade || ''}/${cliente.estado || ''}`,
             correnteOuCabo: talha.correnteCabo === "Corrente" ? "Guia para Corrente" : "Guia para Cabo",
@@ -47,9 +58,13 @@ export const gerarDocx = async (talha, config, cliente, precos, arquivo = null) 
             data: new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }),
             imagemTalha: imagemObjeto || "",
             ...cliente,
+            ...pagamento,
             ...talhaFormatada,
             ...configFormatada,
-            ...dadosTalha
+            ...dadosTalha,
+            precoBaseTalha : formatadorPreco.format(precoBaseTalha),
+            precoTotalGeral: formatadorPreco.format(precoTotalGeral),
+            precoTotalGeralQuant: formatadorPreco.format(precoTotalGeralQuant)
         };
 
         const handler = new TemplateHandler();
