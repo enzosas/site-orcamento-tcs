@@ -152,7 +152,7 @@
 }
 
 .import .frame{
-    background: var(--corFundo);
+    background: var(--corFundoFundo);
     box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 3rem;
@@ -254,7 +254,7 @@
 }
 
 .cliente .frame {
-    background: var(--corFundo);
+    background: var(--corFundoFundo);
     box-shadow: var(--sombraPadrao);
     border-radius: 0.7em;
     padding: 3rem;
@@ -536,6 +536,10 @@
 .adm .registrar .input_com_label {
     display: flex;
     flex-direction: column;
+}
+
+.adm .registrar .input_com_label input {
+    padding: 0.5em;
 }
 
 .adm .listar {
