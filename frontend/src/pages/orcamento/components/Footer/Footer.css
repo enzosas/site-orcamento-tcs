@@ -289,6 +289,7 @@
     gap: 2rem;
     transition: max-height 0.5s ease, opacity 0.2s ease;
     overflow: hidden;
+    max-height: 29.5em;
 }
 
 .cliente .body_import{
@@ -296,6 +297,7 @@
     flex-direction: column;
     transition: max-height 0.5s ease, opacity 0.2s ease;
     overflow: hidden;
+    max-height: 11em;
 }
 
 .body_import > div:not(:first-child) {
@@ -747,21 +749,29 @@
 
     .cliente .input_com_label {
         width: 100%;
-        flex: 1;
+        flex-direction: row;
+    }
+
+    .cliente .body_cliente{
+        max-height: 74em;
+    }
+
+    .cliente .body_import{
+        max-height: 21em;
     }
 
     .cliente .fileira {
         flex-direction: column;
     }
-    
+
     .cliente .frame_botoes {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 
-    .cliente .frame_botoes .dir {
-        flex-direction: column;
+    .cliente .frame_botoes .dir,
+    .cliente .frame_botoes .esq {
+        display: contents; 
     }
 
     .adm {
