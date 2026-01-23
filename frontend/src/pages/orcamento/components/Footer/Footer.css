@@ -586,6 +586,7 @@
     padding: 1em;
     border-bottom: 1px solid color-mix(in srgb, var(--corFundo) 90%,black);
     background-color: var(--corFundo);
+    transition: filter 0.2s ease;
 }
 
 .listar .table .row.selecionado {
@@ -716,13 +717,22 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    box-sizing: border-box;
+    transition: max-height 0.2s ease, padding 0.2s ease;
     justify-content: space-between;
+    max-height: 6rem;
+    overflow: hidden;
 }
 
 .acoes-usuario--closed {
+    padding: 0;
+    overflow: hidden;
     opacity: 0;
     max-height: 0;
+    padding: 0;
+    border: none; 
+    pointer-events: none;
+    transition: max-height 0.2s ease, padding 0.2s ease, opacity 0.2s step-end;
 }
 
 .acoes-usuario__esq, 

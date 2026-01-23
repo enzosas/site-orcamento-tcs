@@ -4,9 +4,9 @@ import { API_BASE_URL } from "../../../../../config";
 
 function ListarUsuariosAcoes({ user, isOpen, onUpdate }) {
 
-    if (!user) return null;
-
     const handleExcluir = async () => {
+
+        if (!user) return;
 
         if (user.username === "admin") {
             alert("Não.")
@@ -31,10 +31,10 @@ function ListarUsuariosAcoes({ user, isOpen, onUpdate }) {
     }
 
     return (
-        <div className={`acoes-usuario${isOpen ? "" : "--closed"}`}>
+        <div className={`acoes-usuario ${isOpen ? "" : "acoes-usuario--closed"}`}>
             <div className="acoes-usuario__esq">
-                <p>Usuário: {user.username}</p>
-                <p>ID: {user.id}</p>
+                <p>Usuário: {user?.username}</p>
+                <p>ID: {user?.id}</p>
             </div>
             <div className="acoes-usuario__dir">
                 <button onClick={handleExcluir}>Excluir</button>
