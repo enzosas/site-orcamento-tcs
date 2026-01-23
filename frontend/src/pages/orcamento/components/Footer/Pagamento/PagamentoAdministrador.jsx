@@ -59,19 +59,31 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
     const opcoesComissao = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     const precoBaseTalha = pagamento.tipoPainel === "TCS" 
-        ? gerarDocxObjetos.precos.totalTcs 
-        : gerarDocxObjetos.precos.totalSch;
-
-    const precoTotalGeral = precoBaseTalha 
-        + Number(pagamento.ajusteTalha) 
-        + Number(pagamento.valorMontagem) 
-        + Number(pagamento.valorFrete);
+        ? gerarDocxObjetos.precos.totalTcs + Number(pagamento.ajusteTalha) 
+        : gerarDocxObjetos.precos.totalSch + Number(pagamento.ajusteTalha)
+    ;
 
     const formatadorPreco = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
     });
 
+    const precoTotalSemComissao = precoBaseTalha*Number(pagamento.quantidade) 
+            + Number(pagamento.valorMontagem) 
+            + Number(pagamento.valorFrete)
+    ;
+
+    const calculoComissao = () => {
+        const precoVenda = precoTotalSemComissao;
+        const operacao = (100 - pagamento.percentualComissaoVendas) / 100
+        const valorTotal = precoVenda / operacao;
+        return valorTotal - precoVenda;
+    }
+
+    const precoTotal = precoTotalSemComissao + calculoComissao();
+
+    const precoUnitario = precoTotal / Number(pagamento.quantidade);
+    
     const handleGerarDocx = () => {
         gerarDocx(
             gerarDocxObjetos.talha,
@@ -89,7 +101,18 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
             [campo]: valor
         }));
     };
-
+    
+    useEffect(() => {
+        if (pagamento.precoTotal !== precoTotal || pagamento.precoUnitario !== precoUnitario) {
+            setPagamento((prev) => ({
+                ...prev,
+                precoTotal: precoTotal,
+                precoUnitario: precoUnitario
+            }));
+        }
+    }, [precoTotal, precoUnitario, pagamento.precoTotal, pagamento.precoUnitario, pagamento]);
+    
+    console.table(pagamento)
     return (
         <div className="pagamento__background">
             <div className="pagamento__window">
@@ -248,6 +271,7 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                             <h4>Quantidade</h4>
                             <input 
                                 name="quantidade" 
+                                type="number"
                                 value={pagamento.quantidade} 
                                 onChange={(e) => handleChange("quantidade", e.target.value)}
                                 onFocus={(e) => e.target.select()}
@@ -272,16 +296,7 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                                 </div>
                                 <div className="pagamento__window__main__preco__linha__pontinhos"/>
                                 <div className="pagamento__window__main__preco__linha__valor">
-                                    {pagamento.tipoPainel === "TCS" ? formatadorPreco.format(gerarDocxObjetos.precos.totalTcs) : formatadorPreco.format(gerarDocxObjetos.precos.totalSch)}
-                                </div>
-                            </div>
-                            <div className="pagamento__window__main__preco__linha">
-                                <div className="pagamento__window__main__preco__linha__tag">
-                                    Ajuste
-                                </div>
-                                <div className="pagamento__window__main__preco__linha__pontinhos"/>
-                                <div className="pagamento__window__main__preco__linha__valor">
-                                    {formatadorPreco.format(pagamento.ajusteTalha)}
+                                    {formatadorPreco.format(precoBaseTalha)}
                                 </div>
                             </div>
                             <div className="pagamento__window__main__preco__linha">
@@ -302,13 +317,31 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                                     {formatadorPreco.format(pagamento.valorFrete)}
                                 </div>
                             </div>
-                            <div className="pagamento__window__main__preco__linha--final">
+                            <div className="pagamento__window__main__preco__linha">
                                 <div className="pagamento__window__main__preco__linha__tag">
-                                    Total Talha
+                                    Comissão
                                 </div>
                                 <div className="pagamento__window__main__preco__linha__pontinhos"/>
                                 <div className="pagamento__window__main__preco__linha__valor">
-                                    {formatadorPreco.format(precoTotalGeral)}
+                                    {formatadorPreco.format(calculoComissao())}
+                                </div>
+                            </div>
+                            <div className="pagamento__window__main__preco__linha--final">
+                                <div className="pagamento__window__main__preco__linha__tag">
+                                    Valor Unitário
+                                </div>
+                                <div className="pagamento__window__main__preco__linha__pontinhos"/>
+                                <div className="pagamento__window__main__preco__linha__valor">
+                                    {formatadorPreco.format(precoUnitario)}
+                                </div>
+                            </div>
+                            <div className="pagamento__window__main__preco__linha">
+                                <div className="pagamento__window__main__preco__linha__tag">
+                                    Total
+                                </div>
+                                <div className="pagamento__window__main__preco__linha__pontinhos"/>
+                                <div className="pagamento__window__main__preco__linha__valor">
+                                    {formatadorPreco.format(precoTotal)}
                                 </div>
                             </div>
                         </div>

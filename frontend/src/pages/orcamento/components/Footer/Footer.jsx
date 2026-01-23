@@ -131,6 +131,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         observacoes: "",
         quantidade: 1,
         tipoPainel: "TCS",
+        precoUnitario: 0,
+        precoTotal: 0
     });
 
     const gerarDocxObjetos = {

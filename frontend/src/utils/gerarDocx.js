@@ -59,12 +59,11 @@ export const gerarDocx = async (talha, config, cliente, precos, pagamento, arqui
             imagemTalha: imagemObjeto || "",
             ...cliente,
             ...pagamento,
+            precoUnitarioF: formatadorPreco.format(pagamento.precoUnitario),
+            precoTotalF: formatadorPreco.format(pagamento.precoTotal),
             ...talhaFormatada,
             ...configFormatada,
             ...dadosTalha,
-            precoBaseTalha : formatadorPreco.format(precoBaseTalha),
-            precoTotalGeral: formatadorPreco.format(precoTotalGeral),
-            precoTotalGeralQuant: formatadorPreco.format(precoTotalGeralQuant)
         };
 
         const handler = new TemplateHandler();
