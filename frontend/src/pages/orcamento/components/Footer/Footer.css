@@ -297,7 +297,7 @@
     flex-direction: column;
     transition: max-height 0.5s ease, opacity 0.2s ease;
     overflow: hidden;
-    max-height: 14em;
+    max-height: 26em;
 }
 
 .body_import > div:not(:first-child) {
@@ -757,7 +757,7 @@
     }
 
     .cliente .body_import{
-        max-height: 30em;
+        max-height: 38em;
     }
 
     .cliente .fileira {
