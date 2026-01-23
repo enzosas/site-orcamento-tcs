@@ -30,11 +30,11 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         else return codigo;
     }
 
-    const handleGerarDocx = () => {
+    const handlePagamento = () => {
         if (!validarClientePessoaContato()) {
             alert("Preencha todos os campos na seção cliente para gerar o orçamento.");
         } else {
-            gerarDocx(talha, config, cliente, precos, arquivo);
+            setPagamentoAberto(true);
         }
     }
     
