@@ -182,12 +182,12 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out, opacity 0.2s ease-in;
+    transition: max-height 0.2s ease, opacity 0.2s ease-in;
     margin: 0 !important;
 }
 
 .erro.true{
-    max-height: 2em;
+    max-height: 3em;
     opacity: 1;
     margin-top: 1rem !important;
 }
@@ -297,7 +297,7 @@
     flex-direction: column;
     transition: max-height 0.5s ease, opacity 0.2s ease;
     overflow: hidden;
-    max-height: 11em;
+    max-height: 14em;
 }
 
 .body_import > div:not(:first-child) {
@@ -757,7 +757,7 @@
     }
 
     .cliente .body_import{
-        max-height: 21em;
+        max-height: 30em;
     }
 
     .cliente .fileira {
