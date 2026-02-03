@@ -120,24 +120,28 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                     <h1>Pagamento</h1>
                     {(gerarDocxObjetos.cliente?.razaoSocial || gerarDocxObjetos.cliente?.pessoaContato || numeroOrcamento) && (
                             <div className="pagamento__window__header__infobar">
-                            {gerarDocxObjetos.cliente?.razaoSocial && (
-                                <div className="pagamento__window__header__infobar__labelContent">
-                                    <h2>Cliente</h2>
-                                    <p>{gerarDocxObjetos.cliente.razaoSocial}</p>
+                                <div className="pagamento__window__header__infobar__clientecontato">
+                                    {gerarDocxObjetos.cliente?.razaoSocial && (
+                                        <div className="pagamento__window__header__infobar__labelContent">
+                                            <h2>Cliente</h2>
+                                            <p>{gerarDocxObjetos.cliente.razaoSocial}</p>
+                                        </div>
+                                    )}
+                                    {gerarDocxObjetos.cliente?.pessoaContato && (
+                                    <div className="pagamento__window__header__infobar__labelContent">
+                                        <h2>Contato</h2>
+                                        <p>{gerarDocxObjetos.cliente.pessoaContato}</p>
+                                    </div>
+                                    )}
                                 </div>
-                            )}
-                            {gerarDocxObjetos.cliente?.pessoaContato && (
-                            <div className="pagamento__window__header__infobar__labelContent">
-                                <h2>Contato</h2>
-                                <p>{gerarDocxObjetos.cliente.pessoaContato}</p>
-                            </div>
-                            )}
-                            {numeroOrcamento && (
-                                <div className="pagamento__window__header__infobar__labelContent">
-                                    <h2>Número Orçamento</h2>
-                                    <p>{numeroOrcamento}</p>
-                                </div>
-                            )}
+                                    {numeroOrcamento && (
+                                        <div className="pagamento__window__header__infobar__idorcamento">
+                                            <div className="pagamento__window__header__infobar__labelContent">
+                                                <h2>Número Orçamento</h2>
+                                                <p>{numeroOrcamento}</p>
+                                            </div>
+                                        </div>
+                                    )}
                         </div>
                     )}
                 </div>

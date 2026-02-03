@@ -26,7 +26,6 @@
     gap: 3rem;
     box-sizing: border-box;
     max-height: 100%;
-    max-width: 73em;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -57,6 +56,17 @@
     justify-content: space-between;
 }
 
+.pagamento__window__header__infobar__clientecontato {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.pagamento__window__header__infobar__idorcamento {
+    display: flex;
+    flex-direction: row;    
+}
+
 .pagamento__window__header__infobar__labelContent {
     display: flex;
     flex-direction: row;
@@ -79,7 +89,6 @@
     gap: 3em;
     column-fill: auto;
     box-sizing: border-box;
-    padding: 0.4rem;
 }
 
 .pagamento__window__main__coluna1,
@@ -88,6 +97,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    max-width: 20em;
 }
 
 .pagamento__window__main__combobox h4 {
@@ -157,7 +167,8 @@
     gap: 1em;
     box-sizing: border-box;
     max-height: 100%;
-    max-width: 20em;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .pagamento__window__main__preco__linha {
@@ -175,6 +186,7 @@
 
 .pagamento__window__main__preco__linha__tag {
     text-align: left;
+    min-width: max-content;
 }
 
 .pagamento__window__main__preco__linha__valor {
@@ -217,6 +229,22 @@
 
     .pagamento__window__header {
         flex-direction: column;
+    }
+
+    .pagamento__window__header__infobar {
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .pagamento__window__header__infobar__clientecontato {
+        flex-direction: column;
+    }
+
+    .pagamento__window__main__coluna1,
+    .pagamento__window__main__coluna2,
+    .pagamento__window__main__coluna3 {
+        max-width: 100%;
     }
 
     .pagamento__window__main__combobox {
