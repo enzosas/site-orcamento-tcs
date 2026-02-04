@@ -8,7 +8,6 @@ import Adm from "./Administracao/Administracao.jsx"
 import { gerarDocx } from '../../../../utils/gerarDocx';
 import { AuthContext } from '../../../../context/AuthContext.jsx'
 import PagamentoAdministrador from "./Pagamento/PagamentoAdministrador.jsx";
-import PagamentoCliente from "./Pagamento/PagamentoCliente.jsx";
 
 
 const CheckIcon = () => (
@@ -164,15 +163,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 gerarDocxObjetos={gerarDocxObjetos}
                 numeroOrcamento={codigo}
                 />
-            } else {
-                return <PagamentoCliente 
-                isOpen={pagamentoAberto} 
-                onClose={() => setPagamentoAberto(false)}
-                pagamento={pagamento}
-                setPagamento={setPagamento}
-                gerarDocxObjetos={gerarDocxObjetos}
-                numeroOrcamento={codigo}
-                />
+        } else {
+                return 
         }
     }
 
@@ -217,6 +209,11 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         
         if (salvo) {
             return;
+        }
+
+        if (!validarClientePessoaContato()) {
+            alert("Preencha todos os campos na seção cliente para salvar o orçamento.");
+            return
         }
 
         const dadosParaEnviar = {
@@ -264,66 +261,64 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
 
     return (
          <div className="main-footer">
-            {user?.isAdmin && (
-                <div className="frame-config">
-                    <p>Código da configuração</p>
-                    <div className="config--retangulo_branco">
-                        <div className="config--retangulo_branco--esquerda">
-                            <p>{getCodigoConfig()}</p>
-                        </div>
-                        <div className="config--retangulo_branco--direita">
-                            <button className="botao_branco" aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
-                                <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
-                                    Copiar
-                                </span>
-                                {copiado && (
-                                    <div style={{ 
-                                        position: 'absolute', 
-                                        top: '50%', 
-                                        left: '50%', 
-                                        transform: 'translate(-50%, -50%)',
-                                        display: 'flex',
-                                        transition: 'opacity 0.2s'
-                                    }}>
-                                        <CheckIcon />
-                                    </div>
-                                )}
-                            </button>
-                            <button className="botao_branco" aria-label="Importar" onClick={() => setImportAberto(true)}>
-                                Importar
-                            </button>
-                            <button className="botao_branco" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
-                                <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
-                                    Salvar
-                                </span>
-                                {salvo && (
-                                    <div style={{ 
-                                        position: 'absolute', 
-                                        top: '50%', 
-                                        left: '50%', 
-                                        transform: 'translate(-50%, -50%)',
-                                        display: 'flex',
-                                        transition: 'opacity 0.2s'
-                                    }}>
-                                        <CheckIcon />
-                                    </div>
-                                )}
-                            </button>
-                        </div>
+            <div className="frame-config">
+                <p>Código da configuração</p>
+                <div className="config--retangulo_branco">
+                    <div className="config--retangulo_branco--esquerda">
+                        <p>{getCodigoConfig()}</p>
                     </div>
-                    <Import
-                        isOpen = {importAberto}
-                        onClose={() => setImportAberto(false)}
-                        config={config}
-                        setConfig={setConfig}
-                        setTalhaSelecionada={setTalhaSelecionada}
-                        setCodigo={setCodigo}
-                        isImporting={isImporting}
-                        cliente={cliente}
-                        setCliente={setCliente}
-                    />
+                    <div className="config--retangulo_branco--direita">
+                        <button className="botao_branco" aria-label="Copiar código" onClick={handleCopyClick} style={{ position: 'relative' }}>
+                            <span style={{ opacity: copiado ? 0 : 1, transition: 'opacity 0.2s' }}>
+                                Copiar
+                            </span>
+                            {copiado && (
+                                <div style={{ 
+                                    position: 'absolute', 
+                                    top: '50%', 
+                                    left: '50%', 
+                                    transform: 'translate(-50%, -50%)',
+                                    display: 'flex',
+                                    transition: 'opacity 0.2s'
+                                }}>
+                                    <CheckIcon />
+                                </div>
+                            )}
+                        </button>
+                        <button className="botao_branco" aria-label="Importar" onClick={() => setImportAberto(true)}>
+                            Importar
+                        </button>
+                        <button className="botao_branco" aria-label="Salvar" onClick={handleSaveClick} style={{ position: 'relative' }} disabled={codigo}>
+                            <span style={{ opacity: salvo ? 0 : 1, transition: 'opacity 0.2s' }}>
+                                Salvar
+                            </span>
+                            {salvo && (
+                                <div style={{ 
+                                    position: 'absolute', 
+                                    top: '50%', 
+                                    left: '50%', 
+                                    transform: 'translate(-50%, -50%)',
+                                    display: 'flex',
+                                    transition: 'opacity 0.2s'
+                                }}>
+                                    <CheckIcon />
+                                </div>
+                            )}
+                        </button>
+                    </div>
                 </div>
-            )}
+            </div>
+            <Import
+                isOpen = {importAberto}
+                onClose={() => setImportAberto(false)}
+                config={config}
+                setConfig={setConfig}
+                setTalhaSelecionada={setTalhaSelecionada}
+                setCodigo={setCodigo}
+                isImporting={isImporting}
+                cliente={cliente}
+                setCliente={setCliente}
+            />
             <Cliente
                 isOpen = {clienteAberto}
                 onClose={() => setClienteAberto(false)}
@@ -349,9 +344,11 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 <button aria-label="Cliente" onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
-                <button aria-label="Pagamento" onClick={() => handlePagamento()}>
-                    Pagamento
-                </button>
+                {user?.isAdmin && (
+                    <button aria-label="Pagamento" onClick={() => handlePagamento()}>
+                        Pagamento
+                    </button>
+                )}
             </div>
             {mostrarResumoCliente ? (
                 <div>
