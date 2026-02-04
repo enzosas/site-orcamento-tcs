@@ -1,6 +1,7 @@
 import "./Footer.css"
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../config";
+import { AuthContext } from '../../../../context/AuthContext.jsx'
 
 function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
@@ -11,7 +12,8 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
     const [erro, setErro] = useState("");
     const [showErro, setShowErro] = useState(false);
     const [listaResultados, setListaResultados] = useState([]); 
-    const [showListaResultados, setShowListaResultados] = useState(false); 
+    const [showListaResultados, setShowListaResultados] = useState(false);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         if (isOpen) {
@@ -248,45 +250,46 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
                                 Importar
                             </button>
                         </div>
-                        <div className="fileira">
-                            <div className="input_com_label preencher">
-                                <p>Insira a razão social para buscar</p>
-                                <input 
-                                    value={textoRazaoSocial}
-                                    onKeyDown={onEnter(() => importarClienteRazaoSocial(textoRazaoSocial))}
-                                    onChange={(e) => {
-                                        setShowErro(false);
-                                        setTextoRazaoSocial(e.target.value)
-                                    }}   
-                                />
+                        {user?.isAdmin && (
+                        <div>
+                            <div className="fileira">
+                                <div className="input_com_label preencher">
+                                    <p>Insira a razão social para buscar</p>
+                                    <input 
+                                        value={textoRazaoSocial}
+                                        onKeyDown={onEnter(() => importarClienteRazaoSocial(textoRazaoSocial))}
+                                        onChange={(e) => {
+                                            setShowErro(false);
+                                            setTextoRazaoSocial(e.target.value)
+                                        }}   
+                                    />
+                                </div>
+                                <button className="botao_branco" onClick={() => {importarClienteRazaoSocial(textoRazaoSocial)}}>
+                                    Buscar
+                                </button>
                             </div>
-                            <button className="botao_branco" onClick={() => {importarClienteRazaoSocial(textoRazaoSocial)}}>
-                                Buscar
-                            </button>
-                        </div>
-                        <div
-                            className={`selector-border footer ${showListaResultados ? "open" : ""}`}
-                        >
-                            <div className="selector footer">
-                                {listaResultados.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className={"modelo-opcao footer"}
-                                        onClick={() => {
-                                            setClienteLocal(item);
-                                            setShowListaResultados(false);
-                                            setImportAberto(false);
-                                            setListaResultados([]);
-                                        }}
-                                    >
-                                        {item.razaoSocial}
-                                    </div>
-                                ))}
+                            <div
+                                className={`selector-border footer ${showListaResultados ? "open" : ""}`}
+                            >
+                                <div className="selector footer">
+                                    {listaResultados.map((item, index) => (
+                                        <div
+                                            key={index}
+                                            className={"modelo-opcao footer"}
+                                            onClick={() => {
+                                                setClienteLocal(item);
+                                                setShowListaResultados(false);
+                                                setImportAberto(false);
+                                                setListaResultados([]);
+                                            }}
+                                        >
+                                            {item.razaoSocial}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-
-
-
+                        )}
                         <div className={`erro ${showErro ? 'true' : ''}`}>
                             {erro}
                         </div>
