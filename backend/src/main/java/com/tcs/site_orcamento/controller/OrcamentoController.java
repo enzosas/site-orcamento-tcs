@@ -34,7 +34,8 @@ public class OrcamentoController {
     public ResponseEntity<Orcamento> salvar(@RequestBody SalvarOrcamentoDTO request) {
         Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(
             request.getConfig(),
-            request.getCliente()
+            request.getCliente(),
+            request.getUsername()
         );
         return ResponseEntity.ok(orcamentoSalvo);
     }

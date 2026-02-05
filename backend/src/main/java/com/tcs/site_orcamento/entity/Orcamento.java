@@ -68,4 +68,7 @@ public class Orcamento {
     @Column(name = "cliente", columnDefinition = "jsonb")
     private Map<String, Object> cliente;
 
+    @Column
+    private String username;
+
 }

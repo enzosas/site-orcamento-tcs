@@ -218,7 +218,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
 
         const dadosParaEnviar = {
             config: config,
-            cliente: cliente
+            cliente: cliente,
+            username: user.username
         }
 
         try {
