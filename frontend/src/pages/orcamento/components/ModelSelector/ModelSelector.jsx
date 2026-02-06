@@ -8,6 +8,8 @@ import { fixConfig, getOpcoesPotencia, getOpcoesControle, getOpcoesTensao } from
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
+    const token = localStorage.getItem('token');
+
     const jaCarregouPrimeiraTalhaInit = useRef(false);
 
     const [filtros, setFiltros] = useState({
@@ -75,7 +77,11 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 if (filtros.tipoTrole) query.append("tipoTrole", filtros.tipoTrole);
                 if (filtros.cursoUtilGancho) query.append("cursoUtilGancho", filtros.cursoUtilGancho);
 
-                const response = await fetch(`${API_BASE_URL}/api/talhas/filtro?${query.toString()}`);
+                const response = await fetch(`${API_BASE_URL}/api/talhas/filtro?${query.toString()}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}` 
+                    },
+                });
                 const data = await response.json();
 
                 setModelos(data);

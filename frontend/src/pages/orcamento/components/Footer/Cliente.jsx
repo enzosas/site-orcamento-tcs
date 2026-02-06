@@ -14,6 +14,7 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
     const [listaResultados, setListaResultados] = useState([]); 
     const [showListaResultados, setShowListaResultados] = useState(false);
     const { user } = useContext(AuthContext);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (isOpen) {
@@ -119,7 +120,11 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
     const importarClienteCnpj = async (cnpj) => {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/max/getClienteCnpj/${cnpj}`);
+            const response = await fetch(`${API_BASE_URL}/api/max/getClienteCnpj/${cnpj}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
+            });
             if (!response.ok) {
                 setErro(`O cnpj ${cnpj} não existe no sistema.`);
                 setShowErro(true);
@@ -168,7 +173,11 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
         }
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/max/getClienteRazaoSocial/${razaoSocial}`);
+            const response = await fetch(`${API_BASE_URL}/api/max/getClienteRazaoSocial/${razaoSocial}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
+            });
             const dados = await response.json();
 
             if (!dados || dados.length === 0) {

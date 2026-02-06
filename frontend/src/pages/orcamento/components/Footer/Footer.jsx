@@ -48,6 +48,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
     const [pagamentoAberto, setPagamentoAberto] = useState(false);
     const [mostrarResumoCliente, setMostrarResumoCliente] = useState(false);
     const isImporting = useRef(false);
+    const token = localStorage.getItem('token');
     
     const [cliente, setCliente] = useState({
         cnpj: "",
@@ -227,6 +228,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` 
                 },
                 body: JSON.stringify(dadosParaEnviar),
             });

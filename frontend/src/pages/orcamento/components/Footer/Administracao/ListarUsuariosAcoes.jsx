@@ -6,6 +6,7 @@ function ListarUsuariosAcoes({ user, isOpen, onUpdate }) {
 
     const handleExcluir = async () => {
 
+        const token = localStorage.getItem('token');
         if (!user) return;
 
         if (user.username === "admin") {
@@ -18,7 +19,10 @@ function ListarUsuariosAcoes({ user, isOpen, onUpdate }) {
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/auth/delete/${user.id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
             });
             if (!response.ok) {
                 throw new Error('Erro ao excluir o usuário');

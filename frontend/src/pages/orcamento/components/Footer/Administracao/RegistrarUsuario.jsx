@@ -11,6 +11,7 @@ function RegistrarUsuario( ) {
     const [textoSenha, setTextoSenha] = useState("");
     const [isAdmin, setIsAdmin] = useState("");
     const [salvo, setSalvo] = useState(false);
+    const token = localStorage.getItem('token');
     
     const handleRegisterClick = async () => {
         
@@ -33,7 +34,11 @@ function RegistrarUsuario( ) {
             return;
         }  
         try {
-            const allUsersResponse = await fetch(`${API_BASE_URL}/api/auth/list`);
+            const allUsersResponse = await fetch(`${API_BASE_URL}/api/auth/list`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
+            });
             if (!allUsersResponse.ok) {
                 const errorBody = await allUsersResponse.text();
                 setErro(errorBody);
@@ -60,6 +65,7 @@ function RegistrarUsuario( ) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` 
                 },
                 body: JSON.stringify(user),
             });

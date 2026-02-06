@@ -1,6 +1,7 @@
 import "./Footer.css"
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../config";
+import { AuthContext } from '../../../../context/AuthContext.jsx';
 
 
 const validarCodigoForma = (objModelo, codigoImportado) => {
@@ -25,6 +26,8 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
     const [erro, setErro] = useState("");
     const [showErro, setShowErro] = useState(false);
     const inputRef = useRef(null);
+    const { user } = useContext(AuthContext);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (isOpen && inputRef.current) {
@@ -55,7 +58,11 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
 
             const query = new URLSearchParams();
             query.append("id", codigo);
-            const responseConfig = await fetch(`${API_BASE_URL}/api/orcamentos/buscar?${query.toString()}`);
+            const responseConfig = await fetch(`${API_BASE_URL}/api/orcamentos/buscar?${query.toString()}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
+            });
             if (!responseConfig.ok) {
                 setErro(`A configuração "${codigo}" não foi encontrada no banco de dados.`);
                 setShowErro(true);
@@ -91,7 +98,11 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
 
             const modeloTalha = novaConfig.talhaSelecionada;
             
-            const responseTalha = await fetch(`${API_BASE_URL}/api/talhas/${modeloTalha}`);
+            const responseTalha = await fetch(`${API_BASE_URL}/api/talhas/${modeloTalha}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
+            });
             if (!responseTalha.ok) {
                 setErro(`O modelo de talha "${modeloTalha}" deste orçamento não existe mais no sistema.`);
                 setShowErro(true);

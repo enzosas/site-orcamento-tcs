@@ -7,23 +7,40 @@ function ModelSelectorFilter({ filtros, setFiltros }) {
     const [capacidades, setCapacidades] = useState([]);
     const [tiposTrole, setTiposTrole] = useState([]);
     const [cursosGancho, setCursosGancho] = useState([]);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        fetch(`${API_BASE_URL}/api/talhas/distinct-correnteCabo`)
+        fetch(`${API_BASE_URL}/api/talhas/distinct-correnteCabo`, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            },
+        })
             .then((res) => res.json())
             .then((data) => setCorrentes(data))
             .catch((err) => console.error("Erro ao carregar correntes:", err));
 
-        fetch(`${API_BASE_URL}/api/talhas/distinct-capacidade`)
+        fetch(`${API_BASE_URL}/api/talhas/distinct-capacidade`, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            },
+        })
             .then((res) => res.json())
             .then((data) => setCapacidades(data))
             .catch((err) => console.error("Erro ao carregar capacidades:", err));
 
-        fetch(`${API_BASE_URL}/api/talhas/distinct-tipoTrole`)
+        fetch(`${API_BASE_URL}/api/talhas/distinct-tipoTrole`, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            },
+        })
             .then((res) => res.json())
             .then((data) => setTiposTrole(data))
             .catch((err) => console.error("Erro ao carregar tipos de trole:", err));
-        fetch(`${API_BASE_URL}/api/talhas/distinct-cursoUtilGancho`)
+        fetch(`${API_BASE_URL}/api/talhas/distinct-cursoUtilGancho`, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            },
+        })
             .then((res) => res.json())
             .then((data) => setCursosGancho(data))
             .catch((err) => console.error("Erro ao carregar cursos de gancho:", err));

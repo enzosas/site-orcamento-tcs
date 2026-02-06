@@ -8,6 +8,7 @@ function ListarUsuarios( ) {
     const [usuarios, setUsuarios] = useState(null);
     const [carregando, setCarregando] = useState(true);
     const [selecionado, setSelecionado] = useState(null);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         fetchUsuarios();
@@ -23,7 +24,11 @@ function ListarUsuarios( ) {
 
     const fetchUsuarios = async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/auth/list`);
+            const response = await fetch(`${API_BASE_URL}/api/auth/list`, {
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                },
+            });
             if (!response.ok) {
                 throw new Error('Erro ao buscar dados');
             }

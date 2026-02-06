@@ -5,11 +5,13 @@ import { API_BASE_URL } from '../../../../config';
 
 
 async function fetchOrcamentoCompleto(config, signal) {
+    const token = localStorage.getItem('token');
     try {
         const response = await fetch(`${API_BASE_URL}/api/preco/orcamentoCompleto`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
             },
             body: JSON.stringify(config),
             signal: signal,
