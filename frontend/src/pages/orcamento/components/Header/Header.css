@@ -19,3 +19,13 @@
 .header-botao-tema{
   cursor: pointer;
 }
+
+.header-botao-sair{
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  font-weight: bold;
+  gap: 0.5em;
+  align-items: center;
+}
