@@ -3,6 +3,7 @@ import "./login.css"
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from "../../config";
+import api from '../../services/api';
 
 function Login() {
     
@@ -27,26 +28,13 @@ function Login() {
         setShowCarregando(true);
         
         try {
-            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-                method:'POST',
-                headers:{
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: usuario,
-                    password: senha,
-                }),
+            const response = await api.post('/api/auth/login', {
+                username: usuario,
+                password: senha
             });
 
-            if(response.ok){
-
-                const data = await response.json();
-                login(data);
-                navigate('/');
-
-            } else {
-                throw new Error('falha no login');
-            }
+            login(response.data); 
+            navigate('/');
         
         } catch (error) {
             alert('Usuário ou senha incorretos!');
