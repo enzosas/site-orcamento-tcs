@@ -27,7 +27,7 @@ api.interceptors.response.use(
 
                 const base = import.meta.env.BASE_URL || '/site-orcamento-tcs/';
                 if (!window.location.hash.includes('/login')) {
-                    window.location.href = `${base}#/login`.replace(/\/+/g, '/').replace('/#', '#');
+                    window.location.href = `${base}#/login`.replace(/\/+/g, '/');
                 }
             }
         }
