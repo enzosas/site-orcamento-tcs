@@ -2,6 +2,7 @@ import "../Footer.css"
 import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import ListarUsuariosAcoes from "./ListarUsuariosAcoes";
+import api from '../../../../../services/api.js'
 
 function ListarUsuarios( ) {
 
@@ -24,15 +25,8 @@ function ListarUsuarios( ) {
 
     const fetchUsuarios = async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/auth/list`, {
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
-            });
-            if (!response.ok) {
-                throw new Error('Erro ao buscar dados');
-            }
-            const data = await response.json();
+            const response = await api.get(`/api/auth/list`);
+            const data = await response.data;
             setUsuarios(data);
         } catch (error) {
             console.error(error);

@@ -2,6 +2,7 @@ import "./Footer.css"
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../config";
 import { AuthContext } from '../../../../context/AuthContext.jsx';
+import api from '../../../../services/api.js'
 
 
 const validarCodigoForma = (objModelo, codigoImportado) => {
@@ -58,18 +59,10 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
 
             const query = new URLSearchParams();
             query.append("id", codigo);
-            const responseConfig = await fetch(`${API_BASE_URL}/api/orcamentos/buscar?${query.toString()}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
+            const responseConfig = await api.get('/api/orcamentos/buscar', {
+                params: Object.fromEntries(query) 
             });
-            if (!responseConfig.ok) {
-                setErro(`A configuração "${codigo}" não foi encontrada no banco de dados.`);
-                setShowErro(true);
-                return;
-            }
-
-            const jsonConfigCliente = await responseConfig.json();
+            const jsonConfigCliente = responseConfig.data;
 
             const novaConfig = jsonConfigCliente.config;
 
@@ -98,18 +91,8 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
 
             const modeloTalha = novaConfig.talhaSelecionada;
             
-            const responseTalha = await fetch(`${API_BASE_URL}/api/talhas/${modeloTalha}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
-            });
-            if (!responseTalha.ok) {
-                setErro(`O modelo de talha "${modeloTalha}" deste orçamento não existe mais no sistema.`);
-                setShowErro(true);
-                return;
-            }
-
-            const novaTalha = await responseTalha.json();
+            const responseTalha = await api.get(`$/api/talhas/${modeloTalha}`);
+            const novaTalha = await responseTalha.data;
 
             isImporting.current = true;
             setTalhaSelecionada(novaTalha);

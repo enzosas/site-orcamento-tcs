@@ -4,6 +4,7 @@ import ModelSelectorList from "./ModelSelectorList";
 import React, { useState, useEffect, useRef } from "react";
 import { API_BASE_URL } from '../../../../config';
 import { fixConfig, getOpcoesPotencia, getOpcoesControle, getOpcoesTensao } from "../../../../utils/regrasConfig.js"
+import api from '../../../../services/api.js'
 
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
@@ -77,14 +78,8 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 if (filtros.tipoTrole) query.append("tipoTrole", filtros.tipoTrole);
                 if (filtros.cursoUtilGancho) query.append("cursoUtilGancho", filtros.cursoUtilGancho);
 
-                const response = await fetch(`${API_BASE_URL}/api/talhas/filtro?${query.toString()}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}` 
-                    },
-                });
-                const data = await response.json();
-
-                setModelos(data);
+                const response = await api.get(`/api/talhas/filtro?${query.toString()}`);
+                setModelos(response.data);
             
             } catch (error) {
                 console.error("Erro ao buscar os modelos:", error);

@@ -2,27 +2,14 @@ import "./Pricing.css"
 import LoadingDots from './LoadingDots';
 import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from '../../../../config';
+import api from '../../../../services/api.js'
 
 
 async function fetchOrcamentoCompleto(config, signal) {
     const token = localStorage.getItem('token');
     try {
-        const response = await fetch(`${API_BASE_URL}/api/preco/orcamentoCompleto`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            },
-            body: JSON.stringify(config),
-            signal: signal,
-        });
-
-        if (!response.ok) {
-            const errorBody = await response.text();
-            throw new Error(`Erro na requisição: ${response.status} - [Backend: ${errorBody}]`);
-        }
-        
-        const orcamento = await response.json();
+        const response = await api.post(`/api/preco/orcamentoCompleto`, config, signal);
+        const orcamento = await response.data;
         return orcamento;
         
     } catch (error) {

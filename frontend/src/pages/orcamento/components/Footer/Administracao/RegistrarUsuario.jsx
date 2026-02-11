@@ -1,7 +1,7 @@
 import "../Footer.css"
 import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
-import { all } from "axios";
+import api from '../../../../../services/api.js'
 
 function RegistrarUsuario( ) {
 
@@ -34,18 +34,8 @@ function RegistrarUsuario( ) {
             return;
         }  
         try {
-            const allUsersResponse = await fetch(`${API_BASE_URL}/api/auth/list`, {
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
-            });
-            if (!allUsersResponse.ok) {
-                const errorBody = await allUsersResponse.text();
-                setErro(errorBody);
-                setShowErro(true);
-                throw new Error(`Erro ao verificar disponibilidade do usuário.`);
-            }
-            const allUsers = await allUsersResponse.json();
+            const allUsersResponse = await api.get(`/api/auth/list`);
+            const allUsers = allUsersResponse.data;
             
             let usuarioJaExiste = false;
 
@@ -61,25 +51,14 @@ function RegistrarUsuario( ) {
                 return
             }
 
-            const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` 
-                },
-                body: JSON.stringify(user),
-            });
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`Erro na requisição: ${response.status} - [Backend: ${errorBody}]`);
-            }
+            await api.post(`/api/auth/register`, user);
             setSalvo(true);
             alert(`Usuário registrado com sucesso!`)
         } catch (error) {
-
-            if (error.name !== 'AbortError') {
-                console.error(`Falha ao registrar o usuário:`, error);
-            }
+            const errorBody = error.response.data;
+            setErro(`Falha ao registrar o usuário`);
+            setShowErro(true);
+            console.error(`Falha ao registrar o usuário:`, error);
             throw error;
         }
     };

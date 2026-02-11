@@ -8,6 +8,7 @@ import Adm from "./Administracao/Administracao.jsx"
 import { gerarDocx } from '../../../../utils/gerarDocx';
 import { AuthContext } from '../../../../context/AuthContext.jsx'
 import PagamentoAdministrador from "./Pagamento/PagamentoAdministrador.jsx";
+import api from '../../../../services/api.js'
 
 
 const CheckIcon = () => (
@@ -224,19 +225,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
         }
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/orcamentos/salvar`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` 
-                },
-                body: JSON.stringify(dadosParaEnviar),
-            });
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`Erro na requisição: ${response.status} - [Backend: ${errorBody}]`);
-            }
-            const novoCodigo = (await response.json()).id;
+            const response = await api.post('/api/orcamentos/salvar', dadosParaEnviar);
+            const novoCodigo = response.data.id;
             setCodigo(novoCodigo);
             setSalvo(true);
             alert(`Configuração salva com o código: ${novoCodigo}`)
@@ -244,11 +234,9 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 setSalvo(false);
             }, 2000);
         } catch (error) {
-
-            if (error.name !== 'AbortError') {
-                console.error(`Falha ao salvar o orçamento:`, error);
-            }
-            throw error;
+            const errorMsg = error.response?.data || error.message;
+            console.error("Erro ao salvar orçamento:", error);
+            alert(`Erro na requisição: ${error.response?.status || 'Conexão'} - [Backend: ${errorMsg}]`);
         }
     };
 

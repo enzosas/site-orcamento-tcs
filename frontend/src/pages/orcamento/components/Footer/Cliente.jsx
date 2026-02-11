@@ -2,6 +2,7 @@ import "./Footer.css"
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../config";
 import { AuthContext } from '../../../../context/AuthContext.jsx'
+import api from '../../../../services/api.js'
 
 function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
@@ -120,18 +121,8 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
 
     const importarClienteCnpj = async (cnpj) => {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/max/getClienteCnpj/${cnpj}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
-            });
-            if (!response.ok) {
-                setErro(`O cnpj ${cnpj} não existe no sistema.`);
-                setShowErro(true);
-                return;
-            }
-
-            const novoCliente = await response.json();
+            const response = await api.get(`/api/max/getClienteCnpj/${cnpj}`);
+            const novoCliente = await response.data;
 
             Object.keys(novoCliente).forEach((key) => {
                 const valor = novoCliente[key];
@@ -173,12 +164,8 @@ function Cliente({ isOpen, onClose, cliente, setCliente }) {
         }
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/max/getClienteRazaoSocial/${razaoSocial}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
-            });
-            const dados = await response.json();
+            const response = await api.get(`/api/max/getClienteRazaoSocial/${razaoSocial}`);
+            const dados = await response.data;
 
             if (!dados || dados.length === 0) {
                 setErro("Nenhum cliente encontrado com essa Razão Social.");

@@ -1,6 +1,7 @@
 import "../Footer.css"
 import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
+import api from '../../../../../services/api.js'
 
 function ListarUsuariosAcoes({ user, isOpen, onUpdate }) {
 
@@ -18,15 +19,7 @@ function ListarUsuariosAcoes({ user, isOpen, onUpdate }) {
         if (!confirmou) return;
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/auth/delete/${user.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}` 
-                },
-            });
-            if (!response.ok) {
-                throw new Error('Erro ao excluir o usuário');
-            }
+            const response = await api.delete(`/api/auth/delete/${user.id}`);
             alert("Usuário excluído com sucesso.")
             onUpdate();
         } catch (error) {
