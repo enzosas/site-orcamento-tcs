@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-@Table(name= "talhas")
+@Table(name= "talhas", schema = "backend")
 public class Talha {
 
     @Id

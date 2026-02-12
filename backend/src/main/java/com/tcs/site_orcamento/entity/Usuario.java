@@ -13,7 +13,7 @@
     @Entity
     @Getter
     @Setter
-    @Table(name="usuarios")
+    @Table(name="usuarios", schema = "backend")
     public class Usuario implements UserDetails {
 
         @Id
