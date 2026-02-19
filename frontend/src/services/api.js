@@ -6,7 +6,9 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    if (!config.url.includes('/api/auth/login')) {
+    const publicUrls = ['/api/auth/login', '/uptime'];
+    const isPublic = publicUrls.some(url => config.url.includes(url));
+    if (!isPublic) {
         const token = localStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
