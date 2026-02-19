@@ -2,6 +2,7 @@ package com.tcs.site_orcamento.controller;
 
 import com.tcs.site_orcamento.dto.LoginRequestDTO;
 import com.tcs.site_orcamento.dto.LoginResponseDTO;
+import com.tcs.site_orcamento.dto.OrcamentosCriadosDTO;
 import com.tcs.site_orcamento.entity.Usuario;
 import com.tcs.site_orcamento.repository.UsuarioRepository;
 import com.tcs.site_orcamento.service.AuthService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/auth")
@@ -73,4 +75,15 @@ public class AuthController {
     public List<Usuario> listUsers() {
         return usuarioRepository.findAll();
     }
+
+    @GetMapping("/orcamentos")
+    public ResponseEntity<List<OrcamentosCriadosDTO>> orcamentos() {
+        try {
+            List<OrcamentosCriadosDTO> lista = usuarioRepository.listaOrcamentosCriadosDTOs();
+            return ResponseEntity.ok(lista);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
 }

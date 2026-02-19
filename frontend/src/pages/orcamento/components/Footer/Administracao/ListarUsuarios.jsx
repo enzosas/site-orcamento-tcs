@@ -9,10 +9,16 @@ function ListarUsuarios( ) {
     const [usuarios, setUsuarios] = useState(null);
     const [carregando, setCarregando] = useState(true);
     const [selecionado, setSelecionado] = useState(null);
+    const [orcamentosContagem, setOrcamentosContagem] = useState([]);
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        fetchUsuarios();
+        const carregarDadosIniciais = async () => {
+            setCarregando(true);
+            await Promise.all([fetchUsuarios(), fetchNumeroOrcamentos()]);
+            setCarregando(false);
+        };
+        carregarDadosIniciais();
     }, []);
 
     const handleSelecionar = (user) => {
@@ -26,14 +32,27 @@ function ListarUsuarios( ) {
     const fetchUsuarios = async () => {
         try {
             const response = await api.get(`/api/auth/list`);
-            const data = await response.data;
-            setUsuarios(data);
+            setUsuarios(response.data);
         } catch (error) {
             console.error(error);
             } finally {
             setCarregando(false);
         }
     }
+
+    const fetchNumeroOrcamentos = async () => {
+        try {
+            const response = await api.get('/api/auth/orcamentos');
+            setOrcamentosContagem(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const obterTotalOrcamentos = (username) => {
+        const registro = orcamentosContagem.find(item => item.username === username);
+        return registro ? registro.total : 0;
+    };
 
     if (carregando) {
         return(
@@ -51,9 +70,9 @@ function ListarUsuarios( ) {
             <div className="table">
                 <div className="header">
                         <div className="col">Usuário</div>
-                        <div className="col">Senha</div>
                         <div className="col">Admin</div>
                         <div className="col">Acessos</div>
+                        <div className="col">Orçamentos criados</div>
                 </div>
                 <div className="body">
                 {usuarios && usuarios.map((user, index) => (
@@ -63,9 +82,9 @@ function ListarUsuarios( ) {
                             onClick={() => handleSelecionar(user)}
                         >
                             <div className="col">{user.username}</div>
-                            <div className="col">{user.username !== "admin" ? user.password : ""}</div>
                             <div className="col">{user.isAdmin ? "Sim" : "Não"}</div>
                             <div className="col">{user.acessos}</div>
+                            <div className="col">{obterTotalOrcamentos(user.username)}</div>
                         </div>
                     ))}
                 </div>
