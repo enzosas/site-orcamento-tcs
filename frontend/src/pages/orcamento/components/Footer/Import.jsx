@@ -57,13 +57,11 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
                 return;
             }
 
-            const query = new URLSearchParams();
-            query.append("id", codigo);
             const responseConfig = await api.get('/api/orcamentos/buscar', {
-                params: Object.fromEntries(query) 
+                params: { id: codigo }
             });
-            const jsonConfigCliente = responseConfig.data;
 
+            const jsonConfigCliente = responseConfig.data;
             const novaConfig = jsonConfigCliente.config;
 
             const erroValidacaoConfig = validarNovaConfig(config, novaConfig);
@@ -78,7 +76,7 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
                 setCliente(() => {
                     const novoCliente = { ...cliente }
                     Object.keys(cliente).forEach((key) => {
-                        novoCliente[key] === "";
+                        novoCliente[key] = "";
                     })
                     Object.keys(cliente).forEach((key) => {
                         if (clienteImportado[key] !== undefined) {
@@ -87,12 +85,22 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
                     })
                     return novoCliente;
                 })
+            } else {
+                setCliente(() => {
+                    const novoCliente = { ...cliente }
+                    console.table(novoCliente)
+                    Object.keys(cliente).forEach((key) => {
+                        novoCliente[key] = "";
+                    })
+                    console.table(novoCliente)
+                    return novoCliente;
+                })
             }
 
             const modeloTalha = novaConfig.talhaSelecionada;
             
-            const responseTalha = await api.get(`$/api/talhas/${modeloTalha}`);
-            const novaTalha = await responseTalha.data;
+            const responseTalha = await api.get(`/api/talhas/${modeloTalha}`);
+            const novaTalha = responseTalha.data;
 
             isImporting.current = true;
             setTalhaSelecionada(novaTalha);
@@ -104,8 +112,12 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
             setTexto("");
 
         } catch (e) {
-            console.log(e);
-            setErro("Erro de conexão com o servidor.");
+            console.error(e);
+            if (e.response && e.response.status === 404) {
+                setErro("A configuração ou talha não foi encontrada.");
+            } else {
+                setErro("Erro de conexão com o servidor.");
+            }
             setShowErro(true);
         }
     }
