@@ -29,7 +29,6 @@ A aplicação permite ao usuário carregar seu próprio template docx para event
 
 ### Modo padrão e administrador
 A aplicação conta com duas versões: padrão e administrador. A segunda tem acesso a todas funcionalidades disponíveis, enquanto a primeira apenas a uma fração.
-![Screenshot do arquivo gerado](./docs/images/docx.png "Arquivo gerado")
 
 ### Gerenciamento de usuários
 A aplicação possui telas de registro e listagem de usuários. Na tela de listagem é possível observar o número de acessos e de orçamentos criados.
