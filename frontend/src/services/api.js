@@ -20,10 +20,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const isLoginRequest = error.config.url.includes('/api/auth/login');
+        const urlsIgnoradas = ['/api/auth/login', '/uptime/', '/api/preco/orcamentoCompleto'];
+        const deveIgnorarErro = urlsIgnoradas.some(url => error.config.url.includes(url));
 
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-            if (!isLoginRequest) {
+            if (!deveIgnorarErro) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
 
