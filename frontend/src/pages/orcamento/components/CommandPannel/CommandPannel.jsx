@@ -19,56 +19,67 @@ function CommandPannel({ talha, config, setConfig }) {
         });
     };
 
+    const regrasDesabilitar = {
+        excluirPainel: !talha.exclusaoPainelComandoForca,
+        duplaVelocidadeElevacao: config.excluirPainel || !talha.duplaVelocidadeElevacaoInversor,
+        duplaVelocidadeTranslacao: config.excluirPainel || !talha.duplaVelocidadeTranslacaoInversor,
+        painel6Mov: config.excluirPainel || !talha.painelParaPonteRolante,
+        potenciaMotores: config.excluirPainel || !config.painel6Mov,
+        controleRemoto: config.excluirPainel || !talha.controleRemotoDisponivel,
+        modeloControle: config.excluirPainel || !config.controleRemoto,
+        transmissorExtra: config.excluirPainel || !config.controleRemoto,
+    }
+
     return (
         <div className="frame-branco">
             <h2 className="frame-branco-title">Painel de Comando</h2>
 
             <div className="frame-caixas-selecao">
-                <label className={`${talha.exclusaoPainelComandoForca === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${regrasDesabilitar.excluirPainel ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
                         checked={config.excluirPainel}
-                        disabled={talha.exclusaoPainelComandoForca === false}
+                        disabled={regrasDesabilitar.excluirPainel}
                         onChange={(e) => atualizarConfig({excluirPainel: e.target.checked })}
                     />
                     Sem Painel de Comando
                 </label>
 
-                <label className={`${config.excluirPainel || talha.duplaVelocidadeElevacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${regrasDesabilitar.duplaVelocidadeElevacao ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        disabled={config.excluirPainel || talha.duplaVelocidadeElevacaoInversor === false}
+                        disabled={regrasDesabilitar.duplaVelocidadeElevacao}
                         checked={config.duplaVelocidadeElevacao}
                         onChange={(e) => atualizarConfig({duplaVelocidadeElevacao: e.target.checked })}
                     />
                     Dupla Velocidade de Elevação com inversor de frequência
                 </label>
 
-                <label className={`${config.excluirPainel || talha.duplaVelocidadeTranslacaoInversor === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${regrasDesabilitar.duplaVelocidadeTranslacao ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        disabled={config.excluirPainel || talha.duplaVelocidadeTranslacaoInversor === false}
+                        disabled={regrasDesabilitar.duplaVelocidadeTranslacao}
                         checked={config.duplaVelocidadeTranslacao}
                         onChange={(e) => atualizarConfig({duplaVelocidadeTranslacao: e.target.checked })}
                     />
                     Dupla Velocidade de Translação com inversor de frequência
                 </label>
 
-                <label className={`${config.excluirPainel || talha.painelParaPonteRolante === false ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${regrasDesabilitar.painel6Mov ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
                         checked={config.painel6Mov}
-                        disabled={config.excluirPainel || talha.painelParaPonteRolante === false}
+                        disabled={regrasDesabilitar.painel6Mov}
                         onChange={(e) => atualizarConfig({painel6Mov: e.target.checked })}
                     />
                     Painel 6 Movimentos com 2 velocidades
                 </label>
 
                 <div className="frame-unidade-caixa-selecao">
-                    <h4 className={`headerSelect ${config.excluirPainel || !config.painel6Mov ? "disabled" : ""}`}>Potência Motores Cabeceiras</h4>
+                    <h4 className={`headerSelect ${regrasDesabilitar.potenciaMotores ? "disabled" : ""}`}>Potência Motores Cabeceiras</h4>
                     <select
                         name="opcoesPotencia"
-                        disabled={config.excluirPainel || !config.painel6Mov}
+                        disabled={regrasDesabilitar.potenciaMotores}
                         value={config.potenciaMotores}
                         onChange={(e) => atualizarConfig({potenciaMotores: e.target.value })}
                     >
@@ -78,10 +89,10 @@ function CommandPannel({ talha, config, setConfig }) {
                     </select>
                 </div>
 
-                <label className={`${config.excluirPainel ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${regrasDesabilitar.controleRemoto ? "checkbox-item-disabled" : ""}`}>
                     <input 
                         type="checkbox" 
-                        disabled={config.excluirPainel || talha.controleRemotoDisponivel === false}
+                        disabled={regrasDesabilitar.controleRemoto}
                         checked={config.controleRemoto}
                         onChange={(e) => atualizarConfig({controleRemoto: e.target.checked })}
                     />
@@ -89,10 +100,10 @@ function CommandPannel({ talha, config, setConfig }) {
                 </label>
 
                 <div className="frame-unidade-caixa-selecao">
-                    <h4 className={`headerSelect ${config.excluirPainel || !config.controleRemoto ? "disabled" : ""}`}>Modelo do Controle</h4>
+                    <h4 className={`headerSelect ${regrasDesabilitar.modeloControle ? "disabled" : ""}`}>Modelo do Controle</h4>
                     <select
                         name="opcoesControle"
-                        disabled={config.excluirPainel || !config.controleRemoto}
+                        disabled={regrasDesabilitar.modeloControle}
                         value={config.modeloControle}
                         onChange={(e) => atualizarConfig({modeloControle: e.target.value })}
                     >
@@ -102,10 +113,10 @@ function CommandPannel({ talha, config, setConfig }) {
                     </select>
                 </div>
 
-                <label className={`${config.excluirPainel || !config.controleRemoto ? "checkbox-item-disabled" : ""}`}>
+                <label className={`${regrasDesabilitar.transmissorExtra ? "checkbox-item-disabled" : ""}`}>
                     <input
                         type="checkbox"
-                        disabled={config.excluirPainel || !config.controleRemoto}
+                        disabled={regrasDesabilitar.transmissorExtra}
                         checked={config.transmissorExtra}
                         onChange={(e) => atualizarConfig({transmissorExtra: e.target.checked })}
                     />
