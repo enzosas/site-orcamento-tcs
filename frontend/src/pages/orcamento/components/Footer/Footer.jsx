@@ -17,7 +17,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
+function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, preferencias, setPreferencias }){
 
     const { user } = useContext(AuthContext);
     const [arquivo, setArquivo] = useState(null);
@@ -329,6 +329,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos }){
                 onClose={() => setAdmAberto(false)}
                 arquivo={arquivo}
                 setArquivo={setArquivo}
+                preferencias={preferencias}
+                setPreferencias={setPreferencias}
             />
             {renderPagamento()}
             <div className="footer_frame_botoes">

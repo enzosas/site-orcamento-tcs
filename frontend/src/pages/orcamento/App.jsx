@@ -43,6 +43,10 @@ function App() {
 		talhaSemCircuito: null
 	});
 
+	const [preferencias, setPreferencias] = useState({
+		mostrarLogs: false,
+	})
+
 	return (
 		<div className="app-container">
 			<Header />
@@ -58,8 +62,8 @@ function App() {
 				</div>
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />
-					<Pricing config={config} precos={precos} setPrecos={setPrecos} />
-					<Footer talha={talhaSelecionada} setTalhaSelecionada={setTalhaSelecionada} config={config} setConfig={setConfig} precos={precos}/>  
+					<Pricing config={config} precos={precos} setPrecos={setPrecos} preferencias={preferencias}/>
+					<Footer talha={talhaSelecionada} setTalhaSelecionada={setTalhaSelecionada} config={config} setConfig={setConfig} precos={precos} preferencias={preferencias} setPreferencias={setPreferencias}/>  
 				</div>
 			</div>
 		</div>

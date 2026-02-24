@@ -26,7 +26,7 @@ const formatadorPreco = new Intl.NumberFormat('pt-BR', {
     currency: 'BRL',
 });
 
-function Pricing({ config, precos, setPrecos }){
+function Pricing({ config, precos, setPrecos, preferencias }){
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +41,17 @@ function Pricing({ config, precos, setPrecos }){
                 setIsLoading(true);
                 try {
                     const orcamento = await fetchOrcamentoCompleto(config, controller.signal);
+
+                    if (preferencias.mostrarLogs) {
+                        
+                        try {
+                            const response = await api.post(`/api/preco/orcamentoCompletoLog`, config);
+                            const log = await response.data;
+                            console.log(log)
+                        } catch (error) {
+                            throw error;
+                        }
+                    }
                     
                     setPrecos(() => ({
                         totalSch: orcamento.totalSch,

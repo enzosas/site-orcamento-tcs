@@ -389,7 +389,7 @@ public class PrecoService {
 
         log.debug("\n[{}] Lista Completa de Componentes:\n{}", tipoMotor, toJson(componentesTalha));
 
-        return new PrecoDTO(precoTotal, precoCircuito, componentesCircuito);
+        return new PrecoDTO(precoTotal, precoCircuito, componentesTalha);
     }
 
     public OrcamentoCompletoDTO calculaOrcamentoCompleto(ConfigDTO config) {

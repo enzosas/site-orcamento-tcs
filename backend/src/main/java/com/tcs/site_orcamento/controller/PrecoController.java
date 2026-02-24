@@ -3,9 +3,14 @@ package com.tcs.site_orcamento.controller;
 import com.tcs.site_orcamento.dto.ComponentePrecoDTO;
 import com.tcs.site_orcamento.dto.ConfigDTO;
 import com.tcs.site_orcamento.dto.OrcamentoCompletoDTO;
+import com.tcs.site_orcamento.dto.PrecoDTO;
 import com.tcs.site_orcamento.entity.Talha;
 import com.tcs.site_orcamento.repository.TalhaRepository;
 import com.tcs.site_orcamento.service.PrecoService;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,5 +70,17 @@ public class PrecoController {
     public ResponseEntity<OrcamentoCompletoDTO> getOrcamentoCompleto(@RequestBody ConfigDTO dto) {
         OrcamentoCompletoDTO orcamento = precoService.calculaOrcamentoCompleto(dto);
         return ResponseEntity.ok(orcamento);
+    }
+
+    @PostMapping("/orcamentoCompletoLog")
+    public ResponseEntity<Map<String, PrecoDTO>> getOrcamentoCompletoLog(@RequestBody ConfigDTO dto) {
+        PrecoDTO dtoTcs = precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.TCS);
+        PrecoDTO dtoSch = precoService.calculaPrecoDeVenda(dto, PrecoService.TipoMotor.SCH);
+
+        Map<String, PrecoDTO> map = new HashMap<>();
+        map.put("TCS", dtoTcs);
+        map.put("SCH", dtoSch);
+
+        return ResponseEntity.ok(map);
     }
 }
