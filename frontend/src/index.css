@@ -59,8 +59,13 @@ hr {
 }
 
 input[type="checkbox"] {
-    width: 2em;
-    height: 1em;
+    margin: 0;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 * {

@@ -7,6 +7,7 @@
     color: var(--corTexto);
     display: flex;
     flex-direction: column;
+    gap: 0.2rem;
     place-items: left;
     margin-bottom: 1em;
 }
@@ -24,4 +25,5 @@
     flex-direction: column;
     place-items: left;
     color: var(--corTexto);
+    gap: 0.2rem;
 }
