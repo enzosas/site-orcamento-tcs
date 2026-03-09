@@ -5,6 +5,7 @@ import { API_BASE_URL } from "../../../../config.js";
 import Cliente from "./Cliente.jsx";
 import Pdf from "./PdfViewerTela.jsx"
 import Adm from "./Administracao/Administracao.jsx"
+import Ponte from "./Ponte/Ponte.jsx";
 import { gerarDocx } from '../../../../utils/gerarDocx';
 import { AuthContext } from '../../../../context/AuthContext.jsx'
 import PagamentoAdministrador from "./Pagamento/PagamentoAdministrador.jsx";
@@ -44,6 +45,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
     const [salvo, setSalvo] = useState(false);
     const [importAberto, setImportAberto] = useState(false);
     const [clienteAberto, setClienteAberto] = useState(false);
+    const [ponteAberto, setPonteAberto] = useState(false);
     const [pdfAberto, setPdfAberto] = useState(false);
     const [admAberto, setAdmAberto] = useState(false);
     const [pagamentoAberto, setPagamentoAberto] = useState(false);
@@ -332,8 +334,15 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
                 preferencias={preferencias}
                 setPreferencias={setPreferencias}
             />
+            <Ponte
+                isOpen = {ponteAberto}
+                onClose={() => setPonteAberto(false)}
+            />
             {renderPagamento()}
             <div className="footer_frame_botoes">
+                <button aria-label="Ponte" onClick={() => setPonteAberto(true)}>
+                    Ponte
+                </button>
                 <button aria-label="Cliente" onClick={() => setClienteAberto(true)}>
                     Cliente
                 </button>
