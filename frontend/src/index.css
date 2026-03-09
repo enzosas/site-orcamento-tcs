@@ -131,6 +131,11 @@ button:disabled {
     cursor: default;
 }
 
+input[type="number"]:disabled {
+    color: var(--corDesfoqueFraco);
+    border: 0.15rem solid var(--corDesfoqueFraco);
+}
+
 .config--retangulo_branco button:disabled:hover{
     filter: brightness(1);
 }
