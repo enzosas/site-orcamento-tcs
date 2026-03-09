@@ -108,6 +108,7 @@
 
 .footer_frame_botoes {
     display: flex;
+    gap: 1rem;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
