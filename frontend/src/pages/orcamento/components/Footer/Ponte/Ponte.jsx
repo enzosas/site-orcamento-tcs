@@ -136,6 +136,7 @@ function Ponte({ isOpen, onClose }) {
             <div className="ponte__window">
                 <div className="ponte__body">
                     <div className="ponte__body__coluna">
+                        <p className="ponte__window__titulo">Ponte Rolante</p>
                         <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
                             <h1>Dados Básicos</h1>
                             <div className="ponte__body__coluna__fileira_horizontal">
