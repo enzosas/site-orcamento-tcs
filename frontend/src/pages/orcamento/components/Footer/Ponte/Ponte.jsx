@@ -2,6 +2,7 @@ import "./Ponte.css"
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { AuthContext } from '../../../../../context/AuthContext.jsx'
+import { formatarConfigPonteExibicao } from "../../../../../utils/dadosExibicao.js";
 import api from '../../../../../services/api.js'
 
 function Ponte({ isOpen, onClose }) {
@@ -109,7 +110,7 @@ function Ponte({ isOpen, onClose }) {
         caminhoRolamento_tudo: !ponteConfig.dadosBasicos_isCaminhoRolamento,
         caminhoRolamento_lados: ponteConfig.caminhoRolamento_tipo !== "Viga Metálica + Trilho",
         colunasSustentacao_tudo: !ponteConfig.dadosBasicos_isColunasSustentacao,
-        colunasSustentacao_ladoB: ponteConfig.colunasSustentacao_distribuicaoIs2Lados !== "Nos 2 lados",
+        colunasSustentacao_ladoB: !ponteConfig.colunasSustentacao_distribuicaoIs2Lados,
     };
 
     console.table(desativo)
@@ -130,6 +131,9 @@ function Ponte({ isOpen, onClose }) {
             [name]: val
         }));
     };
+
+    const ponteConfigFormatada = formatarConfigPonteExibicao(ponteConfig);
+    console.log(ponteConfigFormatada);
 
     return (
         <div className="ponte__background">
@@ -479,16 +483,16 @@ function Ponte({ isOpen, onClose }) {
                     </div>
                     <div className="ponte__body__coluna">
                         <div className="ponte__preco__window">
-                            <h2>Ponte Rolante</h2>
+                            <h2>{ponteConfigFormatada.dadosBasicos_isPonte}</h2>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Capacidade</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">Capacidade kg</div>
+                                <div className="ponte__preco__window__linha__valor">{ponteConfigFormatada.dadosBasicos_capacidade}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Vao Livre</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 mm</div>
+                                <div className="ponte__preco__window__linha__valor">{ponteConfigFormatada.dadosBasicos_vaoLivre}</div>
                             </div>
 
                             <div className="ponte__preco__window__titulo">

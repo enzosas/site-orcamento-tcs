@@ -36,6 +36,17 @@ export function formatarConfigExibicao(config) {
     return obj;
 }
 
+export function formatarConfigPonteExibicao(configPonte) {
+    const obj = {
+        ...configPonte,
+        dadosBasicos_capacidade: medida(configPonte.dadosBasicos_capacidade, "kg"),
+        dadosBasicos_vaoLivre: medida(configPonte.dadosBasicos_vaoLivre, "mm"),
+        dadosBasicos_isPonte: configPonte.dadosBasicos_isPonte ? "Ponte Rolante" : "Pórtico Rolante",
+    }
+    limpaNull(obj);
+    return obj;
+}
+
 export function getDadosExibicao(talha, config) {
     
     let dados = {
