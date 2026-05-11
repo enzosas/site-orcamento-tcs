@@ -5,7 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcs.site_orcamento.entity.Cabeceira;
+import com.tcs.site_orcamento.entity.MatrizCabeceira;
 import com.tcs.site_orcamento.entity.MatrizVigaSimples;
+import com.tcs.site_orcamento.repository.CabeceiraRepository;
+import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizVigaSimplesRepository;
 import com.tcs.site_orcamento.service.PonteService;
 
@@ -14,7 +18,13 @@ import com.tcs.site_orcamento.service.PonteService;
 public class HelloController {
 
     @Autowired
-    MatrizVigaSimplesRepository mRepository;
+    PonteService ponteService;
+
+    @Autowired
+    MatrizCabeceiraRepository mRepository;
+
+    @Autowired
+    CabeceiraRepository cRepository;
 
     @GetMapping("/")
     public String hello() {
@@ -22,9 +32,11 @@ public class HelloController {
     }
 
     @GetMapping("/teste")
-    public MatrizVigaSimples teste() {
+    public Cabeceira teste() {
         
-        MatrizVigaSimples aa = mRepository.findByCapacidadeAndVao(3000, 8999);
-        return aa;
+        MatrizCabeceira coisa = mRepository.findByCapacidadeAndVao(3000, 15000);
+        Cabeceira cabeceira = cRepository.findByCodigo(coisa.getModelo());
+        // Double preco = ponteService.calculaValorParCabeceiras(cabeceira);
+        return cabeceira;
     }
 }

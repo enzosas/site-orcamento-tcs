@@ -1,30 +1,35 @@
 package com.tcs.site_orcamento.service;
 
+import com.tcs.site_orcamento.controller.MaxiprodController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.tcs.site_orcamento.entity.Cabeceira;
 
 @Service
 public class PonteService {
-    
-    public static Double calculaCargaMaximaPorRoda
-    (
-        Double capacidadePonte, Double comprimentoPonte, Double pesoMetroLinear, Double pesoVigaPonte, Double pesoCabeceiraUtilizada
-    ) {
 
+    @Autowired
+    MaxiprodService maxiprodService;
+
+    public static Double calculaCargaMaximaPorRoda(
+            Double capacidadePonte, Double comprimentoPonte, Double pesoMetroLinear, Double pesoVigaPonte,
+            Double pesoCabeceiraUtilizada) {
         if (pesoMetroLinear == 0) {
             return 0.0;
         }
 
         Double metadePVP = pesoVigaPonte / 2;
         Double fatorSeguranca = 1.15;
-        Double parenteses = (capacidadePonte *(comprimentoPonte-1000)/comprimentoPonte+(20*comprimentoPonte/1000/2))*fatorSeguranca/2;
+        Double parenteses = (capacidadePonte * (comprimentoPonte - 1000) / comprimentoPonte
+                + (20 * comprimentoPonte / 1000 / 2)) * fatorSeguranca / 2;
 
         return metadePVP + pesoCabeceiraUtilizada + parenteses;
     }
 
     public static Double calculaPesoTotalPonteComTalha(
-        Double comprimentoPonte, Double pesoMetroLinear, Double pesoVigaPonte, Double pesoCabeceiraUtilizada, Double pesoTalha
-    ) {
-
+            Double comprimentoPonte, Double pesoMetroLinear, Double pesoVigaPonte, Double pesoCabeceiraUtilizada,
+            Double pesoTalha) {
         if (pesoMetroLinear == 0) {
             return 0.0;
         }
@@ -33,4 +38,13 @@ public class PonteService {
 
         return pesoVigaPonte + soma;
     }
+
+    public static Double calculaValorVigaPonte(Double pesoVigaPonte, Double valorKgAco) {
+        return pesoVigaPonte * valorKgAco / 0.4;
+    }
+
+    public Double calculaValorParCabeceiras(Cabeceira cabeceira) {
+        return maxiprodService.getPrecoDeVenda(cabeceira.getModelo());
+    }
+
 }
