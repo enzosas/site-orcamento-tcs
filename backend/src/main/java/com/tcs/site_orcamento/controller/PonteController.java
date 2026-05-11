@@ -3,8 +3,10 @@ package com.tcs.site_orcamento.controller;
 
 import com.tcs.site_orcamento.entity.Cabeceira;
 import com.tcs.site_orcamento.entity.MatrizCabeceira;
+import com.tcs.site_orcamento.entity.VigaW;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
+import com.tcs.site_orcamento.repository.VigaWRepository;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ public class PonteController {
 
     @Autowired
     private CabeceiraRepository cabeceiraRepository;
+
+    @Autowired
+    private VigaWRepository vigaWRepository;
 
     @GetMapping("/cabeceiraMatriz")
     public ResponseEntity<MatrizCabeceira> getCabeceiraMatriz(@RequestParam Integer capacidadeKg, Integer vaoMaximoMm) {
@@ -37,6 +42,12 @@ public class PonteController {
     public ResponseEntity<Cabeceira> getCabeceiraMatrizString(@RequestParam String codigo) {
         Cabeceira cabeceira = cabeceiraRepository.findByCodigo(codigo);
         return ResponseEntity.ok(cabeceira);
+    }
+
+    @GetMapping("/vigaW")
+    public ResponseEntity<VigaW> getCabeceiraVigaW(@RequestParam String codigo) {
+        VigaW viga = vigaWRepository.findByCodigo(codigo);
+        return ResponseEntity.ok(viga);
     }
     
 }

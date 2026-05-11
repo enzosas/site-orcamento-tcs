@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tcs.site_orcamento.entity.Cabeceira;
 import com.tcs.site_orcamento.entity.MatrizCabeceira;
 import com.tcs.site_orcamento.entity.MatrizVigaSimples;
+import com.tcs.site_orcamento.entity.VigaW;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizVigaSimplesRepository;
+import com.tcs.site_orcamento.repository.VigaWRepository;
 import com.tcs.site_orcamento.service.PonteService;
 
 @RestController
@@ -26,17 +28,21 @@ public class HelloController {
     @Autowired
     CabeceiraRepository cRepository;
 
+    @Autowired
+    VigaWRepository vRepository;
+
     @GetMapping("/")
     public String hello() {
         return "Hello, World!";
     }
 
     @GetMapping("/teste")
-    public Cabeceira teste() {
+    public VigaW teste() {
         
-        MatrizCabeceira coisa = mRepository.findByCapacidadeAndVao(3000, 15000);
-        Cabeceira cabeceira = cRepository.findByCodigo(coisa.getModelo());
+        // MatrizCabeceira coisa = mRepository.findByCapacidadeAndVao(3000, 15000);
+        // Cabeceira cabeceira = cRepository.findByCodigo(coisa.getModelo());
         // Double preco = ponteService.calculaValorParCabeceiras(cabeceira);
-        return cabeceira;
+        // return cabeceira;
+        return vRepository.findByCodigo("W200X15,0");
     }
 }
