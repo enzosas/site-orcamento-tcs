@@ -1,16 +1,38 @@
 package com.tcs.site_orcamento.service;
 
 import com.tcs.site_orcamento.controller.MaxiprodController;
+import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
+import com.tcs.site_orcamento.dto.PonteConfigDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
 import com.tcs.site_orcamento.entity.Cabeceira;
+import com.tcs.site_orcamento.entity.MatrizCabeceira;
+import com.tcs.site_orcamento.entity.MatrizVigaSimples;
+import com.tcs.site_orcamento.repository.CabeceiraRepository;
+import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
+import com.tcs.site_orcamento.repository.MatrizVigaSimplesRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
+@Slf4j
 public class PonteService {
 
     @Autowired
     MaxiprodService maxiprodService;
+
+    @Autowired
+    private MatrizCabeceiraRepository matrizCabeceiraRepository;
+
+    @Autowired
+    private CabeceiraRepository cabeceiraRepository;
+
+    @Autowired
+    private MatrizVigaSimplesRepository vigaSimplesRepository;
 
     static Double precoTrilhoPorQuilo = 13.0;
     static Double valorKgAco = 7.0;
@@ -235,4 +257,34 @@ public class PonteService {
         return 0.0;
     }
 
+    public Cabeceira getCabeceira(Integer capacidadeKg, Integer vaoMaximoMm) {
+        MatrizCabeceira mc = matrizCabeceiraRepository.findByCapacidadeAndVao(capacidadeKg, vaoMaximoMm);
+        Cabeceira c = cabeceiraRepository.findByCodigo(mc.getModelo());
+        return c;
+    }
+
+    public OrcamentoPonteDTO geraOrcamentoPonte(PonteConfigDTO config) {
+
+        log.info("\n- - - NOVA REQUISICAO DE ORCAMENTO DE PONTE - - -");
+        
+        OrcamentoPonteDTO orcamento = new OrcamentoPonteDTO();
+        Cabeceira cabeceira = getCabeceira(config.getDadosBasicos_capacidade(), config.getDadosBasicos_vaoLivre());
+        String trilhoCR = config.getCaminhoRolamento_bitolaTrilho();
+        Integer capacidadePonteInt = config.getDadosBasicos_capacidade();
+        Integer comprimentoPonteInt = config.getDadosBasicos_vaoLivre();
+        Double capacidadePonte = config.getDadosBasicos_capacidade().doubleValue();
+        Double comprimentoPonte = config.getDadosBasicos_vaoLivre().doubleValue();
+        Double pesoMetroLinear = vigaSimplesRepository.findByCapacidadeAndVao(capacidadePonteInt, comprimentoPonteInt).getPesoMetroLinear();
+        Double pesoVigaPonte = calculaPesoVigaPonte(comprimentoPonte, pesoMetroLinear);
+
+        log.debug("\nCabeceira carregada: {}", cabeceira.getModelo());
+
+        orcamento.setCabeceira(cabeceira.getModelo());
+        orcamento.setTrilhoCR(trilhoCR);
+
+        return orcamento;
+
+        
+
+    }
 }

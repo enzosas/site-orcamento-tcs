@@ -1,13 +1,17 @@
 package com.tcs.site_orcamento.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PonteConfigDTO {
     
     private Boolean dadosBasicos_isPonte;
     private String dadosBasicos_formaConstrutiva;
-    private String dadosBasicos_capacidade;
+    private Integer dadosBasicos_capacidade;
     private Integer dadosBasicos_vaoLivre;
     private Boolean dadosBasicos_isCaminhoRolamento;
     private Boolean dadosBasicos_isColunasSustentacao;

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
+import com.tcs.site_orcamento.dto.PonteConfigDTO;
 import com.tcs.site_orcamento.entity.Cabeceira;
 import com.tcs.site_orcamento.entity.MatrizCabeceira;
 import com.tcs.site_orcamento.entity.MatrizVigaSimples;
@@ -41,8 +43,33 @@ public class HelloController {
     }
 
     @GetMapping("/teste")
-    public String teste() {
-        
+    public OrcamentoPonteDTO teste() {
+
+        PonteConfigDTO config = new PonteConfigDTO(
+            true,
+            "Univiga - Tipo Caixão",
+            3000,
+            15000,
+            true,
+            true,
+            true,
+            16,
+            "Cabo Chato",
+            "Barramento Blindado - 3 consumidores",
+            "Viga Metálica + Trilho",
+            "QD.38 mm",
+            10,
+            "W460X82,0",
+            8,
+            "W360X57,8",
+            true,
+            5,
+            "150 x 150 x 4,75",
+            2,
+            10,
+            "200 x 200 x 6,35",
+            2
+        );
         // MatrizCabeceira coisa = mRepository.findByCapacidadeAndVao(3000, 15000);
         // Cabeceira cabeceira = cRepository.findByCodigo(coisa.getModelo());
         // Double preco = ponteService.calculaValorParCabeceiras(cabeceira);
@@ -55,6 +82,7 @@ public class HelloController {
         // return PonteService.calculaValorKgColunas().toString();
         // return PonteService.calculaPesoColunasTotal(2.0, 2.0, 159.94, 494.24).toString();
         // return ponteService.calculaAntiColisao(15000.0).toString();
-        return PonteService.consultaMontagem(35000.0, 25000.0).toString();
+        // return ponteService.getCabeceira(3000, 15000);
+        return ponteService.geraOrcamentoPonte(config);
     }
 }
