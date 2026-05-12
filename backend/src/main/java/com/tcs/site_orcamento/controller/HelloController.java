@@ -54,6 +54,7 @@ public class HelloController {
         // return PonteService.calculaPesoColunas("Ponte Rolante", 10.0, "200 x 200 x 6,35").toString();
         // return PonteService.calculaValorKgColunas().toString();
         // return PonteService.calculaPesoColunasTotal(2.0, 2.0, 159.94, 494.24).toString();
-        return ponteService.calculaAntiColisao(15000.0).toString();
+        // return ponteService.calculaAntiColisao(15000.0).toString();
+        return PonteService.consultaMontagem(35000.0, 25000.0).toString();
     }
 }
