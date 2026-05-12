@@ -14,6 +14,7 @@ public class PonteService {
 
     static Double precoTrilhoPorQuilo = 13.0;
     static Double valorKgAco = 7.0;
+    static Double vigaWRsKg = 10.0;
 
     public static Double calculaCargaMaximaPorRoda(
             Double capacidadePonte, Double comprimentoPonte, Double pesoMetroLinear, Double pesoVigaPonte,
@@ -109,5 +110,84 @@ public class PonteService {
     public static Double calculaPesoVigaPonte(Double comprimentoPonte, Double pesoMetroLinear) {
         return comprimentoPonte * pesoMetroLinear / 1000;
     }
+
+    public static Double calculaPesoCaminhoRolamento(
+            Double comprimentoA,
+            Double comprimentoB,
+            Double vigaKgMA,
+            Double vigaKgMB,
+            Double trilhoKgMA,
+            Double trilhoKgMB) {
+        Double a = comprimentoA * (vigaKgMA + trilhoKgMA);
+        Double b = comprimentoB * (vigaKgMB + trilhoKgMB);
+        return a + b;
+    }
+
+    public static Double calculaValorVigaCR(Double comprimento, Double vigaKgM, Double vigaRsKg) {
+        return comprimento * vigaKgM * vigaRsKg / 0.5;
+    }
+
+    public static Double calculaValorTrilhoCR(Double comprimento, Double trilhoKgM, Double trilhoRsKg) {
+        return comprimento * trilhoKgM * trilhoRsKg / 0.5;
+    }
+
+    public static Double calculaEletrificacaoTransversal(String tipo, Double precoCoisa1, Double precoCoisa2, Double vaoMm) {
+        return switch (tipo) {
+            case "Cabo Chato" -> precoCoisa1 * vaoMm / 1000;
+            case "Esteira porta cabo" -> precoCoisa2 * vaoMm / 1000;
+            default -> 0.0;
+        };
+    }
+
+    public static Double calculaValorEletrificacaoLongitudinal(Double comprimento, Double precoCoisa1,
+            Double precoCoisa2, String tipo) {
+        Integer numeroCarroColetor = switch (tipo) {
+            case "Barramento Blindado - 1 consumidor" -> 1;
+            case "Barramento Blindado - 2 consumidores" -> 2;
+            case "Barramento Blindado - 3 consumidores" -> 3;
+            case "Barramento Blindado - 4 consumidores" -> 4;
+            case "Somente o Carro coletor" -> 1;
+            default -> 0;
+        };
+        Integer outraCoisa = switch (tipo) {
+            case "Barramento Blindado - 1 consumidor",
+                    "Barramento Blindado - 2 consumidores",
+                    "Barramento Blindado - 3 consumidores",
+                    "Barramento Blindado - 4 consumidores" ->
+                1;
+            default -> 0;
+        };
+        return precoCoisa1 * outraCoisa * comprimento + precoCoisa2 * numeroCarroColetor + 30 * comprimento;
+    }
+
+    public static Double calculaPesoColunas(String tipo, Double altura, String tipoColuna) {
+        Double pesoColunaMetro = getPesoColunaPorMetro(tipoColuna);
+        Double flange = getPesoFlangeColuna(tipoColuna);
+        if (tipo == "Ponte Rolante") {
+            return pesoColunaMetro * altura + flange * 2;
+        } else {
+            return pesoColunaMetro * (altura + 1) + flange * 2;
+        }
+    }
+
+    public static Double calculaValorKgColunas() {
+        return valorKgAco*2.5;
+    }
+
+    public static Double calculaPrecoColunas(Double q1, Double q2, Double p1, Double p2, Double rsKg1, Double rsKg2) {
+        return q1 * p1 * rsKg1 + q2 * p2 * rsKg2;
+    }
+
+    public static Double calculaPesoColunasTotal(Double q1, Double q2, Double p1, Double p2) {
+        return q1 * p1 + q2 * p2;
+    }
+
+    public Double calculaAntiColisao(Double comprimentoPonteMm) {
+        Double coisa1 = maxiprodService.getPrecoDeVenda("BC0445");
+        Double coisa2 = maxiprodService.getPrecoDeVenda("CAB.CHA.06X15");
+        coisa1 = coisa1 * 2;
+        coisa2 = coisa2 * ((comprimentoPonteMm/1000)+5);
+        return coisa1 + coisa2;
+    } 
 
 }
