@@ -272,7 +272,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                 Anti Colisão
                             </label>
                             <div className="ponte__window__input">
-                                <h4>Capacidade</h4>
+                                <h4>Capacidade (kg)</h4>
                                 <select
                                     value={ponteConfig.dadosBasicos_capacidade}
                                     name="dadosBasicos_capacidade"
@@ -308,7 +308,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                 </select>
                             </div>
                             <div className="ponte__window__input">
-                                <h4>Vão Livre</h4>
+                                <h4>Vão Livre (mm)</h4>
                                 <input
                                     className="ponte__window__input"
                                     type="number"
@@ -319,7 +319,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                 </input>
                             </div>
                             <div className="ponte__window__input">
-                                <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento</h4>
+                                <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento (m)</h4>
                                 <input
                                     className={`ponte__window__input ${desativo.caminhoRolamento_tudo ? "ponte__window__input--disabled" : ""}`}
                                     type="number"
