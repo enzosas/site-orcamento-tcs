@@ -1,7 +1,10 @@
 const boolParaTexto = (valor) => valor ? "Sim" : "Não";
 
-const medida = (valor, unidade) => (valor !== null && valor !== undefined && valor !== '') ? `${valor} ${unidade}` : ""; 
-
+const medida = (valor, unidade) => 
+(valor !== null && valor !== undefined && valor !== '') 
+    ? `${parseFloat(valor).toFixed(2).replace('.', ',')} ${unidade}` 
+    : "";
+    
 const limpaNull = (obj) => {
     Object.keys(obj).forEach(key => {
         if (obj[key] === null || obj[key] === undefined) {

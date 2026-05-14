@@ -1,12 +1,15 @@
 package com.tcs.site_orcamento.controller;
 
 
+import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
+import com.tcs.site_orcamento.dto.PonteConfigDTO;
 import com.tcs.site_orcamento.entity.Cabeceira;
 import com.tcs.site_orcamento.entity.MatrizCabeceira;
 import com.tcs.site_orcamento.entity.VigaW;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
 import com.tcs.site_orcamento.repository.VigaWRepository;
+import com.tcs.site_orcamento.service.PonteService;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,9 @@ public class PonteController {
 
     @Autowired
     private VigaWRepository vigaWRepository;
+
+    @Autowired
+    private PonteService ponteService;
 
     @GetMapping("/cabeceiraMatriz")
     public ResponseEntity<MatrizCabeceira> getCabeceiraMatriz(@RequestParam Integer capacidadeKg, Integer vaoMaximoMm) {
@@ -48,6 +54,12 @@ public class PonteController {
     public ResponseEntity<VigaW> getCabeceiraVigaW(@RequestParam String codigo) {
         VigaW viga = vigaWRepository.findByCodigo(codigo);
         return ResponseEntity.ok(viga);
+    }
+
+    @PostMapping("/orcamentoPonte")
+    public ResponseEntity<OrcamentoPonteDTO> getOrcamentoPonte(@RequestBody PonteConfigDTO config) {
+        OrcamentoPonteDTO dto = ponteService.geraOrcamentoPonte(config, 0.0);
+        return ResponseEntity.ok(dto);
     }
     
 }

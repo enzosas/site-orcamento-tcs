@@ -43,6 +43,28 @@ function App() {
 		talhaSemCircuito: null
 	});
 
+	const [precosPesosPonte, setPrecosPesosPonte] = useState ({
+		cabeceira: null,
+		trilhoCR: null,
+		cargaMaximaRoda: null,
+		pesoViga: null,
+		pesoParCabeceira: null,
+		pesoTalha: null,
+		pesoEletrificacaoTransversal: null,
+		pesoEletrificacaoLongitudinal: null,
+		pesoCaminhoRolamento: null,
+		pesoColunasApoio: null,
+		pesoTotal: null,
+		precoVigaPrincipal: null,
+		precoCabeceiras: null,
+		precoMontagem: null,
+		precoEletrificacaoTransversal: null,
+		precoEletrificacaoLongitudinal: null,
+		precoCaminhoRolamento: null,
+		precoColunasApoio: null,
+		precoTotal: null,
+	});
+
 	const [preferencias, setPreferencias] = useState({
 		mostrarLogs: false,
 	})
@@ -63,7 +85,17 @@ function App() {
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />
 					<Pricing config={config} precos={precos} setPrecos={setPrecos} preferencias={preferencias}/>
-					<Footer talha={talhaSelecionada} setTalhaSelecionada={setTalhaSelecionada} config={config} setConfig={setConfig} precos={precos} preferencias={preferencias} setPreferencias={setPreferencias}/>  
+					<Footer 
+						talha={talhaSelecionada} 
+						setTalhaSelecionada={setTalhaSelecionada} 
+						config={config} 
+						setConfig={setConfig} 
+						precos={precos} 
+						preferencias={preferencias} 
+						setPreferencias={setPreferencias}
+						precosPesosPonte={precosPesosPonte}
+						setPrecosPesosPonte={setPrecosPesosPonte}
+					/>  
 				</div>
 			</div>
 		</div>

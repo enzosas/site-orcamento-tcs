@@ -2,10 +2,10 @@ import "./Ponte.css"
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { AuthContext } from '../../../../../context/AuthContext.jsx'
-import { formatarConfigPonteExibicao } from "../../../../../utils/dadosExibicao.js";
+import { formatarConfigPonteExibicao, formatarPontePrecosPesos } from "../../../../../utils/dadosExibicao.js";
 import api from '../../../../../services/api.js'
 
-function Ponte({ isOpen, onClose }) {
+function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
 
     if (!isOpen) return null;
 
@@ -20,15 +20,15 @@ function Ponte({ isOpen, onClose }) {
         "200",
         "250",
         "500",
-        "1.000",
-        "1.500",
-        "2.000",
-        "3.000",
-        "3.200",
-        "5.000",
-        "6.000",
-        "6.300",
-        "8.000",
+        "1000",
+        "1500",
+        "2000",
+        "3000",
+        "3200",
+        "5000",
+        "6000",
+        "6300",
+        "8000",
     ];
 
     const opcoesEletrificacaoTransversal = [
@@ -113,8 +113,6 @@ function Ponte({ isOpen, onClose }) {
         colunasSustentacao_ladoB: !ponteConfig.colunasSustentacao_distribuicaoIs2Lados,
     };
 
-    console.table(desativo)
-
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
 
@@ -125,15 +123,84 @@ function Ponte({ isOpen, onClose }) {
         } else if (type === 'radio'){
             val = value === 'true';
         }
-        console.log(e)
         setPonteConfig(prev => ({
             ...prev,
             [name]: val
         }));
     };
 
+    async function fetchOrcamentoPonte(config, signal) {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.post(`/api/ponte/orcamentoPonte`, config, signal);
+            const orcamento = await response.data;
+            return orcamento;
+
+        } catch (error) {
+
+            if (error.name !== 'AbortError') {
+                console.error(`Falha ao calcular o orçamento da ponte:`, error);
+            }
+            throw error;
+        }
+    }
+
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+
+        const controller = new AbortController();
+        setError(null);
+
+        const fetchPrecos = async () => {
+            if (ponteConfig && ponteConfig.dadosBasicos_capacidade && ponteConfig.dadosBasicos_vaoLivre) {
+                setIsLoading(true);
+                try {
+                    const orcamento = await fetchOrcamentoPonte(ponteConfig, controller.signal);
+                    // TODO: mostrar logs como no preco da talha permite
+                    setPrecosPesos(() => ({
+                        cabeceira: orcamento.cabeceira,
+                        trilhoCR: orcamento.trilhoCR,
+                        cargaMaximaRoda: orcamento.cargaMaximaRoda,
+                        pesoViga: orcamento.pesoViga,
+                        pesoParCabeceira: orcamento.pesoParCabeceira,
+                        pesoEletrificacaoTransversal: orcamento.pesoEletrificacaoTransversal,
+                        pesoEletrificacaoLongitudinal: orcamento.pesoEletrificacaoLongitudinal,
+                        pesoCaminhoRolamento: orcamento.pesoCaminhoRolamento,
+                        pesoColunasApoio: orcamento.pesoColunasApoio,
+                        pesoTotal: orcamento.pesoTotal,
+                        precoVigaPrincipal: orcamento.precoVigaPrincipal,
+                        precoCabeceiras: orcamento.precoCabeceiras,
+                        precoMontagem: orcamento.precoMontagem,
+                        precoEletrificacaoTransversal: orcamento.precoEletrificacaoTransversal,
+                        precoEletrificacaoLongitudinal: orcamento.precoEletrificacaoLongitudinal,
+                        precoCaminhoRolamento: orcamento.precoCaminhoRolamento,
+                        precoColunasApoio: orcamento.precoColunasApoio,
+                        precoTotal: orcamento.precoTotal,
+                    }))
+                } catch (err) {
+                    if (err.name != 'AbortError') {
+                        setError(err);
+                    }
+                } finally {
+                    if (!controller.signal.aborted) {
+                        setIsLoading(false);
+                    }
+                    console.table(precosPesosFormatado)
+                }
+            }
+        };
+
+        fetchPrecos();
+        return () => {
+            controller.abort();
+        };
+
+    }, [ponteConfig])
+
     const ponteConfigFormatada = formatarConfigPonteExibicao(ponteConfig);
-    console.log(ponteConfigFormatada);
+    const precosPesosFormatado = formatarPontePrecosPesos(precosPesos);
 
     return (
         <div className="ponte__background">
@@ -145,7 +212,6 @@ function Ponte({ isOpen, onClose }) {
                             <h1>Dados Básicos</h1>
                             <div className="ponte__body__coluna__fileira_horizontal">
                                 <label>
-                                    {console.log(ponteConfig)}
                                     <input
                                         type="radio"
                                         value="true"
@@ -501,97 +567,97 @@ function Ponte({ isOpen, onClose }) {
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Trilho CR</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">#N/D</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.trilhoCR}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Carga Máxima por roda</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 kg</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.cargaMaximaRoda}</div>
                             </div>
 
                             <h2>Pesos Aproximados</h2>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Viga</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 kg</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoViga}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Par de Cabeceiras</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">#N/D</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoParCabeceira}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Talha</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 kg</div>
+                                <div className="ponte__preco__window__linha__valor">humm</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Transversal</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 kg</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoEletrificacaoTransversal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Longitudinal</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 kg</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoEletrificacaoLongitudinal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Caminho de Rolamento</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">#N/D</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoCaminhoRolamento}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Colunas de Apoio</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">0 kg</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoColunasApoio}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Total</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">#N/D</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoTotal}</div>
                             </div>
 
                             <h2>Valores</h2>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Viga Principal</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">-</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoVigaPrincipal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Cabeceiras</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">-</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoCabeceiras}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
-                                <div className="ponte__preco__window__linha__tag">Valor Montagem Solda/Pintu</div>
+                                <div className="ponte__preco__window__linha__tag">Valor Montagem Solda/Pintura</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">-</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoMontagem}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Transversal</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">-</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoEletrificacaoTransversal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Longitudinal</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">-</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoEletrificacaoLongitudinal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Caminho de Rolamento</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">#N/D</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoCaminhoRolamento}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Colunas de Apoio</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">-</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoColunasApoio}</div>
                             </div>
 
                             <div className="ponte__preco__window__linha--final">
                                 <div className="ponte__preco__window__linha__tag">Total R$</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">#N/D</div>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoTotal}</div>
                             </div>
                         </div>
                     </div>
