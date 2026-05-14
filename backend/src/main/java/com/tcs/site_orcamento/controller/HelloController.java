@@ -42,6 +42,11 @@ public class HelloController {
         return "Hello, World!";
     }
 
+    @GetMapping("/preco")
+    public Double testePreco() {
+        return maxiprod.getPrecoDeVenda("QD.38");
+    }
+    
     @GetMapping("/teste")
     public OrcamentoPonteDTO teste() {
 
@@ -83,6 +88,6 @@ public class HelloController {
         // return PonteService.calculaPesoColunasTotal(2.0, 2.0, 159.94, 494.24).toString();
         // return ponteService.calculaAntiColisao(15000.0).toString();
         // return ponteService.getCabeceira(3000, 15000);
-        return ponteService.geraOrcamentoPonte(config);
+        return ponteService.geraOrcamentoPonte(config, 26.0);
     }
 }
