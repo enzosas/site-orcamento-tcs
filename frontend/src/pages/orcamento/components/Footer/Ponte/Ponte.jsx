@@ -463,7 +463,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                 <h1 className={`${desativo.colunasSustentacao_tudo ? "ponte__disabled_color" : ""}`}>Lado A</h1>
                                 <div className="ponte__body__coluna__fileira_horizontal">
                                     <div className="ponte__window__input">
-                                        <h4 className={`${desativo.colunasSustentacao_tudo ? "ponte__disabled_color" : ""}`}>Altura</h4>
+                                        <h4 className={`${desativo.colunasSustentacao_tudo ? "ponte__disabled_color" : ""}`}>Altura (m)</h4>
                                         <input
                                             className="ponte__window__input"
                                             type="number"
@@ -509,7 +509,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                 <h1 className={`${(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB) ? "ponte__disabled_color" : ""}`}>Lado B</h1>
                                 <div className="ponte__body__coluna__fileira_horizontal">
                                     <div className="ponte__window__input">
-                                        <h4 className={`${(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB) ? "ponte__disabled_color" : ""}`}>Altura</h4>
+                                        <h4 className={`${(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB) ? "ponte__disabled_color" : ""}`}>Altura (m)</h4>
                                         <input
                                             className="ponte__window__input"
                                             type="number"
