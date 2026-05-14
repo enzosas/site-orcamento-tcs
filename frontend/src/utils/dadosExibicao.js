@@ -10,6 +10,11 @@ const limpaNull = (obj) => {
     });
 }
 
+const formatadorPreco = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+});
+
 export function formatarTalhaExibicao(talha) {
     
     const obj = {
@@ -42,6 +47,30 @@ export function formatarConfigPonteExibicao(configPonte) {
         dadosBasicos_capacidade: medida(configPonte.dadosBasicos_capacidade, "kg"),
         dadosBasicos_vaoLivre: medida(configPonte.dadosBasicos_vaoLivre, "mm"),
         dadosBasicos_isPonte: configPonte.dadosBasicos_isPonte ? "Ponte Rolante" : "Pórtico Rolante",
+    }
+    limpaNull(obj);
+    return obj;
+}
+
+export function formatarPontePrecosPesos(precosPesos) {
+    const obj = {
+        ...precosPesos,
+        cargaMaximaRoda: medida(precosPesos.cargaMaximaRoda, "kg"),
+        pesoViga: medida(precosPesos.pesoViga, "kg"),
+        pesoParCabeceira: medida(precosPesos.pesoParCabeceira, "kg"),
+        pesoEletrificacaoTransversal: medida(precosPesos.pesoEletrificacaoTransversal, "kg"),
+        pesoEletrificacaoLongitudinal: medida(precosPesos.pesoEletrificacaoLongitudinal, "kg"),
+        pesoCaminhoRolamento: medida(precosPesos.pesoCaminhoRolamento, "kg"),
+        pesoColunasApoio: medida(precosPesos.pesoColunasApoio, "kg"),
+        pesoTotal: medida(precosPesos.pesoTotal, "kg"),
+        precoVigaPrincipal: formatadorPreco.format(precosPesos.precoVigaPrincipal),
+        precoCabeceiras: formatadorPreco.format(precosPesos.precoCabeceiras),
+        precoMontagem: formatadorPreco.format(precosPesos.precoMontagem),
+        precoEletrificacaoTransversal: formatadorPreco.format(precosPesos.precoEletrificacaoTransversal),
+        precoEletrificacaoLongitudinal: formatadorPreco.format(precosPesos.precoEletrificacaoLongitudinal),
+        precoCaminhoRolamento: formatadorPreco.format(precosPesos.precoCaminhoRolamento),
+        precoColunasApoio: formatadorPreco.format(precosPesos.precoColunasApoio),
+        precoTotal: formatadorPreco.format(precosPesos.precoTotal),
     }
     limpaNull(obj);
     return obj;
