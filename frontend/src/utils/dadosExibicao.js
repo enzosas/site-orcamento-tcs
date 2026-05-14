@@ -1,10 +1,10 @@
 const boolParaTexto = (valor) => valor ? "Sim" : "Não";
 
-const medida = (valor, unidade) => 
-(valor !== null && valor !== undefined && valor !== '') 
-    ? `${parseFloat(valor).toFixed(2).replace('.', ',')} ${unidade}` 
-    : "";
-    
+const medida = (valor, unidade, casasDecimais = 2) =>
+    (valor !== null && valor !== undefined && valor !== '')
+        ? `${parseFloat(valor).toFixed(casasDecimais).replace('.', ',')} ${unidade}`
+        : "";
+
 const limpaNull = (obj) => {
     Object.keys(obj).forEach(key => {
         if (obj[key] === null || obj[key] === undefined) {
@@ -19,7 +19,7 @@ const formatadorPreco = new Intl.NumberFormat('pt-BR', {
 });
 
 export function formatarTalhaExibicao(talha) {
-    
+
     const obj = {
         ...talha,
         capacidade: medida(talha.capacidade, "kg"),
@@ -48,7 +48,7 @@ export function formatarConfigPonteExibicao(configPonte) {
     const obj = {
         ...configPonte,
         dadosBasicos_capacidade: medida(configPonte.dadosBasicos_capacidade, "kg"),
-        dadosBasicos_vaoLivre: medida(configPonte.dadosBasicos_vaoLivre, "mm"),
+        dadosBasicos_vaoLivre: medida(configPonte.dadosBasicos_vaoLivre, "mm", 0),
         dadosBasicos_isPonte: configPonte.dadosBasicos_isPonte ? "Ponte Rolante" : "Pórtico Rolante",
     }
     limpaNull(obj);
@@ -80,13 +80,13 @@ export function formatarPontePrecosPesos(precosPesos) {
 }
 
 export function getDadosExibicao(talha, config) {
-    
+
     let dados = {
         painelComandoTipo: talha.painelComandoPadrao,
         tensaoTrabalho: config.tensao,
         tensaoComando: talha.tensaoComando,
-        sobeDesce: config.duplaVelocidadeElevacao? "2 velocidades com inversor" : talha.acionamentoMotorElevacao,
-        direitaEsquerda: config.duplaVelocidadeTranslacao? "2 velocidades com inversor" : talha.acionamentoMotorTranslacao,
+        sobeDesce: config.duplaVelocidadeElevacao ? "2 velocidades com inversor" : talha.acionamentoMotorElevacao,
+        direitaEsquerda: config.duplaVelocidadeTranslacao ? "2 velocidades com inversor" : talha.acionamentoMotorTranslacao,
         frenteTras: config.painel6Mov ? "2 movimentos" : "Não",
         potenciaMotorPonte: config.painel6Mov ? config.potenciaMotores : "",
         botoeira: talha.botoeira,
