@@ -263,9 +263,7 @@ public class PonteService {
 
     public Cabeceira getCabeceira(Integer capacidadeKg, Integer vaoMaximoMm) {
         MatrizCabeceira mc = matrizCabeceiraRepository.findByCapacidadeAndVao(capacidadeKg, vaoMaximoMm);
-        log.info("{}", mc.getModelo());
         Cabeceira c = cabeceiraRepository.findByCodigo(mc.getModelo());
-        log.info("{}", c.getModelo());
         return c;
     }
 
@@ -296,13 +294,13 @@ public class PonteService {
         if (config.getDadosBasicos_isCaminhoRolamento()) {
             Double pesoTrilhoA = getPesoTrilho(trilhoCR);
             Double pesoTrilhoB = getPesoTrilho(trilhoCR);
+            Double valorCaminhoRolamentoTrilhoA = calculaValorTrilhoCR(comprimento2, pesoTrilhoA, 13.0);
+            Double valorCaminhoRolamentoTrilhoB = calculaValorTrilhoCR(comprimento2, pesoTrilhoB, 13.0);
+            Double vigaAKgM = 0.0;
+            Double vigaBKgM = 0.0;
+            Double valorCaminhoRolamentoVigaA = 0.0;
+            Double valorCaminhoRolamentoVigaB = 0.0;
             if ("Viga Metálica + Trilho".equals(config.getCaminhoRolamento_tipo())) {
-                Double vigaAKgM = 0.0;
-                Double vigaBKgM = 0.0;
-                Double valorCaminhoRolamentoVigaA = 0.0;
-                Double valorCaminhoRolamentoVigaB = 0.0;
-                Double valorCaminhoRolamentoTrilhoA = calculaValorTrilhoCR(comprimento2, pesoTrilhoA, 13.0);
-                Double valorCaminhoRolamentoTrilhoB = calculaValorTrilhoCR(comprimento2, pesoTrilhoB, 13.0);
                 Boolean perfilMetalicoVazio = config.getCaminhoRolamento_ladoA_perfilMetalico().isEmpty() || config.getCaminhoRolamento_ladoB_perfilMetalico().isEmpty();
                 if (!perfilMetalicoVazio) {
                     String vigaA = config.getCaminhoRolamento_ladoA_perfilMetalico();
@@ -312,9 +310,9 @@ public class PonteService {
                     valorCaminhoRolamentoVigaA = calculaValorVigaCR(comprimento2, vigaAKgM, 10.0); 
                     valorCaminhoRolamentoVigaB = calculaValorVigaCR(comprimento2, vigaBKgM, 10.0); 
                 }
-                pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB);
-                valorCaminhoRolamento = valorCaminhoRolamentoVigaA + valorCaminhoRolamentoVigaB + valorCaminhoRolamentoTrilhoA + valorCaminhoRolamentoTrilhoB;
             }
+            pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB);
+            valorCaminhoRolamento = valorCaminhoRolamentoVigaA + valorCaminhoRolamentoVigaB + valorCaminhoRolamentoTrilhoA + valorCaminhoRolamentoTrilhoB;
         }
 
         Double pesoEletTransversal = 10*comprimentoPonte/1000;
