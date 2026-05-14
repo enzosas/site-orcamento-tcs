@@ -187,7 +187,6 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                     if (!controller.signal.aborted) {
                         setIsLoading(false);
                     }
-                    console.table(precosPesosFormatado)
                 }
             }
         };
