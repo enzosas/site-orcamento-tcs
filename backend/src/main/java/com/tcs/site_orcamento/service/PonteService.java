@@ -263,13 +263,21 @@ public class PonteService {
 
     public Cabeceira getCabeceira(Integer capacidadeKg, Integer vaoMaximoMm) {
         MatrizCabeceira mc = matrizCabeceiraRepository.findByCapacidadeAndVao(capacidadeKg, vaoMaximoMm);
+        log.info("{}", mc.getModelo());
         Cabeceira c = cabeceiraRepository.findByCodigo(mc.getModelo());
+        log.info("{}", c.getModelo());
         return c;
     }
 
     public OrcamentoPonteDTO geraOrcamentoPonte(PonteConfigDTO config, Double pesoTalha) {
 
         log.info("\n- - - NOVA REQUISICAO DE ORCAMENTO DE PONTE - - -");
+        
+        Double precoTotal = 0.0;
+        Double pesoCaminhoRolamento = 0.0;
+        Double pesoColunasTotal = 0.0;
+        Double valorCaminhoRolamento = 0.0;
+        Double precoColunasApoio = 0.0;
         
         OrcamentoPonteDTO orcamento = new OrcamentoPonteDTO();
         Cabeceira cabeceira = getCabeceira(config.getDadosBasicos_capacidade(), config.getDadosBasicos_vaoLivre());
@@ -285,13 +293,30 @@ public class PonteService {
         Double pesoViga = calculaPesoVigaPonte(comprimentoPonte, pesoMetroLinear);
         Double comprimento2 = config.getDadosBasicos_comprimento().doubleValue();
         
-        String vigaA = config.getCaminhoRolamento_ladoA_perfilMetalico();
-        String vigaB = config.getCaminhoRolamento_ladoB_perfilMetalico();
-        Double vigaAKgM = vRepository.findByCodigo(vigaA).getMassaLinear();
-        Double vigaBKgM = vRepository.findByCodigo(vigaB).getMassaLinear();
-        Double pesoTrilhoA = getPesoTrilho(trilhoCR);
-        Double pesoTrilhoB = getPesoTrilho(trilhoCR);
-        Double pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB);
+        if (config.getDadosBasicos_isCaminhoRolamento()) {
+            Double pesoTrilhoA = getPesoTrilho(trilhoCR);
+            Double pesoTrilhoB = getPesoTrilho(trilhoCR);
+            if ("Viga Metálica + Trilho".equals(config.getCaminhoRolamento_tipo())) {
+                Double vigaAKgM = 0.0;
+                Double vigaBKgM = 0.0;
+                Double valorCaminhoRolamentoVigaA = 0.0;
+                Double valorCaminhoRolamentoVigaB = 0.0;
+                Double valorCaminhoRolamentoTrilhoA = calculaValorTrilhoCR(comprimento2, pesoTrilhoA, 13.0);
+                Double valorCaminhoRolamentoTrilhoB = calculaValorTrilhoCR(comprimento2, pesoTrilhoB, 13.0);
+                Boolean perfilMetalicoVazio = config.getCaminhoRolamento_ladoA_perfilMetalico().isEmpty() || config.getCaminhoRolamento_ladoB_perfilMetalico().isEmpty();
+                if (!perfilMetalicoVazio) {
+                    String vigaA = config.getCaminhoRolamento_ladoA_perfilMetalico();
+                    String vigaB = config.getCaminhoRolamento_ladoB_perfilMetalico();
+                    vigaAKgM = vRepository.findByCodigo(vigaA).getMassaLinear();
+                    vigaBKgM = vRepository.findByCodigo(vigaB).getMassaLinear();
+                    valorCaminhoRolamentoVigaA = calculaValorVigaCR(comprimento2, vigaAKgM, 10.0); 
+                    valorCaminhoRolamentoVigaB = calculaValorVigaCR(comprimento2, vigaBKgM, 10.0); 
+                }
+                pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB);
+                valorCaminhoRolamento = valorCaminhoRolamentoVigaA + valorCaminhoRolamentoVigaB + valorCaminhoRolamentoTrilhoA + valorCaminhoRolamentoTrilhoB;
+            }
+        }
+
         Double pesoEletTransversal = 10*comprimentoPonte/1000;
         Double pesoEletLongitudinal = 8*comprimentoPonte/1000;
         Double pesoParCabeceira = 2*pesoCabeceira;
@@ -305,8 +330,6 @@ public class PonteService {
         Double pesoTotalColunaKgB = calculaPesoColunas(isPonteRolante, alturaB, dimensoesB);
         Integer qA = config.getColunasSustentacao_ladoA_numeroColunas();
         Integer qB = config.getColunasSustentacao_ladoB_numeroColunas();
-        Double pesoColunasTotal = calculaPesoColunasTotal(pesoTotalColunaKgA, pesoTotalColunaKgB, qA, qB);
-        Double pesoTotal = pesoVigaPonte + pesoParCabeceira + pesoEletTransversal + pesoEletLongitudinal + pesoTalha + pesoCaminhoRolamento + pesoColunasTotal;
 
         Double valorVigaPonte = calculaValorVigaPonte(pesoVigaPonte, valorKgAco);
         // Double valorParCabeceiras = calculaValorParCabeceiras(cabeceira);
@@ -320,18 +343,17 @@ public class PonteService {
         Double precoCoisa2 = maxiprodService.getPrecoDeVenda("CAR.COL.40A");
         Double valorEletLongitudinal = calculaValorEletrificacaoLongitudinal(comprimento2, 232.70, precoCoisa2, tipoEL);
 
-        Double valorCaminhoRolamentoVigaA = calculaValorVigaCR(comprimento2, vigaAKgM, 10.0); 
-        Double valorCaminhoRolamentoVigaB = calculaValorVigaCR(comprimento2, vigaBKgM, 10.0); 
-        Double valorCaminhoRolamentoTrilhoA = calculaValorTrilhoCR(comprimento2, pesoTrilhoA, 13.0);
-        Double valorCaminhoRolamentoTrilhoB = calculaValorTrilhoCR(comprimento2, pesoTrilhoB, 13.0);
-        Double valorCaminhoRolamento = valorCaminhoRolamentoVigaA + valorCaminhoRolamentoVigaB + valorCaminhoRolamentoTrilhoA + valorCaminhoRolamentoTrilhoB;
-
         Double qADouble = qA.doubleValue();
         Double qBDouble = qB.doubleValue();
         Double colunaRsKg = calculaValorKgColunas();
-        Double precoColunasApoio = calculaPrecoColunas(qADouble, qBDouble, pesoTotalColunaKgA, pesoTotalColunaKgB, colunaRsKg, colunaRsKg);
 
-        Double precoTotal = 0.0;
+        
+        if (config.getDadosBasicos_isColunasSustentacao()) {
+            pesoColunasTotal = calculaPesoColunasTotal(pesoTotalColunaKgA, pesoTotalColunaKgB, qA, qB);
+            precoColunasApoio = calculaPrecoColunas(qADouble, qBDouble, pesoTotalColunaKgA, pesoTotalColunaKgB, colunaRsKg, colunaRsKg);
+        }
+        Double pesoTotal = pesoVigaPonte + pesoParCabeceira + pesoEletTransversal + pesoEletLongitudinal + pesoTalha + pesoCaminhoRolamento + pesoColunasTotal;
+        
         precoTotal += valorVigaPonte;
         precoTotal += valorParCabeceiras;
         precoTotal += valorMontagem;
