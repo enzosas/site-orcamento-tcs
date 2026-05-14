@@ -315,6 +315,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                     value={ponteConfig.dadosBasicos_vaoLivre}
                                     name="dadosBasicos_vaoLivre"
                                     onChange={handleChange}
+                                    onFocus={(e) => e.target.select()}
                                 >
                                 </input>
                             </div>
@@ -327,6 +328,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                     name="dadosBasicos_comprimento"
                                     onChange={handleChange}
                                     disabled={desativo.caminhoRolamento_tudo}
+                                    onFocus={(e) => e.target.select()}
                                 >
                                 </input>
                             </div>
@@ -379,6 +381,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                             name="caminhoRolamento_ladoA_distanciaApoios"
                                             onChange={handleChange}
                                             disabled={(desativo.caminhoRolamento_tudo || desativo.caminhoRolamento_lados)}
+                                            onFocus={(e) => e.target.select()}
                                         >
 
                                         </input>
@@ -409,6 +412,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                             onChange={handleChange}
                                             type="number"
                                             disabled={(desativo.caminhoRolamento_tudo || desativo.caminhoRolamento_lados)}
+                                            onFocus={(e) => e.target.select()}
                                         >
 
                                         </input>
@@ -467,6 +471,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                             name="colunasSustentacao_ladoA_altura"
                                             onChange={handleChange}
                                             disabled={desativo.colunasSustentacao_tudo}
+                                            onFocus={(e) => e.target.select()}
                                         >
 
                                         </input>
@@ -493,6 +498,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                             name="colunasSustentacao_ladoA_numeroColunas"
                                             onChange={handleChange}
                                             disabled={desativo.colunasSustentacao_tudo}
+                                            onFocus={(e) => e.target.select()}
                                         >
 
                                         </input>
@@ -511,6 +517,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                             name="colunasSustentacao_ladoB_altura"
                                             onChange={handleChange}
                                             disabled={(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB)}
+                                            onFocus={(e) => e.target.select()}
                                         >
 
                                         </input>
@@ -537,6 +544,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                             name="colunasSustentacao_ladoB_numeroColunas"
                                             onChange={handleChange}
                                             disabled={(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB)}
+                                            onFocus={(e) => e.target.select()}
                                         >
 
                                         </input>
