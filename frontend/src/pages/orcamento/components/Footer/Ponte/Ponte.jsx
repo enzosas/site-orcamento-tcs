@@ -2,10 +2,10 @@ import "./Ponte.css"
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { AuthContext } from '../../../../../context/AuthContext.jsx'
-import { formatarConfigPonteExibicao, formatarPontePrecosPesos } from "../../../../../utils/dadosExibicao.js";
+import { formatarConfigPonteExibicao, formatarPontePrecosPesos, formatarTalhaExibicao } from "../../../../../utils/dadosExibicao.js";
 import api from '../../../../../services/api.js'
 
-function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
+function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
 
     if (!isOpen) return null;
 
@@ -147,6 +147,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const talhaFormatada = formatarTalhaExibicao(talha);
 
     useEffect(() => {
 
@@ -598,7 +599,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Talha</div>
                                 <div className="ponte__preco__window__linha__pontinhos"/>
-                                <div className="ponte__preco__window__linha__valor">humm</div>
+                                <div className="ponte__preco__window__linha__valor">{talhaFormatada.peso}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Transversal</div>
