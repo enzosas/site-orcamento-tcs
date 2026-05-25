@@ -14,9 +14,6 @@ import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizVigaSimplesRepository;
 import com.tcs.site_orcamento.repository.VigaWRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Service
 @Slf4j
 public class PonteService {

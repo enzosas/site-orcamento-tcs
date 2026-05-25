@@ -7,13 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
 import com.tcs.site_orcamento.dto.PonteConfigDTO;
-import com.tcs.site_orcamento.entity.Cabeceira;
-import com.tcs.site_orcamento.entity.MatrizCabeceira;
-import com.tcs.site_orcamento.entity.MatrizVigaSimples;
-import com.tcs.site_orcamento.entity.VigaW;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
-import com.tcs.site_orcamento.repository.MatrizVigaSimplesRepository;
 import com.tcs.site_orcamento.repository.VigaWRepository;
 import com.tcs.site_orcamento.service.MaxiprodService;
 import com.tcs.site_orcamento.service.PonteService;
@@ -75,19 +70,6 @@ public class HelloController {
             "200 x 200 x 6,35",
             2
         );
-        // MatrizCabeceira coisa = mRepository.findByCapacidadeAndVao(3000, 15000);
-        // Cabeceira cabeceira = cRepository.findByCodigo(coisa.getModelo());
-        // Double preco = ponteService.calculaValorParCabeceiras(cabeceira);
-        // return cabeceira;
-        // return vRepository.findByCodigo("W200X15,0");
-        // return PonteService.calculaPesoCaminhoRolamento(15.0, 15.0, 13.0, 13.0, 11.51, 11.51);
-        // return maxiprod.getPrecoDeVenda("CAB.CHA.06X15").toString();
-        // return PonteService.calculaValorEletrificacaoLongitudinal(15.0, 232.7, 932.0, "Barramento Blindado - 3 consumidores").toString();
-        // return PonteService.calculaPesoColunas("Ponte Rolante", 10.0, "200 x 200 x 6,35").toString();
-        // return PonteService.calculaValorKgColunas().toString();
-        // return PonteService.calculaPesoColunasTotal(2.0, 2.0, 159.94, 494.24).toString();
-        // return ponteService.calculaAntiColisao(15000.0).toString();
-        // return ponteService.getCabeceira(3000, 15000);
         return ponteService.geraOrcamentoPonte(config, 26.0);
     }
 }
