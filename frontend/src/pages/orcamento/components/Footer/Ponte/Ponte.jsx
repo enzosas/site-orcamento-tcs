@@ -183,6 +183,9 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                 } catch (err) {
                     if (err.name != 'AbortError') {
                         setError(err);
+                        setPrecosPesos((prev) => 
+                            Object.fromEntries(Object.keys(prev).map(key => [key, "erro"]))
+                        );
                     }
                 } finally {
                     if (!controller.signal.aborted) {
