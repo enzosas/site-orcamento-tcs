@@ -1,6 +1,5 @@
 package com.tcs.site_orcamento.service;
 
-import com.tcs.site_orcamento.controller.MaxiprodController;
 import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
 import com.tcs.site_orcamento.dto.PonteConfigDTO;
 
@@ -10,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.tcs.site_orcamento.entity.Cabeceira;
 import com.tcs.site_orcamento.entity.MatrizCabeceira;
-import com.tcs.site_orcamento.entity.MatrizVigaSimples;
 import com.tcs.site_orcamento.repository.CabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
 import com.tcs.site_orcamento.repository.MatrizVigaSimplesRepository;

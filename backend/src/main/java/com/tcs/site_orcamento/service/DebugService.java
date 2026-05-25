@@ -4,7 +4,6 @@ import com.tcs.site_orcamento.entity.Motor;
 import com.tcs.site_orcamento.entity.Talha;
 import com.tcs.site_orcamento.repository.MotorRepository;
 import com.tcs.site_orcamento.repository.TalhaRepository;
-import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

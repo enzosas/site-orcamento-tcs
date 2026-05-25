@@ -1,12 +1,10 @@
 package com.tcs.site_orcamento.controller;
 
-import com.tcs.site_orcamento.dto.ConfigDTO;
 import com.tcs.site_orcamento.dto.SalvarOrcamentoDTO;
 import com.tcs.site_orcamento.entity.Orcamento;
 import com.tcs.site_orcamento.repository.OrcamentoRepository;
 import com.tcs.site_orcamento.service.OrcamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
