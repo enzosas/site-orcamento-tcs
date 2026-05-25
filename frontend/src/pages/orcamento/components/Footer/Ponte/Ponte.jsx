@@ -466,7 +466,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                     <div className="ponte__window__input">
                                         <h4 className={`${desativo.colunasSustentacao_tudo ? "ponte__disabled_color" : ""}`}>Altura (m)</h4>
                                         <input
-                                            className="ponte__window__input"
+                                            className="ponte__window__width100"
                                             type="number"
                                             value={ponteConfig.colunasSustentacao_ladoA_altura}
                                             name="colunasSustentacao_ladoA_altura"
@@ -493,7 +493,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                     <div className="ponte__window__input">
                                         <h4 className={`${desativo.colunasSustentacao_tudo ? "ponte__disabled_color" : ""}`}>Número de Colunas</h4>
                                         <input
-                                            className="ponte__window__input"
+                                            className="ponte__window__width100"
                                             type="number"
                                             value={ponteConfig.colunasSustentacao_ladoA_numeroColunas}
                                             name="colunasSustentacao_ladoA_numeroColunas"
@@ -512,7 +512,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                     <div className="ponte__window__input">
                                         <h4 className={`${(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB) ? "ponte__disabled_color" : ""}`}>Altura (m)</h4>
                                         <input
-                                            className="ponte__window__input"
+                                            className="ponte__window__width100"
                                             type="number"
                                             value={ponteConfig.colunasSustentacao_ladoB_altura}
                                             name="colunasSustentacao_ladoB_altura"
@@ -539,7 +539,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                     <div className="ponte__window__input">
                                         <h4 className={`${(desativo.colunasSustentacao_tudo || desativo.colunasSustentacao_ladoB) ? "ponte__disabled_color" : ""}`}>Número de Colunas</h4>
                                         <input
-                                            className="ponte__window__input"
+                                            className="ponte__window__width100"
                                             type="number"
                                             value={ponteConfig.colunasSustentacao_ladoB_numeroColunas}
                                             name="colunasSustentacao_ladoB_numeroColunas"
