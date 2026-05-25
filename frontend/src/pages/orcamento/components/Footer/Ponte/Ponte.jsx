@@ -273,6 +273,18 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                 Anti Colisão
                             </label>
                             <div className="ponte__window__input">
+                                <h4>Vão Livre (mm)</h4>
+                                <input
+                                    className="ponte__window__width100"
+                                    type="number"
+                                    value={ponteConfig.dadosBasicos_vaoLivre}
+                                    name="dadosBasicos_vaoLivre"
+                                    onChange={handleChange}
+                                    onFocus={(e) => e.target.select()}
+                                >
+                                </input>
+                            </div>
+                            <div className="ponte__window__input">
                                 <h4>Capacidade (kg)</h4>
                                 <select
                                     value={ponteConfig.dadosBasicos_capacidade}
@@ -307,18 +319,6 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                         <option key={index} value={item}>{item}</option>
                                     ))}
                                 </select>
-                            </div>
-                            <div className="ponte__window__input">
-                                <h4>Vão Livre (mm)</h4>
-                                <input
-                                    className="ponte__window__width100"
-                                    type="number"
-                                    value={ponteConfig.dadosBasicos_vaoLivre}
-                                    name="dadosBasicos_vaoLivre"
-                                    onChange={handleChange}
-                                    onFocus={(e) => e.target.select()}
-                                >
-                                </input>
                             </div>
                             <div className="ponte__window__input">
                                 <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento (m)</h4>
