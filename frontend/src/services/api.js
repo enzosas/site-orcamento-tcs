@@ -20,7 +20,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const urlsIgnoradas = ['/api/auth/login', '/uptime/', '/api/preco/orcamentoCompleto'];
+        const urlsIgnoradas = ['/api/auth/login', '/uptime/', '/api/preco/orcamentoCompleto', '/api/ponte/orcamentoPonte'];
         const deveIgnorarErro = urlsIgnoradas.some(url => error.config.url.includes(url));
 
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
