@@ -1,5 +1,5 @@
 import "./Ponte.css"
-import React, {useState, useEffect, useRef, useContext} from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { AuthContext } from '../../../../../context/AuthContext.jsx'
 import { formatarConfigPonteExibicao, formatarPontePrecosPesos, formatarTalhaExibicao } from "../../../../../utils/dadosExibicao.js";
@@ -52,6 +52,60 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
         "Viga Metálica + Trilho",
         "Somente Trilho",
         "Trilho + Chumbador"
+    ];
+
+    const opcoesPerfilMetalico = [
+        "W150X13,0",
+        "W150X18,0",
+        "W200X15,0",
+        "W200X19,3",
+        "W200X22,5",
+        "W200X26,6",
+        "W200X31,3",
+        "W250X17,9",
+        "W250X22,3",
+        "W250X25,3",
+        "W250X28,4",
+        "W250X32,7",
+        "W250X38,5",
+        "W250X44,8",
+        "W310X21,0",
+        "W310X23,8",
+        "W310X28,3",
+        "W310X32,7",
+        "W310X38,7",
+        "W310X44,5",
+        "W310X52,0",
+        "W360X32,9",
+        "W360X39,0",
+        "W360X44,0",
+        "W360X51,0",
+        "W360X57,8",
+        "W360X64,0",
+        "W360X72,0",
+        "W360X79,0",
+        "W410X38,8",
+        "W410X46,1",
+        "W410X53,0",
+        "W410X60,0",
+        "W410X67,0",
+        "W410X75,0",
+        "W460X52,0",
+        "W460X60,0",
+        "W460X68,0",
+        "W460X74,0",
+        "W460X82,0",
+        "W460X89,0",
+        "W530X66,0",
+        "W530X72,0",
+        "W530X74,0",
+        "W530X82,0",
+        "W530X85,0",
+        "W530X92,0",
+        "W610X101,0",
+        "W610X113,0",
+        "W610X155,0",
+        "W610X174,0"
     ];
 
     const opcoesBitolaTrilho = [
@@ -120,7 +174,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
 
         if (type === 'checkbox') {
             val = checked;
-        } else if (type === 'radio'){
+        } else if (type === 'radio') {
             val = value === 'true';
         }
         setPonteConfig(prev => ({
@@ -183,7 +237,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                 } catch (err) {
                     if (err.name != 'AbortError') {
                         setError(err);
-                        setPrecosPesos((prev) => 
+                        setPrecosPesos((prev) =>
                             Object.fromEntries(Object.keys(prev).map(key => [key, "erro"]))
                         );
                     }
@@ -399,7 +453,9 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                             onChange={handleChange}
                                             disabled={(desativo.caminhoRolamento_tudo || desativo.caminhoRolamento_lados)}
                                         >
-
+                                            {opcoesPerfilMetalico.map((item, index) => (
+                                                <option key={index} value={item}>{item}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -429,7 +485,9 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                             onChange={handleChange}
                                             disabled={(desativo.caminhoRolamento_tudo || desativo.caminhoRolamento_lados)}
                                         >
-
+                                            {opcoesPerfilMetalico.map((item, index) => (
+                                                <option key={index} value={item}>{item}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -563,113 +621,113 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                             <h2>{ponteConfigFormatada.dadosBasicos_isPonte}</h2>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Capacidade</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{ponteConfigFormatada.dadosBasicos_capacidade}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Vao Livre</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{ponteConfigFormatada.dadosBasicos_vaoLivre}</div>
                             </div>
 
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Cabeceira</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.cabeceira}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Trilho CR</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.trilhoCR}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Carga Máxima por roda</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.cargaMaximaRoda}</div>
                             </div>
 
                             <h2>Pesos Aproximados</h2>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Viga</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoViga}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Par de Cabeceiras</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoParCabeceira}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Talha</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{talhaFormatada.peso}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Transversal</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoEletrificacaoTransversal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Longitudinal</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoEletrificacaoLongitudinal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Caminho de Rolamento</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoCaminhoRolamento}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Colunas de Apoio</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoColunasApoio}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Total</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.pesoTotal}</div>
                             </div>
 
                             <h2>Valores</h2>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Viga Principal</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoVigaPrincipal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Cabeceiras</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoCabeceiras}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Valor Montagem Solda/Pintura</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoMontagem}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Transversal</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoEletrificacaoTransversal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Eletrificação Longitudinal</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoEletrificacaoLongitudinal}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Caminho de Rolamento</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoCaminhoRolamento}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Colunas de Apoio</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoColunasApoio}</div>
                             </div>
 
                             <div className="ponte__preco__window__linha--final">
                                 <div className="ponte__preco__window__linha__tag">Total R$</div>
-                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__pontinhos" />
                                 <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.precoTotal}</div>
                             </div>
                         </div>
