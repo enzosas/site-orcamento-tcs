@@ -321,7 +321,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                 </select>
                             </div>
                             <div className="ponte__window__input">
-                                <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento (m)</h4>
+                                <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento do Caminho de Rolamento (m)</h4>
                                 <input
                                     className={`ponte__window__width100 ${desativo.caminhoRolamento_tudo ? "ponte__window__input--disabled" : ""}`}
                                     type="number"

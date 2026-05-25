@@ -143,10 +143,17 @@ public class PonteService {
             Double vigaKgMA,
             Double vigaKgMB,
             Double trilhoKgMA,
-            Double trilhoKgMB) {
-        Double a = comprimentoA * (vigaKgMA + trilhoKgMA);
-        Double b = comprimentoB * (vigaKgMB + trilhoKgMB);
-        return a + b;
+            Double trilhoKgMB,
+            Boolean comViga) {
+        Double pesoTrilhoA = comprimentoA * trilhoKgMA;
+        Double pesoTrilhoB = comprimentoB * trilhoKgMB;
+        Double pesoVigaA = 0.0;
+        Double pesoVigaB = 0.0;
+        if (comViga) {
+            pesoVigaA = comprimentoA * vigaKgMA;
+            pesoVigaB = comprimentoB * vigaKgMB;
+        }
+        return pesoTrilhoA + pesoTrilhoB + pesoVigaA + pesoVigaB;
     }
 
     public static Double calculaValorVigaCR(Double comprimento, Double vigaKgM, Double vigaRsKg) {
@@ -300,7 +307,8 @@ public class PonteService {
             Double vigaBKgM = 0.0;
             Double valorCaminhoRolamentoVigaA = 0.0;
             Double valorCaminhoRolamentoVigaB = 0.0;
-            if ("Viga Metálica + Trilho".equals(config.getCaminhoRolamento_tipo())) {
+            Boolean comViga = "Viga Metálica + Trilho".equals(config.getCaminhoRolamento_tipo());
+            if (comViga) {
                 Boolean perfilMetalicoVazio = config.getCaminhoRolamento_ladoA_perfilMetalico().isEmpty() || config.getCaminhoRolamento_ladoB_perfilMetalico().isEmpty();
                 if (!perfilMetalicoVazio) {
                     String vigaA = config.getCaminhoRolamento_ladoA_perfilMetalico();
@@ -311,7 +319,7 @@ public class PonteService {
                     valorCaminhoRolamentoVigaB = calculaValorVigaCR(comprimento2, vigaBKgM, 10.0); 
                 }
             }
-            pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB);
+            pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB, comViga);
             valorCaminhoRolamento = valorCaminhoRolamentoVigaA + valorCaminhoRolamentoVigaB + valorCaminhoRolamentoTrilhoA + valorCaminhoRolamentoTrilhoB;
         }
 
