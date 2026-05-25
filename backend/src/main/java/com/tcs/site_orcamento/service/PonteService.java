@@ -207,11 +207,13 @@ public class PonteService {
         return valorKgAco*2.5;
     }
 
-    public static Double calculaPrecoColunas(Double q1, Double q2, Double p1, Double p2, Double rsKg1, Double rsKg2) {
+    public static Double calculaPrecoColunas(Double q1, Double q2, Double p1, Double p2, Double rsKg1, Double rsKg2, Boolean doisLados) {
+        if (!doisLados) q2 = 0.0;
         return q1 * p1 * rsKg1 + q2 * p2 * rsKg2;
     }
 
-    public static Double calculaPesoColunasTotal(Double q1, Double q2, Integer p1, Integer p2) {
+    public static Double calculaPesoColunasTotal(Double q1, Double q2, Integer p1, Integer p2, Boolean doisLados) {
+        if (!doisLados) q2 = 0.0;
         return q1 * p1 + q2 * p2;
     }
 
@@ -355,8 +357,9 @@ public class PonteService {
 
         
         if (config.getDadosBasicos_isColunasSustentacao()) {
-            pesoColunasTotal = calculaPesoColunasTotal(pesoTotalColunaKgA, pesoTotalColunaKgB, qA, qB);
-            precoColunasApoio = calculaPrecoColunas(qADouble, qBDouble, pesoTotalColunaKgA, pesoTotalColunaKgB, colunaRsKg, colunaRsKg);
+            Boolean doisLados = config.getColunasSustentacao_distribuicaoIs2Lados();
+            pesoColunasTotal = calculaPesoColunasTotal(pesoTotalColunaKgA, pesoTotalColunaKgB, qA, qB, doisLados);
+            precoColunasApoio = calculaPrecoColunas(qADouble, qBDouble, pesoTotalColunaKgA, pesoTotalColunaKgB, colunaRsKg, colunaRsKg, doisLados);
         }
         Double pesoTotal = pesoVigaPonte + pesoParCabeceira + pesoEletTransversal + pesoEletLongitudinal + pesoTalha + pesoCaminhoRolamento + pesoColunasTotal;
         
