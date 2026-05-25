@@ -311,7 +311,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                             <div className="ponte__window__input">
                                 <h4>Vão Livre (mm)</h4>
                                 <input
-                                    className="ponte__window__input"
+                                    className="ponte__window__width100"
                                     type="number"
                                     value={ponteConfig.dadosBasicos_vaoLivre}
                                     name="dadosBasicos_vaoLivre"
@@ -323,7 +323,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                             <div className="ponte__window__input">
                                 <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento (m)</h4>
                                 <input
-                                    className={`ponte__window__input ${desativo.caminhoRolamento_tudo ? "ponte__window__input--disabled" : ""}`}
+                                    className={`ponte__window__width100 ${desativo.caminhoRolamento_tudo ? "ponte__window__input--disabled" : ""}`}
                                     type="number"
                                     value={ponteConfig.dadosBasicos_comprimento}
                                     name="dadosBasicos_comprimento"
