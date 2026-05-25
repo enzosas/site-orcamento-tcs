@@ -4,7 +4,10 @@ import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
 import com.tcs.site_orcamento.dto.PonteConfigDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import lombok.extern.slf4j.Slf4j;
 
 import com.tcs.site_orcamento.entity.Cabeceira;
@@ -267,7 +270,13 @@ public class PonteService {
 
     public Cabeceira getCabeceira(Integer capacidadeKg, Integer vaoMaximoMm) {
         MatrizCabeceira mc = matrizCabeceiraRepository.findByCapacidadeAndVao(capacidadeKg, vaoMaximoMm);
+        if (mc == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entrada na matriz de cabeceira nao encontrada para a capacidade e vao informados");
+        }
         Cabeceira c = cabeceiraRepository.findByCodigo(mc.getModelo());
+        if (c == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "cabeceira nao encontrada para o modelo: " + mc.getModelo());
+        }
         return c;
     }
 
