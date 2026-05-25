@@ -568,8 +568,10 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos }) {
                                 <div className="ponte__preco__window__linha__valor">{ponteConfigFormatada.dadosBasicos_vaoLivre}</div>
                             </div>
 
-                            <div className="ponte__preco__window__titulo">
-                                Cabeceira
+                            <div className="ponte__preco__window__linha">
+                                <div className="ponte__preco__window__linha__tag">Cabeceira</div>
+                                <div className="ponte__preco__window__linha__pontinhos"/>
+                                <div className="ponte__preco__window__linha__valor">{precosPesosFormatado.cabeceira}</div>
                             </div>
                             <div className="ponte__preco__window__linha">
                                 <div className="ponte__preco__window__linha__tag">Trilho CR</div>
