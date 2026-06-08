@@ -340,6 +340,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
                 precosPesos={precosPesosPonte}
                 setPrecosPesos={setPrecosPesosPonte}
                 talha={talha}
+                preferencias={preferencias}
             />
             {renderPagamento()}
             <div className="footer_frame_botoes">

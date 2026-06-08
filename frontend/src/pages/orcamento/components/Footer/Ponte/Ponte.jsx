@@ -5,7 +5,7 @@ import { AuthContext } from '../../../../../context/AuthContext.jsx'
 import { formatarConfigPonteExibicao, formatarPontePrecosPesos, formatarTalhaExibicao } from "../../../../../utils/dadosExibicao.js";
 import api from '../../../../../services/api.js'
 
-function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
+function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferencias }) {
 
     if (!isOpen) return null;
 
@@ -188,6 +188,13 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
         try {
             const response = await api.post(`/api/ponte/orcamentoPonte`, config, signal);
             const orcamento = await response.data;
+            if (preferencias.mostrarLogs) {
+                const logs = orcamento.logs;
+                console.log("- - - NOVO CALCULO PONTE - - -");
+                logs.map((log) => {
+                    console.log(log);
+                })
+            }
             return orcamento;
 
         } catch (error) {
