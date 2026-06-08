@@ -262,9 +262,9 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
     return (
         <div className="ponte__background">
             <div className="ponte__window">
+                <p className="ponte__window__titulo">Ponte Rolante</p>
                 <div className="ponte__body">
                     <div className="ponte__body__coluna">
-                        <p className="ponte__window__titulo">Ponte Rolante</p>
                         <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
                             <h1>Dados Básicos</h1>
                             <div className="ponte__body__coluna__fileira_horizontal">
@@ -377,6 +377,13 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                     ))}
                                 </select>
                             </div>
+                        </div>
+                    </div>
+                    <div className="ponte__body__coluna">
+                        <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
+                            <h2 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>
+                                Caminho Rolamento
+                            </h2>
                             <div className="ponte__window__input">
                                 <h4 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>Comprimento do Caminho de Rolamento (m)</h4>
                                 <input
@@ -390,13 +397,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha }) {
                                 >
                                 </input>
                             </div>
-                        </div>
-                    </div>
-                    <div className="ponte__body__coluna">
-                        <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
-                            <h2 className={`${desativo.caminhoRolamento_tudo ? "ponte__disabled_color" : ""}`}>
-                                Caminho Rolamento
-                            </h2>
+
                             <div className="ponte__body__coluna__fileira_horizontal">
                                 <div className={`ponte__window__input ${desativo.caminhoRolamento_tudo ? "ponte__window__input--disabled" : ""}`}>
                                     <h4>Tipo</h4>
