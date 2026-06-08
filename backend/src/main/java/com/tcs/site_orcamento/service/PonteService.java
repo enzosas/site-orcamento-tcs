@@ -3,6 +3,9 @@ package com.tcs.site_orcamento.service;
 import com.tcs.site_orcamento.dto.OrcamentoPonteDTO;
 import com.tcs.site_orcamento.dto.PonteConfigDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -282,6 +285,7 @@ public class PonteService {
 
     public OrcamentoPonteDTO geraOrcamentoPonte(PonteConfigDTO config, Double pesoTalha) {
 
+        List<String> logs = new ArrayList<>();
         log.info("\n- - - NOVA REQUISICAO DE ORCAMENTO DE PONTE - - -");
         
         Double precoTotal = 0.0;
@@ -301,18 +305,54 @@ public class PonteService {
         Double pesoVigaPonte = calculaPesoVigaPonte(comprimentoPonte, pesoMetroLinear);
         Double pesoCabeceira = cabeceira.getPesoCabeceiraIndividual().doubleValue();
         Double cargaMaximaRoda = calculaCargaMaximaPorRoda(capacidadePonte, comprimentoPonte, pesoMetroLinear, pesoVigaPonte, pesoCabeceira);
-        Double pesoViga = calculaPesoVigaPonte(comprimentoPonte, pesoMetroLinear);
         Double comprimento2 = config.getDadosBasicos_comprimento().doubleValue();
         
+
+        logs.add(String.format(
+            "Cabeceira para capacidade %dkg e vao livre %dmm: %s", 
+            config.getDadosBasicos_capacidade(), 
+            config.getDadosBasicos_vaoLivre(), 
+            cabeceira.getModelo()
+        ));
+        logs.add(String.format("Peso por metro linear da viga simples obtido: %.2f", pesoMetroLinear));
+        logs.add(String.format(
+            "Calculo peso da viga da ponte: comprimento=%.2f | pesoMetroLinear=%.2f | resultado=%.2f", 
+            comprimentoPonte,
+            pesoMetroLinear,
+            pesoVigaPonte
+        ));
+        logs.add(String.format(
+            "Calculo carga maxima roda: capacidadePonte=%.2f | comprimentoPonte=%.2f | pesoMetroLinear=%.2f | pesoVigaPonte=%.2f | pesoCabeceira=%.2f | resultado=%.2f", 
+            capacidadePonte,
+            comprimentoPonte,
+            pesoMetroLinear,
+            pesoVigaPonte,
+            pesoCabeceira,
+            cargaMaximaRoda
+        ));
+
+
         if (config.getDadosBasicos_isCaminhoRolamento()) {
             Double pesoTrilhoA = getPesoTrilho(trilhoCR);
             Double pesoTrilhoB = getPesoTrilho(trilhoCR);
-            Double valorCaminhoRolamentoTrilhoA = calculaValorTrilhoCR(comprimento2, pesoTrilhoA, 13.0);
-            Double valorCaminhoRolamentoTrilhoB = calculaValorTrilhoCR(comprimento2, pesoTrilhoB, 13.0);
+            Double valorCaminhoRolamentoTrilhoA = calculaValorTrilhoCR(comprimento2, pesoTrilhoA, precoTrilhoPorQuilo);
+            Double valorCaminhoRolamentoTrilhoB = calculaValorTrilhoCR(comprimento2, pesoTrilhoB, precoTrilhoPorQuilo);
             Double vigaAKgM = 0.0;
             Double vigaBKgM = 0.0;
             Double valorCaminhoRolamentoVigaA = 0.0;
             Double valorCaminhoRolamentoVigaB = 0.0;
+
+
+            logs.add(String.format("Peso do trilho %s: %.2f", trilhoCR, pesoTrilhoA));
+            logs.add(String.format(
+                "Calculo preco trilho caminho rolamento: comprimento=%.2f | pesoTrilho=%.2f | precoKgTrilho=%.2f | resultado=%.2f", 
+                comprimento2,
+                pesoTrilhoA,
+                precoTrilhoPorQuilo,
+                valorCaminhoRolamentoTrilhoA
+            ));
+
+
             Boolean comViga = "Viga Metálica + Trilho".equals(config.getCaminhoRolamento_tipo());
             if (comViga) {
                 Boolean perfilMetalicoVazio = config.getCaminhoRolamento_ladoA_perfilMetalico().isEmpty() || config.getCaminhoRolamento_ladoB_perfilMetalico().isEmpty();
@@ -321,17 +361,67 @@ public class PonteService {
                     String vigaB = config.getCaminhoRolamento_ladoB_perfilMetalico();
                     vigaAKgM = vRepository.findByCodigo(vigaA).getMassaLinear();
                     vigaBKgM = vRepository.findByCodigo(vigaB).getMassaLinear();
-                    valorCaminhoRolamentoVigaA = calculaValorVigaCR(comprimento2, vigaAKgM, 10.0); 
-                    valorCaminhoRolamentoVigaB = calculaValorVigaCR(comprimento2, vigaBKgM, 10.0); 
+                    valorCaminhoRolamentoVigaA = calculaValorVigaCR(comprimento2, vigaAKgM, vigaWRsKg); 
+                    valorCaminhoRolamentoVigaB = calculaValorVigaCR(comprimento2, vigaBKgM, vigaWRsKg); 
+                    
+                    logs.add(String.format(
+                        "Calculo preco viga A caminho rolamento: comprimento=%.2f | vigaA=%s | vigaAKgM=%.2f | vigaWRsKg=%.2f | resultado=%.2f", 
+                        comprimento2,
+                        vigaA,
+                        vigaAKgM,
+                        vigaWRsKg,
+                        valorCaminhoRolamentoVigaA
+                    ));
+                    logs.add(String.format(
+                        "Calculo preco viga B caminho rolamento: comprimento=%.2f | vigaB=%s | vigaBKgM=%.2f | vigaWRsKg=%.2f | resultado=%.2f", 
+                        comprimento2,
+                        vigaB,
+                        vigaBKgM,
+                        vigaWRsKg,
+                        valorCaminhoRolamentoVigaA
+                    ));
                 }
             }
             pesoCaminhoRolamento = calculaPesoCaminhoRolamento(comprimento2, comprimento2, vigaAKgM, vigaBKgM, pesoTrilhoA, pesoTrilhoB, comViga);
             valorCaminhoRolamento = valorCaminhoRolamentoVigaA + valorCaminhoRolamentoVigaB + valorCaminhoRolamentoTrilhoA + valorCaminhoRolamentoTrilhoB;
+            
+            logs.add(String.format(
+                "Calculo peso caminho rolamento: comprimento=%.2f | vigaAKgM=%.2f | vigaBKgM=%.2f | pesoTrilhoA=%.2f | pesoTrilhoB=%.2f | resultado=%.2f", 
+                comprimento2,
+                vigaAKgM,
+                vigaBKgM,
+                pesoTrilhoA,
+                pesoTrilhoB,
+                pesoCaminhoRolamento
+            ));
+            logs.add(String.format(
+                "Calculo preco caminho rolamento: valorCaminhoRolamentoVigaA=%.2f | valorCaminhoRolamentoVigaB=%.2f | valorCaminhoRolamentoTrilhoA=%.2f | valorCaminhoRolamentoTrilhoB=%.2f | resultado=%.2f", 
+                valorCaminhoRolamentoVigaA,
+                valorCaminhoRolamentoVigaB,
+                valorCaminhoRolamentoTrilhoA,
+                valorCaminhoRolamentoTrilhoB,
+                valorCaminhoRolamento
+            ));
         }
 
         Double pesoEletTransversal = 10*comprimentoPonte/1000;
+        logs.add(String.format(
+            "Calculo peso eletrificacao transversal: comprimentoPonte=%.2f | 10*comprimentoPonte/1000 | resultado=%.2f", 
+            comprimentoPonte,
+            pesoEletTransversal
+        ));
         Double pesoEletLongitudinal = 8*comprimentoPonte/1000;
+        logs.add(String.format(
+            "Calculo peso eletrificacao longitudinal: comprimentoPonte=%.2f | 8*comprimentoPonte/1000 | resultado=%.2f", 
+            comprimentoPonte,
+            pesoEletLongitudinal
+        ));
         Double pesoParCabeceira = 2*pesoCabeceira;
+        logs.add(String.format(
+            "Calculo peso par cabeceira: pesoCabeceira=%.2f | 2*pesoCabeceira | resultado=%.2f", 
+            pesoCabeceira,
+            pesoParCabeceira
+        ));
         
         Boolean isPonteRolante = config.getDadosBasicos_isPonte();
         Double alturaA = config.getColunasSustentacao_ladoA_altura().doubleValue();
@@ -339,31 +429,100 @@ public class PonteService {
         String dimensoesA = config.getColunasSustentacao_ladoA_dimensoes();
         String dimensoesB = config.getColunasSustentacao_ladoB_dimensoes();
         Double pesoTotalColunaKgA = calculaPesoColunas(isPonteRolante, alturaA, dimensoesA);
+        logs.add(String.format(
+            "Calculo peso coluna: se for ponte rolante: pesoColunaMetro * altura + flange * 2"
+        ));
+        logs.add(String.format(
+            "Calculo peso coluna: se for portico rolante: pesoColunaMetro * (altura + 1) + flange * 2;"
+        ));
+        logs.add(String.format(
+            "Calculo peso coluna A: alturaA=%.2f | dimensoesA=%s | resultado=%.2f", 
+            alturaA,
+            dimensoesA,
+            pesoTotalColunaKgA
+        ));
         Double pesoTotalColunaKgB = calculaPesoColunas(isPonteRolante, alturaB, dimensoesB);
+        logs.add(String.format(
+            "Calculo peso coluna B: alturaA=%.2f | dimensoesB=%s | resultado=%.2f", 
+            alturaB,
+            dimensoesB,
+            pesoTotalColunaKgB
+        ));
         Integer qA = config.getColunasSustentacao_ladoA_numeroColunas();
         Integer qB = config.getColunasSustentacao_ladoB_numeroColunas();
 
         Double valorVigaPonte = calculaValorVigaPonte(pesoVigaPonte, valorKgAco);
+        logs.add(String.format(
+            "Calculo valor viga ponte: pesoVigaPonte=%.2f | valorKgAco=%.2f | pesoVigaPonte * valorKgAco / 0.4 | resultado=%.2f", 
+            pesoVigaPonte,
+            valorKgAco,
+            valorVigaPonte
+        ));
         // Double valorParCabeceiras = calculaValorParCabeceiras(cabeceira);
         Double valorParCabeceiras = 27900.0;
+        logs.add(String.format(
+            "preco par cabeceiras provisorio=%.2f", 
+            valorParCabeceiras
+        ));
         Double valorMontagem = consultaMontagem(capacidadePonte, comprimentoPonte);
+        logs.add(String.format(
+            "valor montagem consultado=%.2f", 
+            valorMontagem
+        ));
 
         String tipoET = config.getDadosBasicos_eletrificacaoTransversal();
         Double valorEletTransversal = calculaEletrificacaoTransversal(tipoET, 215.00, 232.70, comprimentoPonte);
+        logs.add(String.format(
+            "Calculo eletrificacao transversal: BC1002=%.2f | BC1016=%.2f | vaoMm=%.2f | codigo * vaoMm / 1000 | resultado=%.2f", 
+            215.00,
+            232.70,
+            comprimentoPonte,
+            valorEletTransversal
+        ));
 
         String tipoEL = config.getDadosBasicos_eletrificacaoLongitudinal();
         Double precoCoisa2 = maxiprodService.getPrecoDeVenda("CAR.COL.40A");
         Double valorEletLongitudinal = calculaValorEletrificacaoLongitudinal(comprimento2, 232.70, precoCoisa2, tipoEL);
+        logs.add(String.format(
+            "Calculo eletrificacao longitudinal: BC1015=%.2f | CAR.COL.40A=%.2f | comprimento=%.2f | resultado=%.2f", 
+            215.00,
+            232.70,
+            comprimento2,
+            valorEletLongitudinal
+        ));
 
         Double qADouble = qA.doubleValue();
         Double qBDouble = qB.doubleValue();
         Double colunaRsKg = calculaValorKgColunas();
+        logs.add(String.format(
+            "valor coluna R$/kg: valorKgAco*2.5 | valorKgAco=%.2f | resultado=%.2f", 
+            valorKgAco,
+            colunaRsKg
+        ));
 
         
         if (config.getDadosBasicos_isColunasSustentacao()) {
             Boolean doisLados = config.getColunasSustentacao_distribuicaoIs2Lados();
             pesoColunasTotal = calculaPesoColunasTotal(pesoTotalColunaKgA, pesoTotalColunaKgB, qA, qB, doisLados);
+            logs.add(String.format(
+                "peso colunas: pesoTotalColunaKgA=%.2f | pesoTotalColunaKgB=%.2f | qA=%d | qB=%d | resultado=%.2f", 
+                pesoTotalColunaKgA,
+                pesoTotalColunaKgB,
+                qA,
+                qB,
+                pesoColunasTotal
+            ));
             precoColunasApoio = calculaPrecoColunas(qADouble, qBDouble, pesoTotalColunaKgA, pesoTotalColunaKgB, colunaRsKg, colunaRsKg, doisLados);
+            logs.add(String.format(
+                "peso colunas: pesoTotalColunaKgA=%.2f | pesoTotalColunaKgB=%.2f | qA=%d | qB=%d | colunaRsKgA=%.2f | colunaRsKgB=%.2f | q1 * p1 * rsKg1 + q2 * p2 * rsKg2 | resultado=%.2f", 
+                pesoTotalColunaKgA,
+                pesoTotalColunaKgB,
+                qA,
+                qB,
+                colunaRsKg,
+                colunaRsKg,
+                pesoColunasTotal
+            ));
         }
         Double pesoTotal = pesoVigaPonte + pesoParCabeceira + pesoEletTransversal + pesoEletLongitudinal + pesoTalha + pesoCaminhoRolamento + pesoColunasTotal;
         
@@ -378,7 +537,7 @@ public class PonteService {
         orcamento.setCabeceira(cabeceira.getModelo());
         orcamento.setTrilhoCR(trilhoCR);
         orcamento.setCargaMaximaRoda(cargaMaximaRoda);
-        orcamento.setPesoViga(pesoViga);
+        orcamento.setPesoViga(pesoVigaPonte);
         orcamento.setPesoParCabeceira(pesoParCabeceira);
         orcamento.setPesoEletrificacaoTransversal(pesoEletTransversal);
         orcamento.setPesoEletrificacaoLongitudinal(pesoEletLongitudinal);
@@ -393,6 +552,12 @@ public class PonteService {
         orcamento.setPrecoCaminhoRolamento(valorCaminhoRolamento);
         orcamento.setPrecoColunasApoio(precoColunasApoio);
         orcamento.setPrecoTotal(precoTotal);
+        
+        for (String mensagem : logs) {
+            log.info("\n" + mensagem);
+        }
+        orcamento.setLogs(logs);
+
         return orcamento;
     }
 }

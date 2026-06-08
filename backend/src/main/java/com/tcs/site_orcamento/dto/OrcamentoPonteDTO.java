@@ -1,5 +1,7 @@
 package com.tcs.site_orcamento.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,4 +28,5 @@ public class OrcamentoPonteDTO {
     private Double precoCaminhoRolamento;
     private Double precoColunasApoio;
     private Double precoTotal;
+    private List<String> logs;
 }
