@@ -186,20 +186,19 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferenci
     async function fetchOrcamentoPonte(config, signal) {
         const token = localStorage.getItem('token');
         try {
-            const response = await api.post(`/api/ponte/orcamentoPonte`, config, signal);
+            const response = await api.post(`/api/ponte/orcamentoPonte`, config, { signal });
             const orcamento = await response.data;
+
             if (preferencias.mostrarLogs) {
-                const logs = orcamento.logs;
                 console.log("- - - NOVO CALCULO PONTE - - -");
-                logs.map((log) => {
+                orcamento.logs.map((log) => {
                     console.log(log);
-                })
+                });
             }
             return orcamento;
 
         } catch (error) {
-
-            if (error.name !== 'AbortError') {
+            if (error.name !== 'CanceledError' && error.name !== 'AbortError') {
                 console.error(`Falha ao calcular o orçamento da ponte:`, error);
             }
             throw error;
@@ -242,7 +241,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferenci
                         precoTotal: orcamento.precoTotal,
                     }))
                 } catch (err) {
-                    if (err.name != 'AbortError') {
+                    if (err.name !== 'CanceledError' && err.name !== 'AbortError') {
                         setError(err);
                         setPrecosPesos((prev) =>
                             Object.fromEntries(Object.keys(prev).map(key => [key, "erro"]))
