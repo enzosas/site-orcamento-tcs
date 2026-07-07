@@ -15,35 +15,9 @@ import {
     opcoesDimensoes
 } from './ponteConstants';
 
-function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferencias }) {
+function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferencias, ponteConfig, setPonteConfig }) {
 
     if (!isOpen) return null;
-
-    const [ponteConfig, setPonteConfig] = useState({
-        dadosBasicos_isPonte: true,
-        dadosBasicos_formaConstrutiva: opcoesFormaConstrutiva[0],
-        dadosBasicos_capacidade: opcoesCapacidade[0],
-        dadosBasicos_vaoLivre: 0,
-        dadosBasicos_isCaminhoRolamento: false,
-        dadosBasicos_isColunasSustentacao: false,
-        dadosBasicos_isAntiColisao: false,
-        dadosBasicos_comprimento: 0,
-        dadosBasicos_eletrificacaoTransversal: opcoesEletrificacaoTransversal[0],
-        dadosBasicos_eletrificacaoLongitudinal: opcoesEletrificacaoLongitudinal[0],
-        caminhoRolamento_tipo: opcoesTipoCaminhoRolamento[0],
-        caminhoRolamento_bitolaTrilho: opcoesBitolaTrilho[0],
-        caminhoRolamento_ladoA_distanciaApoios: 0,
-        caminhoRolamento_ladoA_perfilMetalico: "",
-        caminhoRolamento_ladoB_distanciaApoios: 0,
-        caminhoRolamento_ladoB_perfilMetalico: "",
-        colunasSustentacao_distribuicaoIs2Lados: true,
-        colunasSustentacao_ladoA_altura: 0,
-        colunasSustentacao_ladoA_dimensoes: opcoesDimensoes[0],
-        colunasSustentacao_ladoA_numeroColunas: 0,
-        colunasSustentacao_ladoB_altura: 0,
-        colunasSustentacao_ladoB_dimensoes: opcoesDimensoes[0],
-        colunasSustentacao_ladoB_numeroColunas: 0
-    });
 
     const desativo = {
         caminhoRolamento_tudo: !ponteConfig.dadosBasicos_isCaminhoRolamento,
