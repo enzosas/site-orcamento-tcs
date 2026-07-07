@@ -131,6 +131,17 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferenci
                 <div className="ponte__body">
                     <div className="ponte__body__coluna">
                         <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={ponteConfig.incluir}
+                                    name="incluir"
+                                    onChange={handleChange}
+                                />
+                                Incluir Ponte / Pórtico no orçamento
+                            </label>
+                        </div>
+                        <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
                             <h1>Dados Básicos</h1>
                             <div className="ponte__body__coluna__fileira_horizontal">
                                 <label>

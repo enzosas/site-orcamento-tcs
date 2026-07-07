@@ -26,7 +26,7 @@ const formatadorPreco = new Intl.NumberFormat('pt-BR', {
     currency: 'BRL',
 });
 
-function Pricing({ config, precos, setPrecos, preferencias }){
+function Pricing({ config, precos, setPrecos, preferencias, ponteConfig, precosPesosPonte }){
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +119,14 @@ function Pricing({ config, precos, setPrecos, preferencias }){
                     (isLoading ? <LoadingDots /> :
                         (precos.totalTcs !== null ? formatadorPreco.format(precos.totalTcs) : "-"))}</div>
             </div>
+            {ponteConfig.incluir && (
+                <div className="unidade">
+                    <p className="descricao">{ponteConfig.dadosBasicos_isPonte? "Total Ponte Rolante" : "Total Pórtico Rolante"}</p>
+                    <div className="dinheiro">{error? "Erro" : 
+                        (isLoading ? <LoadingDots /> :
+                            (precosPesosPonte.precoTotal !== null ? formatadorPreco.format(precosPesosPonte.precoTotal) : "-"))}</div>
+                </div>
+            )}
         </div>
     )
 }

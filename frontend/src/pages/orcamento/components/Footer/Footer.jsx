@@ -166,6 +166,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
                 setPagamento={setPagamento}
                 gerarDocxObjetos={gerarDocxObjetos}
                 numeroOrcamento={codigo}
+                precosPesosPonte={precosPesosPonte} 
+                ponteConfig={ponteConfig}
                 />
         } else {
                 return 

@@ -75,6 +75,7 @@ function App() {
 	});
 
 	const [ponteConfig, setPonteConfig] = useState({
+		incluir: false,
         dadosBasicos_isPonte: true,
         dadosBasicos_formaConstrutiva: opcoesFormaConstrutiva[0],
         dadosBasicos_capacidade: opcoesCapacidade[0],
@@ -119,7 +120,14 @@ function App() {
 				</div>
 				<div className="coluna">
 					<Imagem talha={talhaSelecionada} />
-					<Pricing config={config} precos={precos} setPrecos={setPrecos} preferencias={preferencias}/>
+					<Pricing 
+						config={config} 
+						precos={precos} 
+						setPrecos={setPrecos} 
+						preferencias={preferencias} 
+						precosPesosPonte={precosPesosPonte} 
+						ponteConfig={ponteConfig}
+					/>
 					<Footer 
 						talha={talhaSelecionada} 
 						setTalhaSelecionada={setTalhaSelecionada} 

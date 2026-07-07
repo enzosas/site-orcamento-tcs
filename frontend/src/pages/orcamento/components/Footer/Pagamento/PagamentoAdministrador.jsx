@@ -3,7 +3,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { gerarDocx } from '../../../../../utils/gerarDocx';
 
-function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gerarDocxObjetos, numeroOrcamento }) {
+function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gerarDocxObjetos, numeroOrcamento, ponteConfig, precosPesosPonte }) {
 
     if (!isOpen) return null;
 
@@ -71,6 +71,7 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
     const precoTotalSemComissao = precoBaseTalha*Number(pagamento.quantidade) 
             + Number(pagamento.valorMontagem) 
             + Number(pagamento.valorFrete)
+            + (ponteConfig.incluir ? (Number(precosPesosPonte.precoTotal)) : 0)
     ;
 
     const calculoComissao = () => {
@@ -312,6 +313,17 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                                     {formatadorPreco.format(pagamento.valorMontagem)}
                                 </div>
                             </div>
+                            {ponteConfig.incluir && (
+                                <div className="pagamento__window__main__preco__linha">
+                                    <div className="pagamento__window__main__preco__linha__tag">
+                                        {ponteConfig.dadosBasicos_isPonte ? "Valor Ponte" : "Valor Pórtico"}
+                                    </div>
+                                    <div className="pagamento__window__main__preco__linha__pontinhos"/>
+                                    <div className="pagamento__window__main__preco__linha__valor">
+                                        {formatadorPreco.format(precosPesosPonte.precoTotal)}
+                                    </div>
+                                </div>
+                            )}
                             <div className="pagamento__window__main__preco__linha">
                                 <div className="pagamento__window__main__preco__linha__tag">
                                     Valor de Frete
