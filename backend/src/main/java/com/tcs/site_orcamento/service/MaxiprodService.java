@@ -65,7 +65,7 @@ public class MaxiprodService {
     public Double getPrecoDeVenda(String codigo) {
         String query = """
         query {
-            itens(where: { codigo: { eq: "%s" } }) {
+            itens(where: { codigo: { startsWith: "%s" } }) {
                 items {
                     precoDeVenda
                 }
