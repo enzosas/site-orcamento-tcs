@@ -88,11 +88,9 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
             } else {
                 setCliente(() => {
                     const novoCliente = { ...cliente }
-                    console.table(novoCliente)
                     Object.keys(cliente).forEach((key) => {
                         novoCliente[key] = "";
                     })
-                    console.table(novoCliente)
                     return novoCliente;
                 })
             }
