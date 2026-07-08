@@ -47,6 +47,7 @@ function Pricing({ config, precos, setPrecos, preferencias, ponteConfig, precosP
                         try {
                             const response = await api.post(`/api/preco/orcamentoCompletoLog`, config);
                             const log = await response.data;
+                            console.log("- - - NOVO CALCULO TALHA - - -")
                             console.log(log)
                         } catch (error) {
                             throw error;
