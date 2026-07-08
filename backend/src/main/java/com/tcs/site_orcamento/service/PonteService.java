@@ -43,6 +43,10 @@ public class PonteService {
     static Double valorKgAco = 7.0;
     static Double vigaWRsKg = 10.0;
 
+    private static final Double PRECO_BASE_BC1002 = 215.00;
+    private static final Double PRECO_BASE_BC1016 = 232.70;
+    private static final Double VALOR_FIXO_CABECEIRAS = 27900.0;
+
     public static Double calculaCargaMaximaPorRoda(
             Double capacidadePonte, Double comprimentoPonte, Double pesoMetroLinear, Double pesoVigaPonte,
             Double pesoCabeceiraUtilizada) {
@@ -459,7 +463,7 @@ public class PonteService {
             valorVigaPonte
         ));
         // Double valorParCabeceiras = calculaValorParCabeceiras(cabeceira);
-        Double valorParCabeceiras = 27900.0;
+        Double valorParCabeceiras = VALOR_FIXO_CABECEIRAS;
         logs.add(String.format(
             "preco par cabeceiras provisorio=%.2f", 
             valorParCabeceiras
@@ -471,22 +475,22 @@ public class PonteService {
         ));
 
         String tipoET = config.getDadosBasicos_eletrificacaoTransversal();
-        Double valorEletTransversal = calculaEletrificacaoTransversal(tipoET, 215.00, 232.70, comprimentoPonte);
+        Double valorEletTransversal = calculaEletrificacaoTransversal(tipoET, PRECO_BASE_BC1002, PRECO_BASE_BC1016, comprimentoPonte);
         logs.add(String.format(
             "Calculo eletrificacao transversal: BC1002=%.2f | BC1016=%.2f | vaoMm=%.2f | codigo * vaoMm / 1000 | resultado=%.2f", 
-            215.00,
-            232.70,
+            PRECO_BASE_BC1002,
+            PRECO_BASE_BC1016,
             comprimentoPonte,
             valorEletTransversal
         ));
 
         String tipoEL = config.getDadosBasicos_eletrificacaoLongitudinal();
         Double precoCoisa2 = maxiprodService.getPrecoDeVenda("CAR.COL.40A");
-        Double valorEletLongitudinal = calculaValorEletrificacaoLongitudinal(comprimento2, 232.70, precoCoisa2, tipoEL);
+        Double valorEletLongitudinal = calculaValorEletrificacaoLongitudinal(comprimento2, PRECO_BASE_BC1016, precoCoisa2, tipoEL);
         logs.add(String.format(
             "Calculo eletrificacao longitudinal: BC1015=%.2f | CAR.COL.40A=%.2f | comprimento=%.2f | resultado=%.2f", 
-            215.00,
-            232.70,
+            PRECO_BASE_BC1002,
+            PRECO_BASE_BC1016,
             comprimento2,
             valorEletLongitudinal
         ));
