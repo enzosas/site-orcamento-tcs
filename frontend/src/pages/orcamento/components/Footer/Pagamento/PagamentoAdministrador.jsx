@@ -57,33 +57,40 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
     ];
 
     const opcoesComissao = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-    const precoBaseTalha = pagamento.tipoPainel === "TCS" 
-        ? gerarDocxObjetos.precos.totalTcs + Number(pagamento.ajusteTalha) 
-        : gerarDocxObjetos.precos.totalSch + Number(pagamento.ajusteTalha)
-    ;
-
+    
     const formatadorPreco = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
     });
-
-    const precoTotalSemComissao = precoBaseTalha*Number(pagamento.quantidade) 
-            + Number(pagamento.valorMontagem) 
-            + Number(pagamento.valorFrete)
-            + (ponteConfig.incluir ? (Number(precosPesosPonte.precoTotal)) : 0)
-    ;
-
-    const calculoComissao = () => {
-        const precoVenda = precoTotalSemComissao;
+    const precoComComissao = (precoSemComissao) => {
         const operacao = (100 - pagamento.percentualComissaoVendas) / 100
-        const valorTotal = precoVenda / operacao;
-        return valorTotal - precoVenda;
+        return precoSemComissao / operacao;
     }
 
-    const precoTotal = precoTotalSemComissao + calculoComissao();
+    const quantidade = Number(pagamento.quantidade);
+    const frete = Number(pagamento.valorFrete);
+    const montagem = Number(pagamento.valorMontagem);
+    const ajusteTalha = Number(pagamento.ajusteTalha);
+    const talhaBase = pagamento.tipoPainel === "TCS" ? gerarDocxObjetos.precos.totalTcs : gerarDocxObjetos.precos.totalSch;
+    const ponteBase = ponteConfig.incluir ? (Number(precosPesosPonte.precoTotal)) : 0
+    const precoTalhaComAjuste = talhaBase + ajusteTalha;
+    const totalTalha = precoTalhaComAjuste;
+    const totalPonte = ponteBase + frete + montagem;
+    const custoUnitarioBase = totalPonte + totalTalha;
+    const custoTotalBase = custoUnitarioBase * quantidade;
+    const valorUnitarioTalhaFinal = precoComComissao(totalTalha);
+    const valorUnitarioPonteFinal = precoComComissao(totalPonte);
+    const valorUnitarioConjuntoFinal = valorUnitarioTalhaFinal + valorUnitarioPonteFinal;
+    const precoTotal = valorUnitarioConjuntoFinal * quantidade;
+    const precoUnitario = valorUnitarioConjuntoFinal;
+    const valorComissao = precoTotal - custoTotalBase;
 
-    const precoUnitario = precoTotal / Number(pagamento.quantidade);
+    const orcamentoCalculado = {
+        valorUnitarioTalhaFinal: valorUnitarioTalhaFinal,
+        valorUnitarioPonteFinal: valorUnitarioPonteFinal,
+        precoTotal: precoTotal,
+        precoUnitario: precoUnitario,
+    }
     
     const handleGerarDocx = () => {
         gerarDocx(
@@ -92,7 +99,9 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
             gerarDocxObjetos.cliente,
             gerarDocxObjetos.precos,
             pagamento,
-            gerarDocxObjetos.arquivo
+            gerarDocxObjetos.arquivo,
+            gerarDocxObjetos.precosPesosPonte,
+            gerarDocxObjetos.ponteConfig
         )
     }
 
@@ -104,16 +113,21 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
     };
     
     useEffect(() => {
-        if (pagamento.precoTotal !== precoTotal || pagamento.precoUnitario !== precoUnitario) {
-            setPagamento((prev) => ({
+        setPagamento((prev) => {
+            const atualizouValores = 
+                prev.orcamentoCalculado?.precoTotal !== orcamentoCalculado.precoTotal ||
+                prev.orcamentoCalculado?.precoUnitario !== orcamentoCalculado.precoUnitario;
+
+            if (!atualizouValores) {
+                return prev; 
+            }
+            return {
                 ...prev,
-                precoTotal: precoTotal,
-                precoUnitario: precoUnitario
-            }));
-        }
-    }, [precoTotal, precoUnitario, pagamento.precoTotal, pagamento.precoUnitario, pagamento]);
+                orcamentoCalculado: orcamentoCalculado
+            };
+        });
+    }, [precoTotal, precoUnitario, setPagamento]);
     
-    console.table(pagamento)
     return (
         <div className="pagamento__background">
             <div className="pagamento__window">
@@ -301,7 +315,7 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                                 </div>
                                 <div className="pagamento__window__main__preco__linha__pontinhos"/>
                                 <div className="pagamento__window__main__preco__linha__valor">
-                                    {formatadorPreco.format(precoBaseTalha)}
+                                    {formatadorPreco.format(talhaBase)}
                                 </div>
                             </div>
                             <div className="pagamento__window__main__preco__linha">
@@ -339,7 +353,7 @@ function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gera
                                 </div>
                                 <div className="pagamento__window__main__preco__linha__pontinhos"/>
                                 <div className="pagamento__window__main__preco__linha__valor">
-                                    {formatadorPreco.format(calculoComissao())}
+                                    {formatadorPreco.format(valorComissao)}
                                 </div>
                             </div>
                             <div className="pagamento__window__main__preco__linha--final">

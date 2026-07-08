@@ -134,15 +134,16 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
         observacoes: "",
         quantidade: 1,
         tipoPainel: "TCS",
-        precoUnitario: 0,
-        precoTotal: 0
+        orcamentoCalculado: {},
     });
 
     const gerarDocxObjetos = {
         talha,
         config,
+        ponteConfig,
         cliente,
         precos,
+        precosPesosPonte,
         arquivo
     }
 

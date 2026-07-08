@@ -50,6 +50,7 @@ export function formatarConfigPonteExibicao(configPonte) {
         dadosBasicos_capacidade: medida(configPonte.dadosBasicos_capacidade, "kg"),
         dadosBasicos_vaoLivre: medida(configPonte.dadosBasicos_vaoLivre, "mm", 0),
         dadosBasicos_isPonte: configPonte.dadosBasicos_isPonte ? "Ponte Rolante" : "Pórtico Rolante",
+        dadosBasicos_comprimento: medida(configPonte.dadosBasicos_comprimento, "m")
     }
     limpaNull(obj);
     return obj;
@@ -111,4 +112,47 @@ export function getDadosExibicao(talha, config) {
     }
     limpaNull(dados);
     return dados;
+}
+
+export function gerarDescricaoCaminhoRolamento(configPonte) {
+    
+    const semCaminhoRolamento = !configPonte.dadosBasicos_isCaminhoRolamento;
+    if (semCaminhoRolamento) {
+        return "Opcional";
+    }
+    const isSomenteTrilho = configPonte.caminhoRolamento_tipo == "Somente Trilho";
+    const isTrilhoChumbador = configPonte.caminhoRolamento_tipo == "Trilho + Chumbador";
+    
+    if (isSomenteTrilho) {
+        return "Em trilho TR ou similar com comprimento total de 2x " + comp +"m a ser fixado em chumbadores metálicos presentes no leito de concreto já existente no local"
+    }
+    if (isTrilhoChumbador) {
+        return "Trilho + Chumbador";
+    }
+
+    const configPonteFormatada = formatarConfigPonteExibicao(configPonte)
+    const comp = configPonte.dadosBasicos_comprimento;
+    const distanciasApoioIguais = configPonte.caminhoRolamento_ladoA_distanciaApoios == configPonte.caminhoRolamento_ladoB_distanciaApoios;
+    const numeroColunasIguais = configPonte.colunasSustentacao_ladoA_numeroColunas == configPonte.colunasSustentacao_ladoA_numeroColunas;
+    const isSemColunaA = configPonte.colunasSustentacao_ladoA_dimensoes == "Sem coluna";
+    const isSemColunaB = configPonte.colunasSustentacao_ladoB_dimensoes == "Sem coluna";
+    const distApoiosA = configPonte.caminhoRolamento_ladoA_distanciaApoios;
+    const distApoiosB = configPonte.caminhoRolamento_ladoB_distanciaApoios;
+
+    if (distanciasApoioIguais && isSemColunaA && isSemColunaB) {
+        return "Em perfil metálico com comprimento total de " + comp + " metros, apoiado a cada " + distApoiosA + " metros sobre consoles (com placa metalica de apoio) já existentes no local"
+    }
+    else if (!distanciasApoioIguais && isSemColunaA && isSemColunaB) {
+        return "Em perfil metálico com comprimento total de " + comp + " metros, apoiado em um dos lados a cada " + distApoiosA + " metros e no outro lado a cada " + distApoiosB + " metros sobre consoles (com placa metalica de apoio) já existentes no local em ambos os lados"
+    }
+    else if (numeroColunasIguais && !isSemColunaA && !isSemColunaB) {
+        return "Em perfil metálico com comprimento total de " + comp + " metros, apoiado a cada " + distApoiosA + " metros sobre colunas metalicas que serão fixadas as laterais e ao piso do prédio"
+    }
+    else if (!isSemColunaA && isSemColunaB) {
+        return "Em perfil metálico com comprimento total de "+ comp +" metros, apoiado em um dos lados a cada "+ distApoiosA + " metros sobre colunas metálicas que serão fixadas ao piso e a laterais do prédio e no outro lado a cada "+ distApoiosB +" metros sobre consoles (com placa metalica de apoio)  já existentes no local"
+    }
+    else if (isSemColunaA && !isSemColunaB) {
+        return "Em perfil metálico com comprimento total de "+ comp +" metros, apoiado em um dos lados a cada "+ distApoiosA+ " metros sobre consoles  (com placa metalica de apoio)  já existentes no local  e no outro lado a cada "+ distApoiosB +" metros sobre colunas metálicas que serão fixadas ao piso e a lateral do prédio "
+    }
+
 }

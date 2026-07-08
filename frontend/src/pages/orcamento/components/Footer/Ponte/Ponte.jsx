@@ -2,7 +2,7 @@ import "./Ponte.css"
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { AuthContext } from '../../../../../context/AuthContext.jsx'
-import { formatarConfigPonteExibicao, formatarPontePrecosPesos, formatarTalhaExibicao } from "../../../../../utils/dadosExibicao.js";
+import { formatarConfigPonteExibicao, formatarPontePrecosPesos, formatarTalhaExibicao, gerarDescricaoCaminhoRolamento } from "../../../../../utils/dadosExibicao.js";
 import api from '../../../../../services/api.js'
 import {
     opcoesFormaConstrutiva,
@@ -73,6 +73,8 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferenci
         const controller = new AbortController();
         setError(null);
 
+        console.log(gerarDescricaoCaminhoRolamento(ponteConfig))
+
         const fetchPrecos = async () => {
             if (ponteConfig && ponteConfig.dadosBasicos_capacidade && ponteConfig.dadosBasicos_vaoLivre) {
                 setIsLoading(true);
@@ -138,7 +140,7 @@ function Ponte({ isOpen, onClose, precosPesos, setPrecosPesos, talha, preferenci
                                     name="incluir"
                                     onChange={handleChange}
                                 />
-                                Incluir Ponte / Pórtico no orçamento
+                                Incluir {ponteConfigFormatada.dadosBasicos_isPonte} no orçamento
                             </label>
                         </div>
                         <div className="ponte__body__caixa_sombra ponte__body__caixa_sombra--scroll">
