@@ -7,12 +7,6 @@ function ModelSelectorList({ modelos, onSelect, talhaAtiva }) {
     const containerRef = useRef(null);
     const scrollContainerRef = useRef(null);
 
-    // useEffect(() => {
-    //     if (modelos.length > 0) {
-    //         setSelecionado(0);
-    //     }
-    // }, [modelos]);
-
     useEffect(() => {
         setSelecionado(-1);
         if (talhaAtiva && modelos.length > 0) {
@@ -82,7 +76,7 @@ function ModelSelectorList({ modelos, onSelect, talhaAtiva }) {
     return (
         <div
             className="selector-border"
-            tabIndex={0} // deixa o elemento focável
+            tabIndex={0}
             ref={containerRef}
         >
             <div className="selector" ref={scrollContainerRef}>

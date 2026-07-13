@@ -343,7 +343,7 @@ public class MaxiprodService {
             }
             for (JsonNode itemNode : items) {
                 TalhaDTO talha = new TalhaDTO();
-                talha.setCodigo(itemNode.path("codigo").asText(null));
+                talha.setModelo(itemNode.path("codigo").asText(null));
                 JsonNode parametrosNode = itemNode.path("parametros");
                 if (parametrosNode.isArray()) {
                     for (JsonNode param : parametrosNode) {
@@ -353,6 +353,8 @@ public class MaxiprodService {
                             valorParam = valorParam.trim();
                             if (valorParam.equals("-")) {
                                 valorParam = null;
+                            } else {
+                                valorParam = formatarPeloDicionario(valorParam);
                             }
                         }
                         switch (codParam) {
@@ -365,14 +367,14 @@ public class MaxiprodService {
                             case "RAM" -> talha.setRamais(converterParaInteger(valorParam));
                             case "MOV" -> talha.setTipoTrole(valorParam);
                             case "V"   -> talha.setTensaoTrifasica(valorParam);
-                            case "PME" -> talha.setMotorElevacao(valorParam);
+                            case "PME" -> talha.setMotorElevacao(formatarDecimal(valorParam));
                             case "TME" -> talha.setAcionamentoMotorElevacao(valorParam);
                             case "VEL" -> talha.setVelElevacaoPadrao(valorParam);
-                            case "PMT" -> talha.setMotorTranslacao(valorParam);
+                            case "PMT" -> talha.setMotorTranslacao(formatarDecimal(valorParam));
                             case "TMT" -> talha.setAcionamentoMotorTranslacao(valorParam);
                             case "VTR" -> talha.setVelTranslacaoPadrao(valorParam);
                             case "FTR" -> talha.setFreioNoCarroTranslacao(converterParaBoolean(valorParam));
-                            case "PMP" -> talha.setPotenciaMotorPonte(valorParam);
+                            case "PMP" -> talha.setPotenciaMotorPonte(formatarDecimal(valorParam));
                             case "CEL" -> talha.setCelulaCargaSerie(converterParaBoolean(valorParam));
                             case "FCS" -> talha.setFimCursoSobe(valorParam);
                             case "FCD" -> talha.setFimCursoDesce(valorParam);
@@ -409,9 +411,64 @@ public class MaxiprodService {
         }
     }
 
+    private String formatarDecimal(String valor) {
+        if (valor == null || valor.trim().isEmpty()) {
+            return null;
+        }
+
+        return valor.trim().replace(".", ",");
+    }
+
     private Boolean converterParaBoolean(String valor) {
         if (valor == null) return null;
         return valor.equalsIgnoreCase("Sim");
     }
 
+    private static final Map<String, String> DICIONARIO = Map.ofEntries(
+
+        Map.entry("BAIXA ALTURA", "Baixa Altura"),
+        Map.entry("NORMAL", "Normal"),
+        Map.entry("VIGA DUPLA", "Viga Dupla"),
+
+        Map.entry("TROLE ELETRICO", "Trole Elétrico"),
+        Map.entry("TROLE MANUAL", "Trole Manual"),
+        Map.entry("FIXA", "Fixa"),
+        Map.entry("FIXAÇÃO POR PARAFUSOS", "Fixação por Parafusos"),
+        Map.entry("SUSPENSÃO POR GANCHO", "Suspensão por Gancho"),
+
+        Map.entry("CABO DE AÇO", "Cabo de Aço"),
+        Map.entry("CORRENTE", "Corrente"),
+
+        Map.entry("1 VELOCIDADE", "1 Velocidade"),
+        Map.entry("2 VELOCIDADES", "2 Velocidades"),
+        Map.entry("2 VELOCIDADES COM INVERSOR DE FREQUENCIA", "2 Velocidades com Inversor de Frequência"),
+        Map.entry("CONTROLE DE VELOCIDADE VARIÁVEL", "Controle de Velocidade Variável"),
+        Map.entry("2 MOVIMENTO - CONTROLE VARIÁVEL", "2 Movimentos - Controle Variável"),
+
+        Map.entry("220/380V TRIFÁSICO", "220/380V Trifásico"),
+        Map.entry("380V TRIFÁSICO", "380V Trifásico"),
+        Map.entry("220V MONOFÁSICO", "220V Monofásico"),
+        Map.entry("24VCA", "24VCA"),
+
+        Map.entry("2 MOVIMENTOS", "2 Movimentos"),
+        Map.entry("2 MOVIMENTOS + EMERGÊNCIA", "2 Movimentos + Emergência"),
+        Map.entry("4 MOVIMENTOS", "4 Movimentos"),
+        Map.entry("4 MOVIMENTOS + EMERGÊNCIA", "4 Movimentos + Emergência"),
+        Map.entry("6 MOVIMENTOS", "6 Movimentos"),
+        Map.entry("6 MOVIMENTOS + EMERGÊNCIA", "6 Movimentos + Emergência"),
+
+        Map.entry("OPCIONAL", "Opcional"),
+        Map.entry("ORIGINAL", "Original"),
+        Map.entry("SIM", "Sim"),
+        Map.entry("NÃO", "Não"),
+        Map.entry("TCS", "TCS"),
+
+        Map.entry("1 ANO", "1 Ano"),
+        Map.entry("06 MESES", "06 Meses")
+    );
+
+    private String formatarPeloDicionario(String valor) {
+        if (valor == null) return null;
+        return DICIONARIO.getOrDefault(valor.toUpperCase(), valor);
+    }
 }

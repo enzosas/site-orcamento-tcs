@@ -29,8 +29,8 @@ export function getOpcoesControle(isControleRemoto, isPainel6Mov) {
 
 export function getOpcoesTensao(talha) {
     if (talha) {
-        if (talha.tensaoTrifasica === "220/380V - Trifásica") {
-            return ["380V - Trifásica", "220V - Trifásica"];
+        if (talha.tensaoTrifasica === "220/380V Trifásico") {
+            return ["380V Trifásico", "220V Trifásico"];
         } else {
             return [talha.tensaoTrifasica];
         }

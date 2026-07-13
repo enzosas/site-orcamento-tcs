@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class TalhaDTO {
 
-    private String codigo;
+    private String modelo;
     private Integer capacidade;
     private String formaConstrutiva;
     private String grupoTrabalho;
     private String correnteCabo;
-    private String bitola; // Adicionado (BIT)
+    private String bitola;
     private Integer cursoUtilGancho;
     private String tipoTrole;
     private String tensaoTrifasica;
@@ -26,14 +26,14 @@ public class TalhaDTO {
     private String larguraVigaPadrao;
     private String acionamentoMotorTranslacao;
     private Boolean freioNoCarroTranslacao;
-    private String potenciaMotorPonte; // Adicionado (PMP)
+    private String potenciaMotorPonte;
     private Boolean celulaCargaSerie;
     private String guiaCabo;
     private String fimCursoSobe;
-    private String fimCursoDesce; // Adicionado (FCD)
-    private String fimCursoEmergencia; // Adicionado (FCE)
+    private String fimCursoDesce;
+    private String fimCursoEmergencia;
     private String botoeira;
-    private String controleRemoto; // Adicionado (CRM)
+    private String controleRemoto;
     private Integer caboBotoeira;
     private Integer ramais;
     private String painelComandoPadrao;

@@ -69,24 +69,18 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     };
 
     useEffect(() => {
-        const fetchModelos = async () => {
+        const fetchAllTalhas = async () => {
             try {
-                const query = new URLSearchParams();
-
-                if (filtros.correnteCabo) query.append("correnteCabo", filtros.correnteCabo);
-                if (filtros.capacidade) query.append("capacidade", filtros.capacidade);
-                if (filtros.tipoTrole) query.append("tipoTrole", filtros.tipoTrole);
-                if (filtros.cursoUtilGancho) query.append("cursoUtilGancho", filtros.cursoUtilGancho);
-
-                const response = await api.get(`/api/talhas/filtro?${query.toString()}`);
+                const response = await api.get("/api/max/getAllTalhas");
                 setModelos(response.data);
+                console.log(response.data)
             
             } catch (error) {
                 console.error("Erro ao buscar os modelos:", error);
             }
         };
 
-        fetchModelos();
+        fetchAllTalhas();
     }, [filtros, setTalhaSelecionada]);
 
     return (

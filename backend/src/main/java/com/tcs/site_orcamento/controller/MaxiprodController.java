@@ -2,6 +2,7 @@ package com.tcs.site_orcamento.controller;
 
 
 import com.tcs.site_orcamento.dto.ClienteDTO;
+import com.tcs.site_orcamento.dto.TalhaDTO;
 import com.tcs.site_orcamento.service.MaxiprodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,10 @@ public class MaxiprodController {
     @GetMapping("/getClienteRazaoSocial/{razaoSocial}")
     public List<ClienteDTO> getClienteRazaoSocial(@PathVariable String razaoSocial) {
         return maxiprodService.getClienteByRazaoSocial(razaoSocial);
+    }
+
+    @GetMapping("/getAllTalhas")
+    public List<TalhaDTO> getAllTalhas() {
+        return maxiprodService.getAllTalhas();
     }
 }
