@@ -96,6 +96,8 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
     }, [modelos, filtros]);
 
+    const podeAlterarTensao = talha?.tensaoTrifasica === "220/380V Trifásico";
+
     return (
         <div>
             <div className="frame-branco">
@@ -111,10 +113,10 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 </div>
                 {talha && (
                         <div className="frame-unidade-caixa-selecao">
-                            <h4 className={`headerSelect ${talha.tensaoTrifasica !== "220/380V - Trifásica" ? "disabled" : ""}`}>Tensão</h4>
+                            <h4 className={`headerSelect ${!podeAlterarTensao ? "disabled" : ""}`}>Tensão</h4>
                             <select
                                 name="opcoesTensao" 
-                                disabled={!talha || talha.tensaoTrifasica !== "220/380V - Trifásica"}
+                                disabled={!podeAlterarTensao}
                                 value={config.tensao}
                                 onChange={(e) => atualizarConfig({tensao: e.target.value })}
                             >
