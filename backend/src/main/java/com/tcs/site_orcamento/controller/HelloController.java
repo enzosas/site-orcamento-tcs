@@ -1,5 +1,7 @@
 package com.tcs.site_orcamento.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import com.tcs.site_orcamento.repository.MatrizCabeceiraRepository;
 import com.tcs.site_orcamento.repository.VigaWRepository;
 import com.tcs.site_orcamento.service.MaxiprodService;
 import com.tcs.site_orcamento.service.PonteService;
+import com.tcs.site_orcamento.dto.TalhaDTO;;
 
 @RestController
 @RequestMapping("/hello")
@@ -43,33 +46,9 @@ public class HelloController {
     }
     
     @GetMapping("/teste")
-    public OrcamentoPonteDTO teste() {
+    public List<TalhaDTO> teste() {
 
-        PonteConfigDTO config = new PonteConfigDTO(
-            true,
-            "Univiga - Tipo Caixão",
-            3000,
-            15000,
-            true,
-            true,
-            true,
-            16,
-            "Cabo Chato",
-            "Barramento Blindado - 3 consumidores",
-            "Viga Metálica + Trilho",
-            "QD.38 mm",
-            10,
-            "W460X82,0",
-            8,
-            "W360X57,8",
-            true,
-            5,
-            "150 x 150 x 4,75",
-            2,
-            10,
-            "200 x 200 x 6,35",
-            2
-        );
-        return ponteService.geraOrcamentoPonte(config, 26.0);
+        List<TalhaDTO> resultado = maxiprod.getAllTalhas();
+        return resultado;
     }
 }
