@@ -36,6 +36,7 @@ export function formatarTalhaExibicao(talha) {
         motorElevacao: medidaString(talha.motorElevacao, "kW"),
         motorTranslacao: medidaString(talha.motorTranslacao, "kW"),
         potenciaMotorPonte: medidaString(talha.potenciaMotorPonte, "kW"),
+        velTranslacaoPadrao: medidaString(talha.velTranslacaoPadrao, "m/min"),
     };
     limpaNull(obj);
     return obj;
