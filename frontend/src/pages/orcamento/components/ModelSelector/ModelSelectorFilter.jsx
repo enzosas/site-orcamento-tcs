@@ -1,36 +1,28 @@
 import "./ModelSelector.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { API_BASE_URL } from '../../../../config';
 import api from '../../../../services/api.js'
 
-function ModelSelectorFilter({ filtros, setFiltros }) {
-    const [correntes, setCorrentes] = useState([]);
-    const [capacidades, setCapacidades] = useState([]);
-    const [tiposTrole, setTiposTrole] = useState([]);
-    const [cursosGancho, setCursosGancho] = useState([]);
-    const token = localStorage.getItem('token');
+function ModelSelectorFilter({ filtros, setFiltros, modelos }) {
+    const correntes = useMemo(() => {
+        const valoresUnicos = [...new Set(modelos.map(m => m.correnteCabo).filter(Boolean))];
+        return valoresUnicos.sort();
+    }, [modelos]);
 
-    useEffect(() => {
-        const carregarFiltros = async () => {
-            try {
-                const [resCorrente, resCapacidade, resTrole, resCurso] = await Promise.all([
-                    api.get('/api/talhas/distinct-correnteCabo'),
-                    api.get('/api/talhas/distinct-capacidade'),
-                    api.get('/api/talhas/distinct-tipoTrole'),
-                    api.get('/api/talhas/distinct-cursoUtilGancho')
-                ]);
+    const capacidades = useMemo(() => {
+        const valoresUnicos = [...new Set(modelos.map(m => m.capacidade).filter(Boolean))];
+        return valoresUnicos.sort((a, b) => a - b);
+    }, [modelos]);
 
-                setCorrentes(resCorrente.data);
-                setCapacidades(resCapacidade.data);
-                setTiposTrole(resTrole.data);
-                setCursosGancho(resCurso.data);
+    const tiposTrole = useMemo(() => {
+        const valoresUnicos = [...new Set(modelos.map(m => m.tipoTrole).filter(Boolean))];
+        return valoresUnicos.sort();
+    }, [modelos]);
 
-            } catch (error) {
-                console.error("Erro ao carregar os dados dos filtros:", error);
-            }
-        };
-        carregarFiltros();
-    }, []);
+    const cursosGancho = useMemo(() => {
+        const valoresUnicos = [...new Set(modelos.map(m => m.cursoUtilGancho).filter(Boolean))];
+        return valoresUnicos.sort((a, b) => a - b);
+    }, [modelos]);
 
     const handleChange = (campo, valor) => {
         setFiltros(prev => ({ ...prev, [campo]: valor }));

@@ -1,15 +1,12 @@
 import "./ModelSelector.css"
 import ModelSelectorFilter from "./ModelSelectorFilter";
 import ModelSelectorList from "./ModelSelectorList";
-import React, { useState, useEffect, useRef } from "react";
-import { API_BASE_URL } from '../../../../config';
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { fixConfig, getOpcoesPotencia, getOpcoesControle, getOpcoesTensao } from "../../../../utils/regrasConfig.js"
 import api from '../../../../services/api.js'
 
 
 function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
-
-    const token = localStorage.getItem('token');
 
     const jaCarregouPrimeiraTalhaInit = useRef(false);
 
@@ -22,6 +19,19 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     
     let opcoesTensao = talha ? getOpcoesTensao(talha) : [];
     const [modelos, setModelos] = useState([]);
+
+    useEffect(() => {
+        const fetchAllTalhas = async () => {
+            try {
+                const response = await api.get("/api/max/getAllTalhas");
+                setModelos(response.data);
+            } catch (error) {
+                console.error("Erro ao buscar os modelos:", error);
+            }
+        };
+
+        fetchAllTalhas();
+    }, []);
 
     useEffect( () => {
         if(modelos.length > 0 && !jaCarregouPrimeiraTalhaInit.current) {
@@ -38,7 +48,6 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
     };
 
     const handleSelecaoManual = (novaTalha) => {
-        
         setTalhaSelecionada(novaTalha);
         opcoesTensao = getOpcoesTensao(novaTalha);
         setConfig(prev => {
@@ -68,20 +77,24 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
         });
     };
 
-    useEffect(() => {
-        const fetchAllTalhas = async () => {
-            try {
-                const response = await api.get("/api/max/getAllTalhas");
-                setModelos(response.data);
-                console.log(response.data)
-            
-            } catch (error) {
-                console.error("Erro ao buscar os modelos:", error);
-            }
-        };
+    const modelosFiltrados = useMemo(() => {
+        const filtrados = modelos.filter(t => {
+            const bateCorrente = !filtros.correnteCabo || t.correnteCabo === filtros.correnteCabo;
+            const bateCapacidade = !filtros.capacidade || String(t.capacidade) === filtros.capacidade;
+            const bateTrole = !filtros.tipoTrole || t.tipoTrole === filtros.tipoTrole;
+            const bateCurso = !filtros.cursoUtilGancho || String(t.cursoUtilGancho) === filtros.cursoUtilGancho;
 
-        fetchAllTalhas();
-    }, [filtros, setTalhaSelecionada]);
+            return bateCorrente && bateCapacidade && bateTrole && bateCurso;
+        });
+
+        return filtrados.sort((a, b) => {
+            const capA = a.capacidade || 99999;
+            const capB = b.capacidade || 99999;
+
+            return capA - capB; 
+        });
+
+    }, [modelos, filtros]);
 
     return (
         <div>
@@ -89,11 +102,11 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
                 <div className="modelselector-corpo">
                     <div className="modelselector-corpo-left">
                         <h2 className="frame-branco-title">Escolha o modelo:</h2>
-                        <ModelSelectorList modelos={modelos} onSelect={handleSelecaoManual} talhaAtiva={talha} />
+                        <ModelSelectorList modelos={modelosFiltrados} onSelect={handleSelecaoManual} talhaAtiva={talha} />
                     </div>
                     <div className="modelselector-corpo-left">
                         <h2 className="frame-branco-title">Filtros</h2>
-                        <ModelSelectorFilter filtros={filtros} setFiltros={setFiltros} />
+                        <ModelSelectorFilter filtros={filtros} setFiltros={setFiltros} modelos={modelos} />
                     </div>
                 </div>
                 {talha && (
