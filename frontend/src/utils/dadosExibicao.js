@@ -5,6 +5,11 @@ const medida = (valor, unidade, casasDecimais = 2) =>
         ? `${parseFloat(valor).toFixed(casasDecimais).replace('.', ',')} ${unidade}`
         : "";
 
+const medidaString = (valor, unidade) =>
+(valor !== null && valor !== undefined && valor !== '')
+    ? `${valor} ${unidade}`
+    : "";
+
 const limpaNull = (obj) => {
     Object.keys(obj).forEach(key => {
         if (obj[key] === null || obj[key] === undefined) {
@@ -22,12 +27,15 @@ export function formatarTalhaExibicao(talha) {
 
     const obj = {
         ...talha,
-        capacidade: medida(talha.capacidade, "kg"),
+        capacidade: medida(talha.capacidade, "kg", 0),
         cursoUtilGancho: medida(talha.cursoUtilGancho, "metros"),
         velElevacaoPadrao: medida(talha.velElevacaoPadrao, "m/min"),
         freioNoCarroTranslacao: boolParaTexto(talha.freioNoCarroTranslacao),
         fimCursoEsquerdaDireita: boolParaTexto(talha.fimCursoEsquerdaDireita),
-        peso: medida(talha.peso, "kg")
+        peso: medida(talha.peso, "kg"),
+        motorElevacao: medidaString(talha.motorElevacao, "kW"),
+        motorTranslacao: medidaString(talha.motorTranslacao, "kW"),
+        potenciaMotorPonte: medidaString(talha.potenciaMotorPonte, "kW"),
     };
     limpaNull(obj);
     return obj;
