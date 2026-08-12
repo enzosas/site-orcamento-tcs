@@ -35,3 +35,19 @@
     align-items: center;
     margin: 0 auto;
 }
+
+.imagem-fallback-logo {
+    filter: brightness(0);
+    opacity: 0.05;
+}
+
+.imagem-talha {
+    filter: none;
+    opacity: 1;
+}
+
+[data-theme="dark"] .imagem-fallback-logo {
+    filter: brightness(0);
+    opacity: 0.2;
+    transition: 1.0s opacity;
+}
