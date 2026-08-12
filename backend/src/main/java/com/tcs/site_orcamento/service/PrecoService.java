@@ -64,13 +64,13 @@ public class PrecoService {
     private Integer getTensaoInt(ConfigDTO config){
 
         Integer tensao;
-        if(Objects.equals(config.getTensao(), "380V - Trifásica")){
+        if(Objects.equals(config.getTensao(), "380V Trifásico")){
             tensao = 380;
         }
-        else if(Objects.equals(config.getTensao(), "220V - Trifásica")){
+        else if(Objects.equals(config.getTensao(), "220V Trifásico")){
             tensao = 220;
         }
-        else if(Objects.equals(config.getTensao(), "220v - Monofásica")){
+        else if(Objects.equals(config.getTensao(), "220V Monofásico")){
             tensao = 220;
         }
         else{
