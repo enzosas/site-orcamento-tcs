@@ -46,9 +46,7 @@ public class HelloController {
     }
     
     @GetMapping("/teste")
-    public List<TalhaDTO> teste() {
-
-        List<TalhaDTO> resultado = maxiprod.getAllTalhas();
-        return resultado;
+    public String teste() {
+        return maxiprod.getMiscOptions();
     }
 }

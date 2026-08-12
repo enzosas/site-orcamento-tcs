@@ -3,60 +3,25 @@ import React, {useState, useEffect, useRef} from 'react';
 import { API_BASE_URL } from "../../../../../config";
 import { gerarDocx } from '../../../../../utils/gerarDocx';
 
-function PagamentoAdministrador({ isOpen, onClose, pagamento, setPagamento, gerarDocxObjetos, numeroOrcamento, ponteConfig, precosPesosPonte }) {
+function PagamentoAdministrador({ 
+    isOpen, 
+    onClose, 
+    pagamento, 
+    setPagamento, 
+    gerarDocxObjetos, 
+    numeroOrcamento, 
+    ponteConfig, 
+    precosPesosPonte,
+    opcoesFormaPagamento = [],
+    opcoesPrazoEntrega = [],
+    opcoesGarantia = [],
+    opcoesValidadeOrcamento = [],
+    opcoesFrete = [],
+    opcoesMontagem = [],
+    opcoesComissao = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}) {
 
     if (!isOpen) return null;
-
-    const opcoesFormaPagamento = [
-        "28 dias da nfe",
-        "28/56 dias da nfe",
-        "28/56/84 dias da nfe",
-        "28/56/84/112 dias da nfe",
-        "0/28 dias do pedido",
-        "0/28/56 dias do pedido",
-        "0/28/56/84 dias do pedido",
-        "0/28/56/84/112 dias do pedido"
-    ];
-
-    const opcoesPrazoEntrega = [
-        "15 - 20 dias",
-        "20 - 30 dias",
-        "30 - 45 dias",
-        "45 - 60 dias",
-        "60 - 90 dias",
-        "90 - 120 dias",
-        "Ver observações"
-    ];
-
-    const opcoesGarantia = [
-        "6 meses",
-        "12 meses",
-    ];
-
-    const opcoesValidadeOrcamento = [
-        "7 dias",
-        "10 dias",
-        "15 dias",
-        "20 dias",
-        "30 dias",
-        "45 dias",
-        "60 dias"
-    ];
-
-    const opcoesFrete = [
-        "CIF",
-        "FOB",
-        "Cliente Retira",
-    ];
-
-    const opcoesMontagem = [
-        "Não Inclusa",
-        "Inclusa",
-        "Inclusa - Somente Mão de Obra",
-        "Inclusa - Exceto Guincho, Andaime e Plataforma"
-    ];
-
-    const opcoesComissao = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     
     const formatadorPreco = new Intl.NumberFormat('pt-BR', {
         style: 'currency',

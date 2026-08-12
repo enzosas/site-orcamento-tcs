@@ -39,7 +39,6 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
         }
     }
     
-    
     const [codigo, setCodigo] = useState(null);
     const [copiado, setCopiado] = useState(false);
     const [salvo, setSalvo] = useState(false);
@@ -53,6 +52,14 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
     const isImporting = useRef(false);
     const token = localStorage.getItem('token');
     
+    const [opcoesFormaPagamento, setOpcoesFormaPagamento] = useState([]);
+    const [opcoesPrazoEntrega, setOpcoesPrazoEntrega] = useState([]);
+    const [opcoesGarantia, setOpcoesGarantia] = useState([]);
+    const [opcoesValidadeOrcamento, setOpcoesValidadeOrcamento] = useState([]);
+    const [opcoesFrete, setOpcoesFrete] = useState([]);
+    const [opcoesMontagem, setOpcoesMontagem] = useState([]);
+    const [opcoesComissao, setOpcoesComissao] = useState([]);
+
     const [cliente, setCliente] = useState({
         cnpj: "",
         razaoSocial: "",
@@ -68,64 +75,13 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
         whatsapp: ""
 	});
 
-    const opcoesFormaPagamento = [
-        "28 dias da nfe",
-        "28/56 dias da nfe",
-        "28/56/84 dias da nfe",
-        "28/56/84/112 dias da nfe",
-        "0/28 dias do pedido",
-        "0/28/56 dias do pedido",
-        "0/28/56/84 dias do pedido",
-        "0/28/56/84/112 dias do pedido"
-    ];
-
-    const opcoesPrazoEntrega = [
-        "15 - 20 dias",
-        "20 - 30 dias",
-        "30 - 45 dias",
-        "45 - 60 dias",
-        "60 - 90 dias",
-        "90 - 120 dias",
-        "Ver observações"
-    ];
-
-    const opcoesGarantia = [
-        "6 meses",
-        "12 meses",
-    ];
-
-    const opcoesValidadeOrcamento = [
-        "7 dias",
-        "10 dias",
-        "15 dias",
-        "20 dias",
-        "30 dias",
-        "45 dias",
-        "60 dias"
-    ];
-
-    const opcoesFrete = [
-        "CIF",
-        "FOB",
-        "Cliente Retira",
-    ];
-
-    const opcoesMontagem = [
-        "Não Inclusa",
-        "Inclusa",
-        "Inclusa - Somente Mão de Obra",
-        "Inclusa - Exceto Guincho, Andaime e Plataforma"
-    ];
-
-    const opcoesComissao = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
     const [pagamento, setPagamento] = useState({
-        formaPagamento: opcoesFormaPagamento[0],
-        prazoEntrega: opcoesPrazoEntrega[0],
-        prazoGarantia: opcoesGarantia[0],
-        validadeOrcamento: opcoesValidadeOrcamento[0],
-        frete: opcoesFrete[0],
-        montagem: opcoesMontagem[0],
+        formaPagamento: "",
+        prazoEntrega: "",
+        prazoGarantia: "",
+        validadeOrcamento: "",
+        frete: "",
+        montagem: "",
         percentualComissaoVendas: 0,
         ajusteTalha: 0,
         valorMontagem: 0,
@@ -169,6 +125,14 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
                 numeroOrcamento={codigo}
                 precosPesosPonte={precosPesosPonte} 
                 ponteConfig={ponteConfig}
+
+                opcoesFormaPagamento={opcoesFormaPagamento}
+                opcoesPrazoEntrega={opcoesPrazoEntrega}
+                opcoesGarantia={opcoesGarantia}
+                opcoesValidadeOrcamento={opcoesValidadeOrcamento}
+                opcoesFrete={opcoesFrete}
+                opcoesMontagem={opcoesMontagem}
+                opcoesComissao={opcoesComissao}
                 />
         } else {
                 return 
@@ -254,6 +218,40 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
         }
 
     }, [config]);
+
+    useEffect(() => {
+        const carregarOpcoesOrcamento = async () => {
+            try {
+                const response = await api.get('/api/max/getMiscOptions'); 
+                const data = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+
+                if (data) {
+                    setOpcoesFormaPagamento(data.opcoesFormaPagamento || []);
+                    setOpcoesPrazoEntrega(data.opcoesPrazoEntrega || []);
+                    setOpcoesGarantia(data.opcoesGarantia || []);
+                    setOpcoesValidadeOrcamento(data.opcoesValidadeOrcamento || []);
+                    setOpcoesFrete(data.opcoesFrete || []);
+                    setOpcoesMontagem(data.opcoesMontagem || []);
+                    setOpcoesComissao(data.opcoesComissao || []);
+
+                    setPagamento(prev => ({
+                        ...prev,
+                        formaPagamento: data.opcoesFormaPagamento?.[0] || "",
+                        prazoEntrega: data.opcoesPrazoEntrega?.[0] || "",
+                        prazoGarantia: data.opcoesGarantia?.[0] || "",
+                        validadeOrcamento: data.opcoesValidadeOrcamento?.[0] || "",
+                        frete: data.opcoesFrete?.[0] || "",
+                        montagem: data.opcoesMontagem?.[0] || "",
+                        percentualComissaoVendas: data.opcoesComissao?.[0] ?? 0
+                    }));
+                }
+            } catch (error) {
+                console.error("Erro ao carregar opcoes dinamicas do backend:", error);
+            }
+        };
+
+        carregarOpcoesOrcamento();
+    }, []);
 
     return (
          <div className="main-footer">

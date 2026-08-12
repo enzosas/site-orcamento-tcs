@@ -330,6 +330,48 @@ public class MaxiprodService {
         return response;
     }
 
+    private String getMiscDataMaxiprod() {
+        String query = """
+        query {
+            itens(where: { codigo: { eq: "GERORCDATA" } }) {
+                items {
+                    descricaoComplementar
+                }
+            }
+        }
+        """;
+        Map<String, String> body = Map.of("query", query);
+
+        String response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        return response;
+    }
+
+    private String getJsonMiscData(String json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(json);
+            JsonNode itemsNode = root.path("data").path("itens").path("items");
+            if (itemsNode.isArray() && !itemsNode.isEmpty()) {
+                return itemsNode.get(0).path("descricaoComplementar").asText();
+            }
+            return itemsNode.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao navegar a resposta do GraphQL para os dados.", e);
+        }
+    }
+
+    public String getMiscOptions() {
+        String data = getMiscDataMaxiprod();
+        data = getJsonMiscData(data);
+        return data;
+    }
+
     public List<TalhaDTO> getAllTalhas() {
 
         String json = getAllTalhasJSON();

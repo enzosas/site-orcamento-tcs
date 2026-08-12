@@ -56,4 +56,10 @@ public class MaxiprodController {
     public List<TalhaDTO> getAllTalhas() {
         return maxiprodService.getAllTalhas();
     }
+
+    @GetMapping("/getMiscOptions")
+    public String getMiscOptions() {
+        return maxiprodService.getMiscOptions();
+    }
+
 }
