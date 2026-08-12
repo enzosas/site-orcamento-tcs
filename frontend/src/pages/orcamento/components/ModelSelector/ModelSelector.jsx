@@ -6,7 +6,7 @@ import { fixConfig, getOpcoesPotencia, getOpcoesControle, getOpcoesTensao } from
 import api from '../../../../services/api.js'
 
 
-function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
+function ModelSelector({ setTalhaSelecionada, talha, config, setConfig, preferencias }){
 
     const jaCarregouPrimeiraTalhaInit = useRef(false);
 
@@ -49,6 +49,9 @@ function ModelSelector({ setTalhaSelecionada, talha, config, setConfig }){
 
     const handleSelecaoManual = (novaTalha) => {
         setTalhaSelecionada(novaTalha);
+        if (preferencias.mostrarLogTalhaSelecionada) {
+            console.log(novaTalha);
+        }
         opcoesTensao = getOpcoesTensao(novaTalha);
         setConfig(prev => {
             const resetarValores = {

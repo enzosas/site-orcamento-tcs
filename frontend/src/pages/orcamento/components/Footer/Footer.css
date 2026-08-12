@@ -746,6 +746,12 @@
     align-items: center;
 }
 
+.configuracoes--body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 @media (max-width: 768px) {
 
     .cliente .input_com_label {

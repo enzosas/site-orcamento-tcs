@@ -9,7 +9,7 @@ function Configuracoes({ preferencias, setPreferencias }) {
     return (
         <div>
             <h1>Configurações</h1>
-            <div className="body">
+            <div className="configuracoes--body">
                 <div className="linha">
                     <label>
                         <input
@@ -18,6 +18,16 @@ function Configuracoes({ preferencias, setPreferencias }) {
                             onChange={(e) => setPreferencias({mostrarLogs: e.target.checked})}
                         />
                         Exibir logs do cálculo do orçamento (aperte F12 para ver)
+                    </label>
+                </div>
+                <div className="linha">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={preferencias.mostrarLogTalhaSelecionada}
+                            onChange={(e) => setPreferencias({mostrarLogTalhaSelecionada: e.target.checked})}
+                        />
+                        Exibir log da talha selecionada (aperte F12 para ver)
                     </label>
                 </div>
             </div>

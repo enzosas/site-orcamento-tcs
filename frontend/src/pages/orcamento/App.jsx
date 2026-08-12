@@ -79,6 +79,7 @@ function App() {
 
 	const [preferencias, setPreferencias] = useState({
 		mostrarLogs: false,
+		mostrarLogTalhaSelecionada: false
 	})
 
 	return (
@@ -86,7 +87,7 @@ function App() {
 			<Header />
 			<div className="app-corpo">
 				<div className="coluna">
-					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} config={config} setConfig={setConfig} />
+					<ModelSelector setTalhaSelecionada={setTalhaSelecionada} talha={talhaSelecionada} config={config} setConfig={setConfig} preferencias={preferencias} />
 					<CommandPannel talha={talhaSelecionada} config={config} setConfig={setConfig}/>
 					<ExtraOptions talha={talhaSelecionada} config={config} setConfig={setConfig}/>
 				</div>
