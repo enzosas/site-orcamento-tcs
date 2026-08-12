@@ -67,6 +67,7 @@ public class OrcamentoService {
 
         dtoCompleto.setConfig(dto);
         dtoCompleto.setCliente(orcamento.getCliente()); 
+        dtoCompleto.setPonteConfig(orcamento.getPonte());
 
         return dtoCompleto;
     }

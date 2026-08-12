@@ -313,6 +313,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
                 isImporting={isImporting}
                 cliente={cliente}
                 setCliente={setCliente}
+                setPonteConfig={setPonteConfig}
             />
             <Cliente
                 isOpen = {clienteAberto}

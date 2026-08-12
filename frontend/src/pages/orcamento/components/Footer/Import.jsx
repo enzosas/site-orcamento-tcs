@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API_BASE_URL } from "../../../../config";
 import { AuthContext } from '../../../../context/AuthContext.jsx';
 import api from '../../../../services/api.js'
+import { PONTE_CONFIG_INITIAL_STATE } from './../Footer/Ponte/ponteConstants.js';
 
 
 const validarCodigoForma = (objModelo, codigoImportado) => {
@@ -21,7 +22,7 @@ const validarNovaConfig = (velhaConfig, novaConfig) => {
     return null;
 }
 
-function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCodigo, isImporting, cliente, setCliente }) {
+function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCodigo, isImporting, cliente, setCliente, setPonteConfig }) {
     
     const [texto, setTexto] = useState("");
     const [erro, setErro] = useState("");
@@ -94,6 +95,20 @@ function Import({ isOpen, onClose, config, setConfig, setTalhaSelecionada, setCo
                     return novoCliente;
                 })
             }
+
+            const ponteImportada = jsonConfigCliente.ponteConfig;
+            setPonteConfig(() => {
+                const novaPonte = { ...PONTE_CONFIG_INITIAL_STATE };
+                if (ponteImportada && ponteImportada !== "null") {
+                    Object.keys(novaPonte).forEach((key) => {
+                        if (ponteImportada[key] !== undefined) {
+                            novaPonte[key] = ponteImportada[key];
+                        }
+                    });
+                }
+                return novaPonte;
+            });
+            
 
             const modeloTalha = novaConfig.talhaSelecionada;
             
