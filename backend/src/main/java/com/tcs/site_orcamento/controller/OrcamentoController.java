@@ -33,7 +33,8 @@ public class OrcamentoController {
         Orcamento orcamentoSalvo = orcamentoService.salvarOrcamento(
             request.getConfig(),
             request.getCliente(),
-            request.getUsername()
+            request.getUsername(),
+            request.getPonteConfig()
         );
         return ResponseEntity.ok(orcamentoSalvo);
     }

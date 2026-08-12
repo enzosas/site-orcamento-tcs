@@ -16,7 +16,7 @@ public class OrcamentoService {
     @Autowired
     private OrcamentoRepository orcamentoRepository;
 
-    public Orcamento salvarOrcamento(ConfigDTO config, Map<String, Object> dadosCliente, String username) {
+    public Orcamento salvarOrcamento(ConfigDTO config, Map<String, Object> dadosCliente, String username, Map<String, Object> ponteConfig) {
         Orcamento orcamento = new Orcamento();
         orcamento.setTalhaSelecionada(config.getTalhaSelecionada());
         orcamento.setExcluirPainel(config.isExcluirPainel());
@@ -39,6 +39,8 @@ public class OrcamentoService {
         orcamento.setCliente(dadosCliente);
 
         orcamento.setUsername(username);
+
+        orcamento.setPonte(ponteConfig);
 
         return orcamentoRepository.save(orcamento);
     }

@@ -190,7 +190,8 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
         const dadosParaEnviar = {
             config: config,
             cliente: cliente,
-            username: user.username
+            username: user.username,
+            ponteConfig: ponteConfig
         }
 
         try {
@@ -217,7 +218,7 @@ function Footer({ talha, setTalhaSelecionada, config, setConfig, precos, prefere
             setCodigo(null);
         }
 
-    }, [config]);
+    }, [config, cliente, ponteConfig]);
 
     useEffect(() => {
         const carregarOpcoesOrcamento = async () => {

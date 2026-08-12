@@ -68,6 +68,10 @@ public class Orcamento {
     @Column(name = "cliente", columnDefinition = "jsonb")
     private Map<String, Object> cliente;
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "ponte", columnDefinition = "jsonb")
+    private Map<String, Object> ponte;
+
     @Column
     private String username;
 
